@@ -43,7 +43,12 @@ tabs = st.tabs([
 with tabs[0]:
     st.header("Top 10 Most Powerful Pokémon by Type")
     unique_types = sorted(df['Type_1'].unique())
-    selected_type = st.selectbox("Select Type", unique_types)
+    with st.popover(f"Filter by Type: {st.session_state.get('type_choice', 'Normal')}"):
+            selected_type = st.radio(
+                "Select a Pokémon Type:", 
+                unique_types, 
+                key="type_choice"
+            )
 
     left, mid, right = st.columns([1, 4, 1])
 
@@ -64,7 +69,11 @@ with tabs[0]:
 #TAB 2: Specific Stats
 with tabs[1]:
     st.header("Top 10 Pokémon by Specific Stat")
-    stat_choice = st.selectbox("Select Stat", ['Total', 'HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'])
+    stat_choice = st.segmented_control(
+        "Select Stat", 
+        ['Total', 'HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'],
+        default='Total'
+    )
 
     left, mid, right = st.columns([1, 4, 1])
 
