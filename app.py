@@ -59,7 +59,7 @@ with tabs[0]:
 
         ax.set_xlabel('Total Stats')
         ax.invert_yaxis()
-        st.pyplot(fig, width='stretch')
+        st.pyplot(fig)
 
 #TAB 2: Specific Stats
 with tabs[1]:
@@ -79,7 +79,7 @@ with tabs[1]:
             ax2.text(v + 2, i, f'{int(v)}', va='center', fontweight='bold', fontsize=8)
 
         ax2.invert_yaxis()
-        st.pyplot(fig2, width='stretch')
+        st.pyplot(fig2)
 
 #TAB 3: Distribution
 with tabs[2]:
@@ -101,7 +101,7 @@ with tabs[2]:
         for i, v in enumerate(type_counts.values):
             ax3.text(i, v, str(v), ha='center', va='bottom', fontweight='bold', fontsize=8)
 
-        st.pyplot(fig3, width='stretch')
+        st.pyplot(fig3)
 
 #TAB 4: Average Power Level
 with tabs[3]:
@@ -128,4 +128,4 @@ with tabs[3]:
         ax4.invert_yaxis()
         ax4.grid(axis='x', alpha=0.3, linestyle='--')
 
-        st.pyplot(fig4, width='stretch')
+        st.pyplot(fig4)
