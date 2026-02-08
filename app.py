@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly
 import plotly.graph_objects as go
+import plotly.express as px
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from matplotlib.colors import LinearSegmentedColormap
@@ -18,6 +19,13 @@ def get_pokedex_colors(n):
     colors_list = ['#EF5350', '#EC407A', '#AB47BC', '#7E57C2', '#5C6BC0', '#42A5F5']
     cmap = LinearSegmentedColormap.from_list('pokedex', colors_list)
     return [cmap(i/n) for i in range(n)]
+
+#Lightgrey background for Matplotlib/Seaborn charts since white hurts my eyes
+plt.rcParams.update({
+    "figure.facecolor": "darkgrey",  #The area around the chart
+    "axes.facecolor": "darkgrey",    #The area inside the chart axes
+    "savefig.facecolor": "darkgrey"  #Ensures it stays grey if saved
+})
 
 #Data Loading
 @st.cache_data
@@ -155,7 +163,7 @@ with main_tabs[2]:
             # Select only numeric columns
             corr = df[['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']].corr()
             fig_corr, ax_corr = plt.subplots()
-            sns.heatmap(corr, annot=True, cmap='RdYlGn', ax=ax_corr)
+            sns.heatmap(corr, annot=True, cmap='RdYlGn', ax=ax_corr, linewidths=0.5, linecolor='lightgrey')
             st.pyplot(fig_corr)
     else:
         # --- SUB-SECTION: Pokemon Pentagon Charts ---
@@ -232,16 +240,24 @@ with main_tabs[3]:
             y_axis = st.selectbox("Y-Axis Stat:", selected_features, index=min(1, len(selected_features)-1))
 
         col_left, col_right = st.columns([3, 2])
-        with col_left:
-            fig_km, ax_km = plt.subplots(figsize=(8, 5))
-            # Create scatter plot with chosen axes
-            sns.scatterplot(
-                data=df, x=x_axis, y=y_axis, 
-                hue='Cluster', palette='viridis', 
-                style='Cluster', s=60, alpha=0.7, ax=ax_km
+        with col_left:          
+            # Create interactive scatter plot
+            fig_km = px.scatter(
+                df, 
+                x=x_axis, 
+                y=y_axis, 
+                color=df['Cluster'].astype(str), # Convert to string for discrete colors
+                hover_name='Name',               # This shows the Pokémon name on hover
+                title=f"Clusters View: {x_axis} vs {y_axis}",
+                labels={'color': 'Cluster'},
+                template="plotly_white",
+                color_discrete_sequence=px.colors.qualitative.Safe
             )
-            ax_km.set_title(f"Clusters View: {x_axis} vs {y_axis}")
-            st.pyplot(fig_km)
+            
+            fig_km.update_traces(marker=dict(size=10, opacity=0.7, line=dict(width=1, color='DarkSlateGrey')))
+            
+            # Display
+            st.plotly_chart(fig_km, use_container_width=True)
             
         with col_right:
             st.write("**Archetype Average Stats**")
