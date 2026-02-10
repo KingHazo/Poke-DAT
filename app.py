@@ -15,7 +15,7 @@ st.set_page_config(page_title="Poke-DAT", layout="wide")
 
 #The Pokedex Theme
 def get_pokedex_colors(n):
-    # Defining a gradient based on classic Pokedex colors
+    #Defining a gradient based on Pokedex colors
     colors_list = ['#EF5350', '#EC407A', '#AB47BC', '#7E57C2', '#5C6BC0', '#42A5F5']
     cmap = LinearSegmentedColormap.from_list('pokedex', colors_list)
     return [cmap(i/n) for i in range(n)]
@@ -39,6 +39,64 @@ def load_data():
 
 df = load_data()
 
+# ============================================================================
+# CACHED DATA PROCESSING FUNCTIONS
+# ============================================================================
+
+@st.cache_data
+def get_top_pokemon_by_type(df, pokemon_type, n=10):
+    """Get top N pokemon of a specific type by total stats"""
+    return df[df['Type_1'] == pokemon_type].nlargest(n, 'Total')
+
+@st.cache_data
+def get_top_pokemon_by_stat(df, stat, n=10):
+    """Get top N pokemon by a specific stat"""
+    return df.nlargest(n, stat)
+
+@st.cache_data
+def get_type_distribution(df, column_name):
+    """Calculate type distribution counts"""
+    return df[column_name].value_counts().sort_values(ascending=False)
+
+@st.cache_data
+def get_average_stats_by_type(df):
+    """Calculate average total stats by pokemon type"""
+    return df.groupby('Type_1')['Total'].mean().sort_values(ascending=False)
+
+@st.cache_data
+def get_stat_correlation(df):
+    """Calculate correlation matrix for pokemon stats"""
+    return df[['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']].corr()
+
+@st.cache_data
+def get_pokemon_stats(df, name, categories):
+    """Get stats for a specific pokemon"""
+    return df[df['Name'] == name][categories].values.flatten().tolist()
+
+@st.cache_data
+def perform_clustering(df, selected_features, k_val):
+    """Perform K-Means clustering on selected features"""
+    scaler = StandardScaler()
+    scaled_stats = scaler.fit_transform(df[selected_features])
+    
+    kmeans = KMeans(n_clusters=k_val, random_state=42)
+    clusters = kmeans.fit_predict(scaled_stats)
+    
+    # Return a new dataframe with cluster assignments
+    df_clustered = df.copy()
+    df_clustered['Cluster'] = clusters
+    
+    return df_clustered
+
+@st.cache_data
+def get_cluster_summary(df_clustered, selected_features):
+    """Calculate cluster summary statistics"""
+    return df_clustered.groupby('Cluster')[selected_features].mean().round(0)
+
+# ============================================================================
+# UI STARTS HERE
+# ============================================================================
+
 # Title Section
 st.title("The Poké-DAT")
 st.markdown("### A Data Analysis & Visualization Tool")
@@ -51,13 +109,12 @@ main_tabs = st.tabs([
     "Machine Learning"
 ])
 
-# --- MAIN TAB 1: RANKINGS ---
+#MAIN TAB 1: RANKINGS
 with main_tabs[0]:
-    # Secondary navigation for Rankings
     mode = st.radio("View Rankings By:", ["Type", "Specific Stat"], horizontal=True)
     
     if mode == "Type":
-        # --- SUB-SECTION: Top 10 by Type ---
+        #SUB-SECTION: Top 10 by Type
         st.header("Top 10 Most Powerful Pokémon by Type")
         unique_types = sorted(df['Type_1'].unique())
         with st.popover(f"Filter by Type: {st.session_state.get('type_choice', 'Normal')}"):
@@ -69,7 +126,8 @@ with main_tabs[0]:
 
         left, mid, right = st.columns([1, 4, 1])
         with mid:
-            filtered_df = df[df['Type_1'] == selected_type].nlargest(10, 'Total')
+            filtered_df = get_top_pokemon_by_type(df, selected_type, 10)
+            
             fig, ax = plt.subplots(figsize=(9, 5))
             colors = get_pokedex_colors(len(filtered_df))
             ax.barh(filtered_df['Name'].str.replace('\n', ' '), filtered_df['Total'], color=colors)
@@ -82,7 +140,7 @@ with main_tabs[0]:
             st.pyplot(fig)
             
     else:
-        # --- SUB-SECTION: Specific Stats ---
+        #SUB-SECTION: Specific Stats
         st.header("Top 10 Pokémon by Specific Stat")
         stat_choice = st.segmented_control(
             "Select Stat", 
@@ -92,7 +150,8 @@ with main_tabs[0]:
 
         left, mid, right = st.columns([1, 4, 1])
         with mid:
-            top_stat_df = df.nlargest(10, stat_choice)
+            top_stat_df = get_top_pokemon_by_stat(df, stat_choice, 10)
+            
             fig2, ax2 = plt.subplots(figsize=(9, 5))
             colors2 = get_pokedex_colors(10)
             ax2.barh(top_stat_df['Name'].str.replace('\n', ' '), top_stat_df[stat_choice], color=colors2)
@@ -103,20 +162,21 @@ with main_tabs[0]:
             ax2.invert_yaxis()
             st.pyplot(fig2)
 
-# --- MAIN TAB 2: TRENDS ---
+#MAIN TAB 2: TRENDS
 with main_tabs[1]:
-    # Secondary navigation for Trends
     trend_mode = st.radio("View Trends By:", ["Type Distribution", "Average Power Level"], horizontal=True)
     
     if trend_mode == "Type Distribution":
-        # --- SUB-SECTION: Distribution ---
+        #SUB-SECTION: Distribution
         st.header("Pokémon Type Distribution")
         dist_choice = st.radio("Show Distribution for:", ["Primary Typing (Type 1)", "Secondary Typing (Type 2)"], horizontal=True)
 
         left, mid, right = st.columns([1, 5, 1])
         with mid:
             col_name = 'Type_1' if dist_choice == "Primary Typing (Type 1)" else 'Type_2'
-            type_counts = df[col_name].value_counts().sort_values(ascending=False)
+            
+            type_counts = get_type_distribution(df, col_name)
+            
             fig3, ax3 = plt.subplots(figsize=(10, 4))
             type_counts.plot(kind='bar', color='#EF5350', ax=ax3)
 
@@ -129,11 +189,12 @@ with main_tabs[1]:
             st.pyplot(fig3)
             
     else:
-        # --- SUB-SECTION: Average Power Level ---
+        #SUB-SECTION: Average Power Level
         st.header("Average Power Level by Pokémon Type")
         left, mid, right = st.columns([2, 4, 2])
         with mid:
-            avg_stats = df.groupby('Type_1')['Total'].mean().sort_values(ascending=False)
+            avg_stats = get_average_stats_by_type(df)
+            
             fig4, ax4 = plt.subplots(figsize=(8, 6))
             colors4 = get_pokedex_colors(len(avg_stats))
             bars = ax4.barh(range(len(avg_stats)), avg_stats.values, color=colors4)
@@ -151,22 +212,22 @@ with main_tabs[1]:
             ax4.grid(axis='x', alpha=0.3, linestyle='--')
             st.pyplot(fig4)
 
-# --- MAIN TAB 3: RELATIONSHIPS ---
+#MAIN TAB 3: RELATIONSHIPS
 with main_tabs[2]:
     relationship_mode = st.radio("View Relationships By:", ["Stat Correlation", "Pokemon Comparison Chart"], horizontal=True)
 
     if relationship_mode == "Stat Correlation":
-        # --- SUB-SECTION: Stat Correlation Heatmap ---
+        #SUB-SECTION: Stat Correlation Heatmap
         st.header("Stat Correlations")
         left, mid, right = st.columns([2, 4, 2])
         with mid:
-            # Select only numeric columns
-            corr = df[['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']].corr()
+            corr = get_stat_correlation(df)
+            
             fig_corr, ax_corr = plt.subplots()
             sns.heatmap(corr, annot=True, cmap='RdYlGn', ax=ax_corr, linewidths=0.5, linecolor='lightgrey')
             st.pyplot(fig_corr)
     else:
-        # --- SUB-SECTION: Pokemon Pentagon Charts ---
+        #SUB-SECTION: Pokemon Pentagon Charts
         st.header("Stat Radar Comparison")
         st.write("Compare the stat 'shape' of two Pokémon.")
 
@@ -174,22 +235,22 @@ with main_tabs[2]:
         with col_a:
             p1 = st.selectbox("Select Pokémon 1", df['Name'].unique(), index=0)
         with col_b:
-            p2 = st.selectbox("Select Pokémon 2", df['Name'].unique(), index=0) # Default to 000 Bulbasaur
+            p2 = st.selectbox("Select Pokémon 2", df['Name'].unique(), index=0) #Default to 000 Bulbasaur
 
         def create_radar(name1, name2):
             categories = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
             fig = go.Figure()
 
             for name, color in [(name1, '#EF5350'), (name2, '#42A5F5')]:
-                stats = df[df['Name'] == name][categories].values.flatten().tolist()
-                stats.append(stats[0]) # Close the loop
+                stats = get_pokemon_stats(df, name, categories)
+                stats.append(stats[0]) #Close the loop
                 fig.add_trace(go.Scatterpolar(
                     r=stats, theta=categories + [categories[0]],
                     fill='toself', name=name, line_color=color
                 ))
             fig.update_layout(
                 polar=dict(
-                    bgcolor="darkgrey", # Sets the circle background to grey
+                    bgcolor="darkgrey",
                     radialaxis=dict(
                         visible=True, 
                         range=[0, 200],
@@ -202,12 +263,13 @@ with main_tabs[2]:
             return fig
 
         st.plotly_chart(create_radar(p1, p2), use_container_width=True)
-# MAIN TAB 4: MACHINE LEARNING
+
+#MAIN TAB 4: MACHINE LEARNING
 with main_tabs[3]:
     st.header("Pokémon Archetype Clustering")
     st.write("Use Machine Learning to group Pokémon based on custom stat combinations.")
     
-    # 1. Feature Selection
+    #Feature Selection
     all_stats = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
     
     col_input1, col_input2 = st.columns(2)
@@ -215,7 +277,7 @@ with main_tabs[3]:
         selected_features = st.multiselect(
             "Select stats for the AI to analyze:",
             options=all_stats,
-            default=all_stats # Defaults to using everything
+            default=all_stats #Defaults to using everything
         )
     with col_input2:
         k_val = st.slider("Number of Archetypes (Clusters):", 4, 6, 5)
@@ -223,14 +285,10 @@ with main_tabs[3]:
     if len(selected_features) < 2:
         st.warning("Please select at least two stats to perform clustering.")
     else:
-        # 2. K-Means Logic
-        scaler = StandardScaler()
-        scaled_stats = scaler.fit_transform(df[selected_features])
+        #K-Means Logic 
+        df_clustered = perform_clustering(df, selected_features, k_val)
         
-        kmeans = KMeans(n_clusters=k_val, random_state=42)
-        df['Cluster'] = kmeans.fit_predict(scaled_stats)
-        
-        # 3. Plotting Controls
+        #Plotting Controls
         st.markdown("---")
         st.subheader("Visualize the Results")
         col_plot1, col_plot2 = st.columns(2)
@@ -243,10 +301,10 @@ with main_tabs[3]:
         with col_left:          
             # Create interactive scatter plot
             fig_km = px.scatter(
-                df, 
+                df_clustered, 
                 x=x_axis, 
                 y=y_axis, 
-                color=df['Cluster'].astype(str), # Convert to string for discrete colors
+                color=df_clustered['Cluster'].astype(str), # Convert to string for discrete colors
                 hover_name='Name',               # This shows the Pokémon name on hover
                 title=f"Clusters View: {x_axis} vs {y_axis}",
                 labels={'color': 'Cluster'},
@@ -261,10 +319,10 @@ with main_tabs[3]:
             
         with col_right:
             st.write("**Archetype Average Stats**")
-            # Show the average of the SELECTED stats for each cluster
-            cluster_summary = df.groupby('Cluster')[selected_features].mean().round(0)
+            
+            cluster_summary = get_cluster_summary(df_clustered, selected_features)
             st.dataframe(cluster_summary)
 
-            # Fun Insight: Logic to identify the "Strongest" cluster
+            #Logic to identify the Strongest cluster
             top_cluster = cluster_summary.sum(axis=1).idxmax()
             st.info(f"Cluster {top_cluster} appears to be the most powerful group based on the selected stats.")
