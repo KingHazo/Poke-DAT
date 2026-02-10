@@ -39,6 +39,9 @@ def load_data():
 
 df = load_data()
 
+if 'ml_stats' not in st.session_state:
+    st.session_state.ml_stats = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
+
 # ============================================================================
 # CACHED DATA PROCESSING FUNCTIONS
 # ============================================================================
@@ -214,115 +217,121 @@ with main_tabs[1]:
 
 #MAIN TAB 3: RELATIONSHIPS
 with main_tabs[2]:
-    relationship_mode = st.radio("View Relationships By:", ["Stat Correlation", "Pokemon Comparison Chart"], horizontal=True)
+    relationship_mode = st.radio("View Relationships By:", 
+                                 ["Stat Correlation", "Pokemon Comparison Chart"], 
+                                 horizontal=True)
 
     if relationship_mode == "Stat Correlation":
-        #SUB-SECTION: Stat Correlation Heatmap
         st.header("Stat Correlations")
         left, mid, right = st.columns([2, 4, 2])
         with mid:
             corr = get_stat_correlation(df)
-            
             fig_corr, ax_corr = plt.subplots()
-            sns.heatmap(corr, annot=True, cmap='RdYlGn', ax=ax_corr, linewidths=0.5, linecolor='lightgrey')
+            sns.heatmap(corr, annot=True, cmap='RdYlGn', ax=ax_corr, 
+                       linewidths=0.5, linecolor='lightgrey')
             st.pyplot(fig_corr)
     else:
-        #SUB-SECTION: Pokemon Pentagon Charts
         st.header("Stat Radar Comparison")
-        st.write("Compare the stat 'shape' of two Pokémon.")
+        
+        #Fragment for the comparison tool
+        @st.fragment
+        def pokemon_comparison():
+            """Interactive Pokémon comparison - only reruns on selection change"""
+            
+            st.write("Compare the stat 'shape' of two Pokémon.")
 
-        col_a, col_b = st.columns(2)
-        with col_a:
-            p1 = st.selectbox("Select Pokémon 1", df['Name'].unique(), index=0)
-        with col_b:
-            p2 = st.selectbox("Select Pokémon 2", df['Name'].unique(), index=0) #Default to 000 Bulbasaur
+            col_a, col_b = st.columns(2)
+            with col_a:
+                p1 = st.selectbox("Select Pokémon 1", df['Name'].unique(), 
+                                 index=0, key="compare_p1")
+            with col_b:
+                p2 = st.selectbox("Select Pokémon 2", df['Name'].unique(), 
+                                 index=1, key="compare_p2")
 
-        def create_radar(name1, name2):
+            # Create radar chart
             categories = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
             fig = go.Figure()
 
-            for name, color in [(name1, '#EF5350'), (name2, '#42A5F5')]:
+            for name, color in [(p1, '#EF5350'), (p2, '#42A5F5')]:
                 stats = get_pokemon_stats(df, name, categories)
-                stats.append(stats[0]) #Close the loop
+                stats.append(stats[0])
                 fig.add_trace(go.Scatterpolar(
                     r=stats, theta=categories + [categories[0]],
                     fill='toself', name=name, line_color=color
                 ))
+            
             fig.update_layout(
                 polar=dict(
                     bgcolor="darkgrey",
-                    radialaxis=dict(
-                        visible=True, 
-                        range=[0, 200],
-                    ),
+                    radialaxis=dict(visible=True, range=[0, 200]),
                 ),
                 showlegend=True
             )
-
-            fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 200])), showlegend=True)
-            return fig
-
-        st.plotly_chart(create_radar(p1, p2), use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True)
+        
+        pokemon_comparison()
 
 #MAIN TAB 4: MACHINE LEARNING
 with main_tabs[3]:
     st.header("Pokémon Archetype Clustering")
     st.write("Use Machine Learning to group Pokémon based on custom stat combinations.")
     
-    #Feature Selection
-    all_stats = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
-    
-    col_input1, col_input2 = st.columns(2)
-    with col_input1:
-        selected_features = st.multiselect(
-            "Select stats for the AI to analyze:",
-            options=all_stats,
-            default=all_stats #Defaults to using everything
-        )
-    with col_input2:
-        k_val = st.slider("Number of Archetypes (Clusters):", 4, 6, 5)
+    @st.fragment
+    def clustering_analysis():
+        """Interactive ML clustering"""
+        
+        col_input1, col_input2 = st.columns(2)
+        with col_input1:
+            selected_features = st.multiselect(
+                "Select stats for the AI to analyze:",
+                options=st.session_state.ml_stats,  #From session state
+                default=st.session_state.ml_stats,
+                key="ml_features"
+            )
+        with col_input2:
+            k_val = st.slider("Number of Archetypes (Clusters):", 4, 6, 5, key="ml_clusters")
 
-    if len(selected_features) < 2:
-        st.warning("Please select at least two stats to perform clustering.")
-    else:
-        #K-Means Logic 
+        if len(selected_features) < 2:
+            st.warning("Please select at least two stats to perform clustering.")
+            return  #Early exit
+        
+        #Clustering
         df_clustered = perform_clustering(df, selected_features, k_val)
         
-        #Plotting Controls
         st.markdown("---")
         st.subheader("Visualize the Results")
+        
         col_plot1, col_plot2 = st.columns(2)
         with col_plot1:
-            x_axis = st.selectbox("X-Axis Stat:", selected_features, index=0)
+            x_axis = st.selectbox("X-Axis Stat:", selected_features, index=0, key="ml_x")
         with col_plot2:
-            y_axis = st.selectbox("Y-Axis Stat:", selected_features, index=min(1, len(selected_features)-1))
+            y_axis = st.selectbox("Y-Axis Stat:", selected_features, 
+                                 index=min(1, len(selected_features)-1), key="ml_y")
 
         col_left, col_right = st.columns([3, 2])
         with col_left:          
-            # Create interactive scatter plot
             fig_km = px.scatter(
                 df_clustered, 
                 x=x_axis, 
                 y=y_axis, 
-                color=df_clustered['Cluster'].astype(str), # Convert to string for discrete colors
-                hover_name='Name',               # This shows the Pokémon name on hover
+                color=df_clustered['Cluster'].astype(str),
+                hover_name='Name',
                 title=f"Clusters View: {x_axis} vs {y_axis}",
                 labels={'color': 'Cluster'},
                 template="plotly_white",
                 color_discrete_sequence=px.colors.qualitative.Safe
             )
             
-            fig_km.update_traces(marker=dict(size=10, opacity=0.7, line=dict(width=1, color='DarkSlateGrey')))
-            
-            # Display
+            fig_km.update_traces(marker=dict(size=10, opacity=0.7, 
+                                            line=dict(width=1, color='DarkSlateGrey')))
             st.plotly_chart(fig_km, use_container_width=True)
             
         with col_right:
             st.write("**Archetype Average Stats**")
-            
             cluster_summary = get_cluster_summary(df_clustered, selected_features)
             st.dataframe(cluster_summary)
 
-            #Logic to identify the Strongest cluster
             top_cluster = cluster_summary.sum(axis=1).idxmax()
-            st.info(f"Cluster {top_cluster} appears to be the most powerful group based on the selected stats.")
+            st.info(f"Cluster {top_cluster} appears to be the most powerful group.")
+    
+    clustering_analysis()
