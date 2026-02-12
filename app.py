@@ -261,7 +261,7 @@ with main_tabs[2]:
             fig.update_layout(
                 polar=dict(
                     bgcolor="darkgrey",
-                    radialaxis=dict(visible=True, range=[0, 200]),
+                    radialaxis=dict(visible=True, range=[0, 256]),
                 ),
                 showlegend=True
             )
