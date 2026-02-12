@@ -120,7 +120,7 @@ with main_tabs[0]:
         #SUB-SECTION: Top 10 by Type
         st.header("Top 10 Most Powerful Pokémon by Type")
         unique_types = sorted(df['Type_1'].unique())
-        with st.popover(f"Filter by Type: {st.session_state.get('type_choice', 'Normal')}"):
+        with st.popover(f"Filter by Type: {st.session_state.get('type_choice', 'Bug')}"):
                 selected_type = st.radio(
                     "Select a Pokémon Type:", 
                     unique_types, 
@@ -242,11 +242,9 @@ with main_tabs[2]:
 
             col_a, col_b = st.columns(2)
             with col_a:
-                p1 = st.selectbox("Select Pokémon 1", df['Name'].unique(), 
-                                 index=0, key="compare_p1")
+                p1 = st.selectbox("Select Pokémon 1", df['Name'].unique(), index=0, key="compare_p1")
             with col_b:
-                p2 = st.selectbox("Select Pokémon 2", df['Name'].unique(), 
-                                 index=1, key="compare_p2")
+                p2 = st.selectbox("Select Pokémon 2", df['Name'].unique(), index=1, key="compare_p2")
 
             # Create radar chart
             categories = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
