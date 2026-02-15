@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly
@@ -96,6 +97,13 @@ def get_cluster_summary(df_clustered, selected_features):
     """Calculate cluster summary statistics"""
     return df_clustered.groupby('Cluster')[selected_features].mean().round(0)
 
+@st.cache_data
+def get_sprite_path(pokemon_name, df):
+    try:
+        sprite_path = df[df['Name'] == pokemon_name]['Local_Sprite'].iloc[0]     
+        return sprite_path if pd.notna(sprite_path) and sprite_path != '' else None
+    except:
+        return None
 # ============================================================================
 # UI STARTS HERE
 # ============================================================================
@@ -117,30 +125,65 @@ with main_tabs[0]:
     mode = st.radio("View Rankings By:", ["Type", "Specific Stat"], horizontal=True)
     
     if mode == "Type":
-        #SUB-SECTION: Top 10 by Type
+        #SUB-SECTION: Top 10 by Type 
         st.header("Top 10 Most Powerful Pokémon by Type")
         unique_types = sorted(df['Type_1'].unique())
         with st.popover(f"Filter by Type: {st.session_state.get('type_choice', 'Bug')}"):
-                selected_type = st.radio(
-                    "Select a Pokémon Type:", 
-                    unique_types, 
-                    key="type_choice"
-                )
+            selected_type = st.radio(
+                "Select a Pokémon Type:", 
+                unique_types, 
+                key="type_choice"
+            )
 
-        left, mid, right = st.columns([1, 4, 1])
-        with mid:
-            filtered_df = get_top_pokemon_by_type(df, selected_type, 10)
+        #Get filtered data
+        filtered_df = get_top_pokemon_by_type(df, selected_type, 10)
+        
+        #Create two-column layout
+        chart_col, sprites_col = st.columns([3.5, 1.5])
+        
+        with chart_col:
+            #Dynamic height based on number of items
+            num_items = len(filtered_df)
+            fig_height = num_items * 0.4
             
-            fig, ax = plt.subplots(figsize=(9, 5))
-            colors = get_pokedex_colors(len(filtered_df))
-            ax.barh(filtered_df['Name'].str.replace('\n', ' '), filtered_df['Total'], color=colors)
-
+            fig, ax = plt.subplots(figsize=(8, fig_height))
+            colors = get_pokedex_colors(num_items)
+            
+            y_positions = range(num_items)
+            ax.barh(y_positions, filtered_df['Total'], color=colors)
+            
             for i, v in enumerate(filtered_df['Total']):
-                ax.text(v + 2, i, f'{int(v)}', va='center', fontweight='bold', fontsize=8)
-
-            ax.set_xlabel('Total Stats')
+                ax.text(v + 0.5, i, f'{int(v)}', va='center', 
+                       fontweight='bold', fontsize=8)
+            
+            ax.set_yticks(y_positions)
+            ax.set_yticklabels([f"#{i+1}" for i in range(num_items)], 
+                              fontsize=11, fontweight='bold')
             ax.invert_yaxis()
+            ax.set_xlabel('Total Stats', fontweight='bold', fontsize=11)
+            ax.grid(axis='x', alpha=0.3, linestyle='--')
+            
+            plt.tight_layout()
             st.pyplot(fig)
+        
+        with sprites_col:
+            st.markdown("### Pokémon")
+            
+            for rank, (idx, row) in enumerate(filtered_df.iterrows(), 1):
+                sprite_path = get_sprite_path(row['Name'], df)
+
+                cols = st.columns([2, 5, 19])
+                
+                with cols[0]:
+                    st.markdown(f"**#{rank}**")
+                
+                with cols[1]:
+                    if sprite_path:
+                        st.image(sprite_path, width=40)
+                    else:
+                        st.write("Sprite Not Available")
+                with cols[2]:
+                    st.caption(f"**{row['Name'].replace('\n', ' ')}** • {int(row['Total'])}")
             
     else:
         #SUB-SECTION: Specific Stats
@@ -151,19 +194,53 @@ with main_tabs[0]:
             default='Total'
         )
 
-        left, mid, right = st.columns([1, 4, 1])
-        with mid:
-            top_stat_df = get_top_pokemon_by_stat(df, stat_choice, 10)
+        top_stat_df = get_top_pokemon_by_stat(df, stat_choice, 10)
+        
+        chart_col, sprites_col = st.columns([3.5, 1.5])
+        
+        with chart_col:
+            num_items = len(top_stat_df)
+            fig_height = num_items * 0.4
             
-            fig2, ax2 = plt.subplots(figsize=(9, 5))
-            colors2 = get_pokedex_colors(10)
-            ax2.barh(top_stat_df['Name'].str.replace('\n', ' '), top_stat_df[stat_choice], color=colors2)
-
+            fig2, ax2 = plt.subplots(figsize=(8, fig_height))
+            colors2 = get_pokedex_colors(num_items)
+            
+            y_positions = range(num_items)
+            ax2.barh(y_positions, top_stat_df[stat_choice], color=colors2)
+            
             for i, v in enumerate(top_stat_df[stat_choice]):
-                ax2.text(v + 2, i, f'{int(v)}', va='center', fontweight='bold', fontsize=8)
-
+                ax2.text(v + 0.5, i, f'{int(v)}', va='center', 
+                        fontweight='bold', fontsize=8)
+            
+            ax2.set_yticks(y_positions)
+            ax2.set_yticklabels([f"#{i+1}" for i in range(num_items)], 
+                               fontsize=11, fontweight='bold')
             ax2.invert_yaxis()
+            ax2.set_xlabel(f'{stat_choice} Stats', fontweight='bold', fontsize=11)
+            ax2.grid(axis='x', alpha=0.3, linestyle='--')
+            
+            plt.tight_layout()
             st.pyplot(fig2)
+        
+        with sprites_col:
+            st.markdown(f"### Pokémon")
+            
+            for rank, (idx, row) in enumerate(top_stat_df.iterrows(), 1):
+                sprite_path = get_sprite_path(row['Name'], df)
+                
+                cols = st.columns([2, 5, 19])
+                
+                with cols[0]:
+                    st.markdown(f"**#{rank}**")
+                
+                with cols[1]:
+                    if sprite_path:
+                        st.image(sprite_path, width=40)
+                    else:
+                        st.write("Sprite Not Available")
+                with cols[2]:
+                    st.caption(f"**{row['Name'].replace('\n', ' ')}** • {int(row[stat_choice])}")
+
 
 #MAIN TAB 2: TRENDS
 with main_tabs[1]:
@@ -232,42 +309,81 @@ with main_tabs[2]:
             st.pyplot(fig_corr)
     else:
         st.header("Stat Radar Comparison")
+        st.write("Compare the stat 'shape' of two Pokémon.")
         
-        #Fragment for the comparison tool
-        @st.fragment
-        def pokemon_comparison():
-            """Interactive Pokémon comparison - only reruns on selection change"""
-            
-            st.write("Compare the stat 'shape' of two Pokémon.")
+        # Pokemon selection in two columns
+        selection_col1, selection_col2 = st.columns(2)
 
-            col_a, col_b = st.columns(2)
-            with col_a:
-                p1 = st.selectbox("Select Pokémon 1", df['Name'].unique(), index=0, key="compare_p1")
-            with col_b:
-                p2 = st.selectbox("Select Pokémon 2", df['Name'].unique(), index=1, key="compare_p2")
+        with selection_col1:
+            p1 = st.selectbox("Select Pokémon 1", df['Name'].unique(), index=0, key="radar_p1")
 
-            # Create radar chart
+        with selection_col2:
+            p2 = st.selectbox("Select Pokémon 2", df['Name'].unique(), index=1, key="radar_p2")
+
+        #Create the radar chart function
+        def create_radar(name1, name2):
             categories = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
             fig = go.Figure()
 
-            for name, color in [(p1, '#EF5350'), (p2, '#42A5F5')]:
+            for name, color in [(name1, '#EF5350'), (name2, '#42A5F5')]:
                 stats = get_pokemon_stats(df, name, categories)
-                stats.append(stats[0])
+                stats.append(stats[0])  #Close the loop
                 fig.add_trace(go.Scatterpolar(
-                    r=stats, theta=categories + [categories[0]],
-                    fill='toself', name=name, line_color=color
+                    r=stats, 
+                    theta=categories + [categories[0]],
+                    fill='toself', 
+                    name=name, 
+                    line_color=color
                 ))
-            
+
             fig.update_layout(
                 polar=dict(
                     bgcolor="darkgrey",
-                    radialaxis=dict(visible=True, range=[0, 256]),
+                    radialaxis=dict(visible=True, range=[0, 255]),
                 ),
-                showlegend=True
+                showlegend=True,
+                height=500,
+                margin=dict(l=80, r=80, t=20, b=20)
             )
-            st.plotly_chart(fig, use_container_width=True)
-        
-        pokemon_comparison()
+
+            return fig
+
+        #Left Sprite/Radar Chart/Right Sprite
+        sprite_left, chart_middle, sprite_right = st.columns([1, 3, 1])
+
+        #Left Pokémon Sprite
+        with sprite_left:
+            #Center the Pokémon name
+            st.markdown(f"<h3 style='text-align: center;'>{p1}</h3>", unsafe_allow_html=True)
+
+            #Get and display sprite
+            sprite1_path = get_sprite_path(p1, df)
+
+            if sprite1_path:
+                st.image(sprite1_path, use_container_width=True)
+            else:
+                #Fallback
+                st.markdown("<div style='text-align: center; font-size: 60px;'>🎮</div>", unsafe_allow_html=True)
+                st.caption("Sprite not available", unsafe_allow_html=True)
+
+        #Radar Chart
+        with chart_middle:
+            st.plotly_chart(create_radar(p1, p2), use_container_width=True)
+
+        #Right Pokémon Sprite
+        with sprite_right:
+            #Center the Pokémon name
+            st.markdown(f"<h3 style='text-align: center;'>{p2}</h3>", unsafe_allow_html=True)
+
+            #Get and display sprite
+            sprite2_path = get_sprite_path(p2, df)
+
+            if sprite2_path:
+                st.image(sprite2_path, use_container_width=True)
+            else:
+                # Fallback
+                st.markdown("<div style='text-align: center; font-size: 60px;'>🎮</div>", unsafe_allow_html=True)
+                st.caption("Sprite not available", unsafe_allow_html=True)
 
 #MAIN TAB 4: MACHINE LEARNING
 with main_tabs[3]:
