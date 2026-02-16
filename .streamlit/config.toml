@@ -1,0 +1,9 @@
+# Colour Themes
+# primaryColor is the accent
+# background is background
+# secondary background is the one used for widgets
+[theme]
+base = "dark"
+primaryColor = "#242424"
+backgroundColor = "#910922"
+secondaryBackgroundColor = "#610512"
