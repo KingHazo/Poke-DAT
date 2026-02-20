@@ -78,23 +78,110 @@ def get_pokemon_stats(df, name, categories):
 
 @st.cache_data
 def perform_clustering(df, selected_features, k_val):
-    """Perform K-Means clustering on selected features"""
-    scaler = StandardScaler()
-    scaled_stats = scaler.fit_transform(df[selected_features])
-    
-    kmeans = KMeans(n_clusters=k_val, random_state=42)
-    clusters = kmeans.fit_predict(scaled_stats)
-    
-    # Return a new dataframe with cluster assignments
+    """Perform K-Means clustering"""
     df_clustered = df.copy()
-    df_clustered['Cluster'] = clusters
-    
+
+    # Compute per-Pokémon stat totals across only the selected features
+    stat_totals = df_clustered[selected_features].sum(axis=1).replace(0, 1)
+
+    # Build ratio columns: each stat as a fraction of the Pokémon's total
+    ratio_cols = []
+    for feat in selected_features:
+        col = f'_ratio_{feat}'
+        df_clustered[col] = df_clustered[feat] / stat_totals
+        ratio_cols.append(col)
+
+    # Scale ratios (they're already proportional but scaling helps KMeans treat each dimension equally regardless of natural variance)
+    scaler = StandardScaler()
+    scaled = scaler.fit_transform(df_clustered[ratio_cols])
+
+    # n_init=50 runs KMeans from 50 random seeds and picks the best result
+    kmeans = KMeans(n_clusters=k_val, random_state=42, n_init=50)
+    df_clustered['Cluster'] = kmeans.fit_predict(scaled)
+
+    # Drop temporary ratio columns
+    df_clustered.drop(columns=ratio_cols, inplace=True)
+
     return df_clustered
 
 @st.cache_data
 def get_cluster_summary(df_clustered, selected_features):
-    """Calculate cluster summary statistics"""
+    """Calculate cluster summary statistics (raw stat averages per cluster)"""
     return df_clustered.groupby('Cluster')[selected_features].mean().round(0)
+
+@st.cache_data
+def label_archetypes(cluster_summary, selected_features):
+    """Auto-label each cluster with a competitive archetype name based on which stats are most dominant relative to the cluster's own stat mix.
+    """
+    ICONS = {
+        'Physical Sweeper': '⚔️',
+        'Special Sweeper':  '✨',
+        'Physical Wall':    '🛡️',
+        'Special Wall':     '🔮',
+        'Bulky Attacker':   '💪',
+        'Balanced':         '⚖️',
+    }
+
+    # Convert raw averages to per-Pokémon stat ratios at the cluster level
+    normed = cluster_summary.div(cluster_summary.sum(axis=1), axis=0)
+
+    # Key step: deviation from the cross-cluster mean
+    # Positive = this cluster emphasises this stat MORE than others do
+    global_mean = normed.mean()
+    dev = normed.sub(global_mean)
+
+    labels = {}
+    for cid, row in dev.iterrows():
+        atk   = row.get('Attack',  0)
+        spatk = row.get('Sp. Atk', 0)
+        spd   = row.get('Speed',   0)
+        dfn   = row.get('Defense', 0)
+        spdef = row.get('Sp. Def', 0)
+        hp    = row.get('HP',      0)
+
+        n_bulk = sum(1 for s in ['Defense', 'Sp. Def', 'HP'] if s in selected_features)
+        bulk = (dfn + spdef + hp) / max(n_bulk, 1)
+
+        is_fast  = spd > 0
+        is_bulky = bulk > 0 and spd <= 0
+
+        if is_fast:
+            label = 'Physical Sweeper' if atk >= spatk else 'Special Sweeper'
+        elif is_bulky:
+            label = 'Physical Wall' if dfn >= spdef else 'Special Wall'
+        else:
+            label = 'Bulky Attacker' if (atk > 0 or spatk > 0) else 'Balanced'
+
+        labels[cid] = f"{ICONS.get(label, '❓')} {label}"
+
+    return labels
+
+@st.cache_data
+def add_archetype_axes(df_clustered, selected_features):
+    """ Derive two axes that map directly to competitive roles
+
+      X  =  Attack - Sp. Atk
+             left  -> pure Special Attacker
+             right -> pure Physical Attacker
+
+      Y  =  Speed - mean(Defense, Sp. Def, HP)
+             bottom -> bulky Wall
+             top    -> fast Sweeper
+
+    Falls back to zero for any stat not in selected_features.
+    """
+    out = df_clustered.copy()
+
+    def g(col):
+        return out[col] if col in selected_features else pd.Series(0, index=out.index)
+
+    out['_axis_x'] = g('Attack') - g('Sp. Atk')
+
+    bulk_cols = [s for s in ['Defense', 'Sp. Def', 'HP'] if s in selected_features]
+    avg_bulk = sum(g(s) for s in bulk_cols) / max(len(bulk_cols), 1)
+    out['_axis_y'] = g('Speed') - avg_bulk
+
+    return out
 
 @st.cache_data
 def get_sprite_path(pokemon_name, df):
@@ -387,64 +474,84 @@ with main_tabs[2]:
 #MAIN TAB 4: MACHINE LEARNING
 with main_tabs[3]:
     st.header("Pokémon Archetype Clustering")
-    st.write("Use Machine Learning to group Pokémon based on custom stat combinations.")
+    st.write("Use Machine Learning to group Pokémon based on Competitive Archetypes.")
     
     @st.fragment
     def clustering_analysis():
-        """Interactive ML clustering"""
         
-        col_input1, col_input2 = st.columns(2)
-        with col_input1:
-            selected_features = st.multiselect(
-                "Select stats for the AI to analyze:",
-                options=st.session_state.ml_stats,  #From session state
-                default=st.session_state.ml_stats,
-                key="ml_features"
-            )
-        with col_input2:
-            k_val = st.slider("Number of Archetypes (Clusters):", 4, 6, 5, key="ml_clusters")
-
-        if len(selected_features) < 2:
-            st.warning("Please select at least two stats to perform clustering.")
-            return  #Early exit
+        selected_features = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
+        k_val = 6
         
         #Clustering
         df_clustered = perform_clustering(df, selected_features, k_val)
         
+        cluster_summary = get_cluster_summary(df_clustered, selected_features)
+        archetype_labels = label_archetypes(cluster_summary, selected_features)
+        df_clustered['Archetype'] = df_clustered['Cluster'].map(archetype_labels)
+
+        #Compute the archetype axes
+        df_plot = add_archetype_axes(df_clustered, selected_features).copy()
+        rng = np.random.default_rng(seed=42)
+        jitter_scale = 4
+        df_plot['_axis_x'] = df_plot['_axis_x'] + rng.uniform(-jitter_scale, jitter_scale, size=len(df_plot))
+        df_plot['_axis_y'] = df_plot['_axis_y'] + rng.uniform(-jitter_scale, jitter_scale, size=len(df_plot))
+
         st.markdown("---")
-        st.subheader("Visualize the Results")
-        
-        col_plot1, col_plot2 = st.columns(2)
-        with col_plot1:
-            x_axis = st.selectbox("X-Axis Stat:", selected_features, index=0, key="ml_x")
-        with col_plot2:
-            y_axis = st.selectbox("Y-Axis Stat:", selected_features, 
-                                 index=min(1, len(selected_features)-1), key="ml_y")
+        st.subheader("Archetype Map")
+        st.caption(
+            "**X-axis**: Attack - Sp. Atk — left = Special Attacker, right = Physical Attacker  |  "
+            "**Y-axis**: Speed - avg(Def, Sp. Def, HP) — bottom = Bulky Wall, top = Fast Sweeper"
+        )
 
         col_left, col_right = st.columns([3, 2])
-        with col_left:          
+        with col_left:
             fig_km = px.scatter(
-                df_clustered, 
-                x=x_axis, 
-                y=y_axis, 
-                color=df_clustered['Cluster'].astype(str),
+                df_plot,
+                x='_axis_x',
+                y='_axis_y',
+                color='Archetype',
                 hover_name='Name',
-                title=f"Clusters View: {x_axis} vs {y_axis}",
-                labels={'color': 'Cluster'},
+                hover_data={s: True for s in selected_features} | {
+                    '_axis_x': False, '_axis_y': False
+                },
+                labels={
+                    '_axis_x': '← Special Attacker  |  Physical Attacker →',
+                    '_axis_y': '← Bulky Wall  |  Fast Sweeper →',
+                    'color':   'Archetype',
+                },
                 template="plotly_white",
-                color_discrete_sequence=px.colors.qualitative.Safe
+                color_discrete_sequence=px.colors.qualitative.Safe,
             )
-            
-            fig_km.update_traces(marker=dict(size=10, opacity=0.7, 
-                                            line=dict(width=1, color='DarkSlateGrey')))
+            fig_km.update_traces(marker=dict(size=8, opacity=0.7,
+                                             line=dict(width=1, color='DarkSlateGrey')))
+
+            #Quadrant reference lines at zero
+            fig_km.add_hline(y=0, line_dash='dot', line_color='grey', opacity=0.4)
+            fig_km.add_vline(x=0, line_dash='dot', line_color='grey', opacity=0.4)
+
+            #Quadrant corner annotations
+            quadrant_notes = [
+                (0.97, 0.97, 'right', 'top',    'Phys. Sweeper'),
+                (0.03, 0.97, 'left',  'top',    'Spec. Sweeper'),
+                (0.97, 0.03, 'right', 'bottom', 'Phys. Wall'),
+                (0.03, 0.03, 'left',  'bottom', 'Spec. Wall'),
+            ]
+            for xr, yr, xanchor, yanchor, txt in quadrant_notes:
+                fig_km.add_annotation(
+                    xref='paper', yref='paper',
+                    x=xr, y=yr,
+                    text=f"<i>{txt}</i>",
+                    showarrow=False,
+                    font=dict(size=10, color='grey'),
+                    xanchor=xanchor, yanchor=yanchor,
+                )
+
             st.plotly_chart(fig_km, use_container_width=True)
-            
+
         with col_right:
             st.write("**Archetype Average Stats**")
-            cluster_summary = get_cluster_summary(df_clustered, selected_features)
-            st.dataframe(cluster_summary)
-
-            top_cluster = cluster_summary.sum(axis=1).idxmax()
-            st.info(f"Cluster {top_cluster} appears to be the most powerful group.")
+            display_summary = cluster_summary.copy()
+            display_summary.index = [archetype_labels[i] for i in display_summary.index]
+            st.dataframe(display_summary)
     
     clustering_analysis()
