@@ -22,9 +22,9 @@ def get_pokedex_colors(n):
 
 #Lightgrey background for Matplotlib/Seaborn charts since white hurts my eyes
 plt.rcParams.update({
-    "figure.facecolor": "darkgrey",  #The area around the chart
-    "axes.facecolor": "darkgrey",    #The area inside the chart axes
-    "savefig.facecolor": "darkgrey"  #Ensures it stays grey if saved
+    "figure.facecolor": "lightblue",  #The area around the chart
+    "axes.facecolor": "lightblue",    #The area inside the chart axes
+    "savefig.facecolor": "lightblue"  #Ensures it stays grey if saved
 })
 
 #Data Loading
@@ -337,7 +337,7 @@ with main_tabs[2]:
 
             fig.update_layout(
                 polar=dict(
-                    bgcolor="darkgrey",
+                    bgcolor="lightblue",
                     radialaxis=dict(visible=True, range=[0, 255]),
                 ),
                 showlegend=True,
