@@ -190,6 +190,20 @@ def get_sprite_path(pokemon_name, df):
         return sprite_path if pd.notna(sprite_path) and sprite_path != '' else None
     except:
         return None
+    
+@st.cache_data
+def get_type_sprite_paths(pokemon_name, df):
+    try:
+        row = df[df['Name'] == pokemon_name].iloc[0]
+        types = []
+        for col in ['Type_1', 'Type_2']:
+            val = row.get(col)
+            if pd.notna(val) and str(val).strip() not in ('', 'None'):
+                type_name = str(val).strip().lower()
+                types.append((str(val).strip(), f"typeSprites/{type_name}.png"))
+        return types
+    except:
+        return []
 # ============================================================================
 # UI STARTS HERE
 # ============================================================================
@@ -432,25 +446,41 @@ with main_tabs[2]:
 
         sprite1_path = get_sprite_path(p1, df)
         sprite2_path = get_sprite_path(p2, df)
+        type1_sprites = get_type_sprite_paths(p1, df)
+        type2_sprites = get_type_sprite_paths(p2, df)
 
-        with sprite_col1:
-            st.markdown(f"<h3 style='text-align: center;'>{p1}</h3>", unsafe_allow_html=True)
-            #Inner padding so sprite doesn't balloon on very wide screens
+
+        def render_pokemon_panel(name, sprite_path, type_sprites):
+            st.markdown(f"<h3 style='text-align: center;'>{name}</h3>", unsafe_allow_html=True)
+
+            #Pokémon sprite so it doesn't stretch on wide screens
             _, img_area, _ = st.columns([0.5, 3, 0.5])
             with img_area:
-                if sprite1_path:
-                    st.image(sprite1_path, use_container_width=True)
+                if sprite_path:
+                    st.image(sprite_path, use_container_width=True)
                 else:
                     st.caption("Sprite not available")
+
+            #Type badge(s) centred beneath the sprite.
+            #For a single type: one badge centred. For dual types: two badges side by side.
+            if type_sprites:
+                num_types = len(type_sprites)
+                #Build a centred layout: narrow padding columns either side of the badges
+                if num_types == 1:
+                    _, badge_col, _ = st.columns([1.5, 1, 1.5])
+                    badge_cols = [badge_col]
+                else:
+                    _, b1, b2, _ = st.columns([1, 1, 1, 1])
+                    badge_cols = [b1, b2]
+
+                for (type_name, type_path), col in zip(type_sprites, badge_cols):
+                    with col:
+                        st.image(type_path)
+        with sprite_col1:
+            render_pokemon_panel(p1, sprite1_path, type1_sprites)
 
         with sprite_col2:
-            st.markdown(f"<h3 style='text-align: center;'>{p2}</h3>", unsafe_allow_html=True)
-            _, img_area, _ = st.columns([0.5, 3, 0.5])
-            with img_area:
-                if sprite2_path:
-                    st.image(sprite2_path, use_container_width=True)
-                else:
-                    st.caption("Sprite not available")
+            render_pokemon_panel(p2, sprite2_path, type2_sprites)
 
 #MAIN TAB 4: MACHINE LEARNING
 with main_tabs[3]:
