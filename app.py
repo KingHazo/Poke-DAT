@@ -224,14 +224,12 @@ with main_tabs[0]:
         #Get filtered data
         filtered_df = get_top_pokemon_by_type(df, selected_type, 10)
         
-        #Create two-column layout
-        chart_col, sprites_col = st.columns([3.5, 1.5])
+        #Chart at full width
+        num_items = len(filtered_df)
+        fig_height = num_items * 0.4
         
-        with chart_col:
-            #Dynamic height based on number of items
-            num_items = len(filtered_df)
-            fig_height = num_items * 0.4
-            
+        left_pad, chart_area, right_pad = st.columns([1, 8, 1])
+        with chart_area:
             fig, ax = plt.subplots(figsize=(8, fig_height))
             colors = get_pokedex_colors(num_items)
             
@@ -252,24 +250,18 @@ with main_tabs[0]:
             plt.tight_layout()
             st.pyplot(fig)
         
-        with sprites_col:
-            st.markdown("### Pokémon")
-            
-            for rank, (idx, row) in enumerate(filtered_df.iterrows(), 1):
+        #Sprites in a horizontal strip below the chart — one column per Pokémon
+        st.markdown("### Pokémon")
+        sprite_cols = st.columns(num_items)
+        for rank, ((idx, row), col) in enumerate(zip(filtered_df.iterrows(), sprite_cols), 1):
+            with col:
                 sprite_path = get_sprite_path(row['Name'], df)
-
-                cols = st.columns([2, 5, 19])
-                
-                with cols[0]:
-                    st.markdown(f"**#{rank}**")
-                
-                with cols[1]:
-                    if sprite_path:
-                        st.image(sprite_path, width=40)
-                    else:
-                        st.write("Sprite Not Available")
-                with cols[2]:
-                    st.caption(f"**{row['Name'].replace('\n', ' ')}** • {int(row['Total'])}")
+                st.caption(f"**#{rank}**")
+                if sprite_path:
+                    st.image(sprite_path, use_container_width=True)
+                else:
+                    st.markdown("<div style='text-align:center; font-size:24px;'>🎮</div>", unsafe_allow_html=True)
+                st.caption(f"{row['Name'].replace(chr(10), ' ')}")
             
     else:
         #SUB-SECTION: Specific Stats
@@ -282,12 +274,12 @@ with main_tabs[0]:
 
         top_stat_df = get_top_pokemon_by_stat(df, stat_choice, 10)
         
-        chart_col, sprites_col = st.columns([3.5, 1.5])
-        
-        with chart_col:
-            num_items = len(top_stat_df)
-            fig_height = num_items * 0.4
-            
+        #Chart at full width
+        num_items = len(top_stat_df)
+        fig_height = num_items * 0.4
+
+        left_pad, chart_area, right_pad = st.columns([1, 8, 1])
+        with chart_area:
             fig2, ax2 = plt.subplots(figsize=(8, fig_height))
             colors2 = get_pokedex_colors(num_items)
             
@@ -307,25 +299,19 @@ with main_tabs[0]:
             
             plt.tight_layout()
             st.pyplot(fig2)
-        
-        with sprites_col:
-            st.markdown(f"### Pokémon")
-            
-            for rank, (idx, row) in enumerate(top_stat_df.iterrows(), 1):
+
+        #Sprites in a horizontal strip below the chart — one column per Pokémon
+        st.markdown("### Pokémon")
+        sprite_cols = st.columns(num_items)
+        for rank, ((idx, row), col) in enumerate(zip(top_stat_df.iterrows(), sprite_cols), 1):
+            with col:
                 sprite_path = get_sprite_path(row['Name'], df)
-                
-                cols = st.columns([2, 5, 19])
-                
-                with cols[0]:
-                    st.markdown(f"**#{rank}**")
-                
-                with cols[1]:
-                    if sprite_path:
-                        st.image(sprite_path, width=40)
-                    else:
-                        st.write("Sprite Not Available")
-                with cols[2]:
-                    st.caption(f"**{row['Name'].replace('\n', ' ')}** • {int(row[stat_choice])}")
+                st.caption(f"**#{rank}**")
+                if sprite_path:
+                    st.image(sprite_path, use_container_width=True)
+                else:
+                    st.markdown("<div style='text-align:center; font-size:24px;'>🎮</div>", unsafe_allow_html=True)
+                st.caption(f"{row['Name'].replace(chr(10), ' ')}")
 
 
 #MAIN TAB 2: TRENDS
@@ -435,41 +421,36 @@ with main_tabs[2]:
             return fig
 
         #Left Sprite/Radar Chart/Right Sprite
-        sprite_left, chart_middle, sprite_right = st.columns([1, 3, 1])
+        pad_left, chart_middle, pad_right = st.columns([1, 5, 1])
 
-        #Left Pokémon Sprite
-        with sprite_left:
-            #Center the Pokémon name
-            st.markdown(f"<h3 style='text-align: center;'>{p1}</h3>", unsafe_allow_html=True)
-
-            #Get and display sprite
-            sprite1_path = get_sprite_path(p1, df)
-
-            if sprite1_path:
-                st.image(sprite1_path, use_container_width=True)
-            else:
-                #Fallback
-                st.markdown("<div style='text-align: center; font-size: 60px;'>🎮</div>", unsafe_allow_html=True)
-                st.caption("Sprite not available", unsafe_allow_html=True)
-
-        #Radar Chart
         with chart_middle:
             st.plotly_chart(create_radar(p1, p2), use_container_width=True)
 
-        #Right Pokémon Sprite
-        with sprite_right:
-            #Center the Pokémon name
+        #Sprites in a balanced two-column strip below the chart.
+        #Each column gets exactly half the page, so both sprites scale identically
+        sprite_col1, sprite_col2 = st.columns(2)
+
+        sprite1_path = get_sprite_path(p1, df)
+        sprite2_path = get_sprite_path(p2, df)
+
+        with sprite_col1:
+            st.markdown(f"<h3 style='text-align: center;'>{p1}</h3>", unsafe_allow_html=True)
+            #Inner padding so sprite doesn't balloon on very wide screens
+            _, img_area, _ = st.columns([0.5, 3, 0.5])
+            with img_area:
+                if sprite1_path:
+                    st.image(sprite1_path, use_container_width=True)
+                else:
+                    st.caption("Sprite not available")
+
+        with sprite_col2:
             st.markdown(f"<h3 style='text-align: center;'>{p2}</h3>", unsafe_allow_html=True)
-
-            #Get and display sprite
-            sprite2_path = get_sprite_path(p2, df)
-
-            if sprite2_path:
-                st.image(sprite2_path, use_container_width=True)
-            else:
-                # Fallback
-                st.markdown("<div style='text-align: center; font-size: 60px;'>🎮</div>", unsafe_allow_html=True)
-                st.caption("Sprite not available", unsafe_allow_html=True)
+            _, img_area, _ = st.columns([0.5, 3, 0.5])
+            with img_area:
+                if sprite2_path:
+                    st.image(sprite2_path, use_container_width=True)
+                else:
+                    st.caption("Sprite not available")
 
 #MAIN TAB 4: MACHINE LEARNING
 with main_tabs[3]:
