@@ -62,11 +62,11 @@ STEEL",300,50,75,90,10,35,40,sprites/27-sandshrew-alola.png
 28,Sandslash,GROUND,450,75,100,110,45,55,65,sprites/28-sandslash.png
 28,Alolan Sandslash,"ICE
 STEEL",450,75,100,120,25,65,65,sprites/28-sandslash-alola.png
-29,Nidoranâ,POISON,275,55,47,52,40,40,41,sprites/29-nidoran.png
+29,Nidoran Female,POISON,275,55,47,52,40,40,41,sprites/29-nidoran.png
 30,Nidorina,POISON,365,70,62,67,55,55,56,sprites/30-nidorina.png
 31,Nidoqueen,"POISON
 GROUND",505,90,92,87,75,85,76,sprites/31-nidoqueen.png
-32,Nidoranâ,POISON,273,46,57,40,40,40,50,sprites/32-nidoran.png
+32,Nidoran Male,POISON,273,46,57,40,40,40,50,sprites/32-nidoran.png
 33,Nidorino,POISON,365,61,72,57,55,55,65,sprites/33-nidorino.png
 34,Nidoking,"POISON
 GROUND",505,81,102,77,85,75,85,sprites/34-nidoking.png
