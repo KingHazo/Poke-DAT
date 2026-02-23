@@ -30,7 +30,7 @@ plt.rcParams.update({
 #Data Loading
 @st.cache_data
 def load_data():
-    df = pd.read_csv('pokemon.csv')
+    df = pd.read_csv('pokemon.csv', encoding='utf-8')
     
     #Pre-processing
     df['Type_1'] = df['Type'].apply(lambda x: str(x).split('\n')[0].strip() if pd.notna(x) else 'Unknown')
