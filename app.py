@@ -72,6 +72,77 @@ def get_stat_correlation(df):
     return df[['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']].corr()
 
 @st.cache_data
+def get_generation_avg_stats(df, base_only=False):
+    """Return a list of (gen_num, region_name, avg_stats_dict) for all 9 generations, split by canonical National Dex ID ranges.
+
+    base_only: if True, exclude alternate forms and Mega Evolutions.
+    """
+    GENERATIONS = [
+        (1, "Kanto",  1,   151),
+        (2, "Johto",  152, 251),
+        (3, "Hoenn",  252, 386),
+        (4, "Sinnoh", 387, 493),
+        (5, "Unova",  494, 649),
+        (6, "Kalos",  650, 721),
+        (7, "Alola",  722, 809),
+        (8, "Galar",  810, 905),
+        (9, "Paldea", 906, 1025),
+    ]
+    STATS = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
+
+    #Keywords derived from every alternate form present in the dataset.
+    #Organised by category so it's easy to extend if new forms are added.
+    _FORM_KEYWORDS = [
+        #Regional variants
+        'Mega ', 'Primal ',
+        'Alolan ', 'Galarian ', 'Hisuian ', 'Paldean ',
+
+        #Common form suffixes
+        ' Forme', ' Form', ' Mode', ' Style',
+        ' Cloak', ' Breed', ' Mask', ' Rider',
+        ' Rotom', ' Size', ' Plumage',
+
+        #Fusions & special transformations
+        'Eternamax', 'Ash-Greninja',
+        'Black Kyurem', 'White Kyurem',
+        'Hoopa Confined', 'Hoopa Unbound',
+        'Dawn Wings Necrozma', 'Dusk Mane Necrozma', 'Ultra Necrozma',
+
+        #Miscellaneous specific forms
+        'Partner ',       #Partner Pikachu / Partner Eevee
+        'Crowned ',       #Crowned Sword / Crowned Shield (Zacian/Zamazenta)
+        'Own Tempo',      #Own Tempo Rockruff
+        'Family of',      #Family of Three / Family of Four (Maushold)
+        'Ice Face',       #Eiscue
+        'Noice Face',     #Eiscue
+        'Bloodmoon',      #Bloodmoon Ursaluna
+        'Hero of Many Battles',  #Koraidon/Miraidon base form label
+
+        #Gender variants
+        # Meowstic, Indeedee, Basculegion, Oinkologne have a Female form.
+        'Male', 'Female',
+    ]
+
+    if base_only:
+        working_df = df[~df['Name'].apply(
+            lambda n: (
+                any(kw.lower() in str(n).lower() for kw in _FORM_KEYWORDS)
+            )
+        )]
+    else:
+        working_df = df
+
+    results = []
+    for gen_num, region, id_start, id_end in GENERATIONS:
+        subset = working_df[(working_df['#'] >= id_start) & (working_df['#'] <= id_end)]
+        if subset.empty:
+            avg = {s: 0 for s in STATS}
+        else:
+            avg = {s: round(subset[s].mean(), 1) for s in STATS}
+        results.append((gen_num, region, avg))
+    return results
+
+@st.cache_data
 def get_pokemon_stats(df, name, categories):
     """Get stats for a specific pokemon"""
     return df[df['Name'] == name][categories].values.flatten().tolist()
@@ -209,8 +280,35 @@ def get_type_sprite_paths(pokemon_name, df):
 # ============================================================================
 
 # Title Section
-st.title("The Poké-DAT")
-st.markdown("### A Data Analysis & Visualization Tool")
+st.markdown("""
+<div style="
+    background-color: #242424;
+    border: 12px solid #d0d0d0;
+    border-radius: 6px;
+    box-shadow: 0 0 0 3px #c1c1c1, inset 0 2px 6px rgba(0,0,0,0.35);
+    padding: 12px 32px 14px 32px;
+    margin-bottom: 24px;
+    width: 100%;
+    box-sizing: border-box;
+">
+    <p style="
+        font-family: monospace;
+        font-size: 2.4rem;
+        font-weight: 900;
+        color: #ffffff;
+        margin: 0 0 2px 0;
+        letter-spacing: 2px;
+        text-shadow: 1px 1px 0px #ffffff;
+    ">The Poké-DAT</p>
+    <p style="
+        font-family: monospace;
+        font-size: 0.95rem;
+        color: #ffffff;
+        margin: 0;
+        letter-spacing: 1px;
+    ">▶ A Data Analysis &amp; Visualization Tool</p>
+</div>
+""", unsafe_allow_html=True)
 
 # Create categorized main tabs
 main_tabs = st.tabs([
@@ -330,7 +428,7 @@ with main_tabs[0]:
 
 #MAIN TAB 2: TRENDS
 with main_tabs[1]:
-    trend_mode = st.radio("View Trends By:", ["Type Distribution", "Average Power Level"], horizontal=True)
+    trend_mode = st.radio("View Trends By:", ["Type Distribution", "Average Power Level", "Base Stat Averages by Generation"], horizontal=True)
     
     if trend_mode == "Type Distribution":
         #SUB-SECTION: Distribution
@@ -354,7 +452,7 @@ with main_tabs[1]:
                 ax3.text(i, v, str(v), ha='center', va='bottom', fontweight='bold', fontsize=8)
             st.pyplot(fig3)
             
-    else:
+    elif trend_mode == "Average Power Level":
         #SUB-SECTION: Average Power Level
         st.header("Average Power Level by Pokémon Type")
         left, mid, right = st.columns([2, 4, 2])
@@ -377,6 +475,94 @@ with main_tabs[1]:
             ax4.invert_yaxis()
             ax4.grid(axis='x', alpha=0.3, linestyle='--')
             st.pyplot(fig4)
+    else:
+        #SUB-SECTION: Base Stat Averages by Generation
+        st.header("Base Stat Averages by Generation")
+        st.write("Average stats across all Pokémon in each generation, displayed as radar charts.")
+
+        base_only = st.toggle(
+            "Base forms only (exclude Mega Evolutions, regional variants, etc.)",
+            value=True,
+            help="Alternate forms share their original Dex ID, so they skew the "
+                 "averages for the generation they were introduced in — not the "
+                 "generation the form was added. Enable this for a fairer comparison."
+        )
+        st.caption(
+            "Showing base forms only - Mega Evolutions and regional variants excluded."
+            if base_only else
+            "Showing all entries including Mega Evolutions and alternate forms."
+        )
+
+        STATS      = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
+        gen_data   = get_generation_avg_stats(df, base_only=base_only)
+        #Shared radial axis max — round up the highest single average to a  ceiling
+        all_vals   = [v for _, _, avg in gen_data for v in avg.values()]
+        axis_max   = int(round(max(all_vals) / 10 + 0.5) * 10) + 10
+
+        #Pokedex gradient colour per generation
+        gen_colors = get_pokedex_colors(9)
+
+        #3 x 3 grid of each visualisation
+        for row_idx in range(3):
+            cols = st.columns(3)
+            for col_idx in range(3):
+                gen_idx = row_idx * 3 + col_idx
+                gen_num, region, avg = gen_data[gen_idx]
+
+                with cols[col_idx]:
+                    st.markdown(
+                        f"<h4 style='text-align:center; margin-bottom:0;'>"
+                        f"Gen {gen_num} — {region}</h4>",
+                        unsafe_allow_html=True
+                    )
+
+                    values = [avg[s] for s in STATS]
+                    #Close the loop for the filled polygon
+                    values_closed = values + [values[0]]
+                    stats_closed  = STATS  + [STATS[0]]
+
+                    r, g, b, _ = gen_colors[gen_idx]
+                    hex_color   = '#{:02x}{:02x}{:02x}'.format(
+                        int(r * 255), int(g * 255), int(b * 255)
+                    )
+
+                    fig_gen = go.Figure()
+                    rgba_fill = f'rgba({int(r*255)},{int(g*255)},{int(b*255)},0.3)'
+                    fig_gen.add_trace(go.Scatterpolar(
+                        r=values_closed,
+                        theta=stats_closed,
+                        fill='toself',
+                        fillcolor=rgba_fill,
+                        line=dict(color=hex_color, width=2),
+                        name=region,
+                        hovertemplate='%{theta}: %{r:.1f}<extra></extra>',
+                    ))
+                    fig_gen.update_layout(
+                        polar=dict(
+                            bgcolor='lightblue',
+                            radialaxis=dict(
+                                visible=True,
+                                range=[0, axis_max],
+                                tickfont=dict(size=7),
+                                tickangle=45,
+                            ),
+                            angularaxis=dict(tickfont=dict(size=8)),
+                        ),
+                        showlegend=False,
+                        margin=dict(l=30, r=30, t=10, b=10),
+                        height=280,
+                    )
+                    st.plotly_chart(fig_gen, use_container_width=True)
+
+                    #Stat value summary beneath each chart
+                    stat_lines = "  |  ".join(
+                        f"{s}: {avg[s]}" for s in STATS
+                    )
+                    st.markdown(
+                        f"<p style='text-align:center; font-size:11px; "
+                        f"line-height:1.8;'>{stat_lines}</p>",
+                        unsafe_allow_html=True
+                    )
 
 #MAIN TAB 3: RELATIONSHIPS
 with main_tabs[2]:
@@ -386,13 +572,48 @@ with main_tabs[2]:
 
     if relationship_mode == "Stat Correlation":
         st.header("Stat Correlations")
-        left, mid, right = st.columns([2, 4, 2])
-        with mid:
+
+        col_chart, col_explain = st.columns([3, 2])
+
+        with col_chart:
             corr = get_stat_correlation(df)
             fig_corr, ax_corr = plt.subplots()
-            sns.heatmap(corr, annot=True, cmap='RdYlGn', ax=ax_corr, 
+            sns.heatmap(corr, annot=True, cmap='RdYlGn', ax=ax_corr,
                        linewidths=0.5, linecolor='lightgrey')
             st.pyplot(fig_corr)
+
+        with col_explain:
+            st.subheader("How to read this chart")
+            st.write(
+                "Each cell shows how strongly two stats move together across all Pokémon. "
+                "Values run from **−1** (opposite extremes) through **0** (no relationship) "
+                "to **+1** (perfectly in step). The colour reinforces this — "
+                "green means a positive correlation, red means a negative one."
+            )
+            st.markdown("---")
+            st.subheader("Notable relationships")
+
+            # Derive the strongest off-diagonal pairs directly from the data
+            # so the explanations always reflect the actual numbers.
+            corr_pairs = (
+                corr.where(~pd.DataFrame(
+                    [[i == j for j in range(len(corr.columns))]
+                     for i in range(len(corr.columns))],
+                    index=corr.index, columns=corr.columns
+                ))
+                .stack()
+                .drop_duplicates()
+            )
+            top_pos = corr_pairs.nlargest(3)
+            top_neg = corr_pairs.nsmallest(3)
+
+            st.markdown("**Strongest positive correlations**")
+            for (a, b), val in top_pos.items():
+                st.markdown(f"- **{a} ↔ {b}**: `{val:.2f}` — Pokémon with high {a} tend to also have high {b}.")
+
+            st.markdown("**Strongest negative correlations**")
+            for (a, b), val in top_neg.items():
+                st.markdown(f"- **{a} ↔ {b}**: `{val:.2f}` — Pokémon that excel in {a} often sacrifice {b}.")
     else:
         st.header("Stat Radar Comparison")
         st.write("Compare the stat 'shape' of two Pokémon.")

@@ -5,24 +5,20 @@ POISON",318,45,49,49,65,65,45,sprites/1-bulbasaur.png
 POISON",405,60,62,63,80,80,60,sprites/2-ivysaur.png
 3,Venusaur,"GRASS
 POISON",525,80,82,83,100,100,80,sprites/3-venusaur.png
-3,"Venusaur
-Mega Venusaur","GRASS
+3,Mega Venusaur,"GRASS
 POISON",625,80,100,123,122,120,80,sprites/3-venusaur-mega.png
 4,Charmander,FIRE,309,39,52,43,60,50,65,sprites/4-charmander.png
 5,Charmeleon,FIRE,405,58,64,58,80,65,80,sprites/5-charmeleon.png
 6,Charizard,"FIRE
 FLYING",534,78,84,78,109,85,100,sprites/6-charizard.png
-6,"Charizard
-Mega Charizard X","FIRE
+6,Mega Charizard X,"FIRE
 DRAGON",634,78,130,111,130,85,100,sprites/6-charizard-megax.png
-6,"Charizard
-Mega Charizard Y","FIRE
+6,Mega Charizard Y,"FIRE
 FLYING",634,78,104,78,159,115,100,sprites/6-charizard-megay.png
 7,Squirtle,WATER,314,44,48,65,50,64,43,sprites/7-squirtle.png
 8,Wartortle,WATER,405,59,63,80,65,80,58,sprites/8-wartortle.png
 9,Blastoise,WATER,530,79,83,100,85,105,78,sprites/9-blastoise.png
-9,"Blastoise
-Mega Blastoise",WATER,630,79,103,120,135,115,78,sprites/9-blastoise-mega.png
+9,Mega Blastoise,WATER,630,79,103,120,135,115,78,sprites/9-blastoise-mega.png
 10,Caterpie,BUG,195,45,30,35,20,20,45,sprites/10-caterpie.png
 11,Metapod,BUG,205,50,20,55,25,25,30,sprites/11-metapod.png
 12,Butterfree,"BUG
@@ -33,8 +29,7 @@ POISON",195,40,35,30,20,20,50,sprites/13-weedle.png
 POISON",205,45,25,50,25,25,35,sprites/14-kakuna.png
 15,Beedrill,"BUG
 POISON",395,65,90,40,45,80,75,sprites/15-beedrill.png
-15,"Beedrill
-Mega Beedrill","BUG
+15,Mega Beedrill,"BUG
 POISON",495,65,150,40,15,80,145,sprites/15-beedrill-mega.png
 16,Pidgey,"NORMAL
 FLYING",251,40,45,40,35,35,56,sprites/16-pidgey.png
@@ -42,16 +37,13 @@ FLYING",251,40,45,40,35,35,56,sprites/16-pidgey.png
 FLYING",349,63,60,55,50,50,71,sprites/17-pidgeotto.png
 18,Pidgeot,"NORMAL
 FLYING",479,83,80,75,70,70,101,sprites/18-pidgeot.png
-18,"Pidgeot
-Mega Pidgeot","NORMAL
+18,Mega Pidgeot,"NORMAL
 FLYING",579,83,80,80,135,80,121,sprites/18-pidgeot-mega.png
 19,Rattata,NORMAL,253,30,56,35,25,35,72,sprites/19-rattata.png
-19,"Rattata
-Alolan Rattata","DARK
+19,Alolan Rattata,"DARK
 NORMAL",253,30,56,35,25,35,72,sprites/19-rattata-alola.png
 20,Raticate,NORMAL,413,55,81,60,50,70,97,sprites/20-raticate.png
-20,"Raticate
-Alolan Raticate","DARK
+20,Alolan Raticate,"DARK
 NORMAL",413,75,71,70,40,80,77,sprites/20-raticate-alola.png
 21,Spearow,"NORMAL
 FLYING",262,40,60,30,31,31,70,sprites/21-spearow.png
@@ -60,36 +52,30 @@ FLYING",442,65,90,65,61,61,100,sprites/22-fearow.png
 23,Ekans,POISON,288,35,60,44,40,54,55,sprites/23-ekans.png
 24,Arbok,POISON,448,60,95,69,65,79,80,sprites/24-arbok.png
 25,Pikachu,ELECTRIC,320,35,55,40,50,50,90,sprites/25-pikachu.png
-25,"Pikachu
-Partner Pikachu",ELECTRIC,430,45,80,50,75,60,120,sprites/25-pikachu-starter.png
+25,Partner Pikachu,ELECTRIC,430,45,80,50,75,60,120,sprites/25-pikachu-starter.png
 26,Raichu,ELECTRIC,485,60,90,55,90,80,110,sprites/26-raichu.png
-26,"Raichu
-Alolan Raichu","ELECTRIC
+26,Alolan Raichu,"ELECTRIC
 PSYCHIC",485,60,85,50,95,85,110,sprites/26-raichu-alola.png
 27,Sandshrew,GROUND,300,50,75,85,20,30,40,sprites/27-sandshrew.png
-27,"Sandshrew
-Alolan Sandshrew","ICE
+27,Alolan Sandshrew,"ICE
 STEEL",300,50,75,90,10,35,40,sprites/27-sandshrew-alola.png
 28,Sandslash,GROUND,450,75,100,110,45,55,65,sprites/28-sandslash.png
-28,"Sandslash
-Alolan Sandslash","ICE
+28,Alolan Sandslash,"ICE
 STEEL",450,75,100,120,25,65,65,sprites/28-sandslash-alola.png
-29,Nidoranâ™€,POISON,275,55,47,52,40,40,41,sprites/29-nidoran.png
+29,Nidoranâ,POISON,275,55,47,52,40,40,41,sprites/29-nidoran.png
 30,Nidorina,POISON,365,70,62,67,55,55,56,sprites/30-nidorina.png
 31,Nidoqueen,"POISON
 GROUND",505,90,92,87,75,85,76,sprites/31-nidoqueen.png
-32,Nidoranâ™‚,POISON,273,46,57,40,40,40,50,sprites/32-nidoran.png
+32,Nidoranâ,POISON,273,46,57,40,40,40,50,sprites/32-nidoran.png
 33,Nidorino,POISON,365,61,72,57,55,55,65,sprites/33-nidorino.png
 34,Nidoking,"POISON
 GROUND",505,81,102,77,85,75,85,sprites/34-nidoking.png
 35,Clefairy,FAIRY,323,70,45,48,60,65,35,sprites/35-clefairy.png
 36,Clefable,FAIRY,483,95,70,73,95,90,60,sprites/36-clefable.png
 37,Vulpix,FIRE,299,38,41,40,50,65,65,sprites/37-vulpix.png
-37,"Vulpix
-Alolan Vulpix",ICE,299,38,41,40,50,65,65,sprites/37-vulpix-alola.png
+37,Alolan Vulpix,ICE,299,38,41,40,50,65,65,sprites/37-vulpix-alola.png
 38,Ninetales,FIRE,505,73,76,75,81,100,100,sprites/38-ninetales.png
-38,"Ninetales
-Alolan Ninetales","ICE
+38,Alolan Ninetales,"ICE
 FAIRY",505,73,67,75,81,100,109,sprites/38-ninetales-alola.png
 39,Jigglypuff,"NORMAL
 FAIRY",270,115,45,20,45,25,20,sprites/39-jigglypuff.png
@@ -114,32 +100,26 @@ POISON",305,60,55,50,40,55,45,sprites/48-venonat.png
 49,Venomoth,"BUG
 POISON",450,70,65,60,90,75,90,sprites/49-venomoth.png
 50,Diglett,GROUND,265,10,55,25,35,45,95,sprites/50-diglett.png
-50,"Diglett
-Alolan Diglett","GROUND
+50,Alolan Diglett,"GROUND
 STEEL",265,10,55,30,35,45,90,sprites/50-diglett-alola.png
 51,Dugtrio,GROUND,425,35,100,50,50,70,120,sprites/51-dugtrio.png
-51,"Dugtrio
-Alolan Dugtrio","GROUND
+51,Alolan Dugtrio,"GROUND
 STEEL",425,35,100,60,50,70,110,sprites/51-dugtrio-alola.png
 52,Meowth,NORMAL,290,40,45,35,40,40,90,sprites/52-meowth.png
-52,"Meowth
-Alolan Meowth",DARK,290,40,35,35,50,40,90,sprites/52-meowth-alola.png
+52,Alolan Meowth,DARK,290,40,35,35,50,40,90,sprites/52-meowth-alola.png
 52,"Meowth
 Galarian Meowth",STEEL,290,50,65,55,40,40,40,sprites/52-meowth-galar.png
 53,Persian,NORMAL,440,65,70,60,65,65,115,sprites/53-persian.png
-53,"Persian
-Alolan Persian",DARK,440,65,60,60,75,65,115,sprites/53-persian-alola.png
+53,Alolan Persian,DARK,440,65,60,60,75,65,115,sprites/53-persian-alola.png
 54,Psyduck,WATER,320,50,52,48,65,50,55,sprites/54-psyduck.png
 55,Golduck,WATER,500,80,82,78,95,80,85,sprites/55-golduck.png
 56,Mankey,FIGHTING,305,40,80,35,35,45,70,sprites/56-mankey.png
 57,Primeape,FIGHTING,455,65,105,60,60,70,95,sprites/57-primeape.png
 58,Growlithe,FIRE,350,55,70,45,70,50,60,sprites/58-growlithe.png
-58,"Growlithe
-Hisuian Growlithe","FIRE
+58,Hisuian Growlithe,"FIRE
 ROCK",350,60,75,45,65,50,55,sprites/58-growlithe-hisui.png
 59,Arcanine,FIRE,555,90,110,80,100,80,95,sprites/59-arcanine.png
-59,"Arcanine
-Hisuian Arcanine","FIRE
+59,Hisuian Arcanine,"FIRE
 ROCK",555,95,115,80,95,80,90,sprites/59-arcanine-hisui.png
 60,Poliwag,WATER,300,40,50,40,40,40,90,sprites/60-poliwag.png
 61,Poliwhirl,WATER,385,65,65,65,50,50,90,sprites/61-poliwhirl.png
@@ -148,8 +128,7 @@ FIGHTING",510,90,95,95,70,90,70,sprites/62-poliwrath.png
 63,Abra,PSYCHIC,310,25,20,15,105,55,90,sprites/63-abra.png
 64,Kadabra,PSYCHIC,400,40,35,30,120,70,105,sprites/64-kadabra.png
 65,Alakazam,PSYCHIC,500,55,50,45,135,95,120,sprites/65-alakazam.png
-65,"Alakazam
-Mega Alakazam",PSYCHIC,600,55,50,65,175,105,150,sprites/65-alakazam-mega.png
+65,Mega Alakazam,PSYCHIC,600,55,50,65,175,105,150,sprites/65-alakazam-mega.png
 66,Machop,FIGHTING,305,70,80,50,35,35,35,sprites/66-machop.png
 67,Machoke,FIGHTING,405,80,100,70,50,60,45,sprites/67-machoke.png
 68,Machamp,FIGHTING,505,90,130,80,65,85,55,sprites/68-machamp.png
@@ -165,37 +144,29 @@ POISON",335,40,40,35,50,100,70,sprites/72-tentacool.png
 POISON",515,80,70,65,80,120,100,sprites/73-tentacruel.png
 74,Geodude,"ROCK
 GROUND",300,40,80,100,30,30,20,sprites/74-geodude.png
-74,"Geodude
-Alolan Geodude","ROCK
+74,Alolan Geodude,"ROCK
 ELECTRIC",300,40,80,100,30,30,20,sprites/74-geodude-alola.png
 75,Graveler,"ROCK
 GROUND",390,55,95,115,45,45,35,sprites/75-graveler.png
-75,"Graveler
-Alolan Graveler","ROCK
+75,Alolan Graveler,"ROCK
 ELECTRIC",390,55,95,115,45,45,35,sprites/75-graveler-alola.png
 76,Golem,"ROCK
 GROUND",495,80,120,130,55,65,45,sprites/76-golem.png
-76,"Golem
-Alolan Golem","ROCK
+76,Alolan Golem,"ROCK
 ELECTRIC",495,80,120,130,55,65,45,sprites/76-golem-alola.png
 77,Ponyta,FIRE,410,50,85,55,65,65,90,sprites/77-ponyta.png
-77,"Ponyta
-Galarian Ponyta",PSYCHIC,410,50,85,55,65,65,90,sprites/77-ponyta-galar.png
+77,Galarian Ponyta,PSYCHIC,410,50,85,55,65,65,90,sprites/77-ponyta-galar.png
 78,Rapidash,FIRE,500,65,100,70,80,80,105,sprites/78-rapidash.png
-78,"Rapidash
-Galarian Rapidash","PSYCHIC
+78,Galarian Rapidash,"PSYCHIC
 FAIRY",500,65,100,70,80,80,105,sprites/78-rapidash-galar.png
 79,Slowpoke,"WATER
 PSYCHIC",315,90,65,65,40,40,15,sprites/79-slowpoke.png
-79,"Slowpoke
-Galarian Slowpoke",PSYCHIC,315,90,65,65,40,40,15,sprites/79-slowpoke-galar.png
+79,Galarian Slowpoke,PSYCHIC,315,90,65,65,40,40,15,sprites/79-slowpoke-galar.png
 80,Slowbro,"WATER
 PSYCHIC",490,95,75,110,100,80,30,sprites/80-slowbro.png
-80,"Slowbro
-Mega Slowbro","WATER
+80,Mega Slowbro,"WATER
 PSYCHIC",590,95,75,180,130,80,30,sprites/80-slowbro-mega.png
-80,"Slowbro
-Galarian Slowbro","POISON
+80,Galarian Slowbro,"POISON
 PSYCHIC",490,95,100,95,100,70,30,sprites/80-slowbro-galar.png
 81,Magnemite,"ELECTRIC
 STEEL",325,25,35,70,95,55,45,sprites/81-magnemite.png
@@ -203,8 +174,7 @@ STEEL",325,25,35,70,95,55,45,sprites/81-magnemite.png
 STEEL",465,50,60,95,120,70,70,sprites/82-magneton.png
 83,Farfetch'd,"NORMAL
 FLYING",377,52,90,55,58,62,60,sprites/83-farfetchd.png
-83,"Farfetch'd
-Galarian Farfetch'd",FIGHTING,377,52,95,55,58,62,55,sprites/83-farfetchd-galar.png
+83,Galarian Farfetch'd,FIGHTING,377,52,95,55,58,62,55,sprites/83-farfetchd-galar.png
 84,Doduo,"NORMAL
 FLYING",310,35,85,45,35,35,75,sprites/84-doduo.png
 85,Dodrio,"NORMAL
@@ -213,12 +183,10 @@ FLYING",470,60,110,70,60,60,110,sprites/85-dodrio.png
 87,Dewgong,"WATER
 ICE",475,90,70,80,70,95,70,sprites/87-dewgong.png
 88,Grimer,POISON,325,80,80,50,40,50,25,sprites/88-grimer.png
-88,"Grimer
-Alolan Grimer","POISON
+88,Alolan Grimer,"POISON
 DARK",325,80,80,50,40,50,25,sprites/88-grimer-alola.png
 89,Muk,POISON,500,105,105,75,65,100,50,sprites/89-muk.png
-89,"Muk
-Alolan Muk","POISON
+89,Alolan Muk,"POISON
 DARK",500,105,105,75,65,100,50,sprites/89-muk-alola.png
 90,Shellder,WATER,305,30,65,100,45,25,40,sprites/90-shellder.png
 91,Cloyster,"WATER
@@ -229,8 +197,7 @@ POISON",310,30,35,30,100,35,80,sprites/92-gastly.png
 POISON",405,45,50,45,115,55,95,sprites/93-haunter.png
 94,Gengar,"GHOST
 POISON",500,60,65,60,130,75,110,sprites/94-gengar.png
-94,"Gengar
-Mega Gengar","GHOST
+94,Mega Gengar,"GHOST
 POISON",600,60,65,80,170,95,130,sprites/94-gengar-mega.png
 95,Onix,"ROCK
 GROUND",385,35,45,160,30,45,70,sprites/95-onix.png
@@ -239,32 +206,27 @@ GROUND",385,35,45,160,30,45,70,sprites/95-onix.png
 98,Krabby,WATER,325,30,105,90,25,25,50,sprites/98-krabby.png
 99,Kingler,WATER,475,55,130,115,50,50,75,sprites/99-kingler.png
 100,Voltorb,ELECTRIC,330,40,30,50,55,55,100,sprites/100-voltorb.png
-100,"Voltorb
-Hisuian Voltorb","ELECTRIC
+100,Hisuian Voltorb,"ELECTRIC
 GRASS",330,40,30,50,55,55,100,sprites/100-voltorb-hisui.png
 101,Electrode,ELECTRIC,490,60,50,70,80,80,150,sprites/101-electrode.png
-101,"Electrode
-Hisuian Electrode","ELECTRIC
+101,Hisuian Electrode,"ELECTRIC
 GRASS",490,60,50,70,80,80,150,sprites/101-electrode-hisui.png
 102,Exeggcute,"GRASS
 PSYCHIC",325,60,40,80,60,45,40,sprites/102-exeggcute.png
 103,Exeggutor,"GRASS
 PSYCHIC",530,95,95,85,125,75,55,sprites/103-exeggutor.png
-103,"Exeggutor
-Alolan Exeggutor","GRASS
+103,Alolan Exeggutor,"GRASS
 DRAGON",530,95,105,85,125,75,45,sprites/103-exeggutor-alola.png
 104,Cubone,GROUND,320,50,50,95,40,50,35,sprites/104-cubone.png
 105,Marowak,GROUND,425,60,80,110,50,80,45,sprites/105-marowak.png
-105,"Marowak
-Alolan Marowak","FIRE
+105,Alolan Marowak,"FIRE
 GHOST",425,60,80,110,50,80,45,sprites/105-marowak-alola.png
 106,Hitmonlee,FIGHTING,455,50,120,53,35,110,87,sprites/106-hitmonlee.png
 107,Hitmonchan,FIGHTING,455,50,105,79,35,110,76,sprites/107-hitmonchan.png
 108,Lickitung,NORMAL,385,90,55,75,60,75,30,sprites/108-lickitung.png
 109,Koffing,POISON,340,40,65,95,60,45,35,sprites/109-koffing.png
 110,Weezing,POISON,490,65,90,120,85,70,60,sprites/110-weezing.png
-110,"Weezing
-Galarian Weezing","POISON
+110,Galarian Weezing,"POISON
 FAIRY",490,65,90,120,85,70,60,sprites/110-weezing-galar.png
 111,Rhyhorn,"GROUND
 ROCK",345,80,85,95,30,30,25,sprites/111-rhyhorn.png
@@ -273,8 +235,7 @@ ROCK",485,105,130,120,45,45,40,sprites/112-rhydon.png
 113,Chansey,NORMAL,450,250,5,5,35,105,50,sprites/113-chansey.png
 114,Tangela,GRASS,435,65,55,115,100,40,60,sprites/114-tangela.png
 115,Kangaskhan,NORMAL,490,105,95,80,40,80,90,sprites/115-kangaskhan.png
-115,"Kangaskhan
-Mega Kangaskhan",NORMAL,590,105,125,100,60,100,100,sprites/115-kangaskhan-mega.png
+115,Mega Kangaskhan,NORMAL,590,105,125,100,60,100,100,sprites/115-kangaskhan-mega.png
 116,Horsea,WATER,295,30,40,70,70,25,60,sprites/116-horsea.png
 117,Seadra,WATER,440,55,65,95,95,45,85,sprites/117-seadra.png
 118,Goldeen,WATER,320,45,67,60,35,50,63,sprites/118-goldeen.png
@@ -284,8 +245,7 @@ Mega Kangaskhan",NORMAL,590,105,125,100,60,100,100,sprites/115-kangaskhan-mega.p
 PSYCHIC",520,60,75,85,100,85,115,sprites/121-starmie.png
 122,Mr. Mime,"PSYCHIC
 FAIRY",460,40,45,65,100,120,90,sprites/122-mrmime.png
-122,"Mr. Mime
-Galarian Mr. Mime","ICE
+122,Galarian Mr. Mime,"ICE
 PSYCHIC",460,50,65,65,90,90,100,sprites/122-mrmime-galar.png
 123,Scyther,"BUG
 FLYING",500,70,110,80,55,80,105,sprites/123-scyther.png
@@ -294,8 +254,7 @@ PSYCHIC",455,65,50,35,115,95,95,sprites/124-jynx.png
 125,Electabuzz,ELECTRIC,490,65,83,57,95,85,105,sprites/125-electabuzz.png
 126,Magmar,FIRE,495,65,95,57,100,85,93,sprites/126-magmar.png
 127,Pinsir,BUG,500,65,125,100,55,70,85,sprites/127-pinsir.png
-127,"Pinsir
-Mega Pinsir","BUG
+127,Mega Pinsir,"BUG
 FLYING",600,65,155,120,65,90,105,sprites/127-pinsir-mega.png
 128,Tauros,NORMAL,490,75,100,95,40,70,110,sprites/128-tauros.png
 128,"Tauros
@@ -309,15 +268,13 @@ WATER",490,75,110,105,30,70,100,sprites/128-tauros-paldeaaqua.png
 129,Magikarp,WATER,200,20,10,55,15,20,80,sprites/129-magikarp.png
 130,Gyarados,"WATER
 FLYING",540,95,125,79,60,100,81,sprites/130-gyarados.png
-130,"Gyarados
-Mega Gyarados","WATER
+130,Mega Gyarados,"WATER
 DARK",640,95,155,109,70,130,81,sprites/130-gyarados-mega.png
 131,Lapras,"WATER
 ICE",535,130,85,80,85,95,60,sprites/131-lapras.png
 132,Ditto,NORMAL,288,48,48,48,48,48,48,sprites/132-ditto.png
 133,Eevee,NORMAL,325,55,55,50,45,65,55,sprites/133-eevee.png
-133,"Eevee
-Partner Eevee",NORMAL,435,65,75,70,65,85,75,sprites/133-eevee-starter.png
+133,Partner Eevee,NORMAL,435,65,75,70,65,85,75,sprites/133-eevee-starter.png
 134,Vaporeon,WATER,525,130,65,60,110,95,65,sprites/134-vaporeon.png
 135,Jolteon,ELECTRIC,525,65,65,60,110,95,130,sprites/135-jolteon.png
 136,Flareon,FIRE,525,65,130,60,95,110,65,sprites/136-flareon.png
@@ -332,35 +289,29 @@ WATER",355,30,80,90,55,45,55,sprites/140-kabuto.png
 WATER",495,60,115,105,65,70,80,sprites/141-kabutops.png
 142,Aerodactyl,"ROCK
 FLYING",515,80,105,65,60,75,130,sprites/142-aerodactyl.png
-142,"Aerodactyl
-Mega Aerodactyl","ROCK
+142,Mega Aerodactyl,"ROCK
 FLYING",615,80,135,85,70,95,150,sprites/142-aerodactyl-mega.png
 143,Snorlax,NORMAL,540,160,110,65,65,110,30,sprites/143-snorlax.png
 144,Articuno,"ICE
 FLYING",580,90,85,100,95,125,85,sprites/144-articuno.png
-144,"Articuno
-Galarian Articuno","PSYCHIC
+144,Galarian Articuno,"PSYCHIC
 FLYING",580,90,85,85,125,100,95,sprites/144-articuno-galar.png
 145,Zapdos,"ELECTRIC
 FLYING",580,90,90,85,125,90,100,sprites/145-zapdos.png
-145,"Zapdos
-Galarian Zapdos","FIGHTING
+145,Galarian Zapdos,"FIGHTING
 FLYING",580,90,125,90,85,90,100,sprites/145-zapdos-galar.png
 146,Moltres,"FIRE
 FLYING",580,90,100,90,125,85,90,sprites/146-moltres.png
-146,"Moltres
-Galarian Moltres","DARK
+146,Galarian Moltres,"DARK
 FLYING",580,90,85,90,100,125,90,sprites/146-moltres-galar.png
 147,Dratini,DRAGON,300,41,64,45,50,50,50,sprites/147-dratini.png
 148,Dragonair,DRAGON,420,61,84,65,70,70,70,sprites/148-dragonair.png
 149,Dragonite,"DRAGON
 FLYING",600,91,134,95,100,100,80,sprites/149-dragonite.png
 150,Mewtwo,PSYCHIC,680,106,110,90,154,90,130,sprites/150-mewtwo.png
-150,"Mewtwo
-Mega Mewtwo X","PSYCHIC
+150,Mega Mewtwo X,"PSYCHIC
 FIGHTING",780,106,190,100,154,100,130,sprites/150-mewtwo-megax.png
-150,"Mewtwo
-Mega Mewtwo Y",PSYCHIC,780,106,150,70,194,120,140,sprites/150-mewtwo-megay.png
+150,Mega Mewtwo Y,PSYCHIC,780,106,150,70,194,120,140,sprites/150-mewtwo-megay.png
 151,Mew,PSYCHIC,600,100,100,100,100,100,100,sprites/151-mew.png
 152,Chikorita,GRASS,318,45,49,65,49,65,45,sprites/152-chikorita.png
 153,Bayleef,GRASS,405,60,62,80,63,80,60,sprites/153-bayleef.png
@@ -368,8 +319,7 @@ Mega Mewtwo Y",PSYCHIC,780,106,150,70,194,120,140,sprites/150-mewtwo-megay.png
 155,Cyndaquil,FIRE,309,39,52,43,60,50,65,sprites/155-cyndaquil.png
 156,Quilava,FIRE,405,58,64,58,80,65,80,sprites/156-quilava.png
 157,Typhlosion,FIRE,534,78,84,78,109,85,100,sprites/157-typhlosion.png
-157,"Typhlosion
-Hisuian Typhlosion","FIRE
+157,Hisuian Typhlosion,"FIRE
 GHOST",534,73,84,78,119,85,95,sprites/157-typhlosion-hisui.png
 158,Totodile,WATER,314,50,65,64,44,48,43,sprites/158-totodile.png
 159,Croconaw,WATER,405,65,80,80,59,63,58,sprites/159-croconaw.png
@@ -408,8 +358,7 @@ FLYING",470,65,75,70,95,70,95,sprites/178-xatu.png
 179,Mareep,ELECTRIC,280,55,40,40,65,45,35,sprites/179-mareep.png
 180,Flaaffy,ELECTRIC,365,70,55,55,80,60,45,sprites/180-flaaffy.png
 181,Ampharos,ELECTRIC,510,90,75,85,115,90,55,sprites/181-ampharos.png
-181,"Ampharos
-Mega Ampharos","ELECTRIC
+181,Mega Ampharos,"ELECTRIC
 DRAGON",610,90,95,105,165,110,45,sprites/181-ampharos-mega.png
 182,Bellossom,GRASS,490,75,80,95,90,100,50,sprites/182-bellossom.png
 183,Marill,"WATER
@@ -431,8 +380,7 @@ FLYING",460,75,55,70,55,95,110,sprites/189-jumpluff.png
 FLYING",390,65,65,45,75,45,95,sprites/193-yanma.png
 194,Wooper,"WATER
 GROUND",210,55,45,45,25,25,15,sprites/194-wooper.png
-194,"Wooper
-Paldean Wooper","POISON
+194,Paldean Wooper,"POISON
 GROUND",210,55,45,45,25,25,15,sprites/194-wooper-paldea.png
 195,Quagsire,"WATER
 GROUND",430,95,85,85,65,65,35,sprites/195-quagsire.png
@@ -442,8 +390,7 @@ GROUND",430,95,85,85,65,65,35,sprites/195-quagsire.png
 FLYING",405,60,85,42,85,42,91,sprites/198-murkrow.png
 199,Slowking,"WATER
 PSYCHIC",490,95,75,80,100,110,30,sprites/199-slowking.png
-199,"Slowking
-Galarian Slowking","POISON
+199,Galarian Slowking,"POISON
 PSYCHIC",490,95,65,80,110,110,30,sprites/199-slowking-galar.png
 200,Misdreavus,GHOST,435,60,60,60,85,85,85,sprites/200-misdreavus.png
 201,Unown,PSYCHIC,336,48,72,48,72,48,48,sprites/201-unown.png
@@ -458,32 +405,27 @@ STEEL",465,75,90,140,60,60,40,sprites/205-forretress.png
 FLYING",430,65,75,105,35,65,85,sprites/207-gligar.png
 208,Steelix,"STEEL
 GROUND",510,75,85,200,55,65,30,sprites/208-steelix.png
-208,"Steelix
-Mega Steelix","STEEL
+208,Mega Steelix,"STEEL
 GROUND",610,75,125,230,55,95,30,sprites/208-steelix-mega.png
 209,Snubbull,FAIRY,300,60,80,50,40,40,30,sprites/209-snubbull.png
 210,Granbull,FAIRY,450,90,120,75,60,60,45,sprites/210-granbull.png
 211,Qwilfish,"WATER
 POISON",440,65,95,85,55,55,85,sprites/211-qwilfish.png
-211,"Qwilfish
-Hisuian Qwilfish","DARK
+211,Hisuian Qwilfish,"DARK
 POISON",440,65,95,85,55,55,85,sprites/211-qwilfish-hisui.png
 212,Scizor,"BUG
 STEEL",500,70,130,100,55,80,65,sprites/212-scizor.png
-212,"Scizor
-Mega Scizor","BUG
+212,Mega Scizor,"BUG
 STEEL",600,70,150,140,65,100,75,sprites/212-scizor-mega.png
 213,Shuckle,"BUG
 ROCK",505,20,10,230,10,230,5,sprites/213-shuckle.png
 214,Heracross,"BUG
 FIGHTING",500,80,125,75,40,95,85,sprites/214-heracross.png
-214,"Heracross
-Mega Heracross","BUG
+214,Mega Heracross,"BUG
 FIGHTING",600,80,185,115,40,105,75,sprites/214-heracross-mega.png
 215,Sneasel,"DARK
 ICE",430,55,95,55,35,75,115,sprites/215-sneasel.png
-215,"Sneasel
-Hisuian Sneasel","FIGHTING
+215,Hisuian Sneasel,"FIGHTING
 POISON",430,55,95,55,35,75,115,sprites/215-sneasel-hisui.png
 216,Teddiursa,NORMAL,330,60,80,50,50,50,40,sprites/216-teddiursa.png
 217,Ursaring,NORMAL,500,90,130,75,75,75,55,sprites/217-ursaring.png
@@ -496,8 +438,7 @@ GROUND",250,50,50,40,30,30,50,sprites/220-swinub.png
 GROUND",450,100,100,80,60,60,50,sprites/221-piloswine.png
 222,Corsola,"WATER
 ROCK",410,65,55,95,65,95,35,sprites/222-corsola.png
-222,"Corsola
-Galarian Corsola",GHOST,410,60,55,100,65,100,30,sprites/222-corsola-galar.png
+222,Galarian Corsola,GHOST,410,60,55,100,65,100,30,sprites/222-corsola-galar.png
 223,Remoraid,WATER,300,35,65,35,65,35,65,sprites/223-remoraid.png
 224,Octillery,WATER,480,75,105,75,105,75,45,sprites/224-octillery.png
 225,Delibird,"ICE
@@ -510,8 +451,7 @@ FLYING",465,65,80,140,40,70,70,sprites/227-skarmory.png
 FIRE",330,45,60,30,80,50,65,sprites/228-houndour.png
 229,Houndoom,"DARK
 FIRE",500,75,90,50,110,80,95,sprites/229-houndoom.png
-229,"Houndoom
-Mega Houndoom","DARK
+229,Mega Houndoom,"DARK
 FIRE",600,75,90,90,140,90,115,sprites/229-houndoom-mega.png
 230,Kingdra,"WATER
 DRAGON",540,75,95,95,95,95,85,sprites/230-kingdra.png
@@ -537,8 +477,7 @@ GROUND",300,50,64,50,45,50,41,sprites/246-larvitar.png
 GROUND",410,70,84,70,65,70,51,sprites/247-pupitar.png
 248,Tyranitar,"ROCK
 DARK",600,100,134,110,95,100,61,sprites/248-tyranitar.png
-248,"Tyranitar
-Mega Tyranitar","ROCK
+248,Mega Tyranitar,"ROCK
 DARK",700,100,164,150,95,120,71,sprites/248-tyranitar-mega.png
 249,Lugia,"PSYCHIC
 FLYING",680,106,90,130,90,154,110,sprites/249-lugia.png
@@ -549,34 +488,29 @@ GRASS",600,100,100,100,100,100,100,sprites/251-celebi.png
 252,Treecko,GRASS,310,40,45,35,65,55,70,sprites/252-treecko.png
 253,Grovyle,GRASS,405,50,65,45,85,65,95,sprites/253-grovyle.png
 254,Sceptile,GRASS,530,70,85,65,105,85,120,sprites/254-sceptile.png
-254,"Sceptile
-Mega Sceptile","GRASS
+254,Mega Sceptile,"GRASS
 DRAGON",630,70,110,75,145,85,145,sprites/254-sceptile-mega.png
 255,Torchic,FIRE,310,45,60,40,70,50,45,sprites/255-torchic.png
 256,Combusken,"FIRE
 FIGHTING",405,60,85,60,85,60,55,sprites/256-combusken.png
 257,Blaziken,"FIRE
 FIGHTING",530,80,120,70,110,70,80,sprites/257-blaziken.png
-257,"Blaziken
-Mega Blaziken","FIRE
+257,Mega Blaziken,"FIRE
 FIGHTING",630,80,160,80,130,80,100,sprites/257-blaziken-mega.png
 258,Mudkip,WATER,310,50,70,50,50,50,40,sprites/258-mudkip.png
 259,Marshtomp,"WATER
 GROUND",405,70,85,70,60,70,50,sprites/259-marshtomp.png
 260,Swampert,"WATER
 GROUND",535,100,110,90,85,90,60,sprites/260-swampert.png
-260,"Swampert
-Mega Swampert","WATER
+260,Mega Swampert,"WATER
 GROUND",635,100,150,110,95,110,70,sprites/260-swampert-mega.png
 261,Poochyena,DARK,220,35,55,35,30,30,35,sprites/261-poochyena.png
 262,Mightyena,DARK,420,70,90,70,60,60,70,sprites/262-mightyena.png
 263,Zigzagoon,NORMAL,240,38,30,41,30,41,60,sprites/263-zigzagoon.png
-263,"Zigzagoon
-Galarian Zigzagoon","DARK
+263,Galarian Zigzagoon,"DARK
 NORMAL",240,38,30,41,30,41,60,sprites/263-zigzagoon-galar.png
 264,Linoone,NORMAL,420,78,70,61,50,61,100,sprites/264-linoone.png
-264,"Linoone
-Galarian Linoone","DARK
+264,Galarian Linoone,"DARK
 NORMAL",420,78,70,61,50,61,100,sprites/264-linoone-galar.png
 265,Wurmple,BUG,195,45,45,35,20,30,20,sprites/265-wurmple.png
 266,Silcoon,BUG,205,50,35,55,25,25,15,sprites/266-silcoon.png
@@ -610,8 +544,7 @@ FAIRY",198,28,25,25,45,35,40,sprites/280-ralts.png
 FAIRY",278,38,35,35,65,55,50,sprites/281-kirlia.png
 282,Gardevoir,"PSYCHIC
 FAIRY",518,68,65,65,125,115,80,sprites/282-gardevoir.png
-282,"Gardevoir
-Mega Gardevoir","PSYCHIC
+282,Mega Gardevoir,"PSYCHIC
 FAIRY",618,68,85,65,165,135,100,sprites/282-gardevoir-mega.png
 283,Surskit,"BUG
 WATER",269,40,30,32,50,52,65,sprites/283-surskit.png
@@ -641,13 +574,11 @@ FAIRY",190,50,20,40,20,40,20,sprites/298-azurill.png
 301,Delcatty,NORMAL,400,70,65,65,55,55,90,sprites/301-delcatty.png
 302,Sableye,"DARK
 GHOST",380,50,75,75,65,65,50,sprites/302-sableye.png
-302,"Sableye
-Mega Sableye","DARK
+302,Mega Sableye,"DARK
 GHOST",480,50,85,125,85,115,20,sprites/302-sableye-mega.png
 303,Mawile,"STEEL
 FAIRY",380,50,85,85,55,55,50,sprites/303-mawile.png
-303,"Mawile
-Mega Mawile","STEEL
+303,Mega Mawile,"STEEL
 FAIRY",480,50,105,125,55,95,50,sprites/303-mawile-mega.png
 304,Aron,"STEEL
 ROCK",330,50,70,100,40,40,30,sprites/304-aron.png
@@ -655,19 +586,16 @@ ROCK",330,50,70,100,40,40,30,sprites/304-aron.png
 ROCK",430,60,90,140,50,50,40,sprites/305-lairon.png
 306,Aggron,"STEEL
 ROCK",530,70,110,180,60,60,50,sprites/306-aggron.png
-306,"Aggron
-Mega Aggron",STEEL,630,70,140,230,60,80,50,sprites/306-aggron-mega.png
+306,Mega Aggron,STEEL,630,70,140,230,60,80,50,sprites/306-aggron-mega.png
 307,Meditite,"FIGHTING
 PSYCHIC",280,30,40,55,40,55,60,sprites/307-meditite.png
 308,Medicham,"FIGHTING
 PSYCHIC",410,60,60,75,60,75,80,sprites/308-medicham.png
-308,"Medicham
-Mega Medicham","FIGHTING
+308,Mega Medicham,"FIGHTING
 PSYCHIC",510,60,100,85,80,85,100,sprites/308-medicham-mega.png
 309,Electrike,ELECTRIC,295,40,45,40,65,40,65,sprites/309-electrike.png
 310,Manectric,ELECTRIC,475,70,75,60,105,60,105,sprites/310-manectric.png
-310,"Manectric
-Mega Manectric",ELECTRIC,575,70,75,80,135,80,135,sprites/310-manectric-mega.png
+310,Mega Manectric,ELECTRIC,575,70,75,80,135,80,135,sprites/310-manectric-mega.png
 311,Plusle,ELECTRIC,405,60,50,40,85,75,95,sprites/311-plusle.png
 312,Minun,ELECTRIC,405,60,40,50,75,85,95,sprites/312-minun.png
 313,Volbeat,BUG,430,65,73,75,47,85,85,sprites/313-volbeat.png
@@ -680,8 +608,7 @@ POISON",400,50,60,45,100,80,65,sprites/315-roselia.png
 DARK",305,45,90,20,65,20,65,sprites/318-carvanha.png
 319,Sharpedo,"WATER
 DARK",460,70,120,40,95,40,95,sprites/319-sharpedo.png
-319,"Sharpedo
-Mega Sharpedo","WATER
+319,Mega Sharpedo,"WATER
 DARK",560,70,140,70,110,65,105,sprites/319-sharpedo-mega.png
 320,Wailmer,WATER,400,130,70,35,70,35,60,sprites/320-wailmer.png
 321,Wailord,WATER,500,170,90,45,90,45,60,sprites/321-wailord.png
@@ -689,8 +616,7 @@ DARK",560,70,140,70,110,65,105,sprites/319-sharpedo-mega.png
 GROUND",305,60,60,40,65,45,35,sprites/322-numel.png
 323,Camerupt,"FIRE
 GROUND",460,70,100,70,105,75,40,sprites/323-camerupt.png
-323,"Camerupt
-Mega Camerupt","FIRE
+323,Mega Camerupt,"FIRE
 GROUND",560,70,120,100,145,105,20,sprites/323-camerupt-mega.png
 324,Torkoal,FIRE,470,70,85,140,85,70,20,sprites/324-torkoal.png
 325,Spoink,PSYCHIC,330,60,25,35,70,80,60,sprites/325-spoink.png
@@ -708,8 +634,7 @@ DARK",475,70,115,60,115,60,55,sprites/332-cacturne.png
 FLYING",310,45,40,60,40,75,50,sprites/333-swablu.png
 334,Altaria,"DRAGON
 FLYING",490,75,70,90,70,105,80,sprites/334-altaria.png
-334,"Altaria
-Mega Altaria","DRAGON
+334,Mega Altaria,"DRAGON
 FAIRY",590,75,110,110,110,105,80,sprites/334-altaria-mega.png
 335,Zangoose,NORMAL,458,73,115,60,60,60,90,sprites/335-zangoose.png
 336,Seviper,POISON,458,73,100,60,100,60,65,sprites/336-seviper.png
@@ -748,21 +673,18 @@ Snowy Form",ICE,420,70,70,70,70,70,70,sprites/351-castform-snowy.png
 352,Kecleon,NORMAL,440,60,90,70,60,120,40,sprites/352-kecleon.png
 353,Shuppet,GHOST,295,44,75,35,63,33,45,sprites/353-shuppet.png
 354,Banette,GHOST,455,64,115,65,83,63,65,sprites/354-banette.png
-354,"Banette
-Mega Banette",GHOST,555,64,165,75,93,83,75,sprites/354-banette-mega.png
+354,Mega Banette,GHOST,555,64,165,75,93,83,75,sprites/354-banette-mega.png
 355,Duskull,GHOST,295,20,40,90,30,90,25,sprites/355-duskull.png
 356,Dusclops,GHOST,455,40,70,130,60,130,25,sprites/356-dusclops.png
 357,Tropius,"GRASS
 FLYING",460,99,68,83,72,87,51,sprites/357-tropius.png
 358,Chimecho,PSYCHIC,455,75,50,80,95,90,65,sprites/358-chimecho.png
 359,Absol,DARK,465,65,130,60,75,60,75,sprites/359-absol.png
-359,"Absol
-Mega Absol",DARK,565,65,150,60,115,60,115,sprites/359-absol-mega.png
+359,Mega Absol,DARK,565,65,150,60,115,60,115,sprites/359-absol-mega.png
 360,Wynaut,PSYCHIC,260,95,23,48,23,48,23,sprites/360-wynaut.png
 361,Snorunt,ICE,300,50,50,50,50,50,50,sprites/361-snorunt.png
 362,Glalie,ICE,480,80,80,80,80,80,80,sprites/362-glalie.png
-362,"Glalie
-Mega Glalie",ICE,580,80,120,80,120,80,100,sprites/362-glalie-mega.png
+362,Mega Glalie,ICE,580,80,120,80,120,80,100,sprites/362-glalie-mega.png
 363,Spheal,"ICE
 WATER",290,70,40,50,55,50,25,sprites/363-spheal.png
 364,Sealeo,"ICE
@@ -779,8 +701,7 @@ ROCK",485,100,90,130,45,65,55,sprites/369-relicanth.png
 372,Shelgon,DRAGON,420,65,95,100,60,50,50,sprites/372-shelgon.png
 373,Salamence,"DRAGON
 FLYING",600,95,135,80,110,80,100,sprites/373-salamence.png
-373,"Salamence
-Mega Salamence","DRAGON
+373,Mega Salamence,"DRAGON
 FLYING",700,95,145,130,120,90,120,sprites/373-salamence-mega.png
 374,Beldum,"STEEL
 PSYCHIC",300,40,55,80,35,60,30,sprites/374-beldum.png
@@ -788,33 +709,27 @@ PSYCHIC",300,40,55,80,35,60,30,sprites/374-beldum.png
 PSYCHIC",420,60,75,100,55,80,50,sprites/375-metang.png
 376,Metagross,"STEEL
 PSYCHIC",600,80,135,130,95,90,70,sprites/376-metagross.png
-376,"Metagross
-Mega Metagross","STEEL
+376,Mega Metagross,"STEEL
 PSYCHIC",700,80,145,150,105,110,110,sprites/376-metagross-mega.png
 377,Regirock,ROCK,580,80,100,200,50,100,50,sprites/377-regirock.png
 378,Regice,ICE,580,80,50,100,100,200,50,sprites/378-regice.png
 379,Registeel,STEEL,580,80,75,150,75,150,50,sprites/379-registeel.png
 380,Latias,"DRAGON
 PSYCHIC",600,80,80,90,110,130,110,sprites/380-latias.png
-380,"Latias
-Mega Latias","DRAGON
+380,Mega Latias,"DRAGON
 PSYCHIC",700,80,100,120,140,150,110,sprites/380-latias-mega.png
 381,Latios,"DRAGON
 PSYCHIC",600,80,90,80,130,110,110,sprites/381-latios.png
-381,"Latios
-Mega Latios","DRAGON
+381,Mega Latios,"DRAGON
 PSYCHIC",700,80,130,100,160,120,110,sprites/381-latios-mega.png
 382,Kyogre,WATER,670,100,100,90,150,140,90,sprites/382-kyogre.png
-382,"Kyogre
-Primal Kyogre",WATER,770,100,150,90,180,160,90,sprites/382-kyogre-primal.png
+382,Primal Kyogre,WATER,770,100,150,90,180,160,90,sprites/382-kyogre-primal.png
 383,Groudon,GROUND,670,100,150,140,100,90,90,sprites/383-groudon.png
-383,"Groudon
-Primal Groudon","GROUND
+383,Primal Groudon,"GROUND
 FIRE",770,100,180,160,150,90,90,sprites/383-groudon-primal.png
 384,Rayquaza,"DRAGON
 FLYING",680,105,150,90,150,90,95,sprites/384-rayquaza.png
-384,"Rayquaza
-Mega Rayquaza","DRAGON
+384,Mega Rayquaza,"DRAGON
 FLYING",780,105,180,100,180,100,115,sprites/384-rayquaza-mega.png
 385,Jirachi,"STEEL
 PSYCHIC",600,100,100,100,100,100,100,sprites/385-jirachi.png
@@ -899,8 +814,7 @@ FLYING",348,90,50,34,60,44,70,sprites/425-drifloon.png
 FLYING",498,150,80,44,90,54,80,sprites/426-drifblim.png
 427,Buneary,NORMAL,350,55,66,44,44,56,85,sprites/427-buneary.png
 428,Lopunny,NORMAL,480,65,76,84,54,96,105,sprites/428-lopunny.png
-428,"Lopunny
-Mega Lopunny","NORMAL
+428,Mega Lopunny,"NORMAL
 FIGHTING",580,65,136,94,54,96,135,sprites/428-lopunny-mega.png
 429,Mismagius,GHOST,495,60,60,60,105,105,105,sprites/429-mismagius.png
 430,Honchkrow,"DARK
@@ -930,15 +844,13 @@ GROUND",300,58,70,45,40,45,42,sprites/443-gible.png
 GROUND",410,68,90,65,50,55,82,sprites/444-gabite.png
 445,Garchomp,"DRAGON
 GROUND",600,108,130,95,80,85,102,sprites/445-garchomp.png
-445,"Garchomp
-Mega Garchomp","DRAGON
+445,Mega Garchomp,"DRAGON
 GROUND",700,108,170,115,120,95,92,sprites/445-garchomp-mega.png
 446,Munchlax,NORMAL,390,135,85,40,40,85,5,sprites/446-munchlax.png
 447,Riolu,FIGHTING,285,40,70,40,35,40,60,sprites/447-riolu.png
 448,Lucario,"FIGHTING
 STEEL",525,70,110,70,115,70,90,sprites/448-lucario.png
-448,"Lucario
-Mega Lucario","FIGHTING
+448,Mega Lucario,"FIGHTING
 STEEL",625,70,145,88,140,70,112,sprites/448-lucario-mega.png
 449,Hippopotas,GROUND,330,68,72,78,38,42,32,sprites/449-hippopotas.png
 450,Hippowdon,GROUND,525,108,112,118,68,72,47,sprites/450-hippowdon.png
@@ -959,8 +871,7 @@ FLYING",345,45,20,50,60,120,50,sprites/458-mantyke.png
 ICE",334,60,62,50,62,60,40,sprites/459-snover.png
 460,Abomasnow,"GRASS
 ICE",494,90,92,75,92,85,60,sprites/460-abomasnow.png
-460,"Abomasnow
-Mega Abomasnow","GRASS
+460,Mega Abomasnow,"GRASS
 ICE",594,90,132,105,132,105,30,sprites/460-abomasnow-mega.png
 461,Weavile,"DARK
 ICE",510,70,120,65,45,85,125,sprites/461-weavile.png
@@ -985,8 +896,7 @@ GROUND",530,110,130,80,70,60,80,sprites/473-mamoswine.png
 474,Porygon-Z,NORMAL,535,85,80,70,135,75,90,sprites/474-porygonz.png
 475,Gallade,"PSYCHIC
 FIGHTING",518,68,125,65,65,115,80,sprites/475-gallade.png
-475,"Gallade
-Mega Gallade","PSYCHIC
+475,Mega Gallade,"PSYCHIC
 FIGHTING",618,68,165,95,65,115,110,sprites/475-gallade-mega.png
 476,Probopass,"ROCK
 STEEL",525,60,55,145,75,150,40,sprites/476-probopass.png
@@ -1055,8 +965,7 @@ FIGHTING",528,110,123,65,100,65,65,sprites/500-emboar.png
 501,Oshawott,WATER,308,55,55,45,63,45,45,sprites/501-oshawott.png
 502,Dewott,WATER,413,75,75,60,83,60,60,sprites/502-dewott.png
 503,Samurott,WATER,528,95,100,85,108,70,70,sprites/503-samurott.png
-503,"Samurott
-Hisuian Samurott","WATER
+503,Hisuian Samurott,"WATER
 DARK",528,90,108,80,100,65,85,sprites/503-samurott-hisui.png
 504,Patrat,NORMAL,255,45,55,39,35,39,42,sprites/504-patrat.png
 505,Watchog,NORMAL,420,60,85,69,60,69,77,sprites/505-watchog.png
@@ -1092,8 +1001,7 @@ FLYING",425,67,57,55,77,55,114,sprites/528-swoobat.png
 530,Excadrill,"GROUND
 STEEL",508,110,135,60,50,65,88,sprites/530-excadrill.png
 531,Audino,NORMAL,445,103,60,86,60,86,50,sprites/531-audino.png
-531,"Audino
-Mega Audino","NORMAL
+531,Mega Audino,"NORMAL
 FAIRY",545,103,60,126,80,126,50,sprites/531-audino-mega.png
 532,Timburr,FIGHTING,305,75,80,55,25,35,35,sprites/532-timburr.png
 533,Gurdurr,FIGHTING,405,85,105,85,40,50,40,sprites/533-gurdurr.png
@@ -1123,8 +1031,7 @@ FAIRY",280,40,27,60,37,50,66,sprites/546-cottonee.png
 FAIRY",480,60,67,85,77,75,116,sprites/547-whimsicott.png
 548,Petilil,GRASS,280,45,35,50,70,50,30,sprites/548-petilil.png
 549,Lilligant,GRASS,480,70,60,75,110,75,90,sprites/549-lilligant.png
-549,"Lilligant
-Hisuian Lilligant","GRASS
+549,Hisuian Lilligant,"GRASS
 FIGHTING",480,70,105,75,50,75,105,sprites/549-lilligant-hisui.png
 550,"Basculin
 Red-Striped Form",WATER,460,70,92,65,80,55,98,sprites/550-basculin.png
@@ -1139,8 +1046,7 @@ DARK",351,60,82,45,45,45,74,sprites/552-krokorok.png
 553,Krookodile,"GROUND
 DARK",519,95,117,80,65,70,92,sprites/553-krookodile.png
 554,Darumaka,FIRE,315,70,90,45,15,45,50,sprites/554-darumaka.png
-554,"Darumaka
-Galarian Darumaka",ICE,315,70,90,45,15,45,50,sprites/554-darumaka-galar.png
+554,Galarian Darumaka,ICE,315,70,90,45,15,45,50,sprites/554-darumaka-galar.png
 555,"Darmanitan
 Standard Mode",FIRE,480,105,140,55,30,55,95,sprites/555-darmanitan.png
 555,"Darmanitan
@@ -1163,8 +1069,7 @@ FIGHTING",488,65,90,115,45,115,58,sprites/560-scrafty.png
 561,Sigilyph,"PSYCHIC
 FLYING",490,72,58,80,103,80,97,sprites/561-sigilyph.png
 562,Yamask,GHOST,303,38,30,85,55,65,30,sprites/562-yamask.png
-562,"Yamask
-Galarian Yamask","GROUND
+562,Galarian Yamask,"GROUND
 GHOST",303,38,55,85,30,65,30,sprites/562-yamask-galar.png
 563,Cofagrigus,GHOST,483,58,50,145,95,105,30,sprites/563-cofagrigus.png
 564,Tirtouga,"WATER
@@ -1178,12 +1083,10 @@ FLYING",567,75,140,65,112,65,110,sprites/567-archeops.png
 568,Trubbish,POISON,329,50,50,62,40,62,65,sprites/568-trubbish.png
 569,Garbodor,POISON,474,80,95,82,60,82,75,sprites/569-garbodor.png
 570,Zorua,DARK,330,40,65,40,80,40,65,sprites/570-zorua.png
-570,"Zorua
-Hisuian Zorua","NORMAL
+570,Hisuian Zorua,"NORMAL
 GHOST",330,35,60,40,85,40,70,sprites/570-zorua-hisui.png
 571,Zoroark,DARK,510,60,105,60,120,60,105,sprites/571-zoroark.png
-571,"Zoroark
-Hisuian Zoroark","NORMAL
+571,Hisuian Zoroark,"NORMAL
 GHOST",510,55,100,60,125,60,110,sprites/571-zoroark-hisui.png
 572,Minccino,NORMAL,300,55,50,40,40,40,75,sprites/572-minccino.png
 573,Cinccino,NORMAL,470,75,95,60,65,60,115,sprites/573-cinccino.png
@@ -1250,8 +1153,7 @@ FIRE",520,60,55,90,145,90,80,sprites/609-chandelure.png
 617,Accelgor,BUG,495,80,70,40,100,60,145,sprites/617-accelgor.png
 618,Stunfisk,"GROUND
 ELECTRIC",471,109,66,84,81,99,32,sprites/618-stunfisk.png
-618,"Stunfisk
-Galarian Stunfisk","GROUND
+618,Galarian Stunfisk,"GROUND
 STEEL",471,109,81,99,66,84,32,sprites/618-stunfisk-galar.png
 619,Mienfoo,FIGHTING,350,45,85,50,55,50,65,sprites/619-mienfoo.png
 620,Mienshao,FIGHTING,510,65,125,60,95,60,105,sprites/620-mienshao.png
@@ -1269,8 +1171,7 @@ STEEL",490,65,125,100,60,70,70,sprites/625-bisharp.png
 FLYING",350,70,83,50,37,50,60,sprites/627-rufflet.png
 628,Braviary,"NORMAL
 FLYING",510,100,123,75,57,75,80,sprites/628-braviary.png
-628,"Braviary
-Hisuian Braviary","PSYCHIC
+628,Hisuian Braviary,"PSYCHIC
 FLYING",510,110,83,70,112,70,65,sprites/628-braviary-hisui.png
 629,Vullaby,"DARK
 FLYING",370,70,55,75,45,65,60,sprites/629-vullaby.png
@@ -1317,11 +1218,9 @@ Therian Forme","GROUND
 FLYING",600,89,145,90,105,80,91,sprites/645-landorus-therian.png
 646,Kyurem,"DRAGON
 ICE",660,125,130,90,130,90,95,sprites/646-kyurem.png
-646,"Kyurem
-White Kyurem","DRAGON
+646,White Kyurem,"DRAGON
 ICE",700,125,120,90,170,100,95,sprites/646-kyurem-white.png
-646,"Kyurem
-Black Kyurem","DRAGON
+646,Black Kyurem,"DRAGON
 ICE",700,125,170,100,120,90,95,sprites/646-kyurem-black.png
 647,"Keldeo
 Ordinary Form","WATER
@@ -1349,8 +1248,7 @@ PSYCHIC",534,75,69,72,114,100,104,sprites/655-delphox.png
 657,Frogadier,WATER,405,54,63,52,83,56,97,sprites/657-frogadier.png
 658,Greninja,"WATER
 DARK",530,72,95,67,103,71,122,sprites/658-greninja.png
-658,"Greninja
-Ash-Greninja","WATER
+658,Ash-Greninja,"WATER
 DARK",640,72,145,67,153,71,132,sprites/658-greninja-ash.png
 659,Bunnelby,NORMAL,237,38,36,38,32,36,57,sprites/659-bunnelby.png
 660,Diggersby,"NORMAL
@@ -1381,8 +1279,7 @@ DARK",495,95,124,78,69,71,58,sprites/675-pangoro.png
 677,Espurr,PSYCHIC,355,62,48,54,63,60,68,sprites/677-espurr.png
 678,"Meowstic
 Male",PSYCHIC,466,74,48,76,83,81,104,sprites/678-meowstic.png
-678,"Meowstic
-f",PSYCHIC,466,74,48,76,83,81,104,sprites/678-meowstic-f.png
+678,Meowstic Female,PSYCHIC,466,74,48,76,83,81,104,sprites/678-meowstic-f.png
 679,Honedge,"STEEL
 GHOST",325,45,80,100,35,37,28,sprites/679-honedge.png
 680,Doublade,"STEEL
@@ -1432,12 +1329,10 @@ FAIRY",431,67,58,57,81,67,101,sprites/702-dedenne.png
 FAIRY",500,50,50,150,50,150,50,sprites/703-carbink.png
 704,Goomy,DRAGON,300,45,50,35,55,75,40,sprites/704-goomy.png
 705,Sliggoo,DRAGON,452,68,75,53,83,113,60,sprites/705-sliggoo.png
-705,"Sliggoo
-Hisuian Sliggoo","STEEL
+705,Hisuian Sliggoo,"STEEL
 DRAGON",452,58,75,83,83,113,40,sprites/705-sliggoo-hisui.png
 706,Goodra,DRAGON,600,90,100,70,110,150,80,sprites/706-goodra.png
-706,"Goodra
-Hisuian Goodra","STEEL
+706,Hisuian Goodra,"STEEL
 DRAGON",600,80,100,100,110,150,60,sprites/706-goodra-hisui.png
 707,Klefki,"STEEL
 FAIRY",470,57,80,91,80,87,75,sprites/707-klefki.png
@@ -1471,8 +1366,7 @@ Super Size","GHOST
 GRASS",494,85,100,122,58,75,54,sprites/711-gourgeist-super.png
 712,Bergmite,ICE,304,55,69,85,32,35,28,sprites/712-bergmite.png
 713,Avalugg,ICE,514,95,117,184,44,46,28,sprites/713-avalugg.png
-713,"Avalugg
-Hisuian Avalugg","ICE
+713,Hisuian Avalugg,"ICE
 ROCK",514,95,127,184,34,36,38,sprites/713-avalugg-hisui.png
 714,Noibat,"FLYING
 DRAGON",245,40,30,35,45,40,55,sprites/714-noibat.png
@@ -1492,14 +1386,12 @@ Complete Forme","DRAGON
 GROUND",708,216,100,121,91,95,85,sprites/718-zygarde-complete.png
 719,Diancie,"ROCK
 FAIRY",600,50,100,150,100,150,50,sprites/719-diancie.png
-719,"Diancie
-Mega Diancie","ROCK
+719,Mega Diancie,"ROCK
 FAIRY",700,50,160,110,160,110,110,sprites/719-diancie-mega.png
 720,"Hoopa
 Hoopa Confined","PSYCHIC
 GHOST",600,80,110,60,150,130,70,sprites/720-hoopa.png
-720,"Hoopa
-Hoopa Unbound","PSYCHIC
+720,Hoopa Unbound,"PSYCHIC
 DARK",680,80,160,60,170,130,80,sprites/720-hoopa-unbound.png
 721,Volcanion,"FIRE
 WATER",600,80,110,120,130,90,70,sprites/721-volcanion.png
@@ -1509,8 +1401,7 @@ FLYING",320,68,55,55,50,50,42,sprites/722-rowlet.png
 FLYING",420,78,75,75,70,70,52,sprites/723-dartrix.png
 724,Decidueye,"GRASS
 GHOST",530,78,107,75,100,100,70,sprites/724-decidueye.png
-724,"Decidueye
-Hisuian Decidueye","GRASS
+724,Hisuian Decidueye,"GRASS
 FIGHTING",530,88,112,80,95,95,60,sprites/724-decidueye-hisui.png
 725,Litten,FIRE,320,45,65,40,60,40,70,sprites/725-litten.png
 726,Torracat,FIRE,420,65,85,50,80,50,90,sprites/726-torracat.png
@@ -1659,14 +1550,11 @@ STEEL",570,59,181,131,59,31,109,sprites/798-kartana.png
 799,Guzzlord,"DARK
 DRAGON",570,223,101,53,97,53,43,sprites/799-guzzlord.png
 800,Necrozma,PSYCHIC,600,97,107,101,127,89,79,sprites/800-necrozma.png
-800,"Necrozma
-Dusk Mane Necrozma","PSYCHIC
+800,Dusk Mane Necrozma,"PSYCHIC
 STEEL",680,97,157,127,113,109,77,sprites/800-necrozma-duskmane.png
-800,"Necrozma
-Dawn Wings Necrozma","PSYCHIC
+800,Dawn Wings Necrozma,"PSYCHIC
 GHOST",680,97,113,109,157,127,77,sprites/800-necrozma-dawnwings.png
-800,"Necrozma
-Ultra Necrozma","PSYCHIC
+800,Ultra Necrozma,"PSYCHIC
 DRAGON",754,97,167,97,167,97,129,sprites/800-necrozma-ultra.png
 801,Magearna,"STEEL
 FAIRY",600,80,95,115,130,115,65,sprites/801-magearna.png
@@ -1781,8 +1669,7 @@ Noice Face",ICE,470,75,80,70,65,50,130,sprites/875-eiscue-noice.png
 876,"Indeedee
 Male","PSYCHIC
 NORMAL",475,60,65,55,105,95,95,sprites/876-indeedee.png
-876,"Indeedee
-f","PSYCHIC
+876,Indeedee Female,"PSYCHIC
 NORMAL",475,70,55,65,95,105,85,sprites/876-indeedee-f.png
 877,"Morpeko
 Full Belly Mode","ELECTRIC
@@ -1856,8 +1743,7 @@ NORMAL",555,113,70,120,135,65,52,sprites/901-ursaluna-bloodmoon.png
 902,"Basculegion
 Male","WATER
 GHOST",530,120,112,65,80,75,78,sprites/902-basculegion.png
-902,"Basculegion
-f","WATER
+902,Basculegion Female,"WATER
 GHOST",530,120,92,65,100,75,78,sprites/902-basculegion.png
 903,Sneasler,"FIGHTING
 POISON",510,80,130,60,40,80,120,sprites/903-sneasler.png
@@ -1884,8 +1770,7 @@ FIGHTING",530,85,120,80,85,75,85,sprites/914-quaquaval.png
 915,Lechonk,NORMAL,254,54,45,40,35,45,35,sprites/915-lechonk.png
 916,"Oinkologne
 Male",NORMAL,489,110,100,75,59,80,65,sprites/916-oinkologne.png
-916,"Oinkologne
-f",NORMAL,489,115,90,70,59,90,65,sprites/916-oinkologne-f.png
+916,Oinkologne Female,NORMAL,489,115,90,70,59,90,65,sprites/916-oinkologne-f.png
 917,Tarountula,BUG,210,35,41,45,29,40,20,sprites/917-tarountula.png
 918,Spidops,BUG,404,60,79,92,52,86,35,sprites/918-spidops.png
 919,Nymble,BUG,210,33,46,40,21,25,45,sprites/919-nymble.png
