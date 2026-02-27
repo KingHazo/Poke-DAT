@@ -190,40 +190,124 @@ def label_archetypes(cluster_summary, selected_features):
         'Physical Wall':    '🛡️',
         'Special Wall':     '🔮',
         'Bulky Attacker':   '💪',
+        'Bulky Special Attacker': '🔯',
         'Balanced':         '⚖️',
     }
 
-    # Convert raw averages to per-Pokémon stat ratios at the cluster level
+    #Convert raw averages to per-Pokémon stat ratios at the cluster level
     normed = cluster_summary.div(cluster_summary.sum(axis=1), axis=0)
 
-    # Key step: deviation from the cross-cluster mean
-    # Positive = this cluster emphasises this stat MORE than others do
+    #Deviation from the cross-cluster mean
+    #Positive = this cluster emphasises this stat MORE than others do
     global_mean = normed.mean()
     dev = normed.sub(global_mean)
 
-    labels = {}
-    for cid, row in dev.iterrows():
-        atk   = row.get('Attack',  0)
-        spatk = row.get('Sp. Atk', 0)
-        spd   = row.get('Speed',   0)
-        dfn   = row.get('Defense', 0)
-        spdef = row.get('Sp. Def', 0)
-        hp    = row.get('HP',      0)
+    def g(row, stat):
+        return row.get(stat, 0)
 
-        n_bulk = sum(1 for s in ['Defense', 'Sp. Def', 'HP'] if s in selected_features)
-        bulk = (dfn + spdef + hp) / max(n_bulk, 1)
+    def score_dev(row, archetype):
+        """Primary scoring — uses cross-cluster deviation so each cluster is
+        evaluated relative to others rather than on absolute values.
 
-        is_fast  = spd > 0
-        is_bulky = bulk > 0 and spd <= 0
+        Archetype definitions:
+          Physical Sweeper       — high Speed + Attack, low bulk
+          Special Sweeper        — high Speed + Sp. Atk, low bulk
+          Physical Wall          — high Defense (primary signal), low Speed + Sp. Atk
+          Special Wall           — high HP + Sp. Def, low Speed + Attack
+          Bulky Attacker         — high Attack + HP, low Speed + Sp. Atk
+          Bulky Special Attacker — high Sp. Atk + HP, low Speed + Attack
 
-        if is_fast:
-            label = 'Physical Sweeper' if atk >= spatk else 'Special Sweeper'
-        elif is_bulky:
-            label = 'Physical Wall' if dfn >= spdef else 'Special Wall'
-        else:
-            label = 'Bulky Attacker' if (atk > 0 or spatk > 0) else 'Balanced'
+        Note: Physical Wall uses Defense*2 so the defense-dominant cluster wins
+        over the pure-HP cluster whose Defence deviation is low.
+        """
+        atk   = g(row, 'Attack')
+        spatk = g(row, 'Sp. Atk')
+        spd   = g(row, 'Speed')
+        dfn   = g(row, 'Defense')
+        spdef = g(row, 'Sp. Def')
+        hp    = g(row, 'HP')
 
-        labels[cid] = f"{ICONS.get(label, '❓')} {label}"
+        if archetype == 'Physical Sweeper':
+            return (spd + atk)   - (hp + dfn + spdef)
+        if archetype == 'Special Sweeper':
+            return (spd + spatk) - (hp + dfn + spdef)
+        if archetype == 'Physical Wall':
+            return (dfn * 2)     - (spd + spatk)
+        if archetype == 'Special Wall':
+            return (hp + spdef)  - (spd + atk)
+        if archetype == 'Bulky Attacker':
+            return (atk + hp)    - (spd + spatk)
+        if archetype == 'Bulky Special Attacker':
+            return (spatk + hp)  - (spd + atk)
+        return 0
+    
+    def score_raw(row, archetype):
+        """Fallback scoring for absorbed clusters — uses raw normalised stat
+        ratios rather than deviation, which is more reliable when a cluster is
+        defined by one extreme outlier stat (e.g. Blissey's HP=255 drowning
+        out SpDef in deviation space)."""
+        atk   = g(row, 'Attack')
+        spatk = g(row, 'Sp. Atk')
+        spd   = g(row, 'Speed')
+        dfn   = g(row, 'Defense')
+        spdef = g(row, 'Sp. Def')
+        hp    = g(row, 'HP')
+
+        if archetype == 'Physical Sweeper':
+            return (spd + atk)   - (hp + dfn + spdef)
+        if archetype == 'Special Sweeper':
+            return (spd + spatk) - (hp + dfn + spdef)
+        if archetype == 'Physical Wall':
+            return (dfn + hp)    - (spd + spatk)
+        if archetype == 'Special Wall':
+            return (hp + spdef)  - (spd + atk)
+        if archetype == 'Bulky Attacker':
+            return (atk + hp)    - (spd + spatk)
+        if archetype == 'Bulky Special Attacker':
+            return (spatk + hp)  - (spd + atk)
+        return 0
+
+    archetypes   = list(ICONS.keys())
+    cluster_ids  = list(dev.index)
+
+    # Build score matrix using deviation-based scoring
+    score_matrix = {
+        cid: {arch: score_dev(dev.loc[cid], arch) for arch in archetypes}
+        for cid in cluster_ids
+    }
+
+    # Phase 1 — greedy unique assignment for the 6 best-matching clusters.
+    # k_val is set to 8 so KMeans forms tighter, more homogeneous groups,
+    # giving the labelling better raw material to work with. The 2 extra
+    # clusters beyond the 6 archetypes are absorbed in phase 2.
+    labels             = {}
+    remaining_clusters = set(cluster_ids)
+    remaining_archetypes = set(archetypes)
+
+    while remaining_archetypes:
+        best_score = None
+        best_cid   = None
+        best_arch  = None
+
+        for cid in remaining_clusters:
+            for arch in remaining_archetypes:
+                s = score_matrix[cid][arch]
+                if best_score is None or s > best_score:
+                    best_score = s
+                    best_cid   = cid
+                    best_arch  = arch
+
+        labels[best_cid] = f"{ICONS[best_arch]} {best_arch}"
+        remaining_clusters.discard(best_cid)
+        remaining_archetypes.discard(best_arch)
+
+    # Phase 2 — absorbed clusters get the archetype label whose raw-ratio
+    # score is highest. Raw ratios are used here because extreme HP outliers
+    # (e.g. Blissey, Wobbuffet) distort the deviation values for their cluster.
+    for cid in remaining_clusters:
+        raw_row   = normed.loc[cid]
+        best_arch = max(archetypes, key=lambda a: score_raw(raw_row, a))
+        labels[cid] = f"{ICONS[best_arch]} {best_arch}"
 
     return labels
 
@@ -586,7 +670,7 @@ with main_tabs[2]:
             st.subheader("How to read this chart")
             st.write(
                 "Each cell shows how strongly two stats move together across all Pokémon. "
-                "Values run from **−1** (opposite extremes) through **0** (no relationship) "
+                "Values run from **-1** (opposite extremes) through **0** (no relationship) "
                 "to **+1** (perfectly in step). The colour reinforces this — "
                 "green means a positive correlation, red means a negative one."
             )
@@ -705,85 +789,106 @@ with main_tabs[2]:
 
 #MAIN TAB 4: MACHINE LEARNING
 with main_tabs[3]:
-    st.header("Pokémon Archetype Clustering")
-    st.write("Use Machine Learning to group Pokémon based on Competitive Archetypes.")
-    
-    @st.fragment
-    def clustering_analysis():
-        
-        selected_features = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
-        k_val = 6
-        
-        #Clustering
-        df_clustered = perform_clustering(df, selected_features, k_val)
-        
-        cluster_summary = get_cluster_summary(df_clustered, selected_features)
-        archetype_labels = label_archetypes(cluster_summary, selected_features)
-        df_clustered['Archetype'] = df_clustered['Cluster'].map(archetype_labels)
+    ml_mode = st.radio("View Machine Learning Method By:", ["K-Means", "DBSCAN"], horizontal=True)
+    if ml_mode == "K-Means":
+        st.header("Pokémon Archetype Clustering - K-Means")
+        st.write("Use Machine Learning to group Pokémon based on Competitive Archetypes with K-Means = 7.")
+        @st.fragment
+        def clustering_analysis():
 
-        #Compute the archetype axes
-        df_plot = add_archetype_axes(df_clustered, selected_features).copy()
-        rng = np.random.default_rng(seed=42)
-        jitter_scale = 4
-        df_plot['_axis_x'] = df_plot['_axis_x'] + rng.uniform(-jitter_scale, jitter_scale, size=len(df_plot))
-        df_plot['_axis_y'] = df_plot['_axis_y'] + rng.uniform(-jitter_scale, jitter_scale, size=len(df_plot))
+            selected_features = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
+            k_val = 8
 
-        st.markdown("---")
-        st.subheader("Archetype Map")
-        st.caption(
-            "**X-axis**: Attack - Sp. Atk — left = Special Attacker, right = Physical Attacker  |  "
-            "**Y-axis**: Speed - avg(Def, Sp. Def, HP) — bottom = Bulky Wall, top = Fast Sweeper"
-        )
+            #Clustering
+            df_clustered = perform_clustering(df, selected_features, k_val)
 
-        col_left, col_right = st.columns([3, 2])
-        with col_left:
-            fig_km = px.scatter(
-                df_plot,
-                x='_axis_x',
-                y='_axis_y',
-                color='Archetype',
-                hover_name='Name',
-                hover_data={s: True for s in selected_features} | {
-                    '_axis_x': False, '_axis_y': False
-                },
-                labels={
-                    '_axis_x': '← Special Attacker  |  Physical Attacker →',
-                    '_axis_y': '← Bulky Wall  |  Fast Sweeper →',
-                    'color':   'Archetype',
-                },
-                template="plotly_white",
-                color_discrete_sequence=px.colors.qualitative.Safe,
+            cluster_summary = get_cluster_summary(df_clustered, selected_features)
+            archetype_labels = label_archetypes(cluster_summary, selected_features)
+            df_clustered['Archetype'] = df_clustered['Cluster'].map(archetype_labels)
+
+            #Compute the archetype axes
+            df_plot = add_archetype_axes(df_clustered, selected_features).copy()
+            rng = np.random.default_rng(seed=42)
+            jitter_scale = 4
+            df_plot['_axis_x'] = df_plot['_axis_x'] + rng.uniform(-jitter_scale, jitter_scale, size=len(df_plot))
+            df_plot['_axis_y'] = df_plot['_axis_y'] + rng.uniform(-jitter_scale, jitter_scale, size=len(df_plot))
+
+            st.markdown("---")
+            st.subheader("Archetype Map")
+            st.caption(
+                "**X-axis**: Attack - Sp. Atk — left = Special Attacker, right = Physical Attacker  |  "
+                "**Y-axis**: Speed - avg(Def, Sp. Def, HP) — bottom = Bulky Wall, top = Fast Sweeper"
             )
-            fig_km.update_traces(marker=dict(size=8, opacity=0.7,
-                                             line=dict(width=1, color='DarkSlateGrey')))
 
-            #Quadrant reference lines at zero
-            fig_km.add_hline(y=0, line_dash='dot', line_color='grey', opacity=0.4)
-            fig_km.add_vline(x=0, line_dash='dot', line_color='grey', opacity=0.4)
+            col_left, col_right = st.columns([3, 2])
+            with col_left:
+                fig_km = px.scatter(
+                    df_plot,
+                    x='_axis_x',
+                    y='_axis_y',
+                    color='Archetype',
+                    hover_name='Name',
+                    hover_data={s: True for s in selected_features} | {
+                        '_axis_x': False, '_axis_y': False
+                    },
+                    labels={
+                        '_axis_x': '← Special Attacker  |  Physical Attacker →',
+                        '_axis_y': '← Bulky Wall  |  Fast Sweeper →',
+                        'color':   'Archetype',
+                    },
+                    template="plotly_white",
+                    color_discrete_sequence=px.colors.qualitative.Safe,
+                )
+                fig_km.update_traces(marker=dict(size=8, opacity=0.7,
+                                                 line=dict(width=1, color='DarkSlateGrey')))
 
-            #Quadrant corner annotations
-            quadrant_notes = [
-                (0.97, 0.97, 'right', 'top',    'Phys. Sweeper'),
-                (0.03, 0.97, 'left',  'top',    'Spec. Sweeper'),
-                (0.97, 0.03, 'right', 'bottom', 'Phys. Wall'),
-                (0.03, 0.03, 'left',  'bottom', 'Spec. Wall'),
-            ]
-            for xr, yr, xanchor, yanchor, txt in quadrant_notes:
-                fig_km.add_annotation(
-                    xref='paper', yref='paper',
-                    x=xr, y=yr,
-                    text=f"<i>{txt}</i>",
-                    showarrow=False,
-                    font=dict(size=10, color='grey'),
-                    xanchor=xanchor, yanchor=yanchor,
+                #Quadrant reference lines at zero
+                fig_km.add_hline(y=0, line_dash='dot', line_color='grey', opacity=0.4)
+                fig_km.add_vline(x=0, line_dash='dot', line_color='grey', opacity=0.4)
+
+                #Quadrant corner annotations
+                quadrant_notes = [
+                    (0.97, 0.97, 'right', 'top',    'Phys. Sweeper'),
+                    (0.03, 0.97, 'left',  'top',    'Spec. Sweeper'),
+                    (0.97, 0.03, 'right', 'bottom', 'Phys. Wall'),
+                    (0.03, 0.03, 'left',  'bottom', 'Spec. Wall'),
+                ]
+                for xr, yr, xanchor, yanchor, txt in quadrant_notes:
+                    fig_km.add_annotation(
+                        xref='paper', yref='paper',
+                        x=xr, y=yr,
+                        text=f"<i>{txt}</i>",
+                        showarrow=False,
+                        font=dict(size=10, color='grey'),
+                        xanchor=xanchor, yanchor=yanchor,
+                    )
+
+                st.plotly_chart(fig_km, use_container_width=True)
+                st.markdown("---")
+                st.write("This is largely left as a first example foray into K-Means clustering, whilst the other tabs in the Machine Learning section focus on alternative solutions.")
+
+            with col_right:
+                st.write("**Archetype Average Stats**")
+                display_summary = cluster_summary.copy()
+                display_summary.index = [archetype_labels[i] for i in display_summary.index]
+                display_summary = display_summary.groupby(display_summary.index).mean().round(0).astype(int)
+                st.dataframe(display_summary)
+                st.markdown("---")
+                st.subheader("Notable Outliers")
+                st.write(
+                    "K-means has limitations when it comes to clustering similar Pokémon and outliers. "
+                    "Pokémon such as Blissey, Eternatus Eternamax, and Shuckle, are emblematic of this. "
+                    "Having very high stats in multiple fields, they tend to distort the averages "
+                    "or otherwise are grouped incorrectly. "
+                    "To solve this would require some significant clustering i.e. 12, "
+                    "an alternative algorithm to group the Pokémon, or new archetypes that are of a more "
+                    "generalised form than splitting on Special/Physical axis."
+
                 )
 
-            st.plotly_chart(fig_km, use_container_width=True)
-
-        with col_right:
-            st.write("**Archetype Average Stats**")
-            display_summary = cluster_summary.copy()
-            display_summary.index = [archetype_labels[i] for i in display_summary.index]
-            st.dataframe(display_summary)
+        clustering_analysis()
+    elif ml_mode == "DBSCAN":
+        st.header("Pokémon Archetype Clustering - DBSCAN")
+        st.write("Use Machine Learning to group Pokémon based on Competitive Archetypes with DBSCAN.")      
+        st.subheader("WIP")  
     
-    clustering_analysis()
