@@ -6,7 +6,7 @@ import seaborn as sns
 import plotly
 import plotly.graph_objects as go
 import plotly.express as px
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans, DBSCAN
 from sklearn.preprocessing import StandardScaler
 from matplotlib.colors import LinearSegmentedColormap
 
@@ -337,6 +337,103 @@ def add_archetype_axes(df_clustered, selected_features):
     out['_axis_y'] = g('Speed') - avg_bulk
 
     return out
+
+@st.cache_data
+def perform_dbscan(df, selected_features, eps=1.5, min_samples=8):
+    """Two-phase outlier-aware clustering:
+    Phase 1 — DBSCAN on raw scaled stats.
+      Raw values (not ratios) are used so that Pokemon with extreme absolute stats (Blissey HP=255, Shuckle Def=230, Eternatus totals) sit far from the main cloud and are correctly flagged as noise (label = -1).
+    Phase 2 — K-Means (k=6) on the clean non-outlier subset.
+      Ratio features are used here so archetypes reflect stat *shape* rather than overall power level — a weak Rapidash and a strong Arcanine should both land in Physical Sweeper even though their raw stats differ.
+
+    Returns
+    df_result: DataFrame with columns 'Is_Outlier' (bool) and 'Cluster' (int, -1 for outliers)
+    core_summary: cluster mean stats (non-outliers only)
+    """
+    df_result = df.copy()
+
+    # --- Phase 1: DBSCAN outlier detection ---
+    raw_scaled = StandardScaler().fit_transform(df_result[selected_features])
+    db = DBSCAN(eps=eps, min_samples=min_samples).fit(raw_scaled)
+    df_result['Is_Outlier'] = db.labels_ == -1
+    df_result['Cluster']    = db.labels_   #-1 = outlier, 0+ = DBSCAN cluster (discarded after phase 1)
+
+    # --- Phase 2: K-Means on non-outliers using ratio features ---
+    core_mask = ~df_result['Is_Outlier']
+    core_df   = df_result[core_mask].copy()
+
+    stat_totals = core_df[selected_features].sum(axis=1).replace(0, 1)
+    ratio_cols  = []
+    for feat in selected_features:
+        col = f'_ratio_{feat}'
+        core_df[col] = core_df[feat] / stat_totals
+        ratio_cols.append(col)
+
+    core_scaled = StandardScaler().fit_transform(core_df[ratio_cols])
+    km = KMeans(n_clusters=6, random_state=42, n_init=50)
+    core_df['Cluster'] = km.fit_predict(core_scaled)
+    core_df.drop(columns=ratio_cols, inplace=True)
+
+    # Write cluster assignments back into the full DataFrame
+    df_result.loc[core_mask, 'Cluster'] = core_df['Cluster']
+
+    core_summary = core_df.groupby('Cluster')[selected_features].mean().round(0)
+    return df_result, core_summary
+
+
+@st.cache_data
+def label_archetypes_dbscan(core_summary, selected_features):
+    """Same greedy unique-assignment labelling as K-Means, tuned for
+    the cleaner cluster shapes that come from running on outlier-free data.
+    With outliers removed k=6 maps naturally onto 6 archetypes so no
+    absorption phase is needed."""
+    ICONS = {
+        'Physical Sweeper':       '⚔️',
+        'Special Sweeper':        '✨',
+        'Physical Wall':          '🛡️',
+        'Special Wall':           '🔮',
+        'Bulky Attacker':         '💪',
+        'Bulky Special Attacker': '🔯',
+    }
+
+    normed      = core_summary.div(core_summary.sum(axis=1), axis=0)
+    global_mean = normed.mean()
+    dev         = normed.sub(global_mean)
+
+    def g(row, stat):
+        return row.get(stat, 0)
+
+    def score(row, archetype):
+        atk   = g(row, 'Attack');  spatk = g(row, 'Sp. Atk')
+        spd   = g(row, 'Speed');   dfn   = g(row, 'Defense')
+        spdef = g(row, 'Sp. Def'); hp    = g(row, 'HP')
+        if archetype == 'Physical Sweeper':       return (spd + atk)   - (hp + dfn + spdef)
+        if archetype == 'Special Sweeper':        return (spd + spatk) - (hp + dfn + spdef)
+        if archetype == 'Physical Wall':          return (dfn * 2)     - (spd + spatk)
+        if archetype == 'Special Wall':           return (hp + spdef)  - (spd + atk)
+        if archetype == 'Bulky Attacker':         return (atk + hp)    - (spd + spatk)
+        if archetype == 'Bulky Special Attacker': return (spatk + hp)  - (spd + atk)
+        return 0
+
+    archetypes  = list(ICONS.keys())
+    cluster_ids = list(dev.index)
+    score_matrix = {cid: {arch: score(dev.loc[cid], arch) for arch in archetypes} for cid in cluster_ids}
+
+    labels = {}
+    remaining_c = set(cluster_ids)
+    remaining_a = set(archetypes)
+    while remaining_a:
+        best_score, best_cid, best_arch = None, None, None
+        for cid in remaining_c:
+            for arch in remaining_a:
+                s = score_matrix[cid][arch]
+                if best_score is None or s > best_score:
+                    best_score, best_cid, best_arch = s, cid, arch
+        labels[best_cid] = f"{ICONS[best_arch]} {best_arch}"
+        remaining_c.discard(best_cid)
+        remaining_a.discard(best_arch)
+
+    return labels
 
 @st.cache_data
 def get_sprite_path(pokemon_name, df):
@@ -889,6 +986,135 @@ with main_tabs[3]:
         clustering_analysis()
     elif ml_mode == "DBSCAN":
         st.header("Pokémon Archetype Clustering - DBSCAN")
-        st.write("Use Machine Learning to group Pokémon based on Competitive Archetypes with DBSCAN.")      
-        st.subheader("WIP")  
+        st.write(
+            "This takes a hybrid approach: **DBSCAN** first identifies statistical outliers in raw stat space (Pokémon whose stat profiles are too extreme or unusual to belong to any mainstream archetype), then **K-Means** clusters the remaining Pokémon into 6 competitive archetypes on a clean dataset. "
+            "This gives more accurate archetype assignments than pure K-Means because extreme outliers like Blissey, Shuckle, and Eternatus no longer distort the cluster centroids."
+        )
+
+        @st.fragment
+        def dbscan_analysis():
+            selected_features = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
+
+            # Run the two-phase pipeline
+            df_db, core_summary = perform_dbscan(df, selected_features, eps=1.5, min_samples=8)
+            db_labels = label_archetypes_dbscan(core_summary, selected_features)
+
+            # Map labels; outliers get their own display label
+            df_db['Archetype'] = df_db.apply(
+                lambda r: '⚠️ Outlier' if r['Is_Outlier'] else db_labels.get(int(r['Cluster']), 'Unknown'),
+                axis=1
+            )
+
+            # Compute scatter axes (same formula as K-Means tab)
+            df_plot = add_archetype_axes(df_db, selected_features).copy()
+            rng = np.random.default_rng(seed=42)
+            jitter_scale = 4
+            df_plot['_axis_x'] = df_plot['_axis_x'] + rng.uniform(-jitter_scale, jitter_scale, size=len(df_plot))
+            df_plot['_axis_y'] = df_plot['_axis_y'] + rng.uniform(-jitter_scale, jitter_scale, size=len(df_plot))
+
+            # Separate outliers for distinct marker styling
+            df_core    = df_plot[~df_plot['Is_Outlier']]
+            df_outlier = df_plot[df_plot['Is_Outlier']]
+
+            n_outliers = df_outlier.shape[0]
+            n_core     = df_core.shape[0]
+
+            st.markdown("---")
+            st.subheader("Archetype Map")
+            st.caption(
+                f"**{n_core}** Pokémon assigned to archetypes &nbsp;|&nbsp; "
+                f"**{n_outliers}** flagged as outliers &nbsp;|&nbsp; "
+                "**X-axis**: Attack − Sp. Atk — left = Special Attacker, right = Physical Attacker  &nbsp;|&nbsp;  "
+                "**Y-axis**: Speed − avg(Def, Sp. Def, HP) — bottom = Bulky, top = Fast Sweeper"
+            )
+
+            col_left, col_right = st.columns([3, 2])
+
+            with col_left:
+                # Colour palette matching K-Means tab (Safe qualitative) for archetypes
+                archetype_order = sorted(df_core['Archetype'].unique())
+                palette = px.colors.qualitative.Safe[:len(archetype_order)]
+                color_map = {arch: col for arch, col in zip(archetype_order, palette)}
+                color_map['⚠️ Outlier'] = '#888888'
+
+                fig_db = px.scatter(
+                    df_core,
+                    x='_axis_x',
+                    y='_axis_y',
+                    color='Archetype',
+                    hover_name='Name',
+                    hover_data={s: True for s in selected_features} | {'_axis_x': False, '_axis_y': False},
+                    labels={
+                        '_axis_x': '← Special Attacker  |  Physical Attacker →',
+                        '_axis_y': '← Bulky Wall  |  Fast Sweeper →',
+                        'color': 'Archetype',
+                    },
+                    template="plotly_white",
+                    color_discrete_map=color_map,
+                    category_orders={'Archetype': archetype_order},
+                )
+                fig_db.update_traces(marker=dict(size=8, opacity=0.7, line=dict(width=1, color='DarkSlateGrey')))
+
+                # Outliers as grey X markers layered on top
+                fig_db.add_trace(go.Scatter(
+                    x=df_outlier['_axis_x'],
+                    y=df_outlier['_axis_y'],
+                    mode='markers',
+                    name='⚠️ Outlier',
+                    marker=dict(symbol='x', size=9, color='#888888', opacity=0.6,
+                                line=dict(width=1.5, color='#555555')),
+                    hovertemplate=(
+                        '<b>%{customdata[0]}</b><br>'
+                        'HP=%{customdata[1]}  Atk=%{customdata[2]}  Def=%{customdata[3]}<br>'
+                        'SpA=%{customdata[4]}  SpD=%{customdata[5]}  Spe=%{customdata[6]}'
+                        '<extra>⚠️ Outlier</extra>'
+                    ),
+                    customdata=df_outlier[['Name'] + selected_features].values,
+                ))
+
+                # Quadrant reference lines
+                fig_db.add_hline(y=0, line_dash='dot', line_color='grey', opacity=0.4)
+                fig_db.add_vline(x=0, line_dash='dot', line_color='grey', opacity=0.4)
+
+                for xr, yr, xa, ya, txt in [
+                    (0.97, 0.97, 'right', 'top',    'Phys. Sweeper'),
+                    (0.03, 0.97, 'left',  'top',    'Spec. Sweeper'),
+                    (0.97, 0.03, 'right', 'bottom', 'Phys. Wall'),
+                    (0.03, 0.03, 'left',  'bottom', 'Spec. Wall'),
+                ]:
+                    fig_db.add_annotation(
+                        xref='paper', yref='paper', x=xr, y=yr,
+                        text=f"<i>{txt}</i>", showarrow=False,
+                        font=dict(size=10, color='grey'), xanchor=xa, yanchor=ya,
+                    )
+
+                st.plotly_chart(fig_db, use_container_width=True)
+
+            with col_right:
+                # --- Archetype average stats (clean Pokémon only) ---
+                st.write("**Archetype Average Stats**")
+                display_summary = core_summary.copy()
+                display_summary.index = [db_labels[i] for i in display_summary.index]
+                display_summary = display_summary.groupby(display_summary.index).mean().round(0).astype(int)
+                st.dataframe(display_summary, use_container_width=True)
+
+                st.markdown("---")
+
+                # --- Outlier table ---
+                st.write(f"**Outliers** ({n_outliers} Pokémon)")
+                st.caption(
+                    "These Pokémon have stat profiles too extreme or unusual to fit any mainstream archetype. "
+                    "Removing them before clustering means they no longer skew the archetype centroids."
+                )
+                outlier_rows = df_db[df_db['Is_Outlier']].copy()
+                outlier_rows['Name'] = outlier_rows['Name'].str.replace('\n', ' ', regex=False)
+                # Sort by Total descending so legendaries appear first
+                outlier_display = (
+                    outlier_rows[['Name'] + selected_features + ['Total']]
+                    .sort_values('Total', ascending=False)
+                    .reset_index(drop=True)
+                )
+                st.dataframe(outlier_display, use_container_width=True, height=340)
+
+        dbscan_analysis()
     
