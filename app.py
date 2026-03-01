@@ -228,24 +228,22 @@ def label_archetypes(cluster_summary, selected_features):
         hp    = g(row, 'HP')
 
         if archetype == 'Physical Sweeper':
-            return (spd + atk)   - (hp + dfn + spdef)
+            return (spd + atk)     - (hp + dfn + spdef)
         if archetype == 'Special Sweeper':
-            return (spd + spatk) - (hp + dfn + spdef)
+            return (spd + spatk)   - (hp + dfn + spdef)
         if archetype == 'Physical Wall':
-            return (dfn * 2)     - (spd + spatk)
+            return (dfn*2 + hp)    - (spd + spatk)
         if archetype == 'Special Wall':
-            return (hp + spdef)  - (spd + atk)
+            return (spdef*2 + hp)  - (spd + atk)
         if archetype == 'Bulky Attacker':
-            return (atk + hp)    - (spd + spatk)
+            return (atk + dfn)     - (spd + spatk)
         if archetype == 'Bulky Special Attacker':
-            return (spatk + hp)  - (spd + atk)
+            return (spatk + spdef) - (spd + atk)
         return 0
     
     def score_raw(row, archetype):
-        """Fallback scoring for absorbed clusters — uses raw normalised stat
-        ratios rather than deviation, which is more reliable when a cluster is
-        defined by one extreme outlier stat (e.g. Blissey's HP=255 drowning
-        out SpDef in deviation space)."""
+        """Fallback scoring for absorbed clusters — uses raw normalised stat ratios rather than deviation, which is more reliable when a cluster is
+        defined by one extreme outlier stat (e.g. Blissey's HP=255 drowning out SpDef in deviation space)."""
         atk   = g(row, 'Attack')
         spatk = g(row, 'Sp. Atk')
         spd   = g(row, 'Speed')
@@ -254,17 +252,17 @@ def label_archetypes(cluster_summary, selected_features):
         hp    = g(row, 'HP')
 
         if archetype == 'Physical Sweeper':
-            return (spd + atk)   - (hp + dfn + spdef)
+            return (spd + atk)     - (hp + dfn + spdef)
         if archetype == 'Special Sweeper':
-            return (spd + spatk) - (hp + dfn + spdef)
+            return (spd + spatk)   - (hp + dfn + spdef)
         if archetype == 'Physical Wall':
-            return (dfn + hp)    - (spd + spatk)
+            return (dfn*2 + hp)    - (spd + spatk)
         if archetype == 'Special Wall':
-            return (hp + spdef)  - (spd + atk)
+            return (spdef*2 + hp)  - (spd + atk)
         if archetype == 'Bulky Attacker':
-            return (atk + hp)    - (spd + spatk)
+            return (atk + dfn)     - (spd + spatk)
         if archetype == 'Bulky Special Attacker':
-            return (spatk + hp)  - (spd + atk)
+            return (spatk + spdef) - (spd + atk)
         return 0
 
     archetypes   = list(ICONS.keys())
@@ -339,7 +337,7 @@ def add_archetype_axes(df_clustered, selected_features):
     return out
 
 @st.cache_data
-def perform_dbscan(df, selected_features, eps=1.5, min_samples=8):
+def perform_dbscan(df, selected_features, eps=2, min_samples=8):
     """Two-phase outlier-aware clustering:
     Phase 1 — DBSCAN on raw scaled stats.
       Raw values (not ratios) are used so that Pokemon with extreme absolute stats (Blissey HP=255, Shuckle Def=230, Eternatus totals) sit far from the main cloud and are correctly flagged as noise (label = -1).
@@ -407,12 +405,12 @@ def label_archetypes_dbscan(core_summary, selected_features):
         atk   = g(row, 'Attack');  spatk = g(row, 'Sp. Atk')
         spd   = g(row, 'Speed');   dfn   = g(row, 'Defense')
         spdef = g(row, 'Sp. Def'); hp    = g(row, 'HP')
-        if archetype == 'Physical Sweeper':       return (spd + atk)   - (hp + dfn + spdef)
-        if archetype == 'Special Sweeper':        return (spd + spatk) - (hp + dfn + spdef)
-        if archetype == 'Physical Wall':          return (dfn * 2)     - (spd + spatk)
-        if archetype == 'Special Wall':           return (hp + spdef)  - (spd + atk)
-        if archetype == 'Bulky Attacker':         return (atk + hp)    - (spd + spatk)
-        if archetype == 'Bulky Special Attacker': return (spatk + hp)  - (spd + atk)
+        if archetype == 'Physical Sweeper':       return (spd + atk)     - (hp + dfn + spdef)
+        if archetype == 'Special Sweeper':        return (spd + spatk)   - (hp + dfn + spdef)
+        if archetype == 'Physical Wall':          return (dfn*2 + hp)    - (spd + spatk)
+        if archetype == 'Special Wall':           return (spdef*2 + hp)  - (spd + atk)
+        if archetype == 'Bulky Attacker':         return (atk + dfn)     - (spd + spatk)
+        if archetype == 'Bulky Special Attacker': return (spatk + spdef) - (spd + atk)
         return 0
 
     archetypes  = list(ICONS.keys())
@@ -996,25 +994,66 @@ with main_tabs[3]:
             selected_features = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
 
             # Run the two-phase pipeline
-            df_db, core_summary = perform_dbscan(df, selected_features, eps=1.5, min_samples=8)
+            df_db, core_summary = perform_dbscan(df, selected_features, eps=2, min_samples=8)
             db_labels = label_archetypes_dbscan(core_summary, selected_features)
 
-            # Map labels; outliers get their own display label
-            df_db['Archetype'] = df_db.apply(
-                lambda r: '⚠️ Outlier' if r['Is_Outlier'] else db_labels.get(int(r['Cluster']), 'Unknown'),
-                axis=1
-            )
+            #"Rescue Step"
+            #Basically, after the two-phases are run, there are still some significant outliers but they could still be assigned to specific roles
+            #Thus, rule-based absolute value determination allows the handling of specific edge cases
+            RESCUE_THRESHOLD = 0.38 #Max single stat share calculated by comparing pokemon stat totals like Blissey with Mega Aggron
+            #Above a ratio of 0.38, you get the defining stat of the pokemon (Usually HP)
 
-            # Compute scatter axes (same formula as K-Means tab)
+            _ICONS = {
+                'Physical Sweeper': '⚔️', 'Special Sweeper': '✨',
+                'Physical Wall':    '🛡️', 'Special Wall':    '🔮',
+                'Bulky Attacker':   '💪', 'Bulky Special Attacker': '🔯',
+            }
+
+            def _rescue_archetype(row):
+                """Return 'icon archetype' if the Pokemon fits a clear role, else None."""
+                atk=row['Attack']; spatk=row['Sp. Atk']; spd=row['Speed']
+                dfn=row['Defense']; spdef=row['Sp. Def']
+                if spd >= 100:
+                    arch = 'Physical Sweeper' if atk >= spatk else 'Special Sweeper'
+                elif atk >= 100 and dfn >= 120:
+                    arch = 'Bulky Attacker'
+                elif spatk >= 110 and spdef >= 120:
+                    arch = 'Bulky Special Attacker'
+                elif dfn > spdef and dfn >= 120:
+                    arch = 'Physical Wall'
+                elif spdef >= dfn and spdef >= 120:
+                    arch = 'Special Wall'
+                else:
+                    return None
+                return f"{_ICONS[arch]} {arch}"
+
+            _totals    = df_db[selected_features].sum(axis=1).replace(0, 1)
+            _max_ratio = df_db[selected_features].div(_totals, axis=0).max(axis=1)
+
+            def _assign_archetype(row):
+                if not row['Is_Outlier']:
+                    return db_labels.get(int(row['Cluster']), 'Unknown')
+                if _max_ratio[row.name] < RESCUE_THRESHOLD:
+                    rescued = _rescue_archetype(row)
+                    if rescued:
+                        return rescued
+                return '⚠️ Outlier'
+            #Map labels; outliers get their own display label
+            df_db['Archetype'] = df_db.apply(_assign_archetype, axis=1)
+
+            #Compute scatter axes (same formula as K-Means tab)
             df_plot = add_archetype_axes(df_db, selected_features).copy()
             rng = np.random.default_rng(seed=42)
             jitter_scale = 4
             df_plot['_axis_x'] = df_plot['_axis_x'] + rng.uniform(-jitter_scale, jitter_scale, size=len(df_plot))
             df_plot['_axis_y'] = df_plot['_axis_y'] + rng.uniform(-jitter_scale, jitter_scale, size=len(df_plot))
 
-            # Separate outliers for distinct marker styling
-            df_core    = df_plot[~df_plot['Is_Outlier']]
-            df_outlier = df_plot[df_plot['Is_Outlier']]
+            #Separate outliers for distinct marker styling
+            df_core    = df_plot[df_plot['Archetype'] != '⚠️ Outlier']
+            df_outlier = df_plot[df_plot['Archetype'] == '⚠️ Outlier']
+
+            n_outliers = df_outlier.shape[0]
+            n_core     = df_core.shape[0]
 
             n_outliers = df_outlier.shape[0]
             n_core     = df_core.shape[0]
@@ -1024,8 +1063,8 @@ with main_tabs[3]:
             st.caption(
                 f"**{n_core}** Pokémon assigned to archetypes &nbsp;|&nbsp; "
                 f"**{n_outliers}** flagged as outliers &nbsp;|&nbsp; "
-                "**X-axis**: Attack − Sp. Atk — left = Special Attacker, right = Physical Attacker  &nbsp;|&nbsp;  "
-                "**Y-axis**: Speed − avg(Def, Sp. Def, HP) — bottom = Bulky, top = Fast Sweeper"
+                "**X-axis**: Attack - Sp. Atk — left = Special Attacker, right = Physical Attacker  &nbsp;|&nbsp;  "
+                "**Y-axis**: Speed - avg(Def, Sp. Def, HP) — bottom = Bulky, top = Fast Sweeper"
             )
 
             col_left, col_right = st.columns([3, 2])
@@ -1091,7 +1130,7 @@ with main_tabs[3]:
                 st.plotly_chart(fig_db, use_container_width=True)
 
             with col_right:
-                # --- Archetype average stats (clean Pokémon only) ---
+                #Archetype average stats
                 st.write("**Archetype Average Stats**")
                 display_summary = core_summary.copy()
                 display_summary.index = [db_labels[i] for i in display_summary.index]
@@ -1100,13 +1139,15 @@ with main_tabs[3]:
 
                 st.markdown("---")
 
-                # --- Outlier table ---
+                #Outlier table
                 st.write(f"**Outliers** ({n_outliers} Pokémon)")
                 st.caption(
-                    "These Pokémon have stat profiles too extreme or unusual to fit any mainstream archetype. "
-                    "Removing them before clustering means they no longer skew the archetype centroids."
+                    "These Pokémon have stat profiles too extreme or unusual to fit the archetypes. "
+                    "Removing them before clustering means they no longer skew the archetype centroids. "
+                    "They could basically be classified as their own class of Pokémon - General Tanks. "
+                    "Depending on other ways to query/sort the Pokémon data, you could assign more Pokémon to this set too."
                 )
-                outlier_rows = df_db[df_db['Is_Outlier']].copy()
+                outlier_rows = df_db[df_db['Archetype'] == '⚠️ Outlier'].copy()
                 outlier_rows['Name'] = outlier_rows['Name'].str.replace('\n', ' ', regex=False)
                 # Sort by Total descending so legendaries appear first
                 outlier_display = (
@@ -1114,7 +1155,7 @@ with main_tabs[3]:
                     .sort_values('Total', ascending=False)
                     .reset_index(drop=True)
                 )
-                st.dataframe(outlier_display, use_container_width=True, height=340)
+                st.dataframe(outlier_display, use_container_width=True)
 
         dbscan_analysis()
     
