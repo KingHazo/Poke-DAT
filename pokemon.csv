@@ -664,11 +664,11 @@ BUG",495,75,125,100,70,80,45,sprites/348-armaldo.png,1.5,68.2,87.5,45,30,Water 3
 350,Milotic,WATER,540,95,60,79,100,125,81,sprites/350-milotic.png,6.2,162,50,60,20,"Water 1, Dragon",Erratic,70,0,0,0,"Marvel Scale, Competitive",Cute Charm
 351,Castform,NORMAL,420,70,70,70,70,70,70,sprites/351-castform.png,0.3,0.8,50,45,25,"Fairy, Amorphous",Medium Fast,70,0,0,0,"Forecast, Cloud Nine, transform its appearance depending on the weather",None
 351,"Castform
-Sunny Form",FIRE,420,70,70,70,70,70,70,sprites/351-castform-sunny.png,0,0,50,45,25,"Fairy, Amorphous",Medium Fast,70,0,0,0,"Forecast, Cloud Nine",None
+Sunny Form",FIRE,420,70,70,70,70,70,70,sprites/351-castform-sunny.png,0.3,0.8,50,45,25,"Fairy, Amorphous",Medium Fast,70,0,0,0,"Forecast, Cloud Nine",None
 351,"Castform
-Rainy Form",WATER,420,70,70,70,70,70,70,sprites/351-castform-rainy.png,0,0,50,45,25,"Fairy, Amorphous",Medium Fast,70,0,0,0,"Forecast, Cloud Nine",None
+Rainy Form",WATER,420,70,70,70,70,70,70,sprites/351-castform-rainy.png,0.3,0.8,50,45,25,"Fairy, Amorphous",Medium Fast,70,0,0,0,"Forecast, Cloud Nine",None
 351,"Castform
-Snowy Form",ICE,420,70,70,70,70,70,70,sprites/351-castform-snowy.png,0,0,50,45,25,"Fairy, Amorphous",Medium Fast,70,0,0,0,"Forecast, Cloud Nine",None
+Snowy Form",ICE,420,70,70,70,70,70,70,sprites/351-castform-snowy.png,0.3,0.8,50,45,25,"Fairy, Amorphous",Medium Fast,70,0,0,0,"Forecast, Cloud Nine",None
 352,Kecleon,NORMAL,440,60,90,70,60,120,40,sprites/352-kecleon.png,1,22,50,200,20,Field,Medium Slow,70,0,0,0,"Color Change, change their skin color, changing the color",Protean
 353,Shuppet,GHOST,295,44,75,35,63,33,45,sprites/353-shuppet.png,0.6,2.3,50,225,25,Amorphous,Fast,35,0,0,0,"Insomnia, Frisk",Cursed Body
 354,Banette,GHOST,455,64,115,65,83,63,65,sprites/354-banette.png,1.1,12.5,50,45,25,Amorphous,Fast,35,0,0,0,"Insomnia, Frisk",Cursed Body
@@ -735,11 +735,11 @@ PSYCHIC",600,100,100,100,100,100,100,sprites/385-jirachi.png,0.3,1.1,N/A,3,120,N
 386,"Deoxys
 Normal Forme",PSYCHIC,600,50,150,50,150,50,150,sprites/386-deoxys.png,1.7,60.8,N/A,3,120,No Eggs Discovered,Slow,0,0,1,0,Pressure,None
 386,"Deoxys
-Attack Forme",PSYCHIC,600,50,180,20,180,20,150,sprites/386-deoxys-attack.png,0,0,N/A,3,120,No Eggs Discovered,Slow,0,0,1,0,Pressure,None
+Attack Forme",PSYCHIC,600,50,180,20,180,20,150,sprites/386-deoxys-attack.png,1.7,60.8,N/A,3,120,No Eggs Discovered,Slow,0,0,1,0,Pressure,None
 386,"Deoxys
-Defense Forme",PSYCHIC,600,50,70,160,70,160,90,sprites/386-deoxys-defense.png,0,0,N/A,3,120,No Eggs Discovered,Slow,0,0,1,0,Pressure,None
+Defense Forme",PSYCHIC,600,50,70,160,70,160,90,sprites/386-deoxys-defense.png,1.7,60.8,N/A,3,120,No Eggs Discovered,Slow,0,0,1,0,Pressure,None
 386,"Deoxys
-Speed Forme",PSYCHIC,600,50,95,90,95,90,180,sprites/386-deoxys-speed.png,0,0,N/A,3,120,No Eggs Discovered,Slow,0,0,1,0,Pressure,None
+Speed Forme",PSYCHIC,600,50,95,90,95,90,180,sprites/386-deoxys-speed.png,1.7,60.8,N/A,3,120,No Eggs Discovered,Slow,0,0,1,0,Pressure,None
 387,Turtwig,GRASS,318,55,68,64,45,55,31,sprites/387-turtwig.png,0.4,10.2,87.5,45,20,"Monster, Grass",Medium Slow,70,0,0,0,Overgrow,Shell Armor
 388,Grotle,GRASS,405,75,89,85,55,65,36,sprites/388-grotle.png,1.1,97,87.5,45,20,"Monster, Grass",Medium Slow,70,0,0,0,Overgrow,Shell Armor
 389,Torterra,"GRASS
@@ -780,18 +780,18 @@ STEEL",495,60,52,168,47,138,30,sprites/411-bastiodon.png,1.3,149.5,87.5,45,30,Mo
 412,"Burmy
 Plant Cloak",BUG,224,40,29,45,29,45,36,sprites/412-burmy-plantpng,0.2,3.4,50,120,15,Bug,Medium Fast,70,0,0,0,Shed Skin,Overcoat
 412,"Burmy
-Sandy Cloak",BUG,224,40,29,45,29,45,36,sprites/412-burmy-sandy.png,0,0,50,120,15,Bug,Medium Fast,70,0,0,0,Shed Skin,Overcoat
+Sandy Cloak",BUG,224,40,29,45,29,45,36,sprites/412-burmy-sandy.png,0.2,3.4,50,120,15,Bug,Medium Fast,70,0,0,0,Shed Skin,Overcoat
 412,"Burmy
-Trash Cloak",BUG,224,40,29,45,29,45,36,sprites/412-burmy-trash.png,0,0,50,120,15,Bug,Medium Fast,70,0,0,0,Shed Skin,Overcoat
+Trash Cloak",BUG,224,40,29,45,29,45,36,sprites/412-burmy-trash.png,0.2,3.4,50,120,15,Bug,Medium Fast,70,0,0,0,Shed Skin,Overcoat
 413,"Wormadam
 Plant Cloak","BUG
 GRASS",424,60,59,85,79,105,36,sprites/413-wormadam-plant.png,0.5,6.5,N/A,45,15,Bug,Medium Fast,70,0,0,0,Anticipation,Overcoat
 413,"Wormadam
 Sandy Cloak","BUG
-GROUND",424,60,79,105,59,85,36,sprites/413-wormadam-sandy.png,0,0,N/A,45,15,Bug,Medium Fast,70,0,0,0,Anticipation,Overcoat
+GROUND",424,60,79,105,59,85,36,sprites/413-wormadam-sandy.png,0.5,6.5,N/A,45,15,Bug,Medium Fast,70,0,0,0,Anticipation,Overcoat
 413,"Wormadam
 Trash Cloak","BUG
-STEEL",424,60,69,95,69,95,36,sprites/413-wormadam-trash.png,0,0,N/A,45,15,Bug,Medium Fast,70,0,0,0,Anticipation,Overcoat
+STEEL",424,60,69,95,69,95,36,sprites/413-wormadam-trash.png,0.5,6.5,N/A,45,15,Bug,Medium Fast,70,0,0,0,Anticipation,Overcoat
 414,Mothim,"BUG
 FLYING",424,70,94,50,94,50,66,sprites/414-mothim.png,0.9,23.3,100,45,15,Bug,Medium Fast,70,0,0,0,Swarm,Tinted Lens
 415,Combee,"BUG
@@ -1035,9 +1035,9 @@ FIGHTING",480,70,105,75,50,75,105,sprites/549-lilligant-hisui.png,1.2,19.2,N/A,7
 550,"Basculin
 Red-Striped Form",WATER,460,70,92,65,80,55,98,sprites/550-basculin.png,1,18,50,190,40,Water 2,Medium Fast,70,0,0,0,"Reckless, Adaptability",Mold Breaker
 550,"Basculin
-Blue-Striped Form",WATER,460,70,92,65,80,55,98,sprites/550-basculin-bluestriped.png,0,0,50,190,40,Water 2,Medium Fast,70,0,0,0,"Rock Head, Adaptability",Mold Breaker
+Blue-Striped Form",WATER,460,70,92,65,80,55,98,sprites/550-basculin-bluestriped.png,1,18,50,190,40,Water 2,Medium Fast,70,0,0,0,"Rock Head, Adaptability",Mold Breaker
 550,"Basculin
-White-Striped Form",WATER,460,70,92,65,80,55,98,sprites/550-basculin-whitestriped.png,0,0,50,190,40,Water 2,Medium Fast,70,0,0,0,"Rattled, Adaptability",Mold Breaker
+White-Striped Form",WATER,460,70,92,65,80,55,98,sprites/550-basculin-whitestriped.png,1,18,50,190,40,Water 2,Medium Fast,70,0,0,0,"Rattled, Adaptability",Mold Breaker
 551,Sandile,"GROUND
 DARK",292,50,72,35,35,35,65,sprites/551-sandile.png,0.7,15.2,50,180,20,Field,Medium Slow,70,0,0,0,"Intimidate, Moxie",Anger Point
 552,Krokorok,"GROUND
@@ -1198,13 +1198,13 @@ FIGHTING",580,91,90,72,90,129,108,sprites/640-virizion.png,2,200,N/A,3,80,No Egg
 641,"Tornadus
 Incarnate Forme",FLYING,580,79,115,70,125,80,111,sprites/641-tornadus.png,1.5,63,100,3,120,No Eggs Discovered,Slow,90,1,0,0,Prankster,Defiant
 641,"Tornadus
-Therian Forme",FLYING,580,79,100,80,110,90,121,sprites/641-tornadus-therian.png,1.4,0,100,3,120,No Eggs Discovered,Slow,90,1,0,0,"Prankster, Regenerator",Defiant
+Therian Forme",FLYING,580,79,100,80,110,90,121,sprites/641-tornadus-therian.png,1.4,63,100,3,120,No Eggs Discovered,Slow,90,1,0,0,"Prankster, Regenerator",Defiant
 642,"Thundurus
 Incarnate Forme","ELECTRIC
 FLYING",580,79,115,70,125,80,111,sprites/642-thundurus.png,1.5,61,100,3,120,No Eggs Discovered,Slow,90,1,0,0,Prankster,Defiant
 642,"Thundurus
 Therian Forme","ELECTRIC
-FLYING",580,79,105,70,145,80,101,sprites/642-thundurus-therian.png,3,0,100,3,120,No Eggs Discovered,Slow,90,1,0,0,"Prankster, Volt Absorb",Defiant
+FLYING",580,79,105,70,145,80,101,sprites/642-thundurus-therian.png,3,61,100,3,120,No Eggs Discovered,Slow,90,1,0,0,"Prankster, Volt Absorb",Defiant
 643,Reshiram,"DRAGON
 FIRE",680,100,120,100,150,120,90,sprites/643-reshiram.png,3.2,330,N/A,3,120,No Eggs Discovered,Slow,0,1,0,0,Turboblaze,None
 644,Zekrom,"DRAGON
@@ -1214,7 +1214,7 @@ Incarnate Forme","GROUND
 FLYING",600,89,125,90,115,80,101,sprites/645-landorus.png,1.5,68,100,3,120,No Eggs Discovered,Slow,90,1,0,0,Sand Force,Sheer Force
 645,"Landorus
 Therian Forme","GROUND
-FLYING",600,89,145,90,105,80,91,sprites/645-landorus-therian.png,1.3,0,100,3,120,No Eggs Discovered,Slow,90,1,0,0,"Sand Force, Intimidate",Sheer Force
+FLYING",600,89,145,90,105,80,91,sprites/645-landorus-therian.png,1.3,68,100,3,120,No Eggs Discovered,Slow,90,1,0,0,"Sand Force, Intimidate",Sheer Force
 646,Kyurem,"DRAGON
 ICE",660,125,130,90,130,90,95,sprites/646-kyurem.png,3,325,N/A,3,120,No Eggs Discovered,Slow,0,1,0,0,"Pressure, Turboblaze, Teravolt",None
 646,White Kyurem,"DRAGON
@@ -1226,13 +1226,13 @@ Ordinary Form","WATER
 FIGHTING",580,91,72,90,129,90,108,sprites/647-keldeo.png,1.4,48.5,N/A,3,80,No Eggs Discovered,Slow,35,0,1,0,Justified,None
 647,"Keldeo
 Resolute Form","WATER
-FIGHTING",580,91,72,90,129,90,108,sprites/647-keldeo-resolute.png,0,0,N/A,3,80,No Eggs Discovered,Slow,35,0,1,0,Justified,None
+FIGHTING",580,91,72,90,129,90,108,sprites/647-keldeo-resolute.png,1.4,48.5,N/A,3,80,No Eggs Discovered,Slow,35,0,1,0,Justified,None
 648,"Meloetta
 Aria Forme","NORMAL
 PSYCHIC",600,100,77,77,128,128,90,sprites/648-meloetta.png,0.6,6.5,N/A,3,120,No Eggs Discovered,Slow,100,0,1,0,Serene Grace,None
 648,"Meloetta
 Pirouette Forme","NORMAL
-FIGHTING",600,100,128,90,77,77,128,sprites/648-meloetta-pirouette.png,0,0,N/A,3,120,No Eggs Discovered,Slow,100,0,1,0,Serene Grace,None
+FIGHTING",600,100,128,90,77,77,128,sprites/648-meloetta-pirouette.png,0.6,6.5,N/A,3,120,No Eggs Discovered,Slow,100,0,1,0,Serene Grace,None
 649,Genesect,"BUG
 STEEL",600,71,120,95,120,95,99,sprites/649-genesect.png,1.5,82.5,N/A,3,120,No Eggs Discovered,Slow,0,0,1,0,Download,None
 650,Chespin,GRASS,313,56,61,65,48,45,38,sprites/650-chespin.png,0.4,9,87.5,45,20,Field,Medium Slow,70,0,0,0,Overgrow,Bulletproof
@@ -1248,7 +1248,7 @@ PSYCHIC",534,75,69,72,114,100,104,sprites/655-delphox.png,1.5,39,87.5,45,20,Fiel
 658,Greninja,"WATER
 DARK",530,72,95,67,103,71,122,sprites/658-greninja.png,1.5,40,87.5,45,20,"Water 1, No Eggs Discovered",Medium Slow,70,0,0,0,"Torrent, Battle Bond",Protean
 658,Ash-Greninja,"WATER
-DARK",640,72,145,67,153,71,132,sprites/658-greninja-ash.png,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,0,N/A,N/A
+DARK",640,72,145,67,153,71,132,sprites/658-greninja-ash.png,1.5,40,87.5,45,20,"Water 1, No Eggs Discovered",Medium Slow,70,0,0,0,"Torrent, Battle Bond",Protean
 659,Bunnelby,NORMAL,237,38,36,38,32,36,57,sprites/659-bunnelby.png,0.4,5,50,255,15,Field,Medium Fast,70,0,0,0,"Pickup, Cheek Pouch",Huge Power
 660,Diggersby,"NORMAL
 GROUND",423,85,56,77,50,77,78,sprites/660-diggersby.png,1,42.4,50,127,15,Field,Medium Fast,70,0,0,0,"Pickup, Cheek Pouch",Huge Power
@@ -1277,8 +1277,8 @@ DARK",495,95,124,78,69,71,58,sprites/675-pangoro.png,2.1,136,50,65,25,"Field, Hu
 676,Furfrou,NORMAL,472,75,80,60,65,90,102,sprites/676-furfrou.png,1.2,28,50,160,20,Field,Medium Fast,70,0,0,0,Fur Coat,None
 677,Espurr,PSYCHIC,355,62,48,54,63,60,68,sprites/677-espurr.png,0.3,3.5,50,190,20,Field,Medium Fast,70,0,0,0,"Keen Eye, Infiltrator",Own Tempo
 678,"Meowstic
-Male",PSYCHIC,466,74,48,76,83,81,104,sprites/678-meowstic.png,N/A,N/A,50,75,20,Field,Medium Fast,70,0,0,0,"Keen Eye, Infiltrator",Prankster
-678,Meowstic Female,PSYCHIC,466,74,48,76,83,81,104,sprites/678-meowstic-f.png,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,0,N/A,N/A
+Male",PSYCHIC,466,74,48,76,83,81,104,sprites/678-meowstic.png,0.6,8.5,N/A,75,20,Field,Medium Fast,70,0,0,0,"Keen Eye, Infiltrator",Prankster
+678,Meowstic Female,PSYCHIC,466,74,48,76,83,81,104,sprites/678-meowstic-f.png,0.6,8.5,N/A,75,20,Field,Medium Fast,70,0,0,0,"Keen Eye, Infiltrator",Competitive
 679,Honedge,"STEEL
 GHOST",325,45,80,100,35,37,28,sprites/679-honedge.png,0.8,2,50,180,20,Mineral,Medium Fast,70,0,0,0,No Guard,None
 680,Doublade,"STEEL
@@ -1288,7 +1288,7 @@ Shield Forme","STEEL
 GHOST",500,60,50,140,50,140,60,sprites/681-aegislash.png,1.7,53,50,45,20,Mineral,Medium Fast,70,0,0,0,Stance Change,None
 681,"Aegislash
 Blade Forme","STEEL
-GHOST",500,60,140,50,140,50,60,sprites/681-aegislash-blade.png,0,0,50,45,20,Mineral,Medium Fast,70,0,0,0,Stance Change,None
+GHOST",500,60,140,50,140,50,60,sprites/681-aegislash-blade.png,1.7,53,50,45,20,Mineral,Medium Fast,70,0,0,0,Stance Change,None
 682,Spritzee,FAIRY,341,78,52,60,63,65,23,sprites/682-spritzee.png,0.2,0.5,50,200,20,Fairy,Medium Fast,70,0,0,0,Healer,Aroma Veil
 683,Aromatisse,FAIRY,462,101,72,72,99,89,29,sprites/683-aromatisse.png,0.8,15.5,50,140,20,Fairy,Medium Fast,70,0,0,0,Healer,Aroma Veil
 684,Swirlix,FAIRY,341,62,48,66,59,57,49,sprites/684-swirlix.png,0.4,3.5,50,200,20,Fairy,Medium Fast,70,0,0,0,Sweet Veil,Unburden
@@ -1391,7 +1391,7 @@ FAIRY",700,50,160,110,160,110,110,sprites/719-diancie-mega.png,0.7,8.8,N/A,3,25,
 Hoopa Confined","PSYCHIC
 GHOST",600,80,110,60,150,130,70,sprites/720-hoopa.png,0.5,9,N/A,3,120,No Eggs Discovered,Slow,100,0,1,0,Magician,None
 720,Hoopa Unbound,"PSYCHIC
-DARK",680,80,160,60,170,130,80,sprites/720-hoopa-unbound.png,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,1,0,N/A,N/A
+DARK",680,80,160,60,170,130,80,sprites/720-hoopa-unbound.png,6.5,490,N/A,3,120,No Eggs Discovered,Slow,100,0,1,0,Magician,None
 721,Volcanion,"FIRE
 WATER",600,80,110,120,130,90,70,sprites/721-volcanion.png,1.7,195,N/A,3,120,No Eggs Discovered,Slow,100,0,1,0,Water Absorb,None
 722,Rowlet,"GRASS
@@ -1431,13 +1431,13 @@ Baile Style","FIRE
 FLYING",476,75,70,70,98,70,93,sprites/741-oricorio.png,0.6,3.4,25,45,20,Flying,Medium Fast,70,0,0,0,Dancer,None
 741,"Oricorio
 Pom-Pom Style","ELECTRIC
-FLYING",476,75,70,70,98,70,93,sprites/741-oricorio-pompom.png,0,0,25,45,20,Flying,Medium Fast,70,0,0,0,Dancer,None
+FLYING",476,75,70,70,98,70,93,sprites/741-oricorio-pompom.png,0.6,3.4,25,45,20,Flying,Medium Fast,70,0,0,0,Dancer,None
 741,"Oricorio
 Pa'u Style","PSYCHIC
-FLYING",476,75,70,70,98,70,93,sprites/741-oricorio-pau.png,0,0,25,45,20,Flying,Medium Fast,70,0,0,0,Dancer,None
+FLYING",476,75,70,70,98,70,93,sprites/741-oricorio-pau.png,0.6,3.4,25,45,20,Flying,Medium Fast,70,0,0,0,Dancer,None
 741,"Oricorio
 Sensu Style","GHOST
-FLYING",476,75,70,70,98,70,93,sprites/741-oricorio-sensu.png,0,0,25,45,20,Flying,Medium Fast,70,0,0,0,Dancer,None
+FLYING",476,75,70,70,98,70,93,sprites/741-oricorio-sensu.png,0.6,3.4,25,45,20,Flying,Medium Fast,70,0,0,0,Dancer,None
 742,Cutiefly,"BUG
 FAIRY",304,40,45,40,55,40,84,sprites/742-cutiefly.png,0.1,0.2,50,190,20,"Bug, Fairy",Medium Fast,70,0,0,0,"Honey Gather, Shield Dust",Sweet Veil
 743,Ribombee,"BUG
@@ -1448,9 +1448,9 @@ Own Tempo Rockruff",ROCK,280,45,65,40,30,40,60,sprites/744-rockruff.png,0.5,9.2,
 745,"Lycanroc
 Midday Form",ROCK,487,75,115,65,55,65,112,sprites/745-lycanroc.png,0.8,25,50,90,15,Field,Medium Fast,70,0,0,0,"Keen Eye, Sand Rush",Steadfast
 745,"Lycanroc
-Midnight Form",ROCK,487,85,115,75,55,75,82,sprites/745-lycanroc-midnight.png,1.1,0,50,90,15,Field,Medium Fast,70,0,0,0,"Keen Eye, Vital Spirit",No Guard
+Midnight Form",ROCK,487,85,115,75,55,75,82,sprites/745-lycanroc-midnight.png,1.1,25,50,90,15,Field,Medium Fast,70,0,0,0,"Keen Eye, Vital Spirit",No Guard
 745,"Lycanroc
-Dusk Form",ROCK,487,75,117,65,55,65,110,sprites/745-lycanroc-dusk.png,0.8,0,50,90,15,Field,Medium Fast,70,0,0,0,Tough Claws,None
+Dusk Form",ROCK,487,75,117,65,55,65,110,sprites/745-lycanroc-dusk.png,0.8,25,50,90,15,Field,Medium Fast,70,0,0,0,Tough Claws,None
 746,"Wishiwashi
 Solo Form",WATER,175,45,20,20,25,25,40,sprites/746-wishiwashi.png,0.2,0.3,50,60,15,Water 2,Fast,70,0,0,0,Schooling,None
 746,"Wishiwashi
@@ -1502,7 +1502,7 @@ Meteor Form","ROCK
 FLYING",440,60,60,100,60,100,60,sprites/774-minior-meteor.png,0.3,40,N/A,30,25,Mineral,Medium Slow,70,0,0,0,Shields Down,None
 774,"Minior
 Core Form","ROCK
-FLYING",500,60,100,60,100,60,120,sprites/774-minior.png,N/A,N/A,N/A,30,25,Mineral,Medium Slow,70,0,0,0,Shields Down,None
+FLYING",500,60,100,60,100,60,120,sprites/774-minior.png,0.3,0.3,N/A,30,25,Mineral,Medium Slow,70,0,0,0,Shields Down,None
 775,Komala,NORMAL,480,65,115,65,75,95,65,sprites/775-komala.png,0.4,19.9,50,45,20,Field,Slow,70,0,0,0,Comatose,None
 776,Turtonator,"FIRE
 DRAGON",485,60,78,135,91,85,36,sprites/776-turtonator.png,2,212,50,70,20,"Monster, Dragon",Medium Fast,70,0,0,0,Shell Armor,None
@@ -1548,13 +1548,13 @@ FLYING",570,97,101,103,107,101,61,sprites/797-celesteela.png,9.2,999.9,N/A,45,12
 STEEL",570,59,181,131,59,31,109,sprites/798-kartana.png,0.3,0.1,N/A,45,120,No Eggs Discovered,Slow,0,0,0,1,Beast Boost,None
 799,Guzzlord,"DARK
 DRAGON",570,223,101,53,97,53,43,sprites/799-guzzlord.png,5.5,888,N/A,45,120,No Eggs Discovered,Slow,0,0,0,1,Beast Boost,None
-800,Necrozma,PSYCHIC,600,97,107,101,127,89,79,sprites/800-necrozma.png,2.4,230,N/A,3,120,No Eggs Discovered,Slow,0,0,0,0,"Prism Armor, Neuroforce",None
+800,Necrozma,PSYCHIC,600,97,107,101,127,89,79,sprites/800-necrozma.png,2.4,230,N/A,3,120,No Eggs Discovered,Slow,0,1,0,0,"Prism Armor, Neuroforce",None
 800,Dusk Mane Necrozma,"PSYCHIC
-STEEL",680,97,157,127,113,109,77,sprites/800-necrozma-duskmane.png,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,0,N/A,N/A
+STEEL",680,97,157,127,113,109,77,sprites/800-necrozma-duskmane.png,3.8,460,N/A,3,120,No Eggs Discovered,Slow,0,1,0,0,N/A,N/A
 800,Dawn Wings Necrozma,"PSYCHIC
-GHOST",680,97,113,109,157,127,77,sprites/800-necrozma-dawnwings.png,2.4,230,N/A,3,120,No Eggs Discovered,Slow,0,0,0,0,Prism Armor,None
+GHOST",680,97,113,109,157,127,77,sprites/800-necrozma-dawnwings.png,4.2,350,N/A,3,120,No Eggs Discovered,Slow,0,1,0,0,Prism Armor,None
 800,Ultra Necrozma,"PSYCHIC
-DRAGON",754,97,167,97,167,97,129,sprites/800-necrozma-ultra.png,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,0,N/A,N/A
+DRAGON",754,97,167,97,167,97,129,sprites/800-necrozma-ultra.png,7.5,230,N/A,3,120,No Eggs Discovered,Slow,0,1,0,0,Neuroforce,None
 801,Magearna,"STEEL
 FAIRY",600,80,95,115,130,115,65,sprites/801-magearna.png,1,80.5,N/A,3,120,No Eggs Discovered,Slow,0,0,1,0,Soul-Heart,None
 802,Marshadow,"FIGHTING
@@ -1667,15 +1667,15 @@ Ice Face",ICE,470,75,80,110,65,90,50,sprites/875-eiscue.png,1.4,89,50,60,25,"Wat
 Noice Face",ICE,470,75,80,70,65,50,130,sprites/875-eiscue-noice.png,1.4,89,50,60,25,"Water 1, Field",Slow,50,0,0,0,Ice Face,None
 876,"Indeedee
 Male","PSYCHIC
-NORMAL",475,60,65,55,105,95,95,sprites/876-indeedee.png,0.9,28,50,30,40,Fairy,Fast,140,0,0,0,"Inner Focus, Synchronize",Psychic Surge
+NORMAL",475,60,65,55,105,95,95,sprites/876-indeedee.png,0.9,28,N/A,30,40,Fairy,Fast,140,0,0,0,"Inner Focus, Synchronize",Psychic Surge
 876,Indeedee Female,"PSYCHIC
-NORMAL",475,70,55,65,95,105,85,sprites/876-indeedee-f.png,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,0,N/A,N/A
+NORMAL",475,70,55,65,95,105,85,sprites/876-indeedee-f.png,0.9,28,N/A,30,40,Fairy,Fast,140,0,0,0,"Own Tempo, Synchronize",Psychic Surge
 877,"Morpeko
 Full Belly Mode","ELECTRIC
 DARK",436,58,95,58,70,58,97,sprites/877-morpeko.png,0.3,3,50,180,10,"Field, Fairy",Medium Fast,50,0,0,0,Hunger Switch,None
 877,"Morpeko
 Hangry Mode","ELECTRIC
-DARK",436,58,95,58,70,58,97,sprites/877-morpeko-hangry.png,0,0,50,180,10,"Field, Fairy",Medium Fast,50,0,0,0,Hunger Switch,None
+DARK",436,58,95,58,70,58,97,sprites/877-morpeko-hangry.png,0.3,3,50,180,10,"Field, Fairy",Medium Fast,50,0,0,0,Hunger Switch,None
 878,Cufant,STEEL,330,72,80,49,40,49,40,sprites/878-cufant.png,1.2,100,50,190,25,"Field, Mineral",Medium Fast,50,0,0,0,Sheer Force,Heavy Metal
 879,Copperajah,STEEL,500,122,130,69,80,69,30,sprites/879-copperajah.png,3,650,50,90,25,"Field, Mineral",Medium Fast,50,0,0,0,Sheer Force,Heavy Metal
 880,Dracozolt,"ELECTRIC
@@ -1698,17 +1698,17 @@ GHOST",600,88,120,75,100,75,142,sprites/887-dragapult.png,3,50,50,45,40,"Amorpho
 Hero of Many Battles",FAIRY,660,92,120,115,80,115,138,sprites/888-zacian.png,2.8,110,N/A,10,120,No Eggs Discovered,Slow,0,1,0,0,Intrepid Sword,None
 888,"Zacian
 Crowned Sword","FAIRY
-STEEL",700,92,150,115,80,115,148,sprites/888-zacian-crowned.png,0,355,N/A,10,120,No Eggs Discovered,Slow,0,1,0,0,Intrepid Sword,None
+STEEL",700,92,150,115,80,115,148,sprites/888-zacian-crowned.png,2.8,110,N/A,10,120,No Eggs Discovered,Slow,0,1,0,0,Intrepid Sword,None
 889,"Zamazenta
 Hero of Many Battles",FIGHTING,660,92,120,115,80,115,138,sprites/889-zamazenta.png,2.9,210,N/A,10,120,No Eggs Discovered,Slow,0,1,0,0,Dauntless Shield,None
 889,"Zamazenta
 Crowned Shield","FIGHTING
-STEEL",700,92,120,140,80,140,128,sprites/889-zamazenta-crowned.png,0,785,N/A,10,120,No Eggs Discovered,Slow,0,1,0,0,Dauntless Shield,None
+STEEL",700,92,120,140,80,140,128,sprites/889-zamazenta-crowned.png,2.9,210,N/A,10,120,No Eggs Discovered,Slow,0,1,0,0,Dauntless Shield,None
 890,Eternatus,"POISON
 DRAGON",690,140,85,95,145,95,130,sprites/890-eternatus.png,20,950,N/A,255,120,No Eggs Discovered,Slow,0,1,0,0,Pressure,None
 890,"Eternatus
 Eternamax","POISON
-DRAGON",1125,255,115,250,125,250,130,sprites/890-eternatus-eternamax.png,100,???.?,N/A,255,120,No Eggs Discovered,Slow,0,0,0,0,Pressure,None
+DRAGON",1125,255,115,250,125,250,130,sprites/890-eternatus-eternamax.png,100,???.?,N/A,255,120,No Eggs Discovered,Slow,0,1,0,0,Pressure,None
 891,Kubfu,FIGHTING,385,60,90,60,53,50,72,sprites/891-kubfu.png,0.6,12,87.5,3,120,No Eggs Discovered,Slow,50,1,0,0,Inner Focus,None
 892,"Urshifu
 Single Strike Style","FIGHTING
@@ -1723,13 +1723,13 @@ GRASS",600,105,120,105,70,95,105,sprites/893-zarude.png,1.8,70,N/A,3,120,No Eggs
 896,Glastrier,ICE,580,100,145,130,65,110,30,sprites/896-glastrier.png,2.2,800,N/A,3,120,No Eggs Discovered,Slow,35,1,0,0,Chilling Neigh,None
 897,Spectrier,GHOST,580,100,65,60,145,80,130,sprites/897-spectrier.png,2,44.5,N/A,3,120,No Eggs Discovered,Slow,35,1,0,0,Grim Neigh,None
 898,Calyrex,"PSYCHIC
-GRASS",500,100,80,80,80,80,80,sprites/898-calyrex.png,1.1,7.7,N/A,3,120,No Eggs Discovered,Slow,100,1,0,0,"Unnerve, As One",None
+GRASS",500,100,80,80,80,80,80,sprites/898-calyrex.png,1.1,7.7,N/A,3,120,No Eggs Discovered,Slow,100,1,0,0,Unnerve,None
 898,"Calyrex
 Ice Rider","PSYCHIC
-ICE",680,100,165,150,85,130,50,sprites/898-calyrex-ice.png,N/A,N/A,N/A,3,120,No Eggs Discovered,Slow,100,1,0,0,"Unnerve, As One",None
+ICE",680,100,165,150,85,130,50,sprites/898-calyrex-ice.png,2.4,809.1,N/A,3,120,No Eggs Discovered,Slow,100,1,0,0,As One,None
 898,"Calyrex
 Shadow Rider","PSYCHIC
-GHOST",680,100,85,80,165,100,150,sprites/898-calyrex-shadow.png,N/A,N/A,N/A,3,120,No Eggs Discovered,Slow,100,1,0,0,Unnerve,None
+GHOST",680,100,85,80,165,100,150,sprites/898-calyrex-shadow.png,2.4,53.6,N/A,3,120,No Eggs Discovered,Slow,100,1,0,0,As One,None
 899,Wyrdeer,"NORMAL
 PSYCHIC",525,103,105,72,105,75,65,sprites/899-wyrdeer.png,1.8,95.1,50,45,20,Field,Slow,50,0,0,0,"Intimidate, Frisk",Sap Sipper
 900,Kleavor,"BUG
@@ -1741,9 +1741,9 @@ Bloodmoon","GROUND
 NORMAL",555,113,70,120,135,65,52,sprites/901-ursaluna-bloodmoon.png,2.7,333,50,20,20,Field,Medium Fast,50,0,0,0,"Guts, Bulletproof, Mind's Eye",Unnerve
 902,"Basculegion
 Male","WATER
-GHOST",530,120,112,65,80,75,78,sprites/902-basculegion.png,N/A,N/A,50,45,20,Water 2,Medium Fast,50,0,0,0,"Swift Swim, Adaptability",Mold Breaker
+GHOST",530,120,112,65,80,75,78,sprites/902-basculegion.png,3,110,N/A,45,20,Water 2,Medium Fast,50,0,0,0,"Swift Swim, Adaptability",Mold Breaker
 902,Basculegion Female,"WATER
-GHOST",530,120,92,65,100,75,78,sprites/902-basculegion.png,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,0,N/A,N/A
+GHOST",530,120,92,65,100,75,78,sprites/902-basculegion.png,3,110,N/A,45,20,Water 2,Medium Fast,50,0,0,0,"Swift Swim, Adaptability",Mold Breaker
 903,Sneasler,"FIGHTING
 POISON",510,80,130,60,40,80,120,sprites/903-sneasler.png,1.3,43,50,20,20,Field,Medium Slow,50,0,0,0,"Pressure, Unburden",Poison Touch
 904,Overqwil,"DARK
@@ -1753,7 +1753,7 @@ Incarnate Forme","FAIRY
 FLYING",580,74,115,70,135,80,106,sprites/905-enamorus.png,1.6,48,N/A,3,20,No Eggs Discovered,Slow,50,1,0,0,Cute Charm,Contrary
 905,"Enamorus
 Therian Forme","FAIRY
-FLYING",580,74,115,110,135,100,46,sprites/905-enamorus-therian.png,N/A,N/A,N/A,3,20,No Eggs Discovered,Slow,50,1,0,0,"Cute Charm, Overcoat",Contrary
+FLYING",580,74,115,110,135,100,46,sprites/905-enamorus-therian.png,1.6,48,N/A,3,20,No Eggs Discovered,Slow,50,1,0,0,Overcoat,Contrary
 906,Sprigatito,GRASS,310,40,61,54,45,45,65,sprites/906-sprigatito.png,0.4,4.1,87.5,45,20,"Field, Grass",Medium Slow,50,0,0,0,Overgrow,Protean
 907,Floragato,GRASS,410,61,80,63,60,63,83,sprites/907-floragato.png,0.9,12.2,87.5,45,20,"Field, Grass",Medium Slow,50,0,0,0,Overgrow,Protean
 908,Meowscarada,"GRASS
@@ -1768,8 +1768,8 @@ GHOST",530,104,75,100,110,75,66,sprites/911-skeledirge.png,1.6,326.5,87.5,45,20,
 FIGHTING",530,85,120,80,85,75,85,sprites/914-quaquaval.png,1.8,61.9,87.5,45,20,"Flying, Water 1",Medium Slow,50,0,0,0,Torrent,Moxie
 915,Lechonk,NORMAL,254,54,45,40,35,45,35,sprites/915-lechonk.png,0.5,10.2,50,255,15,Field,Medium Fast,50,0,0,0,"Aroma Veil, Gluttony",Thick Fat
 916,"Oinkologne
-Male",NORMAL,489,110,100,75,59,80,65,sprites/916-oinkologne.png,1,120,50,100,15,Field,Medium Fast,50,0,0,0,"Lingering Aroma, Gluttony",Thick Fat
-916,Oinkologne Female,NORMAL,489,115,90,70,59,90,65,sprites/916-oinkologne-f.png,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,0,N/A,N/A
+Male",NORMAL,489,110,100,75,59,80,65,sprites/916-oinkologne.png,1,120,N/A,100,15,Field,Medium Fast,50,0,0,0,"Lingering Aroma, Gluttony",Thick Fat
+916,Oinkologne Female,NORMAL,489,115,90,70,59,90,65,sprites/916-oinkologne-f.png,1,120,N/A,N/A,N/A,N/A,N/A,N/A,0,0,0,"Aroma Veil, Gluttony",Thick Fat
 917,Tarountula,BUG,210,35,41,45,29,40,20,sprites/917-tarountula.png,0.3,4,50,255,15,Bug,Erratic,50,0,0,0,Insomnia,Stakeout
 918,Spidops,BUG,404,60,79,92,52,86,35,sprites/918-spidops.png,1,16.5,50,120,15,Bug,Erratic,50,0,0,0,Insomnia,Stakeout
 919,Nymble,BUG,210,33,46,40,21,25,45,sprites/919-nymble.png,0.2,1,50,190,20,Bug,Medium Fast,20,0,0,0,Swarm,Tinted Lens
@@ -1784,7 +1784,7 @@ FIGHTING",490,70,115,70,70,60,105,sprites/923-pawmot.png,0.9,41,50,45,15,Field,M
 925,"Maushold
 Family of Four",NORMAL,470,74,75,70,65,75,111,sprites/925-maushold.png,0.3,2.8,N/A,75,10,"Field, Fairy",Fast,50,0,0,0,"Friend Guard, Cheek Pouch",Technician
 925,"Maushold
-Family of Three",NORMAL,470,74,75,70,65,75,111,sprites/925-maushold-four.png,0,2.3,N/A,75,10,"Field, Fairy",Fast,50,0,0,0,"Friend Guard, Cheek Pouch",Technician
+Family of Three",NORMAL,470,74,75,70,65,75,111,sprites/925-maushold-four.png,0.3,2.3,N/A,75,10,"Field, Fairy",Fast,50,0,0,0,"Friend Guard, Cheek Pouch",Technician
 926,Fidough,FAIRY,312,37,55,70,30,55,65,sprites/926-fidough.png,0.3,10.9,50,190,20,"Field, Mineral",Medium Slow,50,0,0,0,Own Tempo,Klutz
 927,Dachsbun,FAIRY,477,57,80,115,50,80,95,sprites/927-dachsbun.png,0.5,14.9,50,90,20,"Field, Mineral",Medium Slow,50,0,0,0,Well-Baked Body,Aroma Veil
 928,Smoliv,"GRASS
@@ -1798,13 +1798,13 @@ Green Plumage","NORMAL
 FLYING",417,82,96,51,45,51,92,sprites/931-squawkabilly.png,0.6,2.4,50,190,15,Flying,Erratic,50,0,0,0,"Intimidate, Hustle, Guts",Guts
 931,"Squawkabilly
 Blue Plumage","NORMAL
-FLYING",417,82,96,51,45,51,92,sprites/931-squawkabilly-blue.png,0,0,50,190,15,Flying,Erratic,50,0,0,0,"Intimidate, Hustle, Guts",Guts
+FLYING",417,82,96,51,45,51,92,sprites/931-squawkabilly-blue.png,0.6,2.4,50,190,15,Flying,Erratic,50,0,0,0,"Intimidate, Hustle, Guts",Guts
 931,"Squawkabilly
 Yellow Plumage","NORMAL
-FLYING",417,82,96,51,45,51,92,sprites/931-squawkabilly-yellow.png,0,0,50,190,15,Flying,Erratic,50,0,0,0,"Intimidate, Hustle, Sheer Force",Sheer Force
+FLYING",417,82,96,51,45,51,92,sprites/931-squawkabilly-yellow.png,0.6,2.4,50,190,15,Flying,Erratic,50,0,0,0,"Intimidate, Hustle, Sheer Force",Sheer Force
 931,"Squawkabilly
 White Plumage","NORMAL
-FLYING",417,82,96,51,45,51,92,sprites/931-squawkabilly-white.png,0,0,50,190,15,Flying,Erratic,50,0,0,0,"Intimidate, Hustle, Sheer Force",Sheer Force
+FLYING",417,82,96,51,45,51,92,sprites/931-squawkabilly-white.png,0.6,2.4,50,190,15,Flying,Erratic,50,0,0,0,"Intimidate, Hustle, Sheer Force",Sheer Force
 932,Nacli,ROCK,280,55,55,75,35,35,25,sprites/932-nacli.png,0.4,16,50,255,20,Mineral,Medium Slow,50,0,0,0,"Purifying Salt, Sturdy",Clear Body
 933,Naclstack,ROCK,355,60,60,100,35,65,35,sprites/933-naclstack.png,0.6,105,50,120,20,Mineral,Medium Slow,50,0,0,0,"Purifying Salt, Sturdy",Clear Body
 934,Garganacl,ROCK,500,100,100,130,45,90,35,sprites/934-garganacl.png,2.3,240,50,45,20,Mineral,Medium Slow,50,0,0,0,"Purifying Salt, Sturdy",Clear Body
@@ -1882,10 +1882,10 @@ Curly Form","DRAGON
 WATER",475,68,50,60,120,95,82,sprites/978-tatsugiri.png,0.3,8,50,100,35,Water 2,Medium Slow,50,0,0,0,Commander,Storm Drain
 978,"Tatsugiri
 Droopy Form","DRAGON
-WATER",475,68,50,60,120,95,82,sprites/978-tatsugiri-droopy.png,0,0,50,100,35,Water 2,Medium Slow,50,0,0,0,Commander,Storm Drain
+WATER",475,68,50,60,120,95,82,sprites/978-tatsugiri-droopy.png,0.3,8,50,100,35,Water 2,Medium Slow,50,0,0,0,Commander,Storm Drain
 978,"Tatsugiri
 Stretchy Form","DRAGON
-WATER",475,68,50,60,120,95,82,sprites/978-tatsugiri-stretchy.png,0,0,50,100,35,Water 2,Medium Slow,50,0,0,0,Commander,Storm Drain
+WATER",475,68,50,60,120,95,82,sprites/978-tatsugiri-stretchy.png,0.6,24,50,100,35,Water 2,Medium Slow,50,0,0,0,Commander,Storm Drain
 979,Annihilape,"FIGHTING
 GHOST",535,110,115,80,50,90,90,sprites/979-annihilape.png,1.2,56,50,45,20,Field,Medium Fast,50,0,0,0,"Vital Spirit, Inner Focus",Defiant
 980,Clodsire,"POISON
@@ -1968,15 +1968,15 @@ PSYCHIC",555,88,75,66,130,90,106,sprites/1015-munkidori.png,1,12.2,100,3,120,No 
 FAIRY",555,88,91,82,70,125,99,sprites/1016-fezandipiti.png,1.4,30.1,100,3,120,No Eggs Discovered,Slow,0,1,0,0,Toxic Chain,Technician
 1017,"Ogerpon
 Cornerstone Mask","GRASS
-ROCK",550,80,120,84,60,96,110,sprites/1017-ogerpon-cornerstone.png,0,0,N/A,5,10,No Eggs Discovered,Slow,50,1,0,0,N/A,None
+ROCK",550,80,120,84,60,96,110,sprites/1017-ogerpon-cornerstone.png,1.2,39.8,N/A,5,10,No Eggs Discovered,Slow,50,1,0,0,N/A,None
 1017,"Ogerpon
 Hearthflame Mask","GRASS
-FIRE",550,80,120,84,60,96,110,sprites/1017-ogerpon-hearthflame.png,0,0,N/A,5,10,No Eggs Discovered,Slow,50,1,0,0,N/A,None
+FIRE",550,80,120,84,60,96,110,sprites/1017-ogerpon-hearthflame.png,1.2,39.8,N/A,5,10,No Eggs Discovered,Slow,50,1,0,0,N/A,None
 1017,"Ogerpon
 Teal Mask",GRASS,550,80,120,84,60,96,110,sprites/1017-ogerpon-teal.png,1.2,39.8,N/A,5,10,No Eggs Discovered,Slow,50,1,0,0,"Defiant, Water Absorb, Mold Breaker, Sturdy",None
 1017,"Ogerpon
 Wellspring Mask","GRASS
-WATER",550,80,120,84,60,96,110,sprites/1017-ogerpon-wellspring.png,0,0,N/A,5,10,No Eggs Discovered,Slow,50,1,0,0,N/A,None
+WATER",550,80,120,84,60,96,110,sprites/1017-ogerpon-wellspring.png,1.2,39.8,N/A,5,10,No Eggs Discovered,Slow,50,1,0,0,N/A,None
 1018,Archaludon,"STEEL
 DRAGON",600,90,105,130,125,65,85,sprites/1018-archaludon.png,2,60,50,10,30,"Mineral, Dragon",Medium Fast,50,0,0,0,"Stamina, Sturdy",Stalwart
 1019,Hydrapple,"GRASS
