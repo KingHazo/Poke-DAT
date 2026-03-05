@@ -454,6 +454,26 @@ def get_type_sprite_paths(pokemon_name, df):
         return types
     except:
         return []
+    
+@st.cache_data
+def get_top_by_physical(df, column, ascending=False, n=10):
+    """Top N Pokémon by Height or Weight, dropping rows with no data.
+    Coercion happens here (not just in load_data) so it runs even when the
+    Streamlit data cache was built before the coercion lines were added."""
+    working = df.copy()
+    working[column] = pd.to_numeric(working[column], errors='coerce')
+    valid = working[working[column].notna()]
+    return valid.nsmallest(n, column) if ascending else valid.nlargest(n, column)
+
+@st.cache_data
+def get_top_legendary(df, n=10):
+    """Top N Legendary Pokémon by Total stats."""
+    return df[df['Is_Legendary'] == 1].nlargest(n, 'Total')
+
+@st.cache_data
+def get_top_mythical(df, n=10):
+    """Top N Mythical Pokémon by Total stats."""
+    return df[df['Is_Mythical'] == 1].nlargest(n, 'Total')
 # ============================================================================
 # UI STARTS HERE
 # ============================================================================
@@ -499,7 +519,7 @@ main_tabs = st.tabs([
 
 #MAIN TAB 1: RANKINGS
 with main_tabs[0]:
-    mode = st.radio("View Rankings By:", ["Type", "Specific Stat"], horizontal=True)
+    mode = st.radio("View Rankings By:", ["Type", "Specific Stat", "Height & Weight", "Legendary & Mythical"], horizontal=True)
     
     if mode == "Type":
         #SUB-SECTION: Top 10 by Type 
@@ -554,7 +574,8 @@ with main_tabs[0]:
                     st.markdown("<div style='text-align:center; font-size:24px;'>🎮</div>", unsafe_allow_html=True)
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
             
-    else:
+            
+    elif mode == "Specific Stat":
         #SUB-SECTION: Specific Stats
         st.header("Top 10 Pokémon by Specific Stat")
         stat_choice = st.segmented_control(
@@ -602,6 +623,164 @@ with main_tabs[0]:
                     st.image(sprite_path, use_container_width=True)
                 else:
                     st.markdown("<div style='text-align:center; font-size:24px;'>🎮</div>", unsafe_allow_html=True)
+                st.caption(f"{row['Name'].replace(chr(10), ' ')}")
+
+
+    elif mode == "Height & Weight":
+        #SUB-SECTION: Top 10 by Height
+        st.header("Top 10 Pokémon by Height & Weight")
+
+        hw_col1, hw_col2 = st.columns(2)
+        with hw_col1:
+            height_dir = st.radio("Height ranking:", ["Tallest", "Shortest"], horizontal=True, key="height_dir")
+        with hw_col2:
+            weight_dir = st.radio("Weight ranking:", ["Heaviest", "Lightest"], horizontal=True, key="weight_dir")
+
+        st.divider()
+
+        #Height chart
+        st.subheader(f"{'Top 10 Tallest' if height_dir == 'Tallest' else 'Top 10 Shortest'} Pokémon")
+        h_df = get_top_by_physical(df, 'Height_m', ascending=(height_dir == "Shortest"))
+        h_num = len(h_df)
+
+        left_pad, chart_area, right_pad = st.columns([1, 8, 1])
+        with chart_area:
+            fig_h, ax_h = plt.subplots(figsize=(8, h_num * 0.4))
+            colors_h = get_pokedex_colors(h_num)
+            ax_h.barh(range(h_num), h_df['Height_m'], color=colors_h)
+            _h_max = h_df['Height_m'].max()
+            _h_pad = _h_max * 0.30
+            ax_h.set_xlim(0, _h_max + _h_pad)
+            ax_h.xaxis.set_major_locator(plt.MaxNLocator(nbins=6, steps=[1,2,5,10]))
+            ax_h.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x:g}'))
+            for i, v in enumerate(h_df['Height_m']):
+                ax_h.text(v + _h_max * 0.02, i, f'{v:g} m', va='center', fontweight='bold', fontsize=8)
+            ax_h.set_yticks(range(h_num))
+            ax_h.set_yticklabels([f"#{i+1}" for i in range(h_num)], fontsize=11, fontweight='bold')
+            ax_h.invert_yaxis()
+            ax_h.set_xlabel('Height (m)', fontweight='bold', fontsize=11)
+            ax_h.grid(axis='x', alpha=0.3, linestyle='--')
+            plt.tight_layout()
+            st.pyplot(fig_h)
+
+        st.markdown("### Pokémon")
+        sprite_cols_h = st.columns(h_num)
+        for rank, ((idx, row), col) in enumerate(zip(h_df.iterrows(), sprite_cols_h), 1):
+            with col:
+                sprite_path = get_sprite_path(row['Name'], df)
+                st.caption(f"**#{rank}**")
+                if sprite_path:
+                    st.image(sprite_path, use_container_width=True)
+                else:
+                    st.markdown("<div style='text-align:center;font-size:24px;'>🎮</div>", unsafe_allow_html=True)
+                st.caption(f"{row['Name'].replace(chr(10), ' ')}")
+
+        st.divider()
+
+        #Weight chart
+        st.subheader(f"{'Top 10 Heaviest' if weight_dir == 'Heaviest' else 'Top 10 Lightest'} Pokémon")
+        w_df = get_top_by_physical(df, 'Weight_kg', ascending=(weight_dir == "Lightest"))
+        w_num = len(w_df)
+
+        left_pad2, chart_area2, right_pad2 = st.columns([1, 8, 1])
+        with chart_area2:
+            fig_w, ax_w = plt.subplots(figsize=(8, w_num * 0.4))
+            colors_w = get_pokedex_colors(w_num)
+            ax_w.barh(range(w_num), w_df['Weight_kg'], color=colors_w)
+            _w_max = w_df['Weight_kg'].max()
+            _w_pad = _w_max * 0.30
+            ax_w.set_xlim(0, _w_max + _w_pad)
+            ax_w.xaxis.set_major_locator(plt.MaxNLocator(nbins=6, steps=[1,2,5,10]))
+            ax_w.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x:g}'))
+            for i, v in enumerate(w_df['Weight_kg']):
+                ax_w.text(v + _w_max * 0.02, i, f'{v:g} kg', va='center', fontweight='bold', fontsize=8)
+            ax_w.set_yticks(range(w_num))
+            ax_w.set_yticklabels([f"#{i+1}" for i in range(w_num)], fontsize=11, fontweight='bold')
+            ax_w.invert_yaxis()
+            ax_w.set_xlabel('Weight (kg)', fontweight='bold', fontsize=11)
+            ax_w.grid(axis='x', alpha=0.3, linestyle='--')
+            plt.tight_layout()
+            st.pyplot(fig_w)
+
+        st.markdown("### Pokémon")
+        sprite_cols_w = st.columns(w_num)
+        for rank, ((idx, row), col) in enumerate(zip(w_df.iterrows(), sprite_cols_w), 1):
+            with col:
+                sprite_path = get_sprite_path(row['Name'], df)
+                st.caption(f"**#{rank}**")
+                if sprite_path:
+                    st.image(sprite_path, use_container_width=True)
+                else:
+                    st.markdown("<div style='text-align:center;font-size:24px;'>🎮</div>", unsafe_allow_html=True)
+                st.caption(f"{row['Name'].replace(chr(10), ' ')}")
+
+    elif mode == "Legendary & Mythical":
+        #SUB-SECTION: Top 10 Legendary
+        st.header("Top 10 Legendary & Mythical Pokémon by Total Stats")
+
+        st.subheader("Top 10 Legendary Pokémon")
+        leg_df  = get_top_legendary(df)
+        leg_num = len(leg_df)
+
+        left_pad, chart_area, right_pad = st.columns([1, 8, 1])
+        with chart_area:
+            fig_l, ax_l = plt.subplots(figsize=(8, leg_num * 0.4))
+            colors_l = get_pokedex_colors(leg_num)
+            ax_l.barh(range(leg_num), leg_df['Total'], color=colors_l)
+            for i, v in enumerate(leg_df['Total']):
+                ax_l.text(v + 0.5, i, f'{int(v)}', va='center', fontweight='bold', fontsize=8)
+            ax_l.set_yticks(range(leg_num))
+            ax_l.set_yticklabels([f"#{i+1}" for i in range(leg_num)], fontsize=11, fontweight='bold')
+            ax_l.invert_yaxis()
+            ax_l.set_xlabel('Total Stats', fontweight='bold', fontsize=11)
+            ax_l.grid(axis='x', alpha=0.3, linestyle='--')
+            plt.tight_layout()
+            st.pyplot(fig_l)
+
+        st.markdown("### Pokémon")
+        sprite_cols_l = st.columns(leg_num)
+        for rank, ((idx, row), col) in enumerate(zip(leg_df.iterrows(), sprite_cols_l), 1):
+            with col:
+                sprite_path = get_sprite_path(row['Name'], df)
+                st.caption(f"**#{rank}**")
+                if sprite_path:
+                    st.image(sprite_path, use_container_width=True)
+                else:
+                    st.markdown("<div style='text-align:center;font-size:24px;'>🎮</div>", unsafe_allow_html=True)
+                st.caption(f"{row['Name'].replace(chr(10), ' ')}")
+
+        st.divider()
+
+        #SUB-SECTION: Top 10 Mythical
+        st.subheader("Top 10 Mythical Pokémon")
+        myth_df  = get_top_mythical(df)
+        myth_num = len(myth_df)
+
+        left_pad2, chart_area2, right_pad2 = st.columns([1, 8, 1])
+        with chart_area2:
+            fig_m, ax_m = plt.subplots(figsize=(8, myth_num * 0.4))
+            colors_m = get_pokedex_colors(myth_num)
+            ax_m.barh(range(myth_num), myth_df['Total'], color=colors_m)
+            for i, v in enumerate(myth_df['Total']):
+                ax_m.text(v + 0.5, i, f'{int(v)}', va='center', fontweight='bold', fontsize=8)
+            ax_m.set_yticks(range(myth_num))
+            ax_m.set_yticklabels([f"#{i+1}" for i in range(myth_num)], fontsize=11, fontweight='bold')
+            ax_m.invert_yaxis()
+            ax_m.set_xlabel('Total Stats', fontweight='bold', fontsize=11)
+            ax_m.grid(axis='x', alpha=0.3, linestyle='--')
+            plt.tight_layout()
+            st.pyplot(fig_m)
+
+        st.markdown("### Pokémon")
+        sprite_cols_m = st.columns(myth_num)
+        for rank, ((idx, row), col) in enumerate(zip(myth_df.iterrows(), sprite_cols_m), 1):
+            with col:
+                sprite_path = get_sprite_path(row['Name'], df)
+                st.caption(f"**#{rank}**")
+                if sprite_path:
+                    st.image(sprite_path, use_container_width=True)
+                else:
+                    st.markdown("<div style='text-align:center;font-size:24px;'>🎮</div>", unsafe_allow_html=True)
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
 
 
