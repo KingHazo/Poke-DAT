@@ -478,6 +478,66 @@ def get_top_mythical(df, n=10):
 # UI STARTS HERE
 # ============================================================================
 
+#Segmented Control Override
+st.markdown("""
+<style>
+/* Unselected: light sky blue, dark text */
+button[data-testid="stBaseButton-segmented_control"] {
+    background-color: #5bb8f5 !important;
+    color: #111111 !important;
+    border: 2px solid #2980b9 !important;
+    font-weight: 600 !important;
+    transition: background-color 0.15s ease, border-color 0.15s ease !important;
+}
+/*Hover */
+button[data-testid="stBaseButton-segmented_control"]:hover {
+    background-color: #3fa3e8 !important;
+    border-color: #1a6fa0 !important;
+}
+
+/* Selected: deep Pokédex navy, white text */
+button[data-testid="stBaseButton-segmented_controlActive"] {
+    background-color: #1565c0 !important;
+    color: #ffffff !important;
+    border: 2px solid #0d3f7a !important;
+    font-weight: 600 !important;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.35) !important;
+}
+
+button[data-testid="stBaseButton-segmented_controlActive"]:hover {
+    background-color: #1158a8 !important;
+}
+            
+/*Light-grey accent for the popover element */
+/* Trigger button */
+button[data-testid="stPopoverButton"] {
+    background-color: #d6d6d6 !important;
+    color: #111111 !important;
+    border: 2px solid #a0a0a0 !important;
+    font-weight: 600 !important;
+    transition: background-color 0.15s ease !important;
+}
+button[data-testid="stPopoverButton"]:hover {
+    background-color: #bebebe !important;
+    border-color: #808080 !important;
+}
+
+/* Floating panel background */
+div[data-testid="stPopover"] {
+    background-color: #ececec !important;
+    border: 2px solid #a0a0a0 !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25) !important;
+}
+
+/* Radio labels inside the popover */
+div[data-testid="stPopover"] label {
+    color: #111111 !important;
+    font-weight: 500 !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # Title Section
 st.markdown("""
 <div style="
@@ -519,7 +579,7 @@ main_tabs = st.tabs([
 
 #MAIN TAB 1: RANKINGS
 with main_tabs[0]:
-    mode = st.radio("View Rankings By:", ["Type", "Specific Stat", "Height & Weight", "Legendary & Mythical"], horizontal=True)
+    mode = st.segmented_control ("View Rankings By:", ["Type", "Specific Stat", "Height", "Weight", "Legendary", "Mythical"], default="Type", key="mode" )
     
     if mode == "Type":
         #SUB-SECTION: Top 10 by Type 
@@ -626,15 +686,11 @@ with main_tabs[0]:
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
 
 
-    elif mode == "Height & Weight":
+    elif mode == "Height":
         #SUB-SECTION: Top 10 by Height
-        st.header("Top 10 Pokémon by Height & Weight")
+        st.header("Top 10 Pokémon by Height")
 
-        hw_col1, hw_col2 = st.columns(2)
-        with hw_col1:
-            height_dir = st.radio("Height ranking:", ["Tallest", "Shortest"], horizontal=True, key="height_dir")
-        with hw_col2:
-            weight_dir = st.radio("Weight ranking:", ["Heaviest", "Lightest"], horizontal=True, key="weight_dir")
+        height_dir = st.segmented_control ("Height ranking:", ["Tallest", "Shortest"], default="Tallest", key="height_dir" )
 
         st.divider()
 
@@ -672,12 +728,15 @@ with main_tabs[0]:
                 if sprite_path:
                     st.image(sprite_path, use_container_width=True)
                 else:
-                    st.markdown("<div style='text-align:center;font-size:24px;'>🎮</div>", unsafe_allow_html=True)
+                    st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
 
+    elif mode == "Weight":
+        #SUB-SECTION: Top 10 by Weight
+        st.header("Top 10 Pokémon by Weight")
+        weight_dir = st.segmented_control ("Weight ranking:", ["Heaviest", "Lightest"], default="Heaviest", key="weight_dir" )
         st.divider()
-
-        #Weight chart
+         #Weight chart
         st.subheader(f"{'Top 10 Heaviest' if weight_dir == 'Heaviest' else 'Top 10 Lightest'} Pokémon")
         w_df = get_top_by_physical(df, 'Weight_kg', ascending=(weight_dir == "Lightest"))
         w_num = len(w_df)
@@ -711,14 +770,13 @@ with main_tabs[0]:
                 if sprite_path:
                     st.image(sprite_path, use_container_width=True)
                 else:
-                    st.markdown("<div style='text-align:center;font-size:24px;'>🎮</div>", unsafe_allow_html=True)
-                st.caption(f"{row['Name'].replace(chr(10), ' ')}")
+                    st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
+                st.caption(f"{row['Name'].replace(chr(10), ' ')}")       
 
-    elif mode == "Legendary & Mythical":
+    elif mode == "Legendary":
         #SUB-SECTION: Top 10 Legendary
-        st.header("Top 10 Legendary & Mythical Pokémon by Total Stats")
+        st.header("Top 10 Legendary Pokémon by Total Stats")
 
-        st.subheader("Top 10 Legendary Pokémon")
         leg_df  = get_top_legendary(df)
         leg_num = len(leg_df)
 
@@ -746,13 +804,13 @@ with main_tabs[0]:
                 if sprite_path:
                     st.image(sprite_path, use_container_width=True)
                 else:
-                    st.markdown("<div style='text-align:center;font-size:24px;'>🎮</div>", unsafe_allow_html=True)
+                    st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
 
-        st.divider()
+    elif mode == "Mythical":
 
         #SUB-SECTION: Top 10 Mythical
-        st.subheader("Top 10 Mythical Pokémon")
+        st.header("Top 10 Mythical Pokémon by Total Stats")
         myth_df  = get_top_mythical(df)
         myth_num = len(myth_df)
 
@@ -780,18 +838,18 @@ with main_tabs[0]:
                 if sprite_path:
                     st.image(sprite_path, use_container_width=True)
                 else:
-                    st.markdown("<div style='text-align:center;font-size:24px;'>🎮</div>", unsafe_allow_html=True)
+                    st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
 
 
 #MAIN TAB 2: TRENDS
 with main_tabs[1]:
-    trend_mode = st.radio("View Trends By:", ["Type Distribution", "Average Power Level", "Base Stat Averages by Generation"], horizontal=True)
+    trend_mode = st.segmented_control ("View Trends By:", ["Type Distribution", "Average Power Level", "Base Stat Averages by Generation"], default="Type Distribution", key="trend_mode" )
     
     if trend_mode == "Type Distribution":
         #SUB-SECTION: Distribution
         st.header("Pokémon Type Distribution")
-        dist_choice = st.radio("Show Distribution for:", ["Primary Typing (Type 1)", "Secondary Typing (Type 2)"], horizontal=True)
+        dist_choice = st.segmented_control("Show Distribution for:", ["Primary Typing (Type 1)", "Secondary Typing (Type 2)"], default="Primary Typing (Type 1)", key="dist_choice")
 
         left, mid, right = st.columns([1, 5, 1])
         with mid:
@@ -924,9 +982,7 @@ with main_tabs[1]:
 
 #MAIN TAB 3: RELATIONSHIPS
 with main_tabs[2]:
-    relationship_mode = st.radio("View Relationships By:", 
-                                 ["Stat Correlation", "Pokemon Comparison Chart"], 
-                                 horizontal=True)
+    relationship_mode = st.segmented_control("View Relationships By:", ["Stat Correlation", "Pokemon Comparison Chart"], default="Stat Correlation", key="relationship_mode")
 
     if relationship_mode == "Stat Correlation":
         st.header("Stat Correlations")
@@ -1008,13 +1064,14 @@ with main_tabs[2]:
                 ),
                 showlegend=True,
                 height=500,
-                margin=dict(l=80, r=80, t=20, b=20)
+                margin=dict(l=80, r=80, t=20, b=20),
+                font=dict(color='black'),
             )
 
             return fig
 
         #Left Sprite/Radar Chart/Right Sprite
-        pad_left, chart_middle, pad_right = st.columns([1, 5, 1])
+        pad_left, chart_middle, pad_right = st.columns([1, 3, 1])
 
         with chart_middle:
             st.plotly_chart(create_radar(p1, p2), use_container_width=True)
@@ -1033,7 +1090,7 @@ with main_tabs[2]:
             st.markdown(f"<h3 style='text-align: center;'>{name}</h3>", unsafe_allow_html=True)
 
             #Pokémon sprite so it doesn't stretch on wide screens
-            _, img_area, _ = st.columns([0.5, 3, 0.5])
+            _, img_area, _ = st.columns([1, 1, 1])
             with img_area:
                 if sprite_path:
                     st.image(sprite_path, use_container_width=True)
@@ -1044,12 +1101,12 @@ with main_tabs[2]:
             #For a single type: one badge centred. For dual types: two badges side by side.
             if type_sprites:
                 num_types = len(type_sprites)
-                #Build a centred layout: narrow padding columns either side of the badges
+                #Narrow padding columns either side of the badges
                 if num_types == 1:
                     _, badge_col, _ = st.columns([1.5, 1, 1.5])
                     badge_cols = [badge_col]
                 else:
-                    _, b1, b2, _ = st.columns([1, 1, 1, 1])
+                    _, b1, b2, _ = st.columns([0.75, 0.75, 0.75, 0.75])
                     badge_cols = [b1, b2]
 
                 for (type_name, type_path), col in zip(type_sprites, badge_cols):
@@ -1063,7 +1120,7 @@ with main_tabs[2]:
 
 #MAIN TAB 4: MACHINE LEARNING
 with main_tabs[3]:
-    ml_mode = st.radio("View Machine Learning Method By:", ["K-Means", "DBSCAN"], horizontal=True)
+    ml_mode = st.segmented_control("View Machine Learning Method By:", ["K-Means", "DBSCAN"], default="K-Means", key="ml_mode")
     if ml_mode == "K-Means":
         st.header("Pokémon Archetype Clustering - K-Means")
         st.write("Use Machine Learning to group Pokémon based on Competitive Archetypes with K-Means = 7.")
