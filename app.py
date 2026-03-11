@@ -522,9 +522,15 @@ button[data-testid="stPopoverButton"]:hover {
     background-color: #bebebe !important;
     border-color: #808080 !important;
 }
+            
+div[data-testid="stPopover"] {
+    width: fit-content !important;
+    display: inline-flex !important;
+}       
 
 /* Floating panel background */
-div[data-testid="stPopover"] {
+div[data-baseweb="popover"],
+div[data-baseweb="popover"] > div {
     background-color: #ececec !important;
     border: 2px solid #a0a0a0 !important;
     border-radius: 6px !important;
@@ -586,14 +592,12 @@ with main_tabs[0]:
         #SUB-SECTION: Top 10 by Type 
         st.header("Top 10 Most Powerful Pokémon by Type")
         unique_types = sorted(df['Type_1'].unique())
-        _pop_col, _ = st.columns([2, 8])
-        with _pop_col:
-            with st.popover(f"Filter by Type: {st.session_state.get('type_choice', 'Bug')}"):
-                selected_type = st.radio(
-                    "Select a Pokémon Type:", 
-                    unique_types, 
-                    key="type_choice"
-                )
+        with st.popover(f"Filter by Type: {st.session_state.get('type_choice', 'Bug')}"):
+            selected_type = st.radio(
+                "Select a Pokémon Type:", 
+                unique_types, 
+                key="type_choice"
+            )
 
         #Get filtered data
         filtered_df = get_top_pokemon_by_type(df, selected_type, 10)
