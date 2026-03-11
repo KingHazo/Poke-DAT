@@ -515,6 +515,7 @@ button[data-testid="stPopoverButton"] {
     color: #111111 !important;
     border: 2px solid #a0a0a0 !important;
     font-weight: 600 !important;
+    width: fit-content !important;
     transition: background-color 0.15s ease !important;
 }
 button[data-testid="stPopoverButton"]:hover {
