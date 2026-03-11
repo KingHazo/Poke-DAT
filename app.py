@@ -534,14 +534,20 @@ div[data-baseweb="popover"] > div {
     background-color: #ececec !important;
     border: 2px solid #a0a0a0 !important;
     border-radius: 6px !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25) !important;       
 }
 
 /* Radio labels inside the popover */
-div[data-testid="stPopover"] label {
+div[data-testid="stRadio"] label p {
     color: #111111 !important;
     font-weight: 500 !important;
 }
+            
+div[data-testid="stRadio"] [data-testid="stWidgetLabel"] p {
+    color: #111111 !important;
+    opacity: 0.8; /* Makes the header slightly distinct */
+}
+            
 </style>
 """, unsafe_allow_html=True)
 
@@ -592,7 +598,7 @@ with main_tabs[0]:
         #SUB-SECTION: Top 10 by Type 
         st.header("Top 10 Most Powerful Pokémon by Type")
         unique_types = sorted(df['Type_1'].unique())
-        with st.popover(f"Filter by Type: {st.session_state.get('type_choice', 'Bug')}"):
+        with st.popover(f"Filter by Type: {st.session_state.get('type_choice', 'BUG')}"):
             selected_type = st.radio(
                 "Select a Pokémon Type:", 
                 unique_types, 
