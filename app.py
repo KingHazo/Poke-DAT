@@ -509,6 +509,14 @@ button[data-testid="stBaseButton-segmented_controlActive"]:hover {
 }
             
 /*Light-grey accent for the popover element */
+            
+div[data-testid="stPopover"] > div:first-child,
+div[data-testid="stPopover"] > button,
+div[data-testid="element-container"]:has(button[data-testid="stPopoverButton"]) {
+    width: fit-content !important;
+    max-width: fit-content !important;
+}
+
 /* Trigger button */
 button[data-testid="stPopoverButton"] {
     background-color: #d6d6d6 !important;
