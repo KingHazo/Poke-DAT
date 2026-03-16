@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import anthropic as _anthropic
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -146,6 +147,19 @@ def get_generation_avg_stats(df, base_only=False):
 def get_pokemon_stats(df, name, categories):
     """Get stats for a specific pokemon"""
     return df[df['Name'] == name][categories].values.flatten().tolist()
+
+@st.cache_data
+def get_pokemon_abilities(df, name):
+    """Return (normal_abilities_list, hidden_ability_str) for a Pokémon."""
+    rows = df[df['Name'] == name]
+    if rows.empty:
+        return [], None
+    row = rows.iloc[0]
+    raw = str(row.get('Abilities', '') or '')
+    normal = [a.strip() for a in raw.split(',') if a.strip() and a.strip() != 'N/A']
+    hidden = str(row.get('Hidden_Ability', '') or '').strip()
+    hidden = None if hidden in ('', 'None', 'N/A', 'nan') else hidden
+    return normal, hidden
 
 @st.cache_data
 def perform_clustering(df, selected_features, k_val):
@@ -456,6 +470,45 @@ def get_type_sprite_paths(pokemon_name, df):
         return []
     
 @st.cache_data
+def get_stat_distribution_by_type(df, stat):
+    """Return a dict {type: sorted_values_array} for box plot, sorted by median desc"""
+    groups = {}
+    for t, grp in df.groupby('Type_1'):
+        vals = grp[stat].dropna().values
+        if len(vals) > 0:
+            groups[t] = vals
+    return dict(sorted(groups.items(), key=lambda x: float(np.median(x[1])), reverse=True))
+
+@st.cache_data
+def get_type_composition_by_region(df):
+    """Return a DataFrame (index=region, columns=type, values=% of that gen's pokemon)"""
+    GENERATIONS = [
+        (1, "Kanto",  1,   151),
+        (2, "Johto",  152, 251),
+        (3, "Hoenn",  252, 386),
+        (4, "Sinnoh", 387, 493),
+        (5, "Unova",  494, 649),
+        (6, "Kalos",  650, 721),
+        (7, "Alola",  722, 809),
+        (8, "Galar",  810, 905),
+        (9, "Paldea", 906, 1025),
+    ]
+    all_types = sorted(df['Type_1'].dropna().unique())
+    rows = {}
+    for gen_num, region, id_start, id_end in GENERATIONS:
+        subset = df[(df['#'] >= id_start) & (df['#'] <= id_end)]
+        total  = len(subset)
+        if total == 0:
+            rows[f"Gen {gen_num}\n{region}"] = {t: 0.0 for t in all_types}
+        else:
+            counts = subset['Type_1'].value_counts()
+            rows[f"Gen {gen_num}\n{region}"] = {
+                t: round(counts.get(t, 0) / total * 100, 1) for t in all_types
+            }
+    return pd.DataFrame(rows).T   #regions as rows, types as columns
+
+
+@st.cache_data
 def get_top_by_physical(df, column, ascending=False, n=10):
     """Top N Pokémon by Height or Weight, dropping rows with no data.
     Coercion happens here (not just in load_data) so it runs even when the
@@ -587,7 +640,8 @@ main_tabs = st.tabs([
     "Rankings", 
     "Trends", 
     "Relationships",
-    "Machine Learning"
+    "Machine Learning",
+    "Pokédex Lookup"
 ])
 
 #MAIN TAB 1: RANKINGS
@@ -857,7 +911,7 @@ with main_tabs[0]:
 
 #MAIN TAB 2: TRENDS
 with main_tabs[1]:
-    trend_mode = st.segmented_control ("View Trends By:", ["Type Distribution", "Average Power Level", "Base Stat Averages by Generation"], default="Type Distribution", key="trend_mode" )
+    trend_mode = st.segmented_control ("View Trends By:", ["Type Distribution", "Average Power Level", "Stat Distribution by Type", "Type Composition by Region", "Base Stat Averages by Generation"], default="Type Distribution", key="trend_mode" )
     
     if trend_mode == "Type Distribution":
         #SUB-SECTION: Distribution
@@ -904,6 +958,107 @@ with main_tabs[1]:
             ax4.invert_yaxis()
             ax4.grid(axis='x', alpha=0.3, linestyle='--')
             st.pyplot(fig4)
+    elif trend_mode == "Stat Distribution by Type":
+        #SUB-SECTION: Stat Distribution by Type
+        st.header("Stat Distribution by Pokémon Type")
+        st.write("Box plots showing how a chosen stat is distributed within each type, sorted by median — reveals both average strength and variance.")
+ 
+        stat_choice_box = st.segmented_control("Select Stat", ['Total', 'HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'], default='Total', key="box_stat")
+ 
+        box_data = get_stat_distribution_by_type(df, stat_choice_box)
+        types_ordered = list(box_data.keys())
+        values_ordered = [box_data[t] for t in types_ordered]
+        n_types = len(types_ordered)
+ 
+        col_box, col_box_insights = st.columns([3, 1])
+ 
+        with col_box:
+            fig_box, ax_box = plt.subplots(figsize=(14, 6))
+            bp = ax_box.boxplot(
+                values_ordered, vert=True, patch_artist=True,
+                positions=range(n_types), widths=0.55,
+                medianprops=dict(color='white', linewidth=2),
+                whiskerprops=dict(color='#555555'),
+                capprops=dict(color='#555555'),
+                flierprops=dict(marker='o', markersize=3,
+                                markerfacecolor='#aaaaaa', alpha=0.5),
+            )
+            colors_box = get_pokedex_colors(n_types)
+            for patch, color in zip(bp['boxes'], colors_box):
+                patch.set_facecolor(color)
+                patch.set_alpha(0.85)
+ 
+            ax_box.set_xticks(range(n_types))
+            ax_box.set_xticklabels(types_ordered, rotation=40, ha='right',
+                                   fontsize=9, fontweight='bold')
+            ax_box.set_ylabel(stat_choice_box, fontweight='bold', fontsize=11)
+            ax_box.set_title(f"{stat_choice_box} Distribution by Primary Type "
+                             f"(sorted by median)", fontsize=11, fontweight='bold')
+            ax_box.grid(axis='y', alpha=0.3, linestyle='--')
+            plt.tight_layout()
+            st.pyplot(fig_box)
+ 
+        with col_box_insights:
+            st.subheader("How to read this")
+            st.write(
+                "Each box spans the **middle 50%** of values for that type "
+                "(the interquartile range). The **white line** is the median. "
+                "Whiskers extend to 1.5× the IQR, and dots beyond that are outliers."
+            )
+            st.markdown("A **tall box** means high variance — that type contains "
+                        "both weak and strong Pokemon. A **short box** means "
+                        "most of that type's Pokemon cluster around a similar value.")
+            st.subheader("Select Facts")
+            st.markdown( f"- The 3 weakest types are Bug, Normal, and Grass.")
+            st.markdown( f"- The 3 strongest types are Dragon, Steel, and Psychic (Due to variance).")
+            st.markdown( f"- The 3 most varied types are Psychic, Bug, and Fairy.")
+            st.markdown( f"- The 3 most consistent are Fighting, Flying, and Electric.")
+            st.markdown( f"- Stellar's single white line is Stellar Terapagos.")
+ 
+    elif trend_mode == "Type Composition by Region":
+        st.header("Type Composition by Region")
+        st.write("What percentage of each generation's Pokémon belong to each type?")
+ 
+        comp_df = get_type_composition_by_region(df)
+ 
+        col_heatmap, col_insights = st.columns([3, 1])
+ 
+        with col_heatmap:
+            fig_heat, ax_heat = plt.subplots(figsize=(14, 5))
+            sns.heatmap(
+                comp_df, ax=ax_heat, cmap='YlOrRd', annot=True, fmt='.1f',
+                annot_kws={'size': 7}, linewidths=0.4, linecolor='#cccccc',
+                cbar_kws={'label': '% of generation', 'shrink': 0.6},
+            )
+            ax_heat.set_title("Pokemon Type Composition by Generation (%)", fontsize=12, fontweight='bold', pad=12)
+            ax_heat.set_xlabel("Primary Type", fontweight='bold', fontsize=10)
+            ax_heat.set_ylabel("Generation", fontweight='bold', fontsize=10)
+            ax_heat.set_xticklabels(ax_heat.get_xticklabels(), rotation=40, ha='right', fontsize=8)
+            ax_heat.set_yticklabels(ax_heat.get_yticklabels(), rotation=0, fontsize=8)
+            plt.tight_layout()
+            st.pyplot(fig_heat)
+ 
+        with col_insights:
+            st.subheader("How to read this")
+            st.write(
+                "Each cell is the **% of that generation's Pokemon** with that primary type. Darker = higher share. Rows sum to ~100%."
+            )
+ 
+            #Peak generation per type (only types that ever hit 10%+)
+            notable_peaks = []
+            for t in comp_df.columns:
+                peak_val = comp_df[t].max()
+                peak_gen = comp_df[t].idxmax()
+                if peak_val >= 10.0:
+                    parts = peak_gen.split("\n")
+                    gen_label = parts[0] + (" (" + parts[1] + ")" if len(parts) > 1 else "")
+                    notable_peaks.append((t, gen_label, peak_val))
+            notable_peaks.sort(key=lambda x: x[2], reverse=True)
+ 
+            st.markdown("**Type peaks of a Generation (10%+)**")
+            for t, gen_label, val in notable_peaks:
+                st.markdown(f"- **{t}** peaked in {gen_label} at `{val:.1f}%`")
+
     else:
         #SUB-SECTION: Base Stat Averages by Generation
         st.header("Base Stat Averages by Generation")
@@ -1048,11 +1203,21 @@ with main_tabs[2]:
         # Pokemon selection in two columns
         selection_col1, selection_col2 = st.columns(2)
 
+        _names = list(df['Name'].unique())
+
         with selection_col1:
-            p1 = st.selectbox("Select Pokémon 1", df['Name'].unique(), index=0, key="radar_p1")
+            _search1 = st.text_input("Search Pokémon 1", placeholder="Type to filter…", key="search_p1")
+            _filtered1 = [n for n in _names if _search1.lower() in n.lower()] if _search1 else _names
+            _p1_current = st.session_state.get("radar_p1")
+            _p1_default = _filtered1.index(_p1_current) if _p1_current in _filtered1 else 0
+            p1 = st.selectbox("Select Pokémon 1", _filtered1, index=_p1_default, key="radar_p1", label_visibility="collapsed")
 
         with selection_col2:
-            p2 = st.selectbox("Select Pokémon 2", df['Name'].unique(), index=1, key="radar_p2")
+            _search2 = st.text_input("Search Pokémon 2", placeholder="Type to filter…", key="search_p2")
+            _filtered2 = [n for n in _names if _search2.lower() in n.lower()] if _search2 else _names
+            _p2_current = st.session_state.get("radar_p2")
+            _p2_default = _filtered2.index(_p2_current) if _p2_current in _filtered2 else 0
+            p2 = st.selectbox("Select Pokémon 2", _filtered2, index=_p2_default, key="radar_p2", label_visibility="collapsed")
 
         #Create the radar chart function
         def create_radar(name1, name2):
@@ -1099,7 +1264,7 @@ with main_tabs[2]:
         type2_sprites = get_type_sprite_paths(p2, df)
 
 
-        def render_pokemon_panel(name, sprite_path, type_sprites):
+        def render_pokemon_panel(name, sprite_path, type_sprites, shared_abilities):
             st.markdown(f"<h3 style='text-align: center;'>{name}</h3>", unsafe_allow_html=True)
 
             #Pokémon sprite so it doesn't stretch on wide screens
@@ -1125,11 +1290,43 @@ with main_tabs[2]:
                 for (type_name, type_path), col in zip(type_sprites, badge_cols):
                     with col:
                         st.image(type_path)
+            #Abilities
+            normal_abs, hidden_ab = get_pokemon_abilities(df, name)
+            all_abs = normal_abs + ([f"{hidden_ab} (Hidden)"] if hidden_ab else [])
+ 
+            st.markdown("<p style='text-align:center; font-size:0.75rem; "
+                        "color:#aaaaaa; margin:8px 0 2px 0; letter-spacing:1px;'>"
+                        "ABILITIES</p>", unsafe_allow_html=True)
+ 
+            for ab in all_abs:
+                # Strip "(Hidden)" suffix for the shared-check lookup
+                ab_key = ab.replace(" (Hidden)", "").strip()
+                is_shared = ab_key in shared_abilities
+                colour  = "#4caf50" if is_shared else "#ffffff"   #green if shared, white if distinct
+                suffix  = " (Hidden)" if "(Hidden)" in ab else ""
+                label   = ab_key + suffix
+                st.markdown(
+                    f"<p style='text-align:center; margin:2px 0; font-size:0.9rem; "
+                    f"font-weight:600; color:{colour};'>{label}</p>",
+                    unsafe_allow_html=True
+                )
+ 
+            if not all_abs:
+                st.markdown("<p style='text-align:center; color:#888; "
+                            "font-size:0.85rem;'>No ability data</p>",
+                            unsafe_allow_html=True)
+        #Compute shared abilities (normal + hidden combined) for colour-coding
+        def _ability_set(name):
+            normal, hidden = get_pokemon_abilities(df, name)
+            return set(normal) | ({hidden} if hidden else set())
+ 
+        shared_abilities = _ability_set(p1) & _ability_set(p2)
+ 
         with sprite_col1:
-            render_pokemon_panel(p1, sprite1_path, type1_sprites)
-
+            render_pokemon_panel(p1, sprite1_path, type1_sprites, shared_abilities)
+ 
         with sprite_col2:
-            render_pokemon_panel(p2, sprite2_path, type2_sprites)
+            render_pokemon_panel(p2, sprite2_path, type2_sprites, shared_abilities)
 
 #MAIN TAB 4: MACHINE LEARNING
 with main_tabs[3]:
@@ -1407,4 +1604,181 @@ with main_tabs[3]:
                 st.dataframe(outlier_display, use_container_width=True)
 
         dbscan_analysis()
-    
+#MAIN TAB 5: POKEDEX LOOKUP
+with main_tabs[4]:
+    st.header("Pokedex Lookup")
+    st.write("Select a Pokemon to view its stats, types, abilities, design origin, and FAQ.")
+ 
+    try:
+        _api_key = st.secrets.get("ANTHROPIC_API_KEY", "")
+    except Exception:
+        _api_key = ""
+ 
+    #Pokemon selector with live search filter
+    _lookup_names = list(df['Name'].unique())
+    lk_col1, _ = st.columns([1, 3])
+    with lk_col1:
+        _lk_search   = st.text_input("Search Pokemon", placeholder="Type to filter...", key="lk_search")
+        _lk_filtered = [n for n in _lookup_names if _lk_search.lower() in n.lower()] if _lk_search else _lookup_names
+        _lk_current  = st.session_state.get("lk_pokemon")
+        _lk_default  = _lk_filtered.index(_lk_current) if _lk_current in _lk_filtered else 0
+        lk_pokemon   = st.selectbox("Select Pokemon", _lk_filtered, index=_lk_default, key="lk_pokemon", label_visibility="collapsed")
+ 
+    st.divider()
+ 
+    #Main layout: left = sprite/types/abilities/stats, right = radar chart
+    lk_left, lk_right = st.columns([1, 2])
+ 
+    with lk_left:
+        _name_display = lk_pokemon.replace(chr(10), ' ')
+        st.markdown(
+            f"<h2 style='text-align:center;'>{_name_display}</h2>",
+            unsafe_allow_html=True
+        )
+ 
+        lk_sprite = get_sprite_path(lk_pokemon, df)
+        _, lk_img, _ = st.columns([1, 2, 1])
+        with lk_img:
+            if lk_sprite:
+                st.image(lk_sprite, use_container_width=True)
+            else:
+                st.caption("Sprite not available")
+ 
+        lk_types = get_type_sprite_paths(lk_pokemon, df)
+        if lk_types:
+            if len(lk_types) == 1:
+                _, tb, _ = st.columns([1.5, 1, 1.5])
+                with tb: st.image(lk_types[0][1])
+            else:
+                _, tb1, tb2, _ = st.columns([0.75, 0.75, 0.75, 0.75])
+                with tb1: st.image(lk_types[0][1])
+                with tb2: st.image(lk_types[1][1])
+ 
+        lk_normal_abs, lk_hidden_ab = get_pokemon_abilities(df, lk_pokemon)
+        lk_all_abs = lk_normal_abs + ([f"{lk_hidden_ab} (Hidden)"] if lk_hidden_ab else [])
+        if lk_all_abs:
+            st.markdown(
+                "<p style='text-align:center; font-size:0.75rem; color:#aaaaaa;"
+                " margin:10px 0 4px 0; letter-spacing:1px;'>ABILITIES</p>",
+                unsafe_allow_html=True
+            )
+            for ab in lk_all_abs:
+                st.markdown(
+                    f"<p style='text-align:center; margin:2px 0;"
+                    f" font-size:0.95rem; font-weight:600;'>{ab}</p>",
+                    unsafe_allow_html=True
+                )
+ 
+        _stat_cols = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed', 'Total']
+        lk_row = df[df['Name'] == lk_pokemon]
+        if not lk_row.empty:
+            st.markdown(
+                "<p style='text-align:center; font-size:0.75rem; color:#aaaaaa;"
+                " margin:14px 0 4px 0; letter-spacing:1px;'>BASE STATS</p>",
+                unsafe_allow_html=True
+            )
+            _sr = lk_row.iloc[0]
+            for sc in _stat_cols:
+                val = _sr.get(sc, 'N/A')
+                st.markdown(
+                    f"<p style='text-align:center; margin:1px 0;"
+                    f" font-size:0.88rem;'><b>{sc}</b>: {val}</p>",
+                    unsafe_allow_html=True
+                )
+ 
+    with lk_right:
+        lk_categories = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
+        lk_stats = get_pokemon_stats(df, lk_pokemon, lk_categories)
+        if lk_stats:
+            lk_stats_closed = lk_stats + [lk_stats[0]]
+            fig_lk = go.Figure()
+            fig_lk.add_trace(go.Scatterpolar(
+                r=lk_stats_closed,
+                theta=lk_categories + [lk_categories[0]],
+                fill='toself',
+                fillcolor='rgba(239,83,80,0.3)',
+                line=dict(color='#EF5350', width=2),
+                hovertemplate='%{theta}: %{r}<extra></extra>',
+            ))
+            fig_lk.update_layout(
+                polar=dict(
+                    bgcolor='lightblue',
+                    radialaxis=dict(visible=True, range=[0, 255]),
+                ),
+                showlegend=False,
+                height=420,
+                margin=dict(l=60, r=60, t=30, b=30),
+                font=dict(color='black'),
+            )
+            st.plotly_chart(fig_lk, use_container_width=True)
+ 
+    st.divider()
+ 
+    #AI-generated Design Origin and FAQ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    if not _api_key:
+        st.warning( "No Anthropic API key found.")
+    else:
+        _origin_key = f"_lk_origin_{lk_pokemon}"
+        _faq_key    = f"_lk_faq_{lk_pokemon}"
+ 
+        if _origin_key not in st.session_state or _faq_key not in st.session_state:
+            _name_clean = lk_pokemon.replace(chr(10), ' ')
+            with st.spinner(f"Looking up {_name_clean}..."):
+ 
+                def _call_claude(prompt):
+                    client = _anthropic.Anthropic(api_key=_api_key)
+                    message = client.messages.create(
+                        model="claude-haiku-4-5-20251001",
+                        max_tokens=600,
+                        temperature=0,
+                        messages=[{"role": "user", "content": prompt}],
+                    )
+                    return message.content[0].text.strip()
+ 
+                _origin_prompt = (
+                    f"You are a Pokemon encyclopaedia. In 3 to 4 concise sentences, "
+                    f"describe the real-world design inspiration and origin of {_name_clean}. "
+                    f"Cover the animals, mythology, objects, or cultural references its design "
+                    f"draws from. Be factual and specific. Do not use bullet points."
+                )
+                _faq_prompt = (
+                    f"You are a Pokemon encyclopaedia. Write exactly 4 frequently asked "
+                    f"questions and answers about {_name_clean}. "
+                    f"Format each strictly as: Q: question then A: answer on the next line. "
+                    f"Focus on lore, competitive use, evolution, or notable trivia. "
+                    f"Keep answers to 1 to 2 sentences each."
+                )
+ 
+                try:
+                    st.session_state[_origin_key] = _call_claude(_origin_prompt)
+                    st.session_state[_faq_key]    = _call_claude(_faq_prompt)
+                except Exception as e:
+                    st.error(f"API error: {e}")
+                    st.session_state[_origin_key] = None
+                    st.session_state[_faq_key]    = None
+ 
+        _origin_text = st.session_state.get(_origin_key)
+        _faq_text    = st.session_state.get(_faq_key)
+ 
+        ai_left, ai_right = st.columns(2)
+ 
+        with ai_left:
+            st.subheader("Design Origin")
+            if _origin_text:
+                st.write(_origin_text)
+            else:
+                st.caption("Could not retrieve design origin.")
+ 
+        with ai_right:
+            st.subheader("FAQ")
+            if _faq_text:
+                for line in _faq_text.splitlines():
+                    line = line.strip()
+                    if not line:
+                        st.markdown("")
+                    elif line.startswith("Q:"):
+                        st.markdown(f"**{line}**")
+                    elif line.startswith("A:"):
+                        st.markdown(line[2:].strip())
+            else:
+                st.caption("Could not retrieve FAQ.")
