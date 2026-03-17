@@ -470,6 +470,41 @@ def get_type_sprite_paths(pokemon_name, df):
         return []
     
 @st.cache_data
+def get_ability_counts(df, type_filter=None):
+    """Count how many Pokemon can have each ability (normal + hidden combined).
+    Returns a DataFrame with columns: Ability, Count, Category.
+    Category is 'Normal Only', 'Hidden Only', or 'Normal & Hidden'"""
+    from collections import Counter
+    if type_filter and type_filter != "All Types":
+        working = df[df['Type_1'] == type_filter]
+    else:
+        working = df
+ 
+    normal_counts = Counter()
+    hidden_counts = Counter()
+    for _, row in working.iterrows():
+        raw = str(row.get('Abilities', '') or '')
+        for a in raw.split(','):
+            a = a.strip()
+            if a and a not in ('N/A', 'nan', ''):
+                normal_counts[a] += 1
+        hid = str(row.get('Hidden_Ability', '') or '').strip()
+        if hid and hid not in ('N/A', 'nan', 'None', ''):
+            hidden_counts[hid] += 1
+ 
+    all_abs = sorted(set(normal_counts) | set(hidden_counts))
+    rows = []
+    for a in all_abs:
+        n, h = normal_counts.get(a, 0), hidden_counts.get(a, 0)
+        total = n + h
+        if n > 0 and h > 0:   cat = 'Normal & Hidden'
+        elif h > 0:            cat = 'Hidden Only'
+        else:                  cat = 'Normal Only'
+        rows.append({'Ability': a, 'Count': total, 'Category': cat})
+ 
+    return pd.DataFrame(rows).sort_values('Count', ascending=False).reset_index(drop=True)
+    
+@st.cache_data
 def get_stat_distribution_by_type(df, stat):
     """Return a dict {type: sorted_values_array} for box plot, sorted by median desc"""
     groups = {}
@@ -911,7 +946,7 @@ with main_tabs[0]:
 
 #MAIN TAB 2: TRENDS
 with main_tabs[1]:
-    trend_mode = st.segmented_control ("View Trends By:", ["Type Distribution", "Average Power Level", "Stat Distribution by Type", "Type Composition by Region", "Base Stat Averages by Generation"], default="Type Distribution", key="trend_mode" )
+    trend_mode = st.segmented_control ("View Trends By:", ["Type Distribution", "Average Power Level", "Ability Distribution", "Stat Distribution by Type", "Type Composition by Region", "Base Stat Averages by Generation"], default="Type Distribution", key="trend_mode" )
     
     if trend_mode == "Type Distribution":
         #SUB-SECTION: Distribution
@@ -934,6 +969,104 @@ with main_tabs[1]:
             for i, v in enumerate(type_counts.values):
                 ax3.text(i, v, str(v), ha='center', va='bottom', fontweight='bold', fontsize=8)
             st.pyplot(fig3)
+
+    elif trend_mode == "Ability Distribution":
+        st.header("Ability Distribution")
+        st.write(
+            "A treemap of every ability in the game, sized by how many Pokemon can have it. "
+            "Colour shows whether it appears as a normal ability, hidden ability, or both."
+        )
+ 
+        #Type filter
+        _ab_types = ["All Types"] + sorted(df['Type_1'].dropna().unique().tolist())
+        ab_type_filter = st.selectbox(
+            "Filter by Primary Type", _ab_types,
+            key="ab_type_filter",
+            index=0
+        )
+ 
+        ab_df = get_ability_counts(df, ab_type_filter)
+ 
+        #Colour map: Normal Only = Pokedex blue, Hidden Only = purple, Both = teal
+        _cat_colors = {
+            'Normal Only':    '#42A5F5',
+            'Hidden Only':    '#AB47BC',
+            'Normal & Hidden':'#26A69A',
+        }
+        ab_df['Color'] = ab_df['Category'].map(_cat_colors)
+ 
+        fig_tree = px.treemap(
+            ab_df,
+            path=['Category', 'Ability'],
+            values='Count',
+            color='Category',
+            color_discrete_map=_cat_colors,
+            custom_data=['Ability', 'Count', 'Category'],
+        )
+        fig_tree.update_traces(
+            hovertemplate=(
+                "<b>%{customdata[0]}</b><br>"
+                "Pokemon with this ability: %{customdata[1]}<br>"
+                "Type: %{customdata[2]}<extra></extra>"
+            ),
+            textinfo='label+value',
+            textfont=dict(size=12),
+        )
+        fig_tree.update_layout(
+            height=650,
+            margin=dict(l=10, r=10, t=40, b=10),
+            font=dict(color='black'),
+        )
+        st.plotly_chart(fig_tree, use_container_width=True)
+ 
+        #Summary stats beneath the treemap
+        n_abilities = len(ab_df)
+        top3 = ab_df.head(3)
+        only_one = (ab_df['Count'] == 1).sum()
+ 
+        def _stat_card(label, value, subtitle=None):
+            sub_html = (
+                f"<p style='font-family:monospace; font-size:0.8rem; "
+                f"color:#aaaaaa; margin:4px 0 0 0; letter-spacing:1px;'>"
+                f"{subtitle}</p>"
+            ) if subtitle else ""
+            st.markdown(f"""
+<div style="
+    background-color: #242424;
+    border: 8px solid #d0d0d0;
+    border-radius: 6px;
+    box-shadow: 0 0 0 2px #c1c1c1, inset 0 2px 6px rgba(0,0,0,0.35);
+    padding: 14px 20px 16px 20px;
+    text-align: center;
+">
+    <p style="
+        font-family: monospace;
+        font-size: 0.75rem;
+        color: #aaaaaa;
+        margin: 0 0 6px 0;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    ">{label}</p>
+    <p style="
+        font-family: monospace;
+        font-size: 1.6rem;
+        font-weight: 900;
+        color: #ffffff;
+        margin: 0;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 0px #ffffff55;
+    ">{value}</p>
+    {sub_html}
+</div>
+""", unsafe_allow_html=True)
+ 
+        sum_col1, sum_col2, sum_col3 = st.columns(3)
+        with sum_col1:
+            _stat_card("▶ Unique Abilities",  n_abilities)
+        with sum_col2:
+            _stat_card("▶ Most Common", top3.iloc[0]['Ability'], f"{top3.iloc[0]['Count']} Pokémon")
+        with sum_col3:
+            _stat_card("▶ Signature Abilities", only_one, "held by exactly 1 Pokémon")
             
     elif trend_mode == "Average Power Level":
         #SUB-SECTION: Average Power Level
