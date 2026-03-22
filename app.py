@@ -30,6 +30,90 @@ plt.rcParams.update({
 
 #Data Loading
 @st.cache_data
+def load_learnsets():
+    try:
+        return pd.read_csv('pokemonLearnsets.csv', encoding='utf-8')
+    except FileNotFoundError:
+        return pd.DataFrame(columns=['pokemon_name','move_name','learn_method','level','version_group'])
+ 
+learnsets_df = load_learnsets()
+
+@st.cache_data
+def load_smogon_sets():
+    import json, os
+    path = 'pokemon_smogon_sets.json'
+    if not os.path.exists(path):
+        return {}
+    with open(path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+ 
+smogon_sets = load_smogon_sets()
+ 
+def _smogon_name(csv_name):
+    name = str(csv_name).strip()
+    if '\n' in name:
+        name = name.split('\n')[1].strip()
+    for prefix, suffix in [
+        ('Alolan ',  '-Alola'), ('Galarian ', '-Galar'),
+        ('Hisuian ', '-Hisui'), ('Paldean ',  '-Paldea'),
+    ]:
+        if name.startswith(prefix):
+            return name[len(prefix):] + suffix
+    for prefix in ('Mega ', 'Primal ', 'Gigantamax ', 'Eternamax '):
+        if name.startswith(prefix):
+            return None
+    return name
+
+def _move_tip_html(mv, mv_lookup, level=None):
+    info   = mv_lookup.get(mv, {})
+    mtype  = info.get('type', '--')
+    dclass = info.get('damage_class', '--')
+    pp     = info.get('pp', '--')
+    pwr    = info.get('power', '--')
+    acc    = info.get('accuracy', '--')
+    effect = info.get('effect', '')
+    level_str = f'<br>Learned at: Lv. {int(level)}' if level and pd.notna(level) and int(level) > 0 else ''
+    tip_content = (
+        f'<b>{mv}</b><br>'
+        f'{mtype} &middot; {dclass}<br>'
+        f'PP: {pp} &nbsp; Pwr: {pwr} &nbsp; Acc: {acc}'
+        + level_str
+        + (f'<br><i>{effect}</i>' if effect else '')
+    )
+    return (
+        f"<span class='move-tip' style='display:inline;'>"
+        f"<span style='color:#e0e0e0;'>{mv}</span>"
+        f"<span class='tip-box'>{tip_content}</span>"
+        f"</span>"
+    )
+
+@st.cache_data
+def load_moves_meta():
+    try:
+        return pd.read_csv('pokemonMoves.csv', encoding='latin-1')
+    except FileNotFoundError:
+        return pd.DataFrame(columns=['name','accuracy','pp','power','priority',
+                                     'type','generation','short_descripton','damage_class'])
+ 
+moves_meta_df = load_moves_meta()
+ 
+@st.cache_data
+def build_moves_lookup(moves_meta):
+    lookup = {}
+    for _, row in moves_meta.iterrows():
+        pwr = row.get('power', '')
+        acc = row.get('accuracy', '')
+        lookup[row['name']] = {
+            'type':         str(row.get('type', '') or ''),
+            'damage_class': str(row.get('damage_class', '') or ''),
+            'pp':           int(row['pp']) if pd.notna(row.get('pp')) else '--',
+            'power':        int(pwr) if pd.notna(pwr) and pwr != '' else '--',
+            'accuracy':     int(acc) if pd.notna(acc) and acc != '' else '--',
+            'effect':       str(row.get('short_descripton', '') or ''),
+        }
+    return lookup
+
+@st.cache_data
 def load_data():
     df = pd.read_csv('pokemon.csv', encoding='utf-8')
     
@@ -147,6 +231,17 @@ def get_generation_avg_stats(df, base_only=False):
 def get_pokemon_stats(df, name, categories):
     """Get stats for a specific pokemon"""
     return df[df['Name'] == name][categories].values.flatten().tolist()
+
+@st.cache_data
+def get_pokemon_moves(learnsets, name):
+    """Return a dict {learn_method: [move_name, ...]} for a Pokemon, sorted alpha."""
+    rows = learnsets[learnsets['pokemon_name'] == name]
+    if rows.empty:
+        return {}
+    result = {}
+    for method, grp in rows.groupby('learn_method'):
+        result[method] = sorted(grp['move_name'].drop_duplicates().tolist())
+    return result
 
 @st.cache_data
 def get_pokemon_abilities(df, name):
@@ -503,6 +598,33 @@ def get_ability_counts(df, type_filter=None):
         rows.append({'Ability': a, 'Count': total, 'Category': cat})
  
     return pd.DataFrame(rows).sort_values('Count', ascending=False).reset_index(drop=True)
+
+@st.cache_data
+def get_move_counts(learnsets, type_filter=None, pokemon_df=None):
+    """Count how many Pokemon can learn each move, grouped by primary learn method.
+    Returns a DataFrame with columns: Move, Count, Category."""
+    working = learnsets.copy()
+    if type_filter and type_filter != "All Types" and pokemon_df is not None:
+        names_of_type = pokemon_df[pokemon_df['Type_1'] == type_filter]['Name'].tolist()
+        working = working[working['pokemon_name'].isin(names_of_type)]
+ 
+    #Primary category per move = the learn method with the most Pokemon for that move
+    method_order = {'level-up': 0, 'machine': 1, 'egg': 2, 'tutor': 3, 'form-change': 4}
+ 
+    rows = []
+    for move, grp in working.groupby('move_name'):
+        count = grp['pokemon_name'].nunique()
+        #Assign category by the most "natural" method present
+        methods_present = set(grp['learn_method'].unique())
+        for m in ['level-up', 'machine', 'tutor', 'egg', 'form-change']:
+            if m in methods_present:
+                category = m.replace('-', ' ').title()
+                break
+        else:
+            category = 'Other'
+        rows.append({'Move': move, 'Count': count, 'Category': category})
+ 
+    return pd.DataFrame(rows).sort_values('Count', ascending=False).reset_index(drop=True)
     
 @st.cache_data
 def get_stat_distribution_by_type(df, stat):
@@ -636,6 +758,38 @@ div[data-testid="stRadio"] [data-testid="stWidgetLabel"] p {
     opacity: 0.8; /* Makes the header slightly distinct */
 }
             
+.move-tip {
+    position: relative;
+    cursor: default;
+    display: inline-block;
+}
+.move-tip .tip-box {
+    visibility: hidden;
+    opacity: 0;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    font-family: monospace;
+    font-size: 0.72rem;
+    line-height: 1.6;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 8px 10px;
+    position: absolute;
+    z-index: 9999;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(100% + 6px);
+    min-width: 200px;
+    max-width: 280px;
+    white-space: normal;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    transition: opacity 0.15s ease;
+    pointer-events: none;
+}
+.move-tip:hover .tip-box {
+    visibility: visible;
+    opacity: 1;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -946,7 +1100,7 @@ with main_tabs[0]:
 
 #MAIN TAB 2: TRENDS
 with main_tabs[1]:
-    trend_mode = st.segmented_control ("View Trends By:", ["Type Distribution", "Average Power Level", "Ability Distribution", "Stat Distribution by Type", "Type Composition by Region", "Base Stat Averages by Generation"], default="Type Distribution", key="trend_mode" )
+    trend_mode = st.segmented_control ("View Trends By:", ["Type Distribution", "Average Power Level", "Ability Distribution", "Move Distribution", "Stat Distribution by Type", "Type Composition by Region", "Base Stat Averages by Generation"], default="Type Distribution", key="trend_mode" )
     
     if trend_mode == "Type Distribution":
         #SUB-SECTION: Distribution
@@ -1067,7 +1221,93 @@ with main_tabs[1]:
             _stat_card("▶ Most Common", top3.iloc[0]['Ability'], f"{top3.iloc[0]['Count']} Pokémon")
         with sum_col3:
             _stat_card("▶ Signature Abilities", only_one, "held by exactly 1 Pokémon")
-            
+
+    elif trend_mode == "Move Distribution":
+        st.header("Move Distribution")
+        st.write(
+            "A treemap of every move in the game, sized by how many Pokemon can learn it. "
+            "Colour shows the primary way each move is learned."
+        )
+ 
+        _mv_types = ["All Types"] + sorted(df['Type_1'].dropna().unique().tolist())
+        mv_type_filter = st.selectbox(
+            "Filter by Primary Type", _mv_types,
+            key="mv_type_filter",
+            index=0
+        )
+ 
+        mv_df = get_move_counts(learnsets_df, mv_type_filter, df)
+ 
+        _mv_colors = {
+            'Level Up':    '#EF5350',
+            'Machine':     '#42A5F5',
+            'Tutor':       '#26A69A',
+            'Egg':         '#AB47BC',
+            'Form Change': '#FFA726',
+        }
+ 
+        fig_mv = px.treemap(
+            mv_df,
+            path=['Category', 'Move'],
+            values='Count',
+            color='Category',
+            color_discrete_map=_mv_colors,
+            custom_data=['Move', 'Count', 'Category'],
+        )
+        fig_mv.update_traces(
+            hovertemplate=(
+                "<b>%{customdata[0]}</b><br>"
+                "Pokemon that can learn this: %{customdata[1]}<br>"
+                "Primary method: %{customdata[2]}<extra></extra>"
+            ),
+            textinfo='label+value',
+            textfont=dict(size=12),
+        )
+        fig_mv.update_layout(
+            height=650,
+            margin=dict(l=10, r=10, t=40, b=10),
+            font=dict(color='black'),
+        )
+        st.plotly_chart(fig_mv, use_container_width=True)
+ 
+        # Summary stat cards
+        n_moves     = len(mv_df)
+        top_move    = mv_df.iloc[0]
+        signature   = (mv_df['Count'] == 1).sum()
+ 
+        def _mv_stat_card(label, value, subtitle=None):
+            sub_html = (
+                f"<p style='font-family:monospace; font-size:0.8rem; "
+                f"color:#aaaaaa; margin:4px 0 0 0; letter-spacing:1px;'>"
+                f"{subtitle}</p>"
+            ) if subtitle else ""
+            st.markdown(f"""
+<div style="
+    background-color: #242424;
+    border: 8px solid #d0d0d0;
+    border-radius: 6px;
+    box-shadow: 0 0 0 2px #c1c1c1, inset 0 2px 6px rgba(0,0,0,0.35);
+    padding: 14px 20px 16px 20px;
+    text-align: center;
+">
+    <p style="font-family:monospace; font-size:0.75rem; color:#aaaaaa;
+              margin:0 0 6px 0; letter-spacing:2px; text-transform:uppercase;">{label}</p>
+    <p style="font-family:monospace; font-size:1.6rem; font-weight:900;
+              color:#ffffff; margin:0; letter-spacing:1px;
+              text-shadow:1px 1px 0px #ffffff55;">{value}</p>
+    {sub_html}
+</div>
+""", unsafe_allow_html=True)
+ 
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            _mv_stat_card("Unique Moves", n_moves, " ")
+        with c2:
+            _mv_stat_card("Most Widespread", top_move['Move'], f"{top_move['Count']} Pokémon")
+        with c3:
+            _mv_stat_card("Signature Moves", signature, "learned by exactly 1 Pokémon")
+
+
     elif trend_mode == "Average Power Level":
         #SUB-SECTION: Average Power Level
         st.header("Average Power Level by Pokémon Type")
@@ -1397,7 +1637,7 @@ with main_tabs[2]:
         type2_sprites = get_type_sprite_paths(p2, df)
 
 
-        def render_pokemon_panel(name, sprite_path, type_sprites, shared_abilities):
+        def render_pokemon_panel(name, sprite_path, type_sprites, shared_abilities, shared_moves):
             st.markdown(f"<h3 style='text-align: center;'>{name}</h3>", unsafe_allow_html=True)
 
             #Pokémon sprite so it doesn't stretch on wide screens
@@ -1431,23 +1671,111 @@ with main_tabs[2]:
                         "color:#aaaaaa; margin:8px 0 2px 0; letter-spacing:1px;'>"
                         "ABILITIES</p>", unsafe_allow_html=True)
  
-            for ab in all_abs:
-                # Strip "(Hidden)" suffix for the shared-check lookup
-                ab_key = ab.replace(" (Hidden)", "").strip()
-                is_shared = ab_key in shared_abilities
-                colour  = "#4caf50" if is_shared else "#ffffff"   #green if shared, white if distinct
-                suffix  = " (Hidden)" if "(Hidden)" in ab else ""
-                label   = ab_key + suffix
+            ab_items_html = ''.join(
+                "<div style='color:{c};padding:2px 0;font-size:0.82rem;"
+                "font-weight:600;text-align:center;'>{ab}</div>".format(
+                    c="#4caf50" if ab.replace(" (Hidden)","").strip() in shared_abilities else "#e0e0e0",
+                    ab=ab
+                )
+                for ab in all_abs
+            ) if all_abs else "<div style='color:#666;font-size:0.8rem;text-align:center;'>No ability data</div>"
+ 
+            st.markdown(
+                "<div style='"
+                "background-color:#242424;"
+                "border:8px solid #d0d0d0;"
+                "border-radius:6px;"
+                "box-shadow:0 0 0 2px #c1c1c1,inset 0 2px 6px rgba(0,0,0,0.35);"
+                "padding:12px 12px 14px 12px;"
+                "font-family:monospace;"
+                "'>"
+                + ab_items_html +
+                "</div>",
+                unsafe_allow_html=True
+            )
+            #Moves 
+            move_data = get_pokemon_moves(learnsets_df, name)
+            METHOD_LABELS = {
+                'level-up':    'LEVEL UP',
+                'machine':     'TM',
+                'egg':         'EGG',
+                'tutor':       'TUTOR',
+                'form-change': 'FORM CHANGE',
+            }
+            METHOD_ORDER = ['level-up', 'machine', 'egg', 'tutor', 'form-change']
+            active_methods = [m for m in METHOD_ORDER if move_data.get(m)]
+            if active_methods:
                 st.markdown(
-                    f"<p style='text-align:center; margin:2px 0; font-size:0.9rem; "
-                    f"font-weight:600; color:{colour};'>{label}</p>",
+                    "<p style='text-align:center; font-size:1rem; "
+                    "margin:12px 0 6px 0; letter-spacing:1px;'>"
+                    "MOVES</p>",
                     unsafe_allow_html=True
                 )
- 
-            if not all_abs:
-                st.markdown("<p style='text-align:center; color:#888; "
-                            "font-size:0.85rem;'>No ability data</p>",
-                            unsafe_allow_html=True)
+                method_cols = st.columns(len(active_methods))
+                for col, method in zip(method_cols, active_methods):
+                    with col:
+                        label  = METHOD_LABELS.get(method, method.upper())
+                        moves_list = move_data[method]
+                        chunk_size = 15
+                        chunks = [moves_list[i:i+chunk_size] for i in range(0, len(moves_list), chunk_size)]
+                        chunks_html = ""
+                        _comp_mv_lookup = build_moves_lookup(moves_meta_df)
+                        # Build a level lookup for this Pokemon's level-up moves
+                        _comp_ls = learnsets_df[
+                            (learnsets_df['pokemon_name'] == name) &
+                            (learnsets_df['learn_method'] == 'level-up')
+                        ].set_index('move_name')['level']
+                        for chunk in chunks:
+                            def _comp_tip(mv):
+                                colour = '#4caf50' if mv in shared_moves else '#e0e0e0'
+                                info   = _comp_mv_lookup.get(mv, {})
+                                mtype  = info.get('type', '--')
+                                dclass = info.get('damage_class', '--')
+                                pp     = info.get('pp', '--')
+                                pwr    = info.get('power', '--')
+                                acc    = info.get('accuracy', '--')
+                                effect = info.get('effect', '')
+                                lvl    = _comp_ls.get(mv)
+                                level_str = f'<br>Learned at: Lv. {int(lvl)}' if lvl is not None and pd.notna(lvl) and int(lvl) > 0 else ''
+                                tip = (
+                                    f'<b>{mv}</b><br>'
+                                    f'{mtype} &middot; {dclass}<br>'
+                                    f'PP: {pp} &nbsp; Pwr: {pwr} &nbsp; Acc: {acc}'
+                                    + level_str
+                                    + (f'<br><i>{effect}</i>' if effect else '')
+                                )
+                                return (
+                                    f"<span class='move-tip' style='display:block;'>"
+                                    f"<div style='color:{colour};padding:1px 0;"
+                                    f"font-size:0.6rem;word-break:break-word;'>{mv}</div>"
+                                    f"<span class='tip-box'>{tip}</span>"
+                                    f"</span>"
+                                )
+                            chunk_items = ''.join(_comp_tip(mv) for mv in chunk)
+                            is_last = (chunk == chunks[-1])
+                            border = "" if is_last else "border-right:1px solid #444;padding-right:1px;"
+                            chunks_html += (
+                                f"<div style='flex:1;min-width:0;{border}'>"
+                                + chunk_items +
+                                "</div>"
+                            )
+                        card = (
+                            "<div style='"
+                            "background-color:#242424;"
+                            "border:8px solid #d0d0d0;"
+                            "border-radius:6px;"
+                            "box-shadow:0 0 0 2px #c1c1c1,inset 0 2px 6px rgba(0,0,0,0.35);"
+                            "padding:12px 12px 14px 12px;"
+                            "font-family:monospace;"
+                            "'>"
+                            f"<p style='font-size:0.7rem;color:#aaaaaa;margin:0 0 8px 0;"
+                            f"letter-spacing:2px;text-transform:uppercase;'> ▶ {label}</p>"
+                            "<div style='display:flex;flex-direction:row;gap:10px;'>"
+                            + chunks_html +
+                            "</div>"
+                            "</div>"
+                        )
+                        st.markdown(card, unsafe_allow_html=True)
         #Compute shared abilities (normal + hidden combined) for colour-coding
         def _ability_set(name):
             normal, hidden = get_pokemon_abilities(df, name)
@@ -1455,11 +1783,17 @@ with main_tabs[2]:
  
         shared_abilities = _ability_set(p1) & _ability_set(p2)
  
+        def _move_set(name):
+            data = get_pokemon_moves(learnsets_df, name)
+            return {m for moves in data.values() for m in moves}
+ 
+        shared_moves = _move_set(p1) & _move_set(p2)
+ 
         with sprite_col1:
-            render_pokemon_panel(p1, sprite1_path, type1_sprites, shared_abilities)
+            render_pokemon_panel(p1, sprite1_path, type1_sprites, shared_abilities, shared_moves)
  
         with sprite_col2:
-            render_pokemon_panel(p2, sprite2_path, type2_sprites, shared_abilities)
+            render_pokemon_panel(p2, sprite2_path, type2_sprites, shared_abilities, shared_moves)
 
 #MAIN TAB 4: MACHINE LEARNING
 with main_tabs[3]:
@@ -1739,9 +2073,9 @@ with main_tabs[3]:
         dbscan_analysis()
 #MAIN TAB 5: POKEDEX LOOKUP
 with main_tabs[4]:
-    st.header("Pokedex Lookup")
+    st.header("Pokédex Lookup")
     st.write("Select a Pokemon to view its stats, types, abilities, design origin, and FAQ.")
- 
+    st.write("Hover over moves to see its information.")
     try:
         _api_key = st.secrets.get("ANTHROPIC_API_KEY", "")
     except Exception:
@@ -1847,6 +2181,180 @@ with main_tabs[4]:
  
     st.divider()
  
+    #Moves section
+    def _make_move_tip(mv, pokemon_name, mv_lookup, ls_rows):
+        info  = mv_lookup.get(mv, {})
+        mtype = info.get('type', '--')
+        dclass= info.get('damage_class', '--')
+        pp    = info.get('pp', '--')
+        pwr   = info.get('power', '--')
+        acc   = info.get('accuracy', '--')
+        effect= info.get('effect', '')
+        # Level learned (only meaningful for level-up moves)
+        level_str = ''
+        if mv in ls_rows.index:
+            row = ls_rows.loc[mv]
+            # loc returns a Series for a single match, DataFrame for multiple
+            if isinstance(row, pd.Series):
+                lvl = row['level']
+            else:
+                # Multiple rows — pick the level-up entry if present, else first
+                lu = row[row['learn_method'] == 'level-up']
+                lvl = lu.iloc[0]['level'] if not lu.empty else row.iloc[0]['level']
+            if pd.notna(lvl) and int(lvl) > 0:
+                level_str = f'<br>Learned at: Lv. {int(lvl)}'
+        tip_content = (
+            f'<b>{mv}</b><br>'
+            f'{mtype} &middot; {dclass}<br>'
+            f'PP: {pp} &nbsp; PWR: {pwr} &nbsp; ACC: {acc}'
+            + level_str +
+            (f'<br><i>{effect}</i>' if effect else '')
+        )
+        return (
+            f"<span class='move-tip' style='display:block;'>"
+            f"<div style='padding:1px 0;font-size:0.75rem;color:#e0e0e0;word-break:break-word;'>{mv}</div>"
+            f"<span class='tip-box'>{tip_content}</span>"
+            f"</span>"
+        )
+
+    lk_move_data = get_pokemon_moves(learnsets_df, lk_pokemon)
+    LK_METHOD_LABELS = {
+        'level-up':    'LEVEL UP',
+        'machine':     'TM',
+        'egg':         'EGG',
+        'tutor':       'TUTOR',
+        'form-change': 'FORM CHANGE',
+    }
+    LK_METHOD_ORDER = ['level-up', 'machine', 'egg', 'tutor', 'form-change']
+    lk_active_methods = [m for m in LK_METHOD_ORDER if lk_move_data.get(m)]
+ 
+    if lk_active_methods:
+        st.markdown(
+            f"<h3 style='text-align:left;'>MOVES</h2>",
+            unsafe_allow_html=True
+        )
+        chunk_size = 15
+        col_widths = [
+            max(1, len(lk_move_data[m]) // chunk_size + (1 if len(lk_move_data[m]) % chunk_size else 0))
+            for m in lk_active_methods
+        ]
+        lk_method_cols = st.columns(col_widths)
+        for col, method in zip(lk_method_cols, lk_active_methods):
+            with col:
+                label = LK_METHOD_LABELS.get(method, method.upper())
+                st.markdown(
+                    f"<p style='font-size:0.7rem; color:#aaaaaa; margin:0 0 6px 0; "
+                    f"letter-spacing:2px; text-transform:uppercase;'>▶ {label}</p>",
+                    unsafe_allow_html=True
+                )
+                moves_list = lk_move_data[method]
+                chunks = [moves_list[i:i+chunk_size] for i in range(0, len(moves_list), chunk_size)]
+                chunks_html = ""
+                for chunk in chunks:
+                    mv_lookup = build_moves_lookup(moves_meta_df)
+                    ls_rows   = learnsets_df[
+                        (learnsets_df['pokemon_name'] == lk_pokemon) &
+                        (learnsets_df['move_name'].isin(chunk))
+                    ].set_index('move_name')
+                    chunk_items = ''.join(
+                        _make_move_tip(mv, lk_pokemon, mv_lookup, ls_rows)
+                        for mv in chunk
+                    )
+                    border = "border-right:1px solid #444; padding-right:16px;"
+                    chunks_html += (
+                        f"<div style='flex:1; min-width:0;"
+                        f"overflow-wrap:break-word; {border}'>"
+                        + chunk_items
+                        + "</div>"
+                    )
+                st.markdown(
+                    "<div style='display:flex; flex-direction:row; gap:16px; "
+                    "font-family:monospace;'>"
+                    + chunks_html +
+                    "</div>",
+                    unsafe_allow_html=True
+                )
+
+    smogon_key   = _smogon_name(lk_pokemon)
+    pokemon_sets = smogon_sets.get(smogon_key, {}) if smogon_key else {}
+ 
+    if pokemon_sets:
+        st.divider()
+        tier = pokemon_sets.get('tier', '')
+        sets = pokemon_sets.get('sets', {})
+        st.markdown(
+            f"<h3 style='margin-bottom:4px;'>Competitive Sets</h3>"
+            f"<p style='font-size:0.8rem;color:#aaaaaa;margin-top:0;'>"
+            f"Source: Smogon &nbsp;&middot;&nbsp; Tier: <b>{tier}</b></p>",
+            unsafe_allow_html=True
+        )
+        EV_MAP = {'hp':'HP','atk':'Atk','def':'Def','spa':'SpA','spd':'SpD','spe':'Spe'}
+ 
+        def _flat(val):
+            if val is None: return '--'
+            if isinstance(val, list): return ' / '.join(str(v) for v in val)
+            return str(val)
+ 
+        for set_name, s in sets.items():
+            moves_flat = [
+                ' / '.join(m) if isinstance(m, list) else m
+                for m in s.get('moves', [])
+            ]
+            item    = _flat(s.get('item'))
+            ability = _flat(s.get('ability'))
+            nature  = _flat(s.get('nature'))
+            tera    = _flat(s.get('teratypes'))
+            evs_raw = s.get('evs', {})
+            if isinstance(evs_raw, list):
+                evs_raw = evs_raw[0]
+            ev_str = ' / '.join(
+                f"{v} {EV_MAP.get(k,k)}" for k,v in evs_raw.items() if v
+            ) if evs_raw else '--'
+ 
+            mv_lookup_comp = build_moves_lookup(moves_meta_df)
+            def _tip_or_plain(move_entry):
+                #move_entry may be 'Move A / Move B' (slash options)
+                #wrap each option individually then rejoin
+                parts = [p.strip() for p in move_entry.split(' / ')]
+                tipped = ' / '.join(
+                    _move_tip_html(p, mv_lookup_comp) if p in mv_lookup_comp else p
+                    for p in parts
+                )
+                return f"<div style='padding:1px 0;'>&#9658; {tipped}</div>"
+            moves_html = ''.join(_tip_or_plain(m) for m in moves_flat)
+            card = (
+                "<div style='background-color:#242424;border:8px solid #d0d0d0;"
+                "border-radius:6px;box-shadow:0 0 0 2px #c1c1c1,"
+                "inset 0 2px 6px rgba(0,0,0,0.35);padding:14px 18px 16px 18px;"
+                "font-family:monospace;margin-bottom:12px;'>"
+                f"<p style='font-size:0.8rem;color:#aaaaaa;margin:0 0 10px 0;"
+                f"letter-spacing:2px;text-transform:uppercase;'>&#9658; {set_name}</p>"
+                "<div style='display:flex;gap:32px;'>"
+                "<div style='flex:1;'>"
+                "<p style='font-size:0.65rem;color:#777;margin:0 0 4px 0;"
+                "letter-spacing:1px;'>MOVES</p>"
+                f"<div style='font-size:0.82rem;color:#e0e0e0;'>{moves_html}</div>"
+                "</div>"
+                "<div style='flex:1;font-size:0.82rem;color:#e0e0e0;'>"
+                "<p style='font-size:0.65rem;color:#777;margin:0 0 4px 0;"
+                "letter-spacing:1px;'>DETAILS</p>"
+                f"<div><span style='color:#aaa;'>Item: </span>{item}</div>"
+                f"<div><span style='color:#aaa;'>Ability: </span>{ability}</div>"
+                f"<div><span style='color:#aaa;'>Nature: </span>{nature}</div>"
+                f"<div><span style='color:#aaa;'>Tera: </span>{tera}</div>"
+                f"<div><span style='color:#aaa;'>EVs: </span>{ev_str}</div>"
+                "</div></div></div>"
+            )
+            st.markdown(card, unsafe_allow_html=True)
+    elif smogon_key:
+        st.divider()
+        st.markdown(
+            f"<p style='color:#888;font-size:0.9rem;'>No competitive sets found for "
+            f"{lk_pokemon.replace(chr(10),' ')} — this Pokémon may not have a dedicated "
+            f"Smogon tier set.</p>",
+            unsafe_allow_html=True
+        )
+    st.divider()
     #AI-generated Design Origin and FAQ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     if not _api_key:
         st.warning( "No Anthropic API key found.")

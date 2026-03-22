@@ -445,7 +445,7 @@ FLYING",330,45,55,45,65,45,75,sprites/225-delibird.png,0.9,16,50,45,20,"Water 1,
 226,Mantine,"WATER
 FLYING",485,85,40,70,80,140,70,sprites/226-mantine.png,2.1,220,50,25,25,Water 1,Slow,70,0,0,0,"Swift Swim, Water Absorb",Water Veil
 227,Skarmory,"STEEL
-FLYING",465,65,80,140,40,70,70,sprites/227-skarmory.png,1.7,50.5,50,25,25,Flying,Slow,70,0,0,0,"Keen Eye, Sturdy, sturdy",Weak Armor
+FLYING",465,65,80,140,40,70,70,sprites/227-skarmory.png,1.7,50.5,50,25,25,Flying,Slow,70,0,0,0,"Keen Eye, Sturdy",Weak Armor
 228,Houndour,"DARK
 FIRE",330,45,60,30,80,50,65,sprites/228-houndour.png,0.6,10.8,50,120,20,Field,Slow,35,0,0,0,"Early Bird, Flash Fire",Unnerve
 229,Houndoom,"DARK
