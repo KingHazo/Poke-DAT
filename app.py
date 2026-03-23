@@ -114,6 +114,22 @@ def build_moves_lookup(moves_meta):
     return lookup
 
 @st.cache_data
+def load_encounters():
+    try:
+        df = pd.read_csv('pokemon_encounters.csv')
+        df['type_1'] = df['type_1'].str.title()
+        df['type_2'] = df['type_2'].fillna('').str.title()
+        return df
+    except FileNotFoundError:
+        return pd.DataFrame(columns=[
+            'pokemon_name','pokemon_id','type_1','type_2',
+            'location','location_area','version','version_group',
+            'generation','encounter_method','min_level','max_level'
+        ])
+ 
+encounters_df = load_encounters()
+
+@st.cache_data
 def load_usage_stats():
     try:
         return pd.read_csv('pokemon_usage.csv')
@@ -1117,7 +1133,7 @@ with main_tabs[0]:
 
 #MAIN TAB 2: TRENDS
 with main_tabs[1]:
-    trend_mode = st.segmented_control ("View Trends By:", ["Type Distribution", "Average Power Level", "Ability Distribution", "Move Distribution", "Stat Distribution by Type", "Type Composition by Region", "Competitive Usage Distribution", "Competitive Cores", "Base Stat Averages by Generation"], default="Type Distribution", key="trend_mode" )
+    trend_mode = st.segmented_control ("View Trends By:", ["Type Distribution", "Average Power Level", "Ability Distribution", "Move Distribution", "Stat Distribution by Type", "Type Composition by Region", "Route Type Distribution", "Competitive Usage Distribution", "Competitive Cores", "Base Stat Averages by Generation"], default="Type Distribution", key="trend_mode" )
     
     if trend_mode == "Type Distribution":
         #SUB-SECTION: Distribution
@@ -1448,6 +1464,137 @@ with main_tabs[1]:
             st.markdown("**Type peaks of a Generation (10%+)**")
             for t, gen_label, val in notable_peaks:
                 st.markdown(f"- **{t}** peaked in {gen_label} at `{val:.1f}%`")
+
+    elif trend_mode == "Route Type Distribution":
+        st.header("Route Type Distribution")
+        st.write(
+            "A heatmap showing the type composition of wild encounters "
+            "across every route/location in a game. "
+            "Darker cells = higher share of that type at that location."
+        )
+        st.caption(
+            "Coverage: Generations I-VII (Red/Blue through Sun/Moon). "
+            "Data sourced from PokeAPI encounter tables."
+        )
+ 
+        if encounters_df.empty:
+            st.warning("pokemon_encounters.csv not found.")
+        else:
+            VG_LABELS = {
+                "red-blue": "Red / Blue", "yellow": "Yellow",
+                "gold-silver": "Gold / Silver", "crystal": "Crystal",
+                "ruby-sapphire": "Ruby / Sapphire",
+                "firered-leafgreen": "FireRed / LeafGreen",
+                "emerald": "Emerald",
+                "diamond-pearl": "Diamond / Pearl", "platinum": "Platinum",
+                "heartgold-soulsilver": "HeartGold / SoulSilver",
+                "black-white": "Black / White",
+                "black-2-white-2": "Black 2 / White 2",
+                "x-y": "X / Y",
+                "omega-ruby-alpha-sapphire": "Omega Ruby / Alpha Sapphire",
+                "sun-moon": "Sun / Moon",
+                "ultra-sun-ultra-moon": "Ultra Sun / Ultra Moon",
+                "lets-go-pikachu-lets-go-eevee": "Let's Go Pikachu / Eevee",
+                "colosseum": "Colosseum",
+            }
+            available_vgs = encounters_df["version_group"].dropna().unique().tolist()
+            vg_options  = [vg for vg in VG_LABELS if vg in available_vgs]
+            vg_display  = [VG_LABELS[vg] for vg in vg_options]
+ 
+            rd_col1, rd_col2, rd_col3 = st.columns(3)
+            with rd_col1:
+                selected_label = st.selectbox(
+                    "Select Game", vg_display,
+                    index=vg_display.index("Red / Blue") if "Red / Blue" in vg_display else 0,
+                    key="enc_vg"
+                )
+                selected_vg = vg_options[vg_display.index(selected_label)]
+            with rd_col2:
+                method_opts = ["All Methods"] + sorted(
+                    encounters_df[encounters_df["version_group"] == selected_vg]
+                    ["encounter_method"].dropna().unique().tolist()
+                )
+                enc_method = st.selectbox("Encounter Method", method_opts, key="enc_method")
+            with rd_col3:
+                enc_view = st.radio("View by", ["Type", "Avg Level"], horizontal=True, key="enc_view")
+ 
+            import re as _re
+            def _loc_sort(name):
+                m = _re.search(r"(\d+)", str(name))
+                return (0, int(m.group(1))) if m else (1, str(name))
+ 
+            game_enc = encounters_df[encounters_df["version_group"] == selected_vg].copy()
+            if enc_method != "All Methods":
+                game_enc = game_enc[game_enc["encounter_method"] == enc_method]
+ 
+            if game_enc.empty:
+                st.info("No encounter data for this selection.")
+            elif enc_view == "Type":
+                loc_poke = game_enc.drop_duplicates(subset=["location","pokemon_name"])
+                pivot_data = (
+                    loc_poke.groupby(["location","type_1"]).size()
+                    .reset_index(name="count")
+                )
+                pivot_data["total"] = pivot_data.groupby("location")["count"].transform("sum")
+                pivot_data["pct"]   = (pivot_data["count"] / pivot_data["total"] * 100).round(1)
+                heatmap_df = (
+                    pivot_data.pivot(index="location", columns="type_1", values="pct")
+                    .fillna(0)
+                )
+                heatmap_df = heatmap_df.loc[sorted(heatmap_df.index, key=_loc_sort)]
+                n_locs  = len(heatmap_df)
+                n_types = len(heatmap_df.columns)
+                fig_enc, ax_enc = plt.subplots(
+                    figsize=(max(12, n_types * 0.7), max(6, n_locs * 0.28))
+                )
+                sns.heatmap(
+                    heatmap_df, ax=ax_enc, cmap="YlOrRd",
+                    annot=(n_locs <= 30), fmt=".0f",
+                    annot_kws={"size": 6},
+                    linewidths=0.3, linecolor="#cccccc",
+                    cbar_kws={"label": "% of encounters", "shrink": 0.5},
+                )
+                ax_enc.set_title(
+                    f"{selected_label} — Type Distribution per Location ({enc_method})",
+                    fontsize=11, fontweight="bold", pad=10
+                )
+                ax_enc.set_xlabel("Type", fontweight="bold", fontsize=9)
+                ax_enc.set_ylabel("Location", fontweight="bold", fontsize=9)
+                ax_enc.set_xticklabels(ax_enc.get_xticklabels(), rotation=40, ha="right", fontsize=8)
+                ax_enc.set_yticklabels(ax_enc.get_yticklabels(), rotation=0, fontsize=7)
+                plt.tight_layout()
+                st.pyplot(fig_enc, use_container_width=True)
+            else:
+                level_df = game_enc.copy()
+                level_df["avg_level"] = (level_df["min_level"] + level_df["max_level"]) / 2
+                pivot_lvl = (
+                    level_df.groupby(["location","encounter_method"])["avg_level"]
+                    .mean().round(1).reset_index()
+                    .pivot(index="location", columns="encounter_method", values="avg_level")
+                    .fillna(0)
+                )
+                pivot_lvl = pivot_lvl.loc[sorted(pivot_lvl.index, key=_loc_sort)]
+                n_locs = len(pivot_lvl)
+                n_meth = len(pivot_lvl.columns)
+                fig_lvl, ax_lvl = plt.subplots(
+                    figsize=(max(8, n_meth * 1.5), max(6, n_locs * 0.28))
+                )
+                sns.heatmap(
+                    pivot_lvl, ax=ax_lvl, cmap="RdYlGn",
+                    annot=True, fmt=".0f", annot_kws={"size": 7},
+                    linewidths=0.3, linecolor="#cccccc",
+                    cbar_kws={"label": "Avg Level", "shrink": 0.5},
+                )
+                ax_lvl.set_title(
+                    f"{selected_label} — Average Encounter Level per Location",
+                    fontsize=11, fontweight="bold", pad=10
+                )
+                ax_lvl.set_xlabel("Method", fontweight="bold", fontsize=9)
+                ax_lvl.set_ylabel("Location", fontweight="bold", fontsize=9)
+                ax_lvl.set_xticklabels(ax_lvl.get_xticklabels(), rotation=30, ha="right", fontsize=8)
+                ax_lvl.set_yticklabels(ax_lvl.get_yticklabels(), rotation=0, fontsize=7)
+                plt.tight_layout()
+                st.pyplot(fig_lvl, use_container_width=True)
 
     elif trend_mode == "Competitive Usage Distribution":
         st.header("Gen 9 Usage Distribution")
