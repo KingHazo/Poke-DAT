@@ -114,6 +114,23 @@ def build_moves_lookup(moves_meta):
     return lookup
 
 @st.cache_data
+def load_usage_stats():
+    try:
+        return pd.read_csv('pokemon_usage.csv')
+    except FileNotFoundError:
+        return pd.DataFrame(columns=['pokemon','usage_pct','raw_count','rank'])
+ 
+@st.cache_data
+def load_teammates():
+    try:
+        return pd.read_csv('pokemon_teammates.csv')
+    except FileNotFoundError:
+        return pd.DataFrame(columns=['pokemon','teammate','score'])
+ 
+usage_df_global  = load_usage_stats()
+teammate_df_global = load_teammates()
+
+@st.cache_data
 def load_data():
     df = pd.read_csv('pokemon.csv', encoding='utf-8')
     
@@ -1100,7 +1117,7 @@ with main_tabs[0]:
 
 #MAIN TAB 2: TRENDS
 with main_tabs[1]:
-    trend_mode = st.segmented_control ("View Trends By:", ["Type Distribution", "Average Power Level", "Ability Distribution", "Move Distribution", "Stat Distribution by Type", "Type Composition by Region", "Base Stat Averages by Generation"], default="Type Distribution", key="trend_mode" )
+    trend_mode = st.segmented_control ("View Trends By:", ["Type Distribution", "Average Power Level", "Ability Distribution", "Move Distribution", "Stat Distribution by Type", "Type Composition by Region", "Competitive Usage Distribution", "Competitive Cores", "Base Stat Averages by Generation"], default="Type Distribution", key="trend_mode" )
     
     if trend_mode == "Type Distribution":
         #SUB-SECTION: Distribution
@@ -1431,6 +1448,162 @@ with main_tabs[1]:
             st.markdown("**Type peaks of a Generation (10%+)**")
             for t, gen_label, val in notable_peaks:
                 st.markdown(f"- **{t}** peaked in {gen_label} at `{val:.1f}%`")
+
+    elif trend_mode == "Competitive Usage Distribution":
+        st.header("Gen 9 Usage Distribution")
+        st.write(
+            "How frequently each Pokémon was used in Gen 9 rated battles "
+            "(December 2025, 1695 rating cutoff). Toggle tiers to include or exclude them."
+        )
+ 
+        if usage_df_global.empty:
+            st.warning("pokemon_usage.csv not found. Run scrape_showdown_usage.py first.")
+        else:
+            available_tiers = sorted(usage_df_global['tier'].unique().tolist())                 if 'tier' in usage_df_global.columns else ['Ubers']
+ 
+            st.markdown("**Include tiers:**")
+            tier_cols = st.columns(min(len(available_tiers), 6))
+            selected_tiers = []
+            default_on = {'Ubers'}
+            for i, tier in enumerate(available_tiers):
+                with tier_cols[i % len(tier_cols)]:
+                    if st.checkbox(tier, value=(tier in default_on),
+                                   key=f"tier_cb_{tier}"):
+                        selected_tiers.append(tier)
+ 
+            if not selected_tiers:
+                st.info("Select at least one tier to display data.")
+            else:
+                if 'tier' in usage_df_global.columns:
+                    tier_filtered = usage_df_global[
+                        usage_df_global['tier'].isin(selected_tiers)]
+                    tier_filtered = (tier_filtered
+                        .sort_values('usage_pct', ascending=False)
+                        .drop_duplicates('pokemon')
+                        .reset_index(drop=True))
+                    tier_filtered['rank'] = tier_filtered.index + 1
+                else:
+                    tier_filtered = usage_df_global
+ 
+                u_col1, u_col2 = st.columns(2)
+                with u_col1:
+                    min_usage = st.slider("Minimum usage %", 0.0, 10.0, 0.5, 0.1,
+                                          key="min_usage")
+                with u_col2:
+                    top_n = st.slider("Show top N Pokémon", 10, 100, 30, 5,
+                                      key="usage_top_n")
+ 
+                filtered = tier_filtered[
+                    tier_filtered['usage_pct'] >= min_usage].head(top_n)
+                n = len(filtered)
+
+                #Row height scales with count; min 0.45 per bar so labels never overlap
+                row_h   = max(0.45, 10 / max(n, 1))
+                fig_u, ax_u = plt.subplots(figsize=(10, n * row_h))
+                colors_u = get_pokedex_colors(n)
+                ax_u.barh(range(n), filtered['usage_pct'], color=colors_u)
+    
+                _u_max = filtered['usage_pct'].max()
+                for i, (_, row) in enumerate(filtered.iterrows()):
+                    ax_u.text(row['usage_pct'] + _u_max * 0.01, i,
+                              f"{row['usage_pct']:.1f}%",
+                              va='center', fontsize=9, fontweight='bold')
+    
+                ax_u.set_yticks(range(n))
+                ax_u.set_yticklabels(filtered['pokemon'], fontsize=10)
+                ax_u.invert_yaxis()
+                ax_u.set_xlabel("Usage %", fontweight='bold', fontsize=11)
+                ax_u.set_xlim(0, _u_max * 1.20)
+                ax_u.xaxis.set_major_formatter(
+                    plt.FuncFormatter(lambda x, _: f"{x:.0f}%"))
+                ax_u.grid(axis='x', alpha=0.3, linestyle='--')
+                ax_u.set_title(
+                    f"Gen 9 Usage — Top {n} Pokémon (\u2265{min_usage}% usage)",
+                    fontsize=11, fontweight='bold')
+                plt.tight_layout()
+                st.pyplot(fig_u, use_container_width=True)
+ 
+    elif trend_mode == "Competitive Cores":
+        st.header("Competitive Cores — Commonly Used Together")
+        st.write(
+            "Which Pokémon appear most frequently on the same team? "
+            "Select a Pokémon to see its strongest core partners in Gen 9 OU. "
+            "Co-occurrence measures how often two Pokémon appear on the same team relative to chance. "
+            "It is calculated as the raw count of battles where both Pokémon were used together, weighted by the usage of each."
+        )
+ 
+        if teammate_df_global.empty:
+            st.warning("pokemon_teammates.csv not found.")
+        else:
+            #Pokemon selector
+            #Tier selector
+            _ct_avail = sorted(teammate_df_global['tier'].unique().tolist()) \
+                if 'tier' in teammate_df_global.columns else ['OU']
+            core_tier = st.selectbox('Tier', _ct_avail,
+                index=_ct_avail.index('OU') if 'OU' in _ct_avail else 0,
+                key='core_tier')
+            tm_for_tier = teammate_df_global[
+                teammate_df_global['tier'] == core_tier] \
+                if 'tier' in teammate_df_global.columns else teammate_df_global
+            all_mons = sorted(tm_for_tier['pokemon'].unique().tolist())
+            c_col1, c_col2 = st.columns([1, 3])
+            with c_col1:
+                core_search = st.text_input("Search", placeholder="Type to filter...",
+                                            key="core_search")
+                filtered_mons = [m for m in all_mons
+                                 if core_search.lower() in m.lower()] if core_search else all_mons
+                core_current = st.session_state.get("core_mon")
+                core_default = filtered_mons.index(core_current) if core_current in filtered_mons else 0
+                core_mon = st.selectbox("Select Pokémon", filtered_mons,
+                                        index=core_default, key="core_mon",
+                                        label_visibility="collapsed")
+                top_n_cores = st.slider("Top N teammates", 5, 20, 10, key="core_top_n")
+ 
+            with c_col2:
+                mon_mates = (
+                    tm_for_tier[tm_for_tier['pokemon'] == core_mon]
+                    .sort_values('score', ascending=False)
+                    .head(top_n_cores)
+                )
+                n_mates = len(mon_mates)
+ 
+                if n_mates == 0:
+                    st.info(f"No teammate data found for {core_mon}.")
+                else:
+                    # Normalise scores to % of max for cleaner display
+                    score_max = mon_mates['score'].max()
+                    fig_c, ax_c = plt.subplots(figsize=(8, n_mates * 0.45))
+                    colors_c = get_pokedex_colors(n_mates)
+                    ax_c.barh(range(n_mates), mon_mates['score'], color=colors_c)
+ 
+                    _c_max = mon_mates['score'].max()
+                    for i, (_, row) in enumerate(mon_mates.iterrows()):
+                        ax_c.text(row['score'] + _c_max * 0.01, i,
+                                  row['teammate'],
+                                  va='center', fontsize=9, fontweight='bold')
+ 
+                    ax_c.set_yticks(range(n_mates))
+                    ax_c.set_yticklabels([f"#{i+1}" for i in range(n_mates)],
+                                         fontsize=10, fontweight='bold')
+                    ax_c.invert_yaxis()
+                    ax_c.set_xlabel("Co-occurrence Score", fontweight='bold', fontsize=10)
+                    ax_c.set_xlim(0, _c_max * 1.30)
+                    ax_c.xaxis.set_major_formatter(
+                        plt.FuncFormatter(lambda x, _: f"{x/1e6:.1f}M" if x >= 1e6 else f"{x/1e3:.0f}K"))
+                    ax_c.grid(axis='x', alpha=0.3, linestyle='--')
+                    ax_c.set_title(f"Most Common Teammates for {core_mon}",
+                                   fontsize=11, fontweight='bold')
+                    plt.tight_layout()
+                    st.pyplot(fig_c)
+ 
+                    # Usage context for the selected Pokemon
+                    mon_usage = usage_df_global[usage_df_global['pokemon'] == core_mon]
+                    if not mon_usage.empty:
+                        u_row = mon_usage.iloc[0]
+                        st.caption(
+                            f"{core_mon}: rank #{int(u_row['rank'])} in Gen 9 OU "
+                            f"— {u_row['usage_pct']:.1f}% usage"
+                        )
 
     else:
         #SUB-SECTION: Base Stat Averages by Generation
