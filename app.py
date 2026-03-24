@@ -348,16 +348,16 @@ def label_archetypes(cluster_summary, selected_features):
         return row.get(stat, 0)
 
     def score_dev(row, archetype):
-        """Primary scoring — uses cross-cluster deviation so each cluster is
+        """Primary scoring - uses cross-cluster deviation so each cluster is
         evaluated relative to others rather than on absolute values.
 
         Archetype definitions:
-          Physical Sweeper       — high Speed + Attack, low bulk
-          Special Sweeper        — high Speed + Sp. Atk, low bulk
-          Physical Wall          — high Defense (primary signal), low Speed + Sp. Atk
-          Special Wall           — high HP + Sp. Def, low Speed + Attack
-          Bulky Attacker         — high Attack + HP, low Speed + Sp. Atk
-          Bulky Special Attacker — high Sp. Atk + HP, low Speed + Attack
+          Physical Sweeper       - high Speed + Attack, low bulk
+          Special Sweeper        - high Speed + Sp. Atk, low bulk
+          Physical Wall          - high Defense (primary signal), low Speed + Sp. Atk
+          Special Wall           - high HP + Sp. Def, low Speed + Attack
+          Bulky Attacker         - high Attack + HP, low Speed + Sp. Atk
+          Bulky Special Attacker - high Sp. Atk + HP, low Speed + Attack
 
         Note: Physical Wall uses Defense*2 so the defense-dominant cluster wins
         over the pure-HP cluster whose Defence deviation is low.
@@ -384,7 +384,7 @@ def label_archetypes(cluster_summary, selected_features):
         return 0
     
     def score_raw(row, archetype):
-        """Fallback scoring for absorbed clusters — uses raw normalised stat ratios rather than deviation, which is more reliable when a cluster is
+        """Fallback scoring for absorbed clusters - uses raw normalised stat ratios rather than deviation, which is more reliable when a cluster is
         defined by one extreme outlier stat (e.g. Blissey's HP=255 drowning out SpDef in deviation space)."""
         atk   = g(row, 'Attack')
         spatk = g(row, 'Sp. Atk')
@@ -416,7 +416,7 @@ def label_archetypes(cluster_summary, selected_features):
         for cid in cluster_ids
     }
 
-    # Phase 1 — greedy unique assignment for the 6 best-matching clusters.
+    # Phase 1 - greedy unique assignment for the 6 best-matching clusters.
     # k_val is set to 8 so KMeans forms tighter, more homogeneous groups,
     # giving the labelling better raw material to work with. The 2 extra
     # clusters beyond the 6 archetypes are absorbed in phase 2.
@@ -441,7 +441,7 @@ def label_archetypes(cluster_summary, selected_features):
         remaining_clusters.discard(best_cid)
         remaining_archetypes.discard(best_arch)
 
-    # Phase 2 — absorbed clusters get the archetype label whose raw-ratio
+    # Phase 2 - absorbed clusters get the archetype label whose raw-ratio
     # score is highest. Raw ratios are used here because extreme HP outliers
     # (e.g. Blissey, Wobbuffet) distort the deviation values for their cluster.
     for cid in remaining_clusters:
@@ -481,10 +481,10 @@ def add_archetype_axes(df_clustered, selected_features):
 @st.cache_data
 def perform_dbscan(df, selected_features, eps=2, min_samples=8):
     """Two-phase outlier-aware clustering:
-    Phase 1 — DBSCAN on raw scaled stats.
+    Phase 1 - DBSCAN on raw scaled stats.
       Raw values (not ratios) are used so that Pokemon with extreme absolute stats (Blissey HP=255, Shuckle Def=230, Eternatus totals) sit far from the main cloud and are correctly flagged as noise (label = -1).
-    Phase 2 — K-Means (k=6) on the clean non-outlier subset.
-      Ratio features are used here so archetypes reflect stat *shape* rather than overall power level — a weak Rapidash and a strong Arcanine should both land in Physical Sweeper even though their raw stats differ.
+    Phase 2 - K-Means (k=6) on the clean non-outlier subset.
+      Ratio features are used here so archetypes reflect stat *shape* rather than overall power level - a weak Rapidash and a strong Arcanine should both land in Physical Sweeper even though their raw stats differ.
 
     Returns
     df_result: DataFrame with columns 'Is_Outlier' (bool) and 'Cluster' (int, -1 for outliers)
@@ -910,7 +910,7 @@ with main_tabs[0]:
             plt.tight_layout()
             st.pyplot(fig)
         
-        #Sprites in a horizontal strip below the chart — one column per Pokémon
+        #Sprites in a horizontal strip below the chart - one column per Pokémon
         st.markdown("### Pokémon")
         sprite_cols = st.columns(num_items)
         for rank, ((idx, row), col) in enumerate(zip(filtered_df.iterrows(), sprite_cols), 1):
@@ -961,7 +961,7 @@ with main_tabs[0]:
             plt.tight_layout()
             st.pyplot(fig2)
 
-        #Sprites in a horizontal strip below the chart — one column per Pokémon
+        #Sprites in a horizontal strip below the chart - one column per Pokémon
         st.markdown("### Pokémon")
         sprite_cols = st.columns(num_items)
         for rank, ((idx, row), col) in enumerate(zip(top_stat_df.iterrows(), sprite_cols), 1):
@@ -1367,7 +1367,7 @@ with main_tabs[1]:
     elif trend_mode == "Stat Distribution by Type":
         #SUB-SECTION: Stat Distribution by Type
         st.header("Stat Distribution by Pokémon Type")
-        st.write("Box plots showing how a chosen stat is distributed within each type, sorted by median — reveals both average strength and variance.")
+        st.write("Box plots showing how a chosen stat is distributed within each type, sorted by median - reveals both average strength and variance.")
  
         stat_choice_box = st.segmented_control("Select Stat", ['Total', 'HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'], default='Total', key="box_stat")
  
@@ -1411,7 +1411,7 @@ with main_tabs[1]:
                 "(the interquartile range). The **white line** is the median. "
                 "Whiskers extend to 1.5× the IQR, and dots beyond that are outliers."
             )
-            st.markdown("A **tall box** means high variance — that type contains "
+            st.markdown("A **tall box** means high variance - that type contains "
                         "both weak and strong Pokemon. A **short box** means "
                         "most of that type's Pokemon cluster around a similar value.")
             st.subheader("Select Facts")
@@ -1468,8 +1468,7 @@ with main_tabs[1]:
     elif trend_mode == "Route Type Distribution":
         st.header("Route Type Distribution")
         st.write(
-            "A heatmap showing the type composition of wild encounters "
-            "across every route/location in a game. "
+            "A heatmap showing the type composition of wild encounters across every route/location in a game. "
             "Darker cells = higher share of that type at that location."
         )
         st.caption(
@@ -1523,9 +1522,20 @@ with main_tabs[1]:
                 m = _re.search(r"(\d+)", str(name))
                 return (0, int(m.group(1))) if m else (1, str(name))
  
+            #Location filter - Best solution I coudl come up with to "condense" a chart like this
+            loc_search = st.text_input(
+                "Filter locations (e.g. 'Route', 'Cave', 'Forest')",
+                placeholder="Leave blank to show all",
+                key="enc_loc_search"
+            )
+ 
             game_enc = encounters_df[encounters_df["version_group"] == selected_vg].copy()
             if enc_method != "All Methods":
                 game_enc = game_enc[game_enc["encounter_method"] == enc_method]
+            if loc_search:
+                game_enc = game_enc[
+                    game_enc["location"].str.contains(loc_search, case=False, na=False)
+                ]
  
             if game_enc.empty:
                 st.info("No encounter data for this selection.")
@@ -1545,7 +1555,7 @@ with main_tabs[1]:
                 n_locs  = len(heatmap_df)
                 n_types = len(heatmap_df.columns)
                 fig_enc, ax_enc = plt.subplots(
-                    figsize=(max(12, n_types * 0.7), max(6, n_locs * 0.28))
+                    figsize=(max(12, n_types * 0.7), max(4, n_locs * 0.22))
                 )
                 sns.heatmap(
                     heatmap_df, ax=ax_enc, cmap="YlOrRd",
@@ -1555,7 +1565,7 @@ with main_tabs[1]:
                     cbar_kws={"label": "% of encounters", "shrink": 0.5},
                 )
                 ax_enc.set_title(
-                    f"{selected_label} — Type Distribution per Location ({enc_method})",
+                    f"{selected_label} - Type Distribution per Location ({enc_method})",
                     fontsize=11, fontweight="bold", pad=10
                 )
                 ax_enc.set_xlabel("Type", fontweight="bold", fontsize=9)
@@ -1577,7 +1587,7 @@ with main_tabs[1]:
                 n_locs = len(pivot_lvl)
                 n_meth = len(pivot_lvl.columns)
                 fig_lvl, ax_lvl = plt.subplots(
-                    figsize=(max(8, n_meth * 1.5), max(6, n_locs * 0.28))
+                    figsize=(max(8, n_meth * 1.5), max(4, n_locs * 0.22))
                 )
                 sns.heatmap(
                     pivot_lvl, ax=ax_lvl, cmap="RdYlGn",
@@ -1586,7 +1596,7 @@ with main_tabs[1]:
                     cbar_kws={"label": "Avg Level", "shrink": 0.5},
                 )
                 ax_lvl.set_title(
-                    f"{selected_label} — Average Encounter Level per Location",
+                    f"{selected_label} - Average Encounter Level per Location",
                     fontsize=11, fontweight="bold", pad=10
                 )
                 ax_lvl.set_xlabel("Method", fontweight="bold", fontsize=9)
@@ -1665,13 +1675,13 @@ with main_tabs[1]:
                     plt.FuncFormatter(lambda x, _: f"{x:.0f}%"))
                 ax_u.grid(axis='x', alpha=0.3, linestyle='--')
                 ax_u.set_title(
-                    f"Gen 9 Usage — Top {n} Pokémon (\u2265{min_usage}% usage)",
+                    f"Gen 9 Usage - Top {n} Pokémon (\u2265{min_usage}% usage)",
                     fontsize=11, fontweight='bold')
                 plt.tight_layout()
                 st.pyplot(fig_u, use_container_width=True)
  
     elif trend_mode == "Competitive Cores":
-        st.header("Competitive Cores — Commonly Used Together")
+        st.header("Competitive Cores - Commonly Used Together")
         st.write(
             "Which Pokémon appear most frequently on the same team? "
             "Select a Pokémon to see its strongest core partners in Gen 9 OU. "
@@ -1749,7 +1759,7 @@ with main_tabs[1]:
                         u_row = mon_usage.iloc[0]
                         st.caption(
                             f"{core_mon}: rank #{int(u_row['rank'])} in Gen 9 OU "
-                            f"— {u_row['usage_pct']:.1f}% usage"
+                            f"- {u_row['usage_pct']:.1f}% usage"
                         )
 
     else:
@@ -1761,7 +1771,7 @@ with main_tabs[1]:
             "Base forms only (exclude Mega Evolutions, regional variants, etc.)",
             value=True,
             help="Alternate forms share their original Dex ID, so they skew the "
-                 "averages for the generation they were introduced in — not the "
+                 "averages for the generation they were introduced in - not the "
                  "generation the form was added. Enable this for a fairer comparison."
         )
         st.caption(
@@ -1772,7 +1782,7 @@ with main_tabs[1]:
 
         STATS      = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
         gen_data   = get_generation_avg_stats(df, base_only=base_only)
-        #Shared radial axis max — round up the highest single average to a  ceiling
+        #Shared radial axis max - round up the highest single average to a  ceiling
         all_vals   = [v for _, _, avg in gen_data for v in avg.values()]
         axis_max   = int(round(max(all_vals) / 10 + 0.5) * 10) + 10
 
@@ -1789,7 +1799,7 @@ with main_tabs[1]:
                 with cols[col_idx]:
                     st.markdown(
                         f"<h4 style='text-align:center; margin-bottom:0;'>"
-                        f"Gen {gen_num} — {region}</h4>",
+                        f"Gen {gen_num} - {region}</h4>",
                         unsafe_allow_html=True
                     )
 
@@ -1862,7 +1872,7 @@ with main_tabs[2]:
             st.write(
                 "Each cell shows how strongly two stats move together across all Pokémon. "
                 "Values run from **-1** (opposite extremes) through **0** (no relationship) "
-                "to **+1** (perfectly in step). The colour reinforces this — "
+                "to **+1** (perfectly in step). The colour reinforces this - "
                 "green means a positive correlation, red means a negative one."
             )
             st.markdown("---")
@@ -1884,11 +1894,11 @@ with main_tabs[2]:
 
             st.markdown("**Strongest positive correlations**")
             for (a, b), val in top_pos.items():
-                st.markdown(f"- **{a} ↔ {b}**: `{val:.2f}` — Pokémon with high {a} tend to also have high {b}.")
+                st.markdown(f"- **{a} ↔ {b}**: `{val:.2f}` - Pokémon with high {a} tend to also have high {b}.")
 
             st.markdown("**Strongest negative correlations**")
             for (a, b), val in top_neg.items():
-                st.markdown(f"- **{a} ↔ {b}**: `{val:.2f}` — Pokémon that excel in {a} often sacrifice {b}.")
+                st.markdown(f"- **{a} ↔ {b}**: `{val:.2f}` - Pokémon that excel in {a} often sacrifice {b}.")
     else:
         st.header("Stat Radar Comparison")
         st.write("Compare the stat 'shape' of two Pokémon.")
@@ -2144,8 +2154,8 @@ with main_tabs[3]:
             st.markdown("---")
             st.subheader("Archetype Map")
             st.caption(
-                "**X-axis**: Attack - Sp. Atk — left = Special Attacker, right = Physical Attacker  |  "
-                "**Y-axis**: Speed - avg(Def, Sp. Def, HP) — bottom = Bulky Wall, top = Fast Sweeper"
+                "**X-axis**: Attack - Sp. Atk - left = Special Attacker, right = Physical Attacker  |  "
+                "**Y-axis**: Speed - avg(Def, Sp. Def, HP) - bottom = Bulky Wall, top = Fast Sweeper"
             )
 
             col_left, col_right = st.columns([3, 2])
@@ -2296,8 +2306,8 @@ with main_tabs[3]:
             st.caption(
                 f"**{n_core}** Pokémon assigned to archetypes &nbsp;|&nbsp; "
                 f"**{n_outliers}** flagged as outliers &nbsp;|&nbsp; "
-                "**X-axis**: Attack - Sp. Atk — left = Special Attacker, right = Physical Attacker  &nbsp;|&nbsp;  "
-                "**Y-axis**: Speed - avg(Def, Sp. Def, HP) — bottom = Bulky, top = Fast Sweeper"
+                "**X-axis**: Attack - Sp. Atk - left = Special Attacker, right = Physical Attacker  &nbsp;|&nbsp;  "
+                "**Y-axis**: Speed - avg(Def, Sp. Def, HP) - bottom = Bulky, top = Fast Sweeper"
             )
 
             col_left, col_right = st.columns([3, 2])
@@ -2518,7 +2528,7 @@ with main_tabs[4]:
             if isinstance(row, pd.Series):
                 lvl = row['level']
             else:
-                # Multiple rows — pick the level-up entry if present, else first
+                # Multiple rows - pick the level-up entry if present, else first
                 lu = row[row['learn_method'] == 'level-up']
                 lvl = lu.iloc[0]['level'] if not lu.empty else row.iloc[0]['level']
             if pd.notna(lvl) and int(lvl) > 0:
@@ -2670,7 +2680,7 @@ with main_tabs[4]:
         st.divider()
         st.markdown(
             f"<p style='color:#888;font-size:0.9rem;'>No competitive sets found for "
-            f"{lk_pokemon.replace(chr(10),' ')} — this Pokémon may not have a dedicated "
+            f"{lk_pokemon.replace(chr(10),' ')} - this Pokémon may not have a dedicated "
             f"Smogon tier set.</p>",
             unsafe_allow_html=True
         )
