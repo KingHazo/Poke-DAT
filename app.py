@@ -7,6 +7,7 @@ import seaborn as sns
 import plotly
 import plotly.graph_objects as go
 import plotly.express as px
+import streamlit.components.v1 as components
 from sklearn.cluster import KMeans, DBSCAN
 from sklearn.preprocessing import StandardScaler
 from matplotlib.colors import LinearSegmentedColormap
@@ -145,6 +146,24 @@ def load_teammates():
  
 usage_df_global  = load_usage_stats()
 teammate_df_global = load_teammates()
+
+INTERACTIVE_MAP_PATHS = {
+    "red-blue": "https://simplyblgdev.github.io/pokemon/kanto",
+    "yellow": "https://simplyblgdev.github.io/pokemon/kanto",
+    "gold-silver": "https://simplyblgdev.github.io/pokemon/johto",
+    "crystal": "https://simplyblgdev.github.io/pokemon/johto",
+    "ruby-sapphire": "https://simplyblgdev.github.io/pokemon/hoenn",
+    "emerald": "https://simplyblgdev.github.io/pokemon/hoenn",
+    "firered-leafgreen": "https://simplyblgdev.github.io/pokemon/kanto3",
+    "diamond-pearl": "https://simplyblgdev.github.io/pokemon/sinnoh",
+    "platinum": "https://simplyblgdev.github.io/pokemon/sinnoh",
+    "heartgold-soulsilver": "https://simplyblgdev.github.io/pokemon/johto4",
+    "black-white": "https://simplyblgdev.github.io/pokemon/unova",
+    "black-2-white-2": "https://simplyblgdev.github.io/pokemon/unova2",
+    "x-y": "https://www.40k.zombiecrisis.org/map.png",
+    "omega-ruby-alpha-sapphire": "https://www.40k.zombiecrisis.org/map-hoenn.png",
+    "sun-moon": "https://www.40k.zombiecrisis.org/map-alola.png",
+}
 
 @st.cache_data
 def load_data():
@@ -327,13 +346,13 @@ def label_archetypes(cluster_summary, selected_features):
     """Auto-label each cluster with a competitive archetype name based on which stats are most dominant relative to the cluster's own stat mix.
     """
     ICONS = {
-        'Physical Sweeper': '⚔️',
-        'Special Sweeper':  '✨',
-        'Physical Wall':    '🛡️',
-        'Special Wall':     '🔮',
-        'Bulky Attacker':   '💪',
-        'Bulky Special Attacker': '🔯',
-        'Balanced':         '⚖️',
+        'Physical Sweeper': 'Phys. Sweep',
+        'Special Sweeper':  'Sp. Sweep',
+        'Physical Wall':    'Phys. Wall',
+        'Special Wall':     'Sp. Wall',
+        'Bulky Attacker':   'Blk. Atk',
+        'Bulky Special Attacker': 'Blk. Sp. Atk',
+        'Balanced':         'Blncd',
     }
 
     #Convert raw averages to per-Pokémon stat ratios at the cluster level
@@ -437,7 +456,7 @@ def label_archetypes(cluster_summary, selected_features):
                     best_cid   = cid
                     best_arch  = arch
 
-        labels[best_cid] = f"{ICONS[best_arch]} {best_arch}"
+        labels[best_cid] = f"{best_arch}"
         remaining_clusters.discard(best_cid)
         remaining_archetypes.discard(best_arch)
 
@@ -447,7 +466,7 @@ def label_archetypes(cluster_summary, selected_features):
     for cid in remaining_clusters:
         raw_row   = normed.loc[cid]
         best_arch = max(archetypes, key=lambda a: score_raw(raw_row, a))
-        labels[cid] = f"{ICONS[best_arch]} {best_arch}"
+        labels[cid] = f"{best_arch}"
 
     return labels
 
@@ -528,12 +547,12 @@ def label_archetypes_dbscan(core_summary, selected_features):
     With outliers removed k=6 maps naturally onto 6 archetypes so no
     absorption phase is needed."""
     ICONS = {
-        'Physical Sweeper':       '⚔️',
-        'Special Sweeper':        '✨',
-        'Physical Wall':          '🛡️',
-        'Special Wall':           '🔮',
-        'Bulky Attacker':         '💪',
-        'Bulky Special Attacker': '🔯',
+        'Physical Sweeper': 'Phys. Sweep',
+        'Special Sweeper':  'Sp. Sweep',
+        'Physical Wall':    'Phys. Wall',
+        'Special Wall':     'Sp. Wall',
+        'Bulky Attacker':   'Blk. Atk',
+        'Bulky Special Attacker': 'Blk. Sp. Atk',
     }
 
     normed      = core_summary.div(core_summary.sum(axis=1), axis=0)
@@ -569,7 +588,7 @@ def label_archetypes_dbscan(core_summary, selected_features):
                 s = score_matrix[cid][arch]
                 if best_score is None or s > best_score:
                     best_score, best_cid, best_arch = s, cid, arch
-        labels[best_cid] = f"{ICONS[best_arch]} {best_arch}"
+        labels[best_cid] = f"{best_arch}"
         remaining_c.discard(best_cid)
         remaining_a.discard(best_arch)
 
@@ -1530,74 +1549,99 @@ with main_tabs[1]:
                     game_enc["location"].str.contains(loc_search, case=False, na=False)
                 ]
  
-            if game_enc.empty:
-                st.info("No encounter data for this selection.")
-            elif enc_view == "Type":
-                loc_poke = game_enc.drop_duplicates(subset=["location","pokemon_name"])
-                pivot_data = (
-                    loc_poke.groupby(["location","type_1"]).size()
-                    .reset_index(name="count")
+            heatmap, descriptorMapColumn = st.columns([7, 3])
+            with heatmap:
+                if game_enc.empty:
+                    st.info("No encounter data for this selection.")
+                elif enc_view == "Type":
+                    loc_poke = game_enc.drop_duplicates(subset=["location","pokemon_name"])
+                    pivot_data = (
+                        loc_poke.groupby(["location","type_1"]).size()
+                        .reset_index(name="count")
+                    )
+                    pivot_data["total"] = pivot_data.groupby("location")["count"].transform("sum")
+                    pivot_data["pct"]   = (pivot_data["count"] / pivot_data["total"] * 100).round(1)
+                    heatmap_df = (
+                        pivot_data.pivot(index="location", columns="type_1", values="pct")
+                        .fillna(0)
+                    )
+                    heatmap_df = heatmap_df.loc[sorted(heatmap_df.index, key=_loc_sort)]
+                    n_locs  = len(heatmap_df)
+                    n_types = len(heatmap_df.columns)
+                    fig_enc, ax_enc = plt.subplots(
+                        figsize=(max(12, n_types * 0.7), max(4, n_locs * 0.22))
+                    )
+                    sns.heatmap(
+                        heatmap_df, ax=ax_enc, cmap="YlOrRd",
+                        annot=(n_locs <= 30), fmt=".0f",
+                        annot_kws={"size": 6},
+                        linewidths=0.3, linecolor="#cccccc",
+                        cbar_kws={"label": "% of encounters", "shrink": 0.5},
+                    )
+                    ax_enc.set_title(
+                        f"{selected_label} - Type Distribution per Location ({enc_method})",
+                        fontsize=11, fontweight="bold", pad=10
+                    )
+                    ax_enc.set_xlabel("Type", fontweight="bold", fontsize=9)
+                    ax_enc.set_ylabel("Location", fontweight="bold", fontsize=9)
+                    ax_enc.set_xticklabels(ax_enc.get_xticklabels(), rotation=40, ha="right", fontsize=8)
+                    ax_enc.set_yticklabels(ax_enc.get_yticklabels(), rotation=0, fontsize=7)
+                    plt.tight_layout()
+                    st.pyplot(fig_enc, use_container_width=True)
+                else:
+                    level_df = game_enc.copy()
+                    level_df["avg_level"] = (level_df["min_level"] + level_df["max_level"]) / 2
+                    pivot_lvl = (
+                        level_df.groupby(["location","encounter_method"])["avg_level"]
+                        .mean().round(1).reset_index()
+                        .pivot(index="location", columns="encounter_method", values="avg_level")
+                        .fillna(0)
+                    )
+                    pivot_lvl = pivot_lvl.loc[sorted(pivot_lvl.index, key=_loc_sort)]
+                    n_locs = len(pivot_lvl)
+                    n_meth = len(pivot_lvl.columns)
+                    fig_lvl, ax_lvl = plt.subplots(
+                        figsize=(max(8, n_meth * 1.5), max(4, n_locs * 0.22))
+                    )
+                    sns.heatmap(
+                        pivot_lvl, ax=ax_lvl, cmap="YlOrRd",
+                        annot=True, fmt=".0f", annot_kws={"size": 7},
+                        linewidths=0.3, linecolor="#cccccc",
+                        cbar_kws={"label": "Avg Level", "shrink": 0.5},
+                    )
+                    ax_lvl.set_title(
+                        f"{selected_label} - Average Encounter Level per Location",
+                        fontsize=11, fontweight="bold", pad=10
+                    )
+                    ax_lvl.set_xlabel("Method", fontweight="bold", fontsize=9)
+                    ax_lvl.set_ylabel("Location", fontweight="bold", fontsize=9)
+                    ax_lvl.set_xticklabels(ax_lvl.get_xticklabels(), rotation=30, ha="right", fontsize=8)
+                    ax_lvl.set_yticklabels(ax_lvl.get_yticklabels(), rotation=0, fontsize=7)
+                    plt.tight_layout()
+                    st.pyplot(fig_lvl, use_container_width=True)
+            with descriptorMapColumn:
+                st.subheader("How to read this chart")
+                st.write(
+                    "You can filter by Game, Encounter Method (Think Gifted, via Fishing, surfing, or walking (Grass), by either type or level), and also the title of the \"Route\".\n\n"
+                    "My recommendation is that you sort by whatever game you are looking for, and then filter at least by \"Route\".\n\n"
+                    "Below, there is an embed for interactive maps relevant to the game you have filtered, to provide additional context to the heatmap. "
                 )
-                pivot_data["total"] = pivot_data.groupby("location")["count"].transform("sum")
-                pivot_data["pct"]   = (pivot_data["count"] / pivot_data["total"] * 100).round(1)
-                heatmap_df = (
-                    pivot_data.pivot(index="location", columns="type_1", values="pct")
-                    .fillna(0)
-                )
-                heatmap_df = heatmap_df.loc[sorted(heatmap_df.index, key=_loc_sort)]
-                n_locs  = len(heatmap_df)
-                n_types = len(heatmap_df.columns)
-                fig_enc, ax_enc = plt.subplots(
-                    figsize=(max(12, n_types * 0.7), max(4, n_locs * 0.22))
-                )
-                sns.heatmap(
-                    heatmap_df, ax=ax_enc, cmap="YlOrRd",
-                    annot=(n_locs <= 30), fmt=".0f",
-                    annot_kws={"size": 6},
-                    linewidths=0.3, linecolor="#cccccc",
-                    cbar_kws={"label": "% of encounters", "shrink": 0.5},
-                )
-                ax_enc.set_title(
-                    f"{selected_label} - Type Distribution per Location ({enc_method})",
-                    fontsize=11, fontweight="bold", pad=10
-                )
-                ax_enc.set_xlabel("Type", fontweight="bold", fontsize=9)
-                ax_enc.set_ylabel("Location", fontweight="bold", fontsize=9)
-                ax_enc.set_xticklabels(ax_enc.get_xticklabels(), rotation=40, ha="right", fontsize=8)
-                ax_enc.set_yticklabels(ax_enc.get_yticklabels(), rotation=0, fontsize=7)
-                plt.tight_layout()
-                st.pyplot(fig_enc, use_container_width=True)
-            else:
-                level_df = game_enc.copy()
-                level_df["avg_level"] = (level_df["min_level"] + level_df["max_level"]) / 2
-                pivot_lvl = (
-                    level_df.groupby(["location","encounter_method"])["avg_level"]
-                    .mean().round(1).reset_index()
-                    .pivot(index="location", columns="encounter_method", values="avg_level")
-                    .fillna(0)
-                )
-                pivot_lvl = pivot_lvl.loc[sorted(pivot_lvl.index, key=_loc_sort)]
-                n_locs = len(pivot_lvl)
-                n_meth = len(pivot_lvl.columns)
-                fig_lvl, ax_lvl = plt.subplots(
-                    figsize=(max(8, n_meth * 1.5), max(4, n_locs * 0.22))
-                )
-                sns.heatmap(
-                    pivot_lvl, ax=ax_lvl, cmap="RdYlGn",
-                    annot=True, fmt=".0f", annot_kws={"size": 7},
-                    linewidths=0.3, linecolor="#cccccc",
-                    cbar_kws={"label": "Avg Level", "shrink": 0.5},
-                )
-                ax_lvl.set_title(
-                    f"{selected_label} - Average Encounter Level per Location",
-                    fontsize=11, fontweight="bold", pad=10
-                )
-                ax_lvl.set_xlabel("Method", fontweight="bold", fontsize=9)
-                ax_lvl.set_ylabel("Location", fontweight="bold", fontsize=9)
-                ax_lvl.set_xticklabels(ax_lvl.get_xticklabels(), rotation=30, ha="right", fontsize=8)
-                ax_lvl.set_yticklabels(ax_lvl.get_yticklabels(), rotation=0, fontsize=7)
-                plt.tight_layout()
-                st.pyplot(fig_lvl, use_container_width=True)
+                st.markdown("---")
+                st.subheader("Map by Game")
+                st.write ("Credit to u/Bobdor on Reddit and SimplyBLGDev on GitHub for their respective sites/maps. Go check them out!")
+                map_path = INTERACTIVE_MAP_PATHS.get(selected_vg)
+                if map_path:
+                    #Construct the full URL
+                    map_url = f"{map_path}"
+
+                    #Use st.components.v1.html to render the iframe
+                    #We set the height slightly higher than the iframe to prevent double scrollbars
+                    components.html(
+                        f'<iframe src="{map_url}" height="500" style="position: relative; width: 100%; border: none;"></iframe>',
+                        height=520 
+                    )
+                else:
+                    st.info(f"Interactive map currently unavailable for {selected_label}.")
 
     elif trend_mode == "Competitive Usage Distribution":
         st.header("Gen 9 Usage Distribution")
@@ -2261,7 +2305,7 @@ with main_tabs[3]:
                     arch = 'Special Wall'
                 else:
                     return None
-                return f"{_ICONS[arch]} {arch}"
+                return f"{arch}"
 
             _totals    = df_db[selected_features].sum(axis=1).replace(0, 1)
             _max_ratio = df_db[selected_features].div(_totals, axis=0).max(axis=1)
@@ -2273,7 +2317,7 @@ with main_tabs[3]:
                     rescued = _rescue_archetype(row)
                     if rescued:
                         return rescued
-                return '⚠️ Outlier'
+                return 'Outlier'
             #Map labels; outliers get their own display label
             df_db['Archetype'] = df_db.apply(_assign_archetype, axis=1)
 
@@ -2285,8 +2329,8 @@ with main_tabs[3]:
             df_plot['_axis_y'] = df_plot['_axis_y'] + rng.uniform(-jitter_scale, jitter_scale, size=len(df_plot))
 
             #Separate outliers for distinct marker styling
-            df_core    = df_plot[df_plot['Archetype'] != '⚠️ Outlier']
-            df_outlier = df_plot[df_plot['Archetype'] == '⚠️ Outlier']
+            df_core    = df_plot[df_plot['Archetype'] != 'Outlier']
+            df_outlier = df_plot[df_plot['Archetype'] == 'Outlier']
 
             n_outliers = df_outlier.shape[0]
             n_core     = df_core.shape[0]
@@ -2310,7 +2354,7 @@ with main_tabs[3]:
                 archetype_order = sorted(df_core['Archetype'].unique())
                 palette = px.colors.qualitative.Safe[:len(archetype_order)]
                 color_map = {arch: col for arch, col in zip(archetype_order, palette)}
-                color_map['⚠️ Outlier'] = '#888888'
+                color_map['Outlier'] = '#888888'
 
                 fig_db = px.scatter(
                     df_core,
@@ -2335,14 +2379,14 @@ with main_tabs[3]:
                     x=df_outlier['_axis_x'],
                     y=df_outlier['_axis_y'],
                     mode='markers',
-                    name='⚠️ Outlier',
+                    name='Outlier',
                     marker=dict(symbol='x', size=9, color='#888888', opacity=0.6,
                                 line=dict(width=1.5, color='#555555')),
                     hovertemplate=(
                         '<b>%{customdata[0]}</b><br>'
                         'HP=%{customdata[1]}  Atk=%{customdata[2]}  Def=%{customdata[3]}<br>'
                         'SpA=%{customdata[4]}  SpD=%{customdata[5]}  Spe=%{customdata[6]}'
-                        '<extra>⚠️ Outlier</extra>'
+                        '<extra>Outlier</extra>'
                     ),
                     customdata=df_outlier[['Name'] + selected_features].values,
                 ))
@@ -2383,7 +2427,7 @@ with main_tabs[3]:
                     "They could basically be classified as their own class of Pokémon - General Tanks. "
                     "Depending on other ways to query/sort the Pokémon data, you could assign more Pokémon to this set too."
                 )
-                outlier_rows = df_db[df_db['Archetype'] == '⚠️ Outlier'].copy()
+                outlier_rows = df_db[df_db['Archetype'] == 'Outlier'].copy()
                 outlier_rows['Name'] = outlier_rows['Name'].str.replace('\n', ' ', regex=False)
                 # Sort by Total descending so legendaries appear first
                 outlier_display = (
