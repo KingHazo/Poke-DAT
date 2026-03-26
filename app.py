@@ -645,16 +645,9 @@ def get_move_counts(learnsets, type_filter=None, pokemon_df=None):
     method_order = {'level-up': 0, 'machine': 1, 'egg': 2, 'tutor': 3, 'form-change': 4}
  
     rows = []
-    for move, grp in working.groupby('move_name'):
+    for (move, method), grp in working.groupby(['move_name', 'learn_method']):
         count = grp['pokemon_name'].nunique()
-        #Assign category by the most "natural" method present
-        methods_present = set(grp['learn_method'].unique())
-        for m in ['level-up', 'machine', 'tutor', 'egg', 'form-change']:
-            if m in methods_present:
-                category = m.replace('-', ' ').title()
-                break
-        else:
-            category = 'Other'
+        category = method.replace('-', ' ').title()
         rows.append({'Move': move, 'Count': count, 'Category': category})
  
     return pd.DataFrame(rows).sort_values('Count', ascending=False).reset_index(drop=True)
