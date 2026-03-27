@@ -147,6 +147,17 @@ def load_teammates():
 usage_df_global  = load_usage_stats()
 teammate_df_global = load_teammates()
 
+@st.cache_data
+def load_abilities():
+    try:
+        #Load the scraped CSV
+        df = pd.read_csv('pokemon_abilities.csv')
+        return pd.Series(df.Description.values, index=df.Name).to_dict() #PLACEHOLDER REMEMBER TO DATA DICT REST OF LOADED CSVS
+    except:
+        return {}
+
+abilities_df = load_abilities()
+
 INTERACTIVE_MAP_PATHS = {
     "red-blue": "https://simplyblgdev.github.io/pokemon/kanto",
     "yellow": "https://simplyblgdev.github.io/pokemon/kanto",
@@ -2030,23 +2041,32 @@ with main_tabs[2]:
                 for (type_name, type_path), col in zip(type_sprites, badge_cols):
                     with col:
                         st.image(type_path)
-            #Abilities
+            #Abilities Section within render_pokemon_panel
             normal_abs, hidden_ab = get_pokemon_abilities(df, name)
             all_abs = normal_abs + ([f"{hidden_ab} (Hidden)"] if hidden_ab else [])
- 
+
             st.markdown("<p style='text-align:center; font-size:0.75rem; "
                         "color:#aaaaaa; margin:8px 0 2px 0; letter-spacing:1px;'>"
                         "ABILITIES</p>", unsafe_allow_html=True)
- 
-            ab_items_html = ''.join(
-                "<div style='color:{c};padding:2px 0;font-size:0.82rem;"
-                "font-weight:600;text-align:center;'>{ab}</div>".format(
-                    c="#4caf50" if ab.replace(" (Hidden)","").strip() in shared_abilities else "#e0e0e0",
-                    ab=ab
+
+            def _get_ability_tip_html(ab_name_full):
+                clean_name = ab_name_full.replace(" (Hidden)", "").strip()
+                colour = "#4caf50" if clean_name in shared_abilities else "#e0e0e0"
+                desc = abilities_df.get(clean_name, "No description available.")
+                desc = desc.replace('"', '&quot;')
+                return (
+                    f"<span class='move-tip' style='display:block;'>"
+                    f"<div style='color:{colour};padding:2px 0;font-size:0.82rem;"
+                    f"font-weight:600;text-align:center;word-break:break-word;'>{ab_name_full}</div>"
+                    f"<span class='tip-box'><b>{clean_name}</b><br><i>{desc}</i></span>"
+                    f"</span>"
                 )
-                for ab in all_abs
-            ) if all_abs else "<div style='color:#666;font-size:0.8rem;text-align:center;'>No ability data</div>"
- 
+
+            #Generate the list of HTML items
+            ab_items_html = ''.join(_get_ability_tip_html(ab) for ab in all_abs) if all_abs else \
+                            "<div style='color:#666;font-size:0.8rem;text-align:center;'>No ability data</div>"
+
+            #Display the box
             st.markdown(
                 "<div style='"
                 "background-color:#242424;"
@@ -2087,7 +2107,7 @@ with main_tabs[2]:
                         chunks = [moves_list[i:i+chunk_size] for i in range(0, len(moves_list), chunk_size)]
                         chunks_html = ""
                         _comp_mv_lookup = build_moves_lookup(moves_meta_df)
-                        # Build a level lookup for this Pokemon's level-up moves
+                        #Build a level lookup for this Pokemon's level-up moves
                         _comp_ls = learnsets_df[
                             (learnsets_df['pokemon_name'] == name) &
                             (learnsets_df['learn_method'] == 'level-up')
@@ -2490,18 +2510,40 @@ with main_tabs[4]:
  
         lk_normal_abs, lk_hidden_ab = get_pokemon_abilities(df, lk_pokemon)
         lk_all_abs = lk_normal_abs + ([f"{lk_hidden_ab} (Hidden)"] if lk_hidden_ab else [])
+
+        def _make_ability_tip(ability_name, display_name=None):
+            if not ability_name or pd.isna(ability_name):
+                return "N/A"
+            
+            label = display_name if display_name else ability_name
+
+            desc = abilities_df.get(ability_name, "No description available.")
+            desc = desc.replace('"', '&quot;')
+
+            return (
+                f"<span class='move-tip' style='display:block;'>"
+                f"<div style='padding:1px 0;font-size:0.95rem;font-weight:600;word-break:break-word;'>{label}</div>"
+                f"<span class='tip-box'><b>{ability_name}</b><br><i>{desc}</i></span>"
+                f"</span>"
+            )
+        
         if lk_all_abs:
             st.markdown(
                 "<p style='text-align:center; font-size:0.75rem; color:#aaaaaa;"
                 " margin:10px 0 4px 0; letter-spacing:1px;'>ABILITIES</p>",
                 unsafe_allow_html=True
             )
+            abilities_html = ""
             for ab in lk_all_abs:
-                st.markdown(
-                    f"<p style='text-align:center; margin:2px 0;"
-                    f" font-size:0.95rem; font-weight:600;'>{ab}</p>",
-                    unsafe_allow_html=True
-                )
+                #Clean the name for lookup (removes " (Hidden)")
+                clean_name = ab.replace(" (Hidden)", "").strip()
+                abilities_html += _make_ability_tip(clean_name, display_name=ab)
+
+            #Display the final block
+            st.markdown(
+                f"<div style='text-align:center;'>{abilities_html}</div>",
+                unsafe_allow_html=True
+            )
  
         _stat_cols = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed', 'Total']
         lk_row = df[df['Name'] == lk_pokemon]
@@ -2679,6 +2721,24 @@ with main_tabs[4]:
             ) if evs_raw else '--'
  
             mv_lookup_comp = build_moves_lookup(moves_meta_df)
+            def _ability_tip_comp(ability_entry):
+                if not ability_entry or ability_entry == '--':
+                    return '--'
+                parts = [p.strip() for p in ability_entry.split(' / ')]
+                tipped_parts = []
+
+                for p in parts:
+                    desc = abilities_df.get(p, "No description available.")
+                    desc = desc.replace('"', '&quot;')
+                    html = (
+                        f"<span class='move-tip'>"
+                        f"{p}"
+                        f"<span class='tip-box'><b>{p}</b><br><i>{desc}</i></span>"
+                        f"</span>"
+                    )
+                    tipped_parts.append(html)
+            
+                return ' / '.join(tipped_parts)
             def _tip_or_plain(move_entry):
                 #move_entry may be 'Move A / Move B' (slash options)
                 #wrap each option individually then rejoin
@@ -2689,6 +2749,8 @@ with main_tabs[4]:
                 )
                 return f"<div style='padding:1px 0;'>&#9658; {tipped}</div>"
             moves_html = ''.join(_tip_or_plain(m) for m in moves_flat)
+            raw_ability = _flat(s.get('ability'))
+            ability_html = _ability_tip_comp(raw_ability)            
             card = (
                 "<div style='background-color:#242424;border:8px solid #d0d0d0;"
                 "border-radius:6px;box-shadow:0 0 0 2px #c1c1c1,"
@@ -2706,7 +2768,7 @@ with main_tabs[4]:
                 "<p style='font-size:0.65rem;color:#777;margin:0 0 4px 0;"
                 "letter-spacing:1px;'>DETAILS</p>"
                 f"<div><span style='color:#aaa;'>Item: </span>{item}</div>"
-                f"<div><span style='color:#aaa;'>Ability: </span>{ability}</div>"
+                f"<div><span style='color:#aaa;'>Ability: </span>{ability_html}</div>"
                 f"<div><span style='color:#aaa;'>Nature: </span>{nature}</div>"
                 f"<div><span style='color:#aaa;'>Tera: </span>{tera}</div>"
                 f"<div><span style='color:#aaa;'>EVs: </span>{ev_str}</div>"

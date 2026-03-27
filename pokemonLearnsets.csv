@@ -895,7 +895,7 @@ Butterfree,Skill Swap,machine,0,brilliant-diamond-shining-pearl
 Butterfree,Aerial Ace,machine,0,brilliant-diamond-shining-pearl
 Butterfree,Roost,machine,0,brilliant-diamond-shining-pearl
 Butterfree,Tailwind,level-up,36,brilliant-diamond-shining-pearl
-Butterfree,U Turn,machine,0,brilliant-diamond-shining-pearl
+Butterfree,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Butterfree,Air Slash,level-up,24,brilliant-diamond-shining-pearl
 Butterfree,Bug Buzz,level-up,32,brilliant-diamond-shining-pearl
 Butterfree,Bug Buzz,machine,0,brilliant-diamond-shining-pearl
@@ -941,7 +941,7 @@ Beedrill,Brick Break,machine,0,brilliant-diamond-shining-pearl
 Beedrill,Endeavor,level-up,41,brilliant-diamond-shining-pearl
 Beedrill,Aerial Ace,machine,0,brilliant-diamond-shining-pearl
 Beedrill,Roost,machine,0,brilliant-diamond-shining-pearl
-Beedrill,U Turn,machine,0,brilliant-diamond-shining-pearl
+Beedrill,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Beedrill,Payback,machine,0,brilliant-diamond-shining-pearl
 Beedrill,Assurance,level-up,26,brilliant-diamond-shining-pearl
 Beedrill,Toxic Spikes,level-up,29,brilliant-diamond-shining-pearl
@@ -989,7 +989,7 @@ Mega Beedrill,Endeavor,tutor,0,ultra-sun-ultra-moon
 Mega Beedrill,Aerial Ace,machine,0,ultra-sun-ultra-moon
 Mega Beedrill,Roost,machine,0,ultra-sun-ultra-moon
 Mega Beedrill,Tailwind,tutor,0,ultra-sun-ultra-moon
-Mega Beedrill,U Turn,machine,0,ultra-sun-ultra-moon
+Mega Beedrill,U-Turn,machine,0,ultra-sun-ultra-moon
 Mega Beedrill,Payback,machine,0,ultra-sun-ultra-moon
 Mega Beedrill,Assurance,level-up,26,ultra-sun-ultra-moon
 Mega Beedrill,Toxic Spikes,level-up,29,ultra-sun-ultra-moon
@@ -1042,7 +1042,7 @@ Pidgey,Roost,level-up,37,brilliant-diamond-shining-pearl
 Pidgey,Roost,machine,0,brilliant-diamond-shining-pearl
 Pidgey,Pluck,machine,0,brilliant-diamond-shining-pearl
 Pidgey,Tailwind,level-up,41,brilliant-diamond-shining-pearl
-Pidgey,U Turn,machine,0,brilliant-diamond-shining-pearl
+Pidgey,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Pidgey,Air Slash,level-up,49,brilliant-diamond-shining-pearl
 Pidgey,Air Slash,egg,0,brilliant-diamond-shining-pearl
 Pidgey,Brave Bird,egg,0,brilliant-diamond-shining-pearl
@@ -1078,7 +1078,7 @@ Pidgeotto,Roost,level-up,42,brilliant-diamond-shining-pearl
 Pidgeotto,Roost,machine,0,brilliant-diamond-shining-pearl
 Pidgeotto,Pluck,machine,0,brilliant-diamond-shining-pearl
 Pidgeotto,Tailwind,level-up,47,brilliant-diamond-shining-pearl
-Pidgeotto,U Turn,machine,0,brilliant-diamond-shining-pearl
+Pidgeotto,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Pidgeotto,Air Slash,level-up,57,brilliant-diamond-shining-pearl
 Pidgeotto,Defog,machine,0,brilliant-diamond-shining-pearl
 Pidgeotto,Work Up,machine,0,brilliant-diamond-shining-pearl
@@ -1113,7 +1113,7 @@ Pidgeot,Roost,level-up,44,brilliant-diamond-shining-pearl
 Pidgeot,Roost,machine,0,brilliant-diamond-shining-pearl
 Pidgeot,Pluck,machine,0,brilliant-diamond-shining-pearl
 Pidgeot,Tailwind,level-up,50,brilliant-diamond-shining-pearl
-Pidgeot,U Turn,machine,0,brilliant-diamond-shining-pearl
+Pidgeot,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Pidgeot,Air Slash,level-up,62,brilliant-diamond-shining-pearl
 Pidgeot,Giga Impact,machine,0,brilliant-diamond-shining-pearl
 Pidgeot,Defog,machine,0,brilliant-diamond-shining-pearl
@@ -1156,7 +1156,7 @@ Mega Pidgeot,Roost,level-up,44,ultra-sun-ultra-moon
 Mega Pidgeot,Roost,machine,0,ultra-sun-ultra-moon
 Mega Pidgeot,Tailwind,level-up,50,ultra-sun-ultra-moon
 Mega Pidgeot,Tailwind,tutor,0,ultra-sun-ultra-moon
-Mega Pidgeot,U Turn,machine,0,ultra-sun-ultra-moon
+Mega Pidgeot,U-Turn,machine,0,ultra-sun-ultra-moon
 Mega Pidgeot,Air Slash,level-up,62,ultra-sun-ultra-moon
 Mega Pidgeot,Giga Impact,machine,0,ultra-sun-ultra-moon
 Mega Pidgeot,Defog,tutor,0,ultra-sun-ultra-moon
@@ -1266,7 +1266,7 @@ Alolan Rattata,Snatch,egg,0,ultra-sun-ultra-moon
 Alolan Rattata,Snatch,tutor,0,ultra-sun-ultra-moon
 Alolan Rattata,Covet,tutor,0,ultra-sun-ultra-moon
 Alolan Rattata,Shock Wave,tutor,0,ultra-sun-ultra-moon
-Alolan Rattata,U Turn,machine,0,ultra-sun-ultra-moon
+Alolan Rattata,U-Turn,machine,0,ultra-sun-ultra-moon
 Alolan Rattata,Assurance,level-up,19,ultra-sun-ultra-moon
 Alolan Rattata,Embargo,machine,0,ultra-sun-ultra-moon
 Alolan Rattata,Me First,egg,0,ultra-sun-ultra-moon
@@ -1379,7 +1379,7 @@ Alolan Raticate,Snatch,tutor,0,ultra-sun-ultra-moon
 Alolan Raticate,Bulk Up,machine,0,ultra-sun-ultra-moon
 Alolan Raticate,Covet,tutor,0,ultra-sun-ultra-moon
 Alolan Raticate,Shock Wave,tutor,0,ultra-sun-ultra-moon
-Alolan Raticate,U Turn,machine,0,ultra-sun-ultra-moon
+Alolan Raticate,U-Turn,machine,0,ultra-sun-ultra-moon
 Alolan Raticate,Assurance,level-up,19,ultra-sun-ultra-moon
 Alolan Raticate,Embargo,machine,0,ultra-sun-ultra-moon
 Alolan Raticate,Last Resort,tutor,0,ultra-sun-ultra-moon
@@ -1434,7 +1434,7 @@ Spearow,Aerial Ace,machine,0,brilliant-diamond-shining-pearl
 Spearow,Roost,level-up,32,brilliant-diamond-shining-pearl
 Spearow,Roost,machine,0,brilliant-diamond-shining-pearl
 Spearow,Pluck,machine,0,brilliant-diamond-shining-pearl
-Spearow,U Turn,machine,0,brilliant-diamond-shining-pearl
+Spearow,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Spearow,Assurance,level-up,8,brilliant-diamond-shining-pearl
 Spearow,Defog,machine,0,brilliant-diamond-shining-pearl
 Spearow,Work Up,machine,0,brilliant-diamond-shining-pearl
@@ -1469,7 +1469,7 @@ Fearow,Roost,level-up,36,brilliant-diamond-shining-pearl
 Fearow,Roost,machine,0,brilliant-diamond-shining-pearl
 Fearow,Pluck,level-up,1,brilliant-diamond-shining-pearl
 Fearow,Pluck,machine,0,brilliant-diamond-shining-pearl
-Fearow,U Turn,machine,0,brilliant-diamond-shining-pearl
+Fearow,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Fearow,Assurance,level-up,8,brilliant-diamond-shining-pearl
 Fearow,Giga Impact,machine,0,brilliant-diamond-shining-pearl
 Fearow,Defog,machine,0,brilliant-diamond-shining-pearl
@@ -3446,7 +3446,7 @@ Venomoth,Endeavor,machine,0,scarlet-violet
 Venomoth,Skill Swap,machine,0,scarlet-violet
 Venomoth,Poison Fang,level-up,47,scarlet-violet
 Venomoth,Air Cutter,machine,0,scarlet-violet
-Venomoth,U Turn,machine,0,scarlet-violet
+Venomoth,U-Turn,machine,0,scarlet-violet
 Venomoth,Toxic Spikes,machine,0,scarlet-violet
 Venomoth,Air Slash,level-up,0,scarlet-violet
 Venomoth,Air Slash,machine,0,scarlet-violet
@@ -3761,7 +3761,7 @@ Meowth,Fake Tears,machine,0,scarlet-violet
 Meowth,Aerial Ace,machine,0,scarlet-violet
 Meowth,Covet,egg,0,scarlet-violet
 Meowth,Feint,level-up,4,scarlet-violet
-Meowth,U Turn,machine,0,scarlet-violet
+Meowth,U-Turn,machine,0,scarlet-violet
 Meowth,Assurance,level-up,24,scarlet-violet
 Meowth,Last Resort,egg,0,scarlet-violet
 Meowth,Dark Pulse,machine,0,scarlet-violet
@@ -3828,7 +3828,7 @@ Alolan Meowth,Fake Tears,machine,0,scarlet-violet
 Alolan Meowth,Aerial Ace,machine,0,scarlet-violet
 Alolan Meowth,Covet,egg,0,scarlet-violet
 Alolan Meowth,Feint,level-up,4,scarlet-violet
-Alolan Meowth,U Turn,machine,0,scarlet-violet
+Alolan Meowth,U-Turn,machine,0,scarlet-violet
 Alolan Meowth,Assurance,level-up,24,scarlet-violet
 Alolan Meowth,Dark Pulse,machine,0,scarlet-violet
 Alolan Meowth,Night Slash,level-up,36,scarlet-violet
@@ -3901,7 +3901,7 @@ Galarian Meowth,Aerial Ace,machine,0,scarlet-violet
 Galarian Meowth,Iron Defense,machine,0,scarlet-violet
 Galarian Meowth,Covet,egg,0,scarlet-violet
 Galarian Meowth,Gyro Ball,machine,0,scarlet-violet
-Galarian Meowth,U Turn,machine,0,scarlet-violet
+Galarian Meowth,U-Turn,machine,0,scarlet-violet
 Galarian Meowth,Fling,machine,0,scarlet-violet
 Galarian Meowth,Dark Pulse,machine,0,scarlet-violet
 Galarian Meowth,Night Slash,egg,0,scarlet-violet
@@ -3967,7 +3967,7 @@ Persian,Hyper Voice,machine,0,scarlet-violet
 Persian,Fake Tears,machine,0,scarlet-violet
 Persian,Aerial Ace,machine,0,scarlet-violet
 Persian,Feint,level-up,1,scarlet-violet
-Persian,U Turn,machine,0,scarlet-violet
+Persian,U-Turn,machine,0,scarlet-violet
 Persian,Assurance,level-up,24,scarlet-violet
 Persian,Dark Pulse,machine,0,scarlet-violet
 Persian,Seed Bomb,machine,0,scarlet-violet
@@ -4034,7 +4034,7 @@ Alolan Persian,Hyper Voice,machine,0,scarlet-violet
 Alolan Persian,Fake Tears,machine,0,scarlet-violet
 Alolan Persian,Aerial Ace,machine,0,scarlet-violet
 Alolan Persian,Feint,level-up,1,scarlet-violet
-Alolan Persian,U Turn,machine,0,scarlet-violet
+Alolan Persian,U-Turn,machine,0,scarlet-violet
 Alolan Persian,Assurance,level-up,24,scarlet-violet
 Alolan Persian,Dark Pulse,machine,0,scarlet-violet
 Alolan Persian,Night Slash,level-up,42,scarlet-violet
@@ -4267,7 +4267,7 @@ Mankey,Overheat,machine,0,scarlet-violet
 Mankey,Rock Tomb,machine,0,scarlet-violet
 Mankey,Bulk Up,machine,0,scarlet-violet
 Mankey,Covet,level-up,1,scarlet-violet
-Mankey,U Turn,machine,0,scarlet-violet
+Mankey,U-Turn,machine,0,scarlet-violet
 Mankey,Close Combat,level-up,33,scarlet-violet
 Mankey,Close Combat,machine,0,scarlet-violet
 Mankey,Assurance,level-up,26,scarlet-violet
@@ -4339,7 +4339,7 @@ Primeape,Endeavor,machine,0,scarlet-violet
 Primeape,Overheat,machine,0,scarlet-violet
 Primeape,Rock Tomb,machine,0,scarlet-violet
 Primeape,Bulk Up,machine,0,scarlet-violet
-Primeape,U Turn,machine,0,scarlet-violet
+Primeape,U-Turn,machine,0,scarlet-violet
 Primeape,Close Combat,level-up,39,scarlet-violet
 Primeape,Close Combat,machine,0,scarlet-violet
 Primeape,Assurance,level-up,26,scarlet-violet
@@ -6344,7 +6344,7 @@ Farfetch'd,Leaf Blade,egg,0,brilliant-diamond-shining-pearl
 Farfetch'd,Roost,machine,0,brilliant-diamond-shining-pearl
 Farfetch'd,Feint,egg,0,brilliant-diamond-shining-pearl
 Farfetch'd,Pluck,machine,0,brilliant-diamond-shining-pearl
-Farfetch'd,U Turn,machine,0,brilliant-diamond-shining-pearl
+Farfetch'd,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Farfetch'd,Poison Jab,machine,0,brilliant-diamond-shining-pearl
 Farfetch'd,Night Slash,egg,0,brilliant-diamond-shining-pearl
 Farfetch'd,Air Slash,level-up,50,brilliant-diamond-shining-pearl
@@ -9402,7 +9402,7 @@ Scyther,Air Cutter,machine,0,scarlet-violet
 Scyther,Aerial Ace,machine,0,scarlet-violet
 Scyther,Feint,egg,0,scarlet-violet
 Scyther,Tailwind,machine,0,scarlet-violet
-Scyther,U Turn,machine,0,scarlet-violet
+Scyther,U-Turn,machine,0,scarlet-violet
 Scyther,Close Combat,machine,0,scarlet-violet
 Scyther,Night Slash,egg,0,scarlet-violet
 Scyther,Air Slash,level-up,36,scarlet-violet
@@ -11212,7 +11212,7 @@ Articuno,Water Pulse,machine,0,scarlet-violet
 Articuno,Roost,level-up,40,scarlet-violet
 Articuno,Tailwind,level-up,30,scarlet-violet
 Articuno,Tailwind,machine,0,scarlet-violet
-Articuno,U Turn,machine,0,scarlet-violet
+Articuno,U-Turn,machine,0,scarlet-violet
 Articuno,Air Slash,machine,0,scarlet-violet
 Articuno,Brave Bird,machine,0,scarlet-violet
 Articuno,Giga Impact,machine,0,scarlet-violet
@@ -11266,7 +11266,7 @@ Galarian Articuno,Air Cutter,machine,0,scarlet-violet
 Galarian Articuno,Calm Mind,machine,0,scarlet-violet
 Galarian Articuno,Tailwind,level-up,30,scarlet-violet
 Galarian Articuno,Tailwind,machine,0,scarlet-violet
-Galarian Articuno,U Turn,machine,0,scarlet-violet
+Galarian Articuno,U-Turn,machine,0,scarlet-violet
 Galarian Articuno,Air Slash,machine,0,scarlet-violet
 Galarian Articuno,Brave Bird,machine,0,scarlet-violet
 Galarian Articuno,Giga Impact,machine,0,scarlet-violet
@@ -11324,7 +11324,7 @@ Zapdos,Aerial Ace,machine,0,scarlet-violet
 Zapdos,Roost,level-up,40,scarlet-violet
 Zapdos,Pluck,level-up,15,scarlet-violet
 Zapdos,Tailwind,machine,0,scarlet-violet
-Zapdos,U Turn,machine,0,scarlet-violet
+Zapdos,U-Turn,machine,0,scarlet-violet
 Zapdos,Brave Bird,machine,0,scarlet-violet
 Zapdos,Giga Impact,machine,0,scarlet-violet
 Zapdos,Discharge,level-up,45,scarlet-violet
@@ -11379,7 +11379,7 @@ Galarian Zapdos,Bulk Up,level-up,50,scarlet-violet
 Galarian Zapdos,Bulk Up,machine,0,scarlet-violet
 Galarian Zapdos,Pluck,level-up,15,scarlet-violet
 Galarian Zapdos,Tailwind,machine,0,scarlet-violet
-Galarian Zapdos,U Turn,machine,0,scarlet-violet
+Galarian Zapdos,U-Turn,machine,0,scarlet-violet
 Galarian Zapdos,Close Combat,level-up,65,scarlet-violet
 Galarian Zapdos,Close Combat,machine,0,scarlet-violet
 Galarian Zapdos,Brave Bird,machine,0,scarlet-violet
@@ -11436,7 +11436,7 @@ Moltres,Overheat,machine,0,scarlet-violet
 Moltres,Aerial Ace,machine,0,scarlet-violet
 Moltres,Roost,level-up,40,scarlet-violet
 Moltres,Tailwind,machine,0,scarlet-violet
-Moltres,U Turn,machine,0,scarlet-violet
+Moltres,U-Turn,machine,0,scarlet-violet
 Moltres,Flare Blitz,machine,0,scarlet-violet
 Moltres,Air Slash,level-up,35,scarlet-violet
 Moltres,Air Slash,machine,0,scarlet-violet
@@ -11486,7 +11486,7 @@ Galarian Moltres,Imprison,machine,0,scarlet-violet
 Galarian Moltres,Hyper Voice,machine,0,scarlet-violet
 Galarian Moltres,Aerial Ace,machine,0,scarlet-violet
 Galarian Moltres,Tailwind,machine,0,scarlet-violet
-Galarian Moltres,U Turn,machine,0,scarlet-violet
+Galarian Moltres,U-Turn,machine,0,scarlet-violet
 Galarian Moltres,Payback,level-up,5,scarlet-violet
 Galarian Moltres,Sucker Punch,level-up,30,scarlet-violet
 Galarian Moltres,Dark Pulse,machine,0,scarlet-violet
@@ -12150,7 +12150,7 @@ Mew,Water Pulse,machine,0,scarlet-violet
 Mew,Gravity,machine,0,scarlet-violet
 Mew,Gyro Ball,machine,0,scarlet-violet
 Mew,Tailwind,machine,0,scarlet-violet
-Mew,U Turn,machine,0,scarlet-violet
+Mew,U-Turn,machine,0,scarlet-violet
 Mew,Close Combat,machine,0,scarlet-violet
 Mew,Fling,machine,0,scarlet-violet
 Mew,Toxic Spikes,machine,0,scarlet-violet
@@ -12998,7 +12998,7 @@ Sentret,Endeavor,machine,0,scarlet-violet
 Sentret,Hyper Voice,level-up,47,scarlet-violet
 Sentret,Hyper Voice,machine,0,scarlet-violet
 Sentret,Water Pulse,machine,0,scarlet-violet
-Sentret,U Turn,machine,0,scarlet-violet
+Sentret,U-Turn,machine,0,scarlet-violet
 Sentret,Fling,machine,0,scarlet-violet
 Sentret,Last Resort,egg,0,scarlet-violet
 Sentret,Sucker Punch,level-up,31,scarlet-violet
@@ -13069,7 +13069,7 @@ Furret,Endeavor,machine,0,scarlet-violet
 Furret,Hyper Voice,level-up,56,scarlet-violet
 Furret,Hyper Voice,machine,0,scarlet-violet
 Furret,Water Pulse,machine,0,scarlet-violet
-Furret,U Turn,machine,0,scarlet-violet
+Furret,U-Turn,machine,0,scarlet-violet
 Furret,Fling,machine,0,scarlet-violet
 Furret,Last Resort,egg,0,scarlet-violet
 Furret,Sucker Punch,level-up,36,scarlet-violet
@@ -13259,7 +13259,7 @@ Ledyba,Aerial Ace,machine,0,brilliant-diamond-shining-pearl
 Ledyba,Roost,level-up,19,brilliant-diamond-shining-pearl
 Ledyba,Roost,machine,0,brilliant-diamond-shining-pearl
 Ledyba,Tailwind,egg,0,brilliant-diamond-shining-pearl
-Ledyba,U Turn,machine,0,brilliant-diamond-shining-pearl
+Ledyba,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Ledyba,Fling,machine,0,brilliant-diamond-shining-pearl
 Ledyba,Air Slash,level-up,36,brilliant-diamond-shining-pearl
 Ledyba,Bug Buzz,level-up,33,brilliant-diamond-shining-pearl
@@ -13304,7 +13304,7 @@ Ledian,Brick Break,machine,0,brilliant-diamond-shining-pearl
 Ledian,Aerial Ace,machine,0,brilliant-diamond-shining-pearl
 Ledian,Roost,level-up,20,brilliant-diamond-shining-pearl
 Ledian,Roost,machine,0,brilliant-diamond-shining-pearl
-Ledian,U Turn,machine,0,brilliant-diamond-shining-pearl
+Ledian,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Ledian,Fling,machine,0,brilliant-diamond-shining-pearl
 Ledian,Air Slash,level-up,42,brilliant-diamond-shining-pearl
 Ledian,Bug Buzz,level-up,38,brilliant-diamond-shining-pearl
@@ -13791,7 +13791,7 @@ Natu,Aerial Ace,machine,0,brilliant-diamond-shining-pearl
 Natu,Calm Mind,machine,0,brilliant-diamond-shining-pearl
 Natu,Roost,machine,0,brilliant-diamond-shining-pearl
 Natu,Pluck,machine,0,brilliant-diamond-shining-pearl
-Natu,U Turn,machine,0,brilliant-diamond-shining-pearl
+Natu,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Natu,Psycho Shift,level-up,26,brilliant-diamond-shining-pearl
 Natu,Power Swap,level-up,30,brilliant-diamond-shining-pearl
 Natu,Guard Swap,level-up,35,brilliant-diamond-shining-pearl
@@ -13842,7 +13842,7 @@ Xatu,Calm Mind,machine,0,brilliant-diamond-shining-pearl
 Xatu,Roost,machine,0,brilliant-diamond-shining-pearl
 Xatu,Pluck,machine,0,brilliant-diamond-shining-pearl
 Xatu,Tailwind,level-up,1,brilliant-diamond-shining-pearl
-Xatu,U Turn,machine,0,brilliant-diamond-shining-pearl
+Xatu,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Xatu,Psycho Shift,level-up,28,brilliant-diamond-shining-pearl
 Xatu,Power Swap,level-up,34,brilliant-diamond-shining-pearl
 Xatu,Guard Swap,level-up,34,brilliant-diamond-shining-pearl
@@ -14488,8 +14488,8 @@ Hoppip,Aerial Ace,machine,0,scarlet-violet
 Hoppip,Bounce,level-up,35,scarlet-violet
 Hoppip,Magical Leaf,machine,0,scarlet-violet
 Hoppip,Tailwind,machine,0,scarlet-violet
-Hoppip,U Turn,level-up,29,scarlet-violet
-Hoppip,U Turn,machine,0,scarlet-violet
+Hoppip,U-Turn,level-up,29,scarlet-violet
+Hoppip,U-Turn,machine,0,scarlet-violet
 Hoppip,Fling,machine,0,scarlet-violet
 Hoppip,Worry Seed,egg,0,scarlet-violet
 Hoppip,Seed Bomb,egg,0,scarlet-violet
@@ -14550,8 +14550,8 @@ Skiploom,Aerial Ace,machine,0,scarlet-violet
 Skiploom,Bounce,level-up,41,scarlet-violet
 Skiploom,Magical Leaf,machine,0,scarlet-violet
 Skiploom,Tailwind,machine,0,scarlet-violet
-Skiploom,U Turn,level-up,34,scarlet-violet
-Skiploom,U Turn,machine,0,scarlet-violet
+Skiploom,U-Turn,level-up,34,scarlet-violet
+Skiploom,U-Turn,machine,0,scarlet-violet
 Skiploom,Fling,machine,0,scarlet-violet
 Skiploom,Seed Bomb,machine,0,scarlet-violet
 Skiploom,Energy Ball,machine,0,scarlet-violet
@@ -14607,8 +14607,8 @@ Jumpluff,Aerial Ace,machine,0,scarlet-violet
 Jumpluff,Bounce,level-up,49,scarlet-violet
 Jumpluff,Magical Leaf,machine,0,scarlet-violet
 Jumpluff,Tailwind,machine,0,scarlet-violet
-Jumpluff,U Turn,level-up,39,scarlet-violet
-Jumpluff,U Turn,machine,0,scarlet-violet
+Jumpluff,U-Turn,level-up,39,scarlet-violet
+Jumpluff,U-Turn,machine,0,scarlet-violet
 Jumpluff,Fling,machine,0,scarlet-violet
 Jumpluff,Seed Bomb,machine,0,scarlet-violet
 Jumpluff,Energy Ball,machine,0,scarlet-violet
@@ -14677,7 +14677,7 @@ Aipom,Bounce,egg,0,scarlet-violet
 Aipom,Mud Shot,machine,0,scarlet-violet
 Aipom,Covet,egg,0,scarlet-violet
 Aipom,Water Pulse,machine,0,scarlet-violet
-Aipom,U Turn,machine,0,scarlet-violet
+Aipom,U-Turn,machine,0,scarlet-violet
 Aipom,Fling,level-up,36,scarlet-violet
 Aipom,Fling,machine,0,scarlet-violet
 Aipom,Last Resort,level-up,43,scarlet-violet
@@ -14835,8 +14835,8 @@ Yanma,Air Cutter,machine,0,scarlet-violet
 Yanma,Aerial Ace,machine,0,scarlet-violet
 Yanma,Feint,egg,0,scarlet-violet
 Yanma,Tailwind,machine,0,scarlet-violet
-Yanma,U Turn,level-up,49,scarlet-violet
-Yanma,U Turn,machine,0,scarlet-violet
+Yanma,U-Turn,level-up,49,scarlet-violet
+Yanma,U-Turn,machine,0,scarlet-violet
 Yanma,Air Slash,level-up,54,scarlet-violet
 Yanma,Air Slash,machine,0,scarlet-violet
 Yanma,Bug Buzz,level-up,57,scarlet-violet
@@ -15258,7 +15258,7 @@ Murkrow,Air Cutter,machine,0,scarlet-violet
 Murkrow,Aerial Ace,machine,0,scarlet-violet
 Murkrow,Calm Mind,machine,0,scarlet-violet
 Murkrow,Tailwind,machine,0,scarlet-violet
-Murkrow,U Turn,machine,0,scarlet-violet
+Murkrow,U-Turn,machine,0,scarlet-violet
 Murkrow,Assurance,level-up,25,scarlet-violet
 Murkrow,Sucker Punch,level-up,50,scarlet-violet
 Murkrow,Dark Pulse,machine,0,scarlet-violet
@@ -15926,8 +15926,8 @@ Gligar,Poison Tail,level-up,19,scarlet-violet
 Gligar,Poison Tail,machine,0,scarlet-violet
 Gligar,Feint,egg,0,scarlet-violet
 Gligar,Tailwind,machine,0,scarlet-violet
-Gligar,U Turn,level-up,30,scarlet-violet
-Gligar,U Turn,machine,0,scarlet-violet
+Gligar,U-Turn,level-up,30,scarlet-violet
+Gligar,U-Turn,machine,0,scarlet-violet
 Gligar,Fling,machine,0,scarlet-violet
 Gligar,Toxic Spikes,machine,0,scarlet-violet
 Gligar,Poison Jab,machine,0,scarlet-violet
@@ -16410,7 +16410,7 @@ Scizor,Aerial Ace,machine,0,scarlet-violet
 Scizor,Iron Defense,level-up,32,scarlet-violet
 Scizor,Iron Defense,machine,0,scarlet-violet
 Scizor,Tailwind,machine,0,scarlet-violet
-Scizor,U Turn,machine,0,scarlet-violet
+Scizor,U-Turn,machine,0,scarlet-violet
 Scizor,Close Combat,machine,0,scarlet-violet
 Scizor,Fling,machine,0,scarlet-violet
 Scizor,Air Slash,level-up,1,scarlet-violet
@@ -16479,7 +16479,7 @@ Mega Scizor,Iron Defense,tutor,0,ultra-sun-ultra-moon
 Mega Scizor,Roost,machine,0,ultra-sun-ultra-moon
 Mega Scizor,Feint,level-up,1,ultra-sun-ultra-moon
 Mega Scizor,Tailwind,tutor,0,ultra-sun-ultra-moon
-Mega Scizor,U Turn,machine,0,ultra-sun-ultra-moon
+Mega Scizor,U-Turn,machine,0,ultra-sun-ultra-moon
 Mega Scizor,Fling,machine,0,ultra-sun-ultra-moon
 Mega Scizor,Night Slash,level-up,45,ultra-sun-ultra-moon
 Mega Scizor,X Scissor,level-up,41,ultra-sun-ultra-moon
@@ -19165,7 +19165,7 @@ Celebi,Calm Mind,machine,0,brilliant-diamond-shining-pearl
 Celebi,Shock Wave,machine,0,brilliant-diamond-shining-pearl
 Celebi,Water Pulse,machine,0,brilliant-diamond-shining-pearl
 Celebi,Healing Wish,level-up,80,brilliant-diamond-shining-pearl
-Celebi,U Turn,machine,0,brilliant-diamond-shining-pearl
+Celebi,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Celebi,Fling,machine,0,brilliant-diamond-shining-pearl
 Celebi,Energy Ball,machine,0,brilliant-diamond-shining-pearl
 Celebi,Giga Impact,machine,0,brilliant-diamond-shining-pearl
@@ -19674,7 +19674,7 @@ Blaziken,Bulk Up,level-up,42,scarlet-violet
 Blaziken,Bulk Up,machine,0,scarlet-violet
 Blaziken,Bounce,level-up,30,scarlet-violet
 Blaziken,Feint,egg,0,scarlet-violet
-Blaziken,U Turn,machine,0,scarlet-violet
+Blaziken,U-Turn,machine,0,scarlet-violet
 Blaziken,Close Combat,machine,0,scarlet-violet
 Blaziken,Fling,machine,0,scarlet-violet
 Blaziken,Last Resort,egg,0,scarlet-violet
@@ -20913,7 +20913,7 @@ Taillow,Aerial Ace,level-up,21,brilliant-diamond-shining-pearl
 Taillow,Aerial Ace,machine,0,brilliant-diamond-shining-pearl
 Taillow,Roost,machine,0,brilliant-diamond-shining-pearl
 Taillow,Pluck,machine,0,brilliant-diamond-shining-pearl
-Taillow,U Turn,machine,0,brilliant-diamond-shining-pearl
+Taillow,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Taillow,Air Slash,level-up,33,brilliant-diamond-shining-pearl
 Taillow,Brave Bird,level-up,41,brilliant-diamond-shining-pearl
 Taillow,Brave Bird,egg,0,brilliant-diamond-shining-pearl
@@ -20951,7 +20951,7 @@ Swellow,Aerial Ace,machine,0,brilliant-diamond-shining-pearl
 Swellow,Roost,machine,0,brilliant-diamond-shining-pearl
 Swellow,Pluck,level-up,1,brilliant-diamond-shining-pearl
 Swellow,Pluck,machine,0,brilliant-diamond-shining-pearl
-Swellow,U Turn,machine,0,brilliant-diamond-shining-pearl
+Swellow,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Swellow,Air Slash,level-up,1,brilliant-diamond-shining-pearl
 Swellow,Brave Bird,level-up,1,brilliant-diamond-shining-pearl
 Swellow,Giga Impact,machine,0,brilliant-diamond-shining-pearl
@@ -20999,7 +20999,7 @@ Wingull,Water Pulse,level-up,20,scarlet-violet
 Wingull,Water Pulse,machine,0,scarlet-violet
 Wingull,Roost,level-up,40,scarlet-violet
 Wingull,Tailwind,machine,0,scarlet-violet
-Wingull,U Turn,machine,0,scarlet-violet
+Wingull,U-Turn,machine,0,scarlet-violet
 Wingull,Aqua Ring,egg,0,scarlet-violet
 Wingull,Air Slash,level-up,30,scarlet-violet
 Wingull,Air Slash,machine,0,scarlet-violet
@@ -21059,7 +21059,7 @@ Pelipper,Water Pulse,machine,0,scarlet-violet
 Pelipper,Roost,level-up,48,scarlet-violet
 Pelipper,Tailwind,level-up,1,scarlet-violet
 Pelipper,Tailwind,machine,0,scarlet-violet
-Pelipper,U Turn,machine,0,scarlet-violet
+Pelipper,U-Turn,machine,0,scarlet-violet
 Pelipper,Fling,level-up,34,scarlet-violet
 Pelipper,Fling,machine,0,scarlet-violet
 Pelipper,Seed Bomb,machine,0,scarlet-violet
@@ -21497,7 +21497,7 @@ Masquerain,Aerial Ace,machine,0,scarlet-violet
 Masquerain,Mud Shot,machine,0,scarlet-violet
 Masquerain,Water Pulse,machine,0,scarlet-violet
 Masquerain,Tailwind,machine,0,scarlet-violet
-Masquerain,U Turn,machine,0,scarlet-violet
+Masquerain,U-Turn,machine,0,scarlet-violet
 Masquerain,Air Slash,level-up,32,scarlet-violet
 Masquerain,Air Slash,machine,0,scarlet-violet
 Masquerain,Bug Buzz,level-up,44,scarlet-violet
@@ -21955,7 +21955,7 @@ Ninjask,Facade,machine,0,brilliant-diamond-shining-pearl
 Ninjask,Aerial Ace,level-up,1,brilliant-diamond-shining-pearl
 Ninjask,Aerial Ace,machine,0,brilliant-diamond-shining-pearl
 Ninjask,Roost,machine,0,brilliant-diamond-shining-pearl
-Ninjask,U Turn,machine,0,brilliant-diamond-shining-pearl
+Ninjask,U-Turn,machine,0,brilliant-diamond-shining-pearl
 Ninjask,X Scissor,level-up,64,brilliant-diamond-shining-pearl
 Ninjask,X Scissor,machine,0,brilliant-diamond-shining-pearl
 Ninjask,Bug Buzz,machine,0,brilliant-diamond-shining-pearl
@@ -23685,7 +23685,7 @@ Volbeat,Aerial Ace,machine,0,scarlet-violet
 Volbeat,Water Pulse,machine,0,scarlet-violet
 Volbeat,Roost,egg,0,scarlet-violet
 Volbeat,Tailwind,machine,0,scarlet-violet
-Volbeat,U Turn,machine,0,scarlet-violet
+Volbeat,U-Turn,machine,0,scarlet-violet
 Volbeat,Fling,machine,0,scarlet-violet
 Volbeat,Air Slash,machine,0,scarlet-violet
 Volbeat,Bug Buzz,level-up,36,scarlet-violet
@@ -23757,7 +23757,7 @@ Illumise,Aerial Ace,machine,0,scarlet-violet
 Illumise,Water Pulse,machine,0,scarlet-violet
 Illumise,Roost,egg,0,scarlet-violet
 Illumise,Tailwind,machine,0,scarlet-violet
-Illumise,U Turn,machine,0,scarlet-violet
+Illumise,U-Turn,machine,0,scarlet-violet
 Illumise,Fling,machine,0,scarlet-violet
 Illumise,Air Slash,machine,0,scarlet-violet
 Illumise,Bug Buzz,level-up,40,scarlet-violet
@@ -24761,7 +24761,7 @@ Vibrava,Dragon Claw,machine,0,scarlet-violet
 Vibrava,Mud Shot,machine,0,scarlet-violet
 Vibrava,Feint,egg,0,scarlet-violet
 Vibrava,Tailwind,machine,0,scarlet-violet
-Vibrava,U Turn,machine,0,scarlet-violet
+Vibrava,U-Turn,machine,0,scarlet-violet
 Vibrava,Air Slash,machine,0,scarlet-violet
 Vibrava,Bug Buzz,level-up,28,scarlet-violet
 Vibrava,Bug Buzz,machine,0,scarlet-violet
@@ -24847,7 +24847,7 @@ Flygon,Dragon Dance,egg,0,scarlet-violet
 Flygon,Dragon Dance,machine,0,scarlet-violet
 Flygon,Feint,egg,0,scarlet-violet
 Flygon,Tailwind,machine,0,scarlet-violet
-Flygon,U Turn,machine,0,scarlet-violet
+Flygon,U-Turn,machine,0,scarlet-violet
 Flygon,Air Slash,machine,0,scarlet-violet
 Flygon,Bug Buzz,level-up,28,scarlet-violet
 Flygon,Bug Buzz,machine,0,scarlet-violet
@@ -27047,7 +27047,7 @@ Tropius,Leaf Blade,egg,0,scarlet-violet
 Tropius,Dragon Dance,egg,0,scarlet-violet
 Tropius,Dragon Dance,machine,0,scarlet-violet
 Tropius,Tailwind,machine,0,scarlet-violet
-Tropius,U Turn,machine,0,scarlet-violet
+Tropius,U-Turn,machine,0,scarlet-violet
 Tropius,Seed Bomb,machine,0,scarlet-violet
 Tropius,Air Slash,level-up,36,scarlet-violet
 Tropius,Air Slash,machine,0,scarlet-violet
@@ -29013,7 +29013,7 @@ Rayquaza,Dragon Dance,level-up,18,scarlet-violet
 Rayquaza,Dragon Dance,machine,0,scarlet-violet
 Rayquaza,Gyro Ball,machine,0,scarlet-violet
 Rayquaza,Tailwind,machine,0,scarlet-violet
-Rayquaza,U Turn,machine,0,scarlet-violet
+Rayquaza,U-Turn,machine,0,scarlet-violet
 Rayquaza,Fling,machine,0,scarlet-violet
 Rayquaza,Air Slash,level-up,1,scarlet-violet
 Rayquaza,Air Slash,machine,0,scarlet-violet
@@ -29177,7 +29177,7 @@ Jirachi,Doom Desire,level-up,98,scarlet-violet
 Jirachi,Gravity,level-up,35,scarlet-violet
 Jirachi,Gravity,machine,0,scarlet-violet
 Jirachi,Healing Wish,level-up,56,scarlet-violet
-Jirachi,U Turn,machine,0,scarlet-violet
+Jirachi,U-Turn,machine,0,scarlet-violet
 Jirachi,Fling,machine,0,scarlet-violet
 Jirachi,Last Resort,level-up,91,scarlet-violet
 Jirachi,Aura Sphere,machine,0,scarlet-violet
@@ -30134,7 +30134,7 @@ Chimchar,Fake Tears,machine,0,scarlet-violet
 Chimchar,Overheat,machine,0,scarlet-violet
 Chimchar,Rock Tomb,machine,0,scarlet-violet
 Chimchar,Bulk Up,machine,0,scarlet-violet
-Chimchar,U Turn,machine,0,scarlet-violet
+Chimchar,U-Turn,machine,0,scarlet-violet
 Chimchar,Fling,machine,0,scarlet-violet
 Chimchar,Flare Blitz,machine,0,scarlet-violet
 Chimchar,Poison Jab,machine,0,scarlet-violet
@@ -30214,7 +30214,7 @@ Monferno,Overheat,machine,0,scarlet-violet
 Monferno,Rock Tomb,machine,0,scarlet-violet
 Monferno,Bulk Up,machine,0,scarlet-violet
 Monferno,Feint,level-up,26,scarlet-violet
-Monferno,U Turn,machine,0,scarlet-violet
+Monferno,U-Turn,machine,0,scarlet-violet
 Monferno,Close Combat,level-up,36,scarlet-violet
 Monferno,Close Combat,machine,0,scarlet-violet
 Monferno,Fling,machine,0,scarlet-violet
@@ -30311,7 +30311,7 @@ Infernape,Bulk Up,machine,0,scarlet-violet
 Infernape,Calm Mind,level-up,58,scarlet-violet
 Infernape,Calm Mind,machine,0,scarlet-violet
 Infernape,Feint,level-up,26,scarlet-violet
-Infernape,U Turn,machine,0,scarlet-violet
+Infernape,U-Turn,machine,0,scarlet-violet
 Infernape,Close Combat,level-up,0,scarlet-violet
 Infernape,Close Combat,machine,0,scarlet-violet
 Infernape,Fling,machine,0,scarlet-violet
@@ -30593,7 +30593,7 @@ Starly,Air Cutter,machine,0,scarlet-violet
 Starly,Aerial Ace,level-up,25,scarlet-violet
 Starly,Aerial Ace,machine,0,scarlet-violet
 Starly,Tailwind,machine,0,scarlet-violet
-Starly,U Turn,machine,0,scarlet-violet
+Starly,U-Turn,machine,0,scarlet-violet
 Starly,Air Slash,machine,0,scarlet-violet
 Starly,Brave Bird,level-up,37,scarlet-violet
 Starly,Brave Bird,machine,0,scarlet-violet
@@ -30634,7 +30634,7 @@ Staravia,Air Cutter,machine,0,scarlet-violet
 Staravia,Aerial Ace,level-up,28,scarlet-violet
 Staravia,Aerial Ace,machine,0,scarlet-violet
 Staravia,Tailwind,machine,0,scarlet-violet
-Staravia,U Turn,machine,0,scarlet-violet
+Staravia,U-Turn,machine,0,scarlet-violet
 Staravia,Air Slash,machine,0,scarlet-violet
 Staravia,Brave Bird,level-up,43,scarlet-violet
 Staravia,Brave Bird,machine,0,scarlet-violet
@@ -30676,7 +30676,7 @@ Staraptor,Air Cutter,machine,0,scarlet-violet
 Staraptor,Aerial Ace,level-up,28,scarlet-violet
 Staraptor,Aerial Ace,machine,0,scarlet-violet
 Staraptor,Tailwind,machine,0,scarlet-violet
-Staraptor,U Turn,machine,0,scarlet-violet
+Staraptor,U-Turn,machine,0,scarlet-violet
 Staraptor,Close Combat,level-up,0,scarlet-violet
 Staraptor,Close Combat,machine,0,scarlet-violet
 Staraptor,Air Slash,machine,0,scarlet-violet
@@ -31380,7 +31380,7 @@ Vespiquen,Helping Hand,machine,0,scarlet-violet
 Vespiquen,Endeavor,machine,0,scarlet-violet
 Vespiquen,Aerial Ace,machine,0,scarlet-violet
 Vespiquen,Roost,level-up,24,scarlet-violet
-Vespiquen,U Turn,machine,0,scarlet-violet
+Vespiquen,U-Turn,machine,0,scarlet-violet
 Vespiquen,Fling,machine,0,scarlet-violet
 Vespiquen,Toxic Spikes,machine,0,scarlet-violet
 Vespiquen,Air Slash,level-up,28,scarlet-violet
@@ -31460,7 +31460,7 @@ Pachirisu,Fake Tears,machine,0,scarlet-violet
 Pachirisu,Aerial Ace,machine,0,scarlet-violet
 Pachirisu,Mud Shot,machine,0,scarlet-violet
 Pachirisu,Covet,egg,0,scarlet-violet
-Pachirisu,U Turn,machine,0,scarlet-violet
+Pachirisu,U-Turn,machine,0,scarlet-violet
 Pachirisu,Fling,machine,0,scarlet-violet
 Pachirisu,Last Resort,level-up,45,scarlet-violet
 Pachirisu,Seed Bomb,machine,0,scarlet-violet
@@ -31797,7 +31797,7 @@ Ambipom,Bounce,egg,0,scarlet-violet
 Ambipom,Mud Shot,machine,0,scarlet-violet
 Ambipom,Covet,egg,0,scarlet-violet
 Ambipom,Water Pulse,machine,0,scarlet-violet
-Ambipom,U Turn,machine,0,scarlet-violet
+Ambipom,U-Turn,machine,0,scarlet-violet
 Ambipom,Fling,level-up,36,scarlet-violet
 Ambipom,Fling,machine,0,scarlet-violet
 Ambipom,Last Resort,level-up,43,scarlet-violet
@@ -32145,7 +32145,7 @@ Honchkrow,Air Cutter,machine,0,scarlet-violet
 Honchkrow,Aerial Ace,machine,0,scarlet-violet
 Honchkrow,Calm Mind,machine,0,scarlet-violet
 Honchkrow,Tailwind,machine,0,scarlet-violet
-Honchkrow,U Turn,machine,0,scarlet-violet
+Honchkrow,U-Turn,machine,0,scarlet-violet
 Honchkrow,Sucker Punch,level-up,1,scarlet-violet
 Honchkrow,Dark Pulse,level-up,55,scarlet-violet
 Honchkrow,Dark Pulse,machine,0,scarlet-violet
@@ -33574,8 +33574,8 @@ Finneon,Water Pulse,level-up,22,scarlet-violet
 Finneon,Water Pulse,machine,0,scarlet-violet
 Finneon,Tailwind,level-up,49,scarlet-violet
 Finneon,Tailwind,machine,0,scarlet-violet
-Finneon,U Turn,level-up,42,scarlet-violet
-Finneon,U Turn,machine,0,scarlet-violet
+Finneon,U-Turn,level-up,42,scarlet-violet
+Finneon,U-Turn,machine,0,scarlet-violet
 Finneon,Aqua Ring,level-up,33,scarlet-violet
 Finneon,Aqua Tail,egg,0,scarlet-violet
 Finneon,Soak,level-up,54,scarlet-violet
@@ -33623,8 +33623,8 @@ Lumineon,Water Pulse,level-up,22,scarlet-violet
 Lumineon,Water Pulse,machine,0,scarlet-violet
 Lumineon,Tailwind,level-up,59,scarlet-violet
 Lumineon,Tailwind,machine,0,scarlet-violet
-Lumineon,U Turn,level-up,48,scarlet-violet
-Lumineon,U Turn,machine,0,scarlet-violet
+Lumineon,U-Turn,level-up,48,scarlet-violet
+Lumineon,U-Turn,machine,0,scarlet-violet
 Lumineon,Aqua Ring,level-up,35,scarlet-violet
 Lumineon,Air Slash,machine,0,scarlet-violet
 Lumineon,Giga Impact,machine,0,scarlet-violet
@@ -34280,8 +34280,8 @@ Yanmega,Aerial Ace,machine,0,scarlet-violet
 Yanmega,Feint,level-up,38,scarlet-violet
 Yanmega,Feint,egg,0,scarlet-violet
 Yanmega,Tailwind,machine,0,scarlet-violet
-Yanmega,U Turn,level-up,49,scarlet-violet
-Yanmega,U Turn,machine,0,scarlet-violet
+Yanmega,U-Turn,level-up,49,scarlet-violet
+Yanmega,U-Turn,machine,0,scarlet-violet
 Yanmega,Night Slash,level-up,1,scarlet-violet
 Yanmega,Air Slash,level-up,1,scarlet-violet
 Yanmega,Air Slash,machine,0,scarlet-violet
@@ -34479,8 +34479,8 @@ Gliscor,Mud Shot,machine,0,scarlet-violet
 Gliscor,Poison Tail,machine,0,scarlet-violet
 Gliscor,Feint,egg,0,scarlet-violet
 Gliscor,Tailwind,machine,0,scarlet-violet
-Gliscor,U Turn,level-up,30,scarlet-violet
-Gliscor,U Turn,machine,0,scarlet-violet
+Gliscor,U-Turn,level-up,30,scarlet-violet
+Gliscor,U-Turn,machine,0,scarlet-violet
 Gliscor,Fling,machine,0,scarlet-violet
 Gliscor,Toxic Spikes,machine,0,scarlet-violet
 Gliscor,Poison Jab,level-up,1,scarlet-violet
@@ -35730,7 +35730,7 @@ Uxie,Imprison,machine,0,scarlet-violet
 Uxie,Extrasensory,level-up,35,scarlet-violet
 Uxie,Calm Mind,machine,0,scarlet-violet
 Uxie,Water Pulse,machine,0,scarlet-violet
-Uxie,U Turn,machine,0,scarlet-violet
+Uxie,U-Turn,machine,0,scarlet-violet
 Uxie,Fling,machine,0,scarlet-violet
 Uxie,Drain Punch,machine,0,scarlet-violet
 Uxie,Energy Ball,machine,0,scarlet-violet
@@ -35804,7 +35804,7 @@ Mesprit,Extrasensory,level-up,35,scarlet-violet
 Mesprit,Calm Mind,machine,0,scarlet-violet
 Mesprit,Water Pulse,machine,0,scarlet-violet
 Mesprit,Healing Wish,level-up,77,scarlet-violet
-Mesprit,U Turn,machine,0,scarlet-violet
+Mesprit,U-Turn,machine,0,scarlet-violet
 Mesprit,Fling,machine,0,scarlet-violet
 Mesprit,Copycat,level-up,70,scarlet-violet
 Mesprit,Drain Punch,machine,0,scarlet-violet
@@ -35878,7 +35878,7 @@ Azelf,Imprison,machine,0,scarlet-violet
 Azelf,Extrasensory,level-up,35,scarlet-violet
 Azelf,Calm Mind,machine,0,scarlet-violet
 Azelf,Water Pulse,machine,0,scarlet-violet
-Azelf,U Turn,machine,0,scarlet-violet
+Azelf,U-Turn,machine,0,scarlet-violet
 Azelf,Fling,machine,0,scarlet-violet
 Azelf,Last Resort,level-up,70,scarlet-violet
 Azelf,Drain Punch,machine,0,scarlet-violet
@@ -36796,7 +36796,7 @@ Phione,Dive,level-up,61,scarlet-violet
 Phione,Weather Ball,machine,0,scarlet-violet
 Phione,Water Pulse,level-up,46,scarlet-violet
 Phione,Water Pulse,machine,0,scarlet-violet
-Phione,U Turn,machine,0,scarlet-violet
+Phione,U-Turn,machine,0,scarlet-violet
 Phione,Fling,machine,0,scarlet-violet
 Phione,Aqua Ring,level-up,54,scarlet-violet
 Phione,Zen Headbutt,machine,0,scarlet-violet
@@ -36853,7 +36853,7 @@ Manaphy,Fake Tears,machine,0,scarlet-violet
 Manaphy,Calm Mind,machine,0,scarlet-violet
 Manaphy,Water Pulse,level-up,46,scarlet-violet
 Manaphy,Water Pulse,machine,0,scarlet-violet
-Manaphy,U Turn,machine,0,scarlet-violet
+Manaphy,U-Turn,machine,0,scarlet-violet
 Manaphy,Fling,machine,0,scarlet-violet
 Manaphy,Heart Swap,level-up,1,scarlet-violet
 Manaphy,Aqua Ring,level-up,54,scarlet-violet
@@ -37310,7 +37310,7 @@ Victini,Blaze Kick,machine,0,sword-shield
 Victini,Overheat,level-up,84,sword-shield
 Victini,Overheat,machine,0,sword-shield
 Victini,Bounce,machine,0,sword-shield
-Victini,U Turn,machine,0,sword-shield
+Victini,U-Turn,machine,0,sword-shield
 Victini,Fling,machine,0,sword-shield
 Victini,Power Swap,machine,0,sword-shield
 Victini,Guard Swap,machine,0,sword-shield
@@ -38331,7 +38331,7 @@ Purrloin,Yawn,egg,0,sword-shield
 Purrloin,Hyper Voice,machine,0,sword-shield
 Purrloin,Fake Tears,machine,0,sword-shield
 Purrloin,Covet,egg,0,sword-shield
-Purrloin,U Turn,machine,0,sword-shield
+Purrloin,U-Turn,machine,0,sword-shield
 Purrloin,Payback,machine,0,sword-shield
 Purrloin,Assurance,level-up,21,sword-shield
 Purrloin,Assurance,machine,0,sword-shield
@@ -38383,7 +38383,7 @@ Liepard,Taunt,machine,0,sword-shield
 Liepard,Trick,machine,0,sword-shield
 Liepard,Hyper Voice,machine,0,sword-shield
 Liepard,Fake Tears,machine,0,sword-shield
-Liepard,U Turn,machine,0,sword-shield
+Liepard,U-Turn,machine,0,sword-shield
 Liepard,Payback,machine,0,sword-shield
 Liepard,Assurance,level-up,23,sword-shield
 Liepard,Assurance,machine,0,sword-shield
@@ -38961,7 +38961,7 @@ Pidove,Feather Dance,level-up,24,sword-shield
 Pidove,Air Cutter,level-up,16,sword-shield
 Pidove,Roost,level-up,36,sword-shield
 Pidove,Tailwind,level-up,40,sword-shield
-Pidove,U Turn,machine,0,sword-shield
+Pidove,U-Turn,machine,0,sword-shield
 Pidove,Night Slash,egg,0,sword-shield
 Pidove,Air Slash,level-up,32,sword-shield
 Pidove,Air Slash,machine,0,sword-shield
@@ -38999,7 +38999,7 @@ Tranquill,Feather Dance,level-up,26,sword-shield
 Tranquill,Air Cutter,level-up,16,sword-shield
 Tranquill,Roost,level-up,44,sword-shield
 Tranquill,Tailwind,level-up,50,sword-shield
-Tranquill,U Turn,machine,0,sword-shield
+Tranquill,U-Turn,machine,0,sword-shield
 Tranquill,Air Slash,level-up,38,sword-shield
 Tranquill,Air Slash,machine,0,sword-shield
 Tranquill,Round,machine,0,sword-shield
@@ -39036,7 +39036,7 @@ Unfezant,Feather Dance,level-up,26,sword-shield
 Unfezant,Air Cutter,level-up,16,sword-shield
 Unfezant,Roost,level-up,50,sword-shield
 Unfezant,Tailwind,level-up,58,sword-shield
-Unfezant,U Turn,machine,0,sword-shield
+Unfezant,U-Turn,machine,0,sword-shield
 Unfezant,Air Slash,level-up,42,sword-shield
 Unfezant,Air Slash,machine,0,sword-shield
 Unfezant,Brave Bird,machine,0,sword-shield
@@ -39332,7 +39332,7 @@ Woobat,Calm Mind,level-up,45,sword-shield
 Woobat,Calm Mind,machine,0,sword-shield
 Woobat,Roost,egg,0,sword-shield
 Woobat,Gyro Ball,machine,0,sword-shield
-Woobat,U Turn,machine,0,sword-shield
+Woobat,U-Turn,machine,0,sword-shield
 Woobat,Assurance,level-up,25,sword-shield
 Woobat,Assurance,machine,0,sword-shield
 Woobat,Psycho Shift,egg,0,sword-shield
@@ -39398,7 +39398,7 @@ Swoobat,Air Cutter,level-up,15,sword-shield
 Swoobat,Calm Mind,level-up,45,sword-shield
 Swoobat,Calm Mind,machine,0,sword-shield
 Swoobat,Gyro Ball,machine,0,sword-shield
-Swoobat,U Turn,machine,0,sword-shield
+Swoobat,U-Turn,machine,0,sword-shield
 Swoobat,Assurance,level-up,25,sword-shield
 Swoobat,Assurance,machine,0,sword-shield
 Swoobat,Air Slash,level-up,35,sword-shield
@@ -40556,7 +40556,7 @@ Whimsicott,Fake Tears,machine,0,scarlet-violet
 Whimsicott,Tickle,egg,0,scarlet-violet
 Whimsicott,Tailwind,level-up,1,scarlet-violet
 Whimsicott,Tailwind,machine,0,scarlet-violet
-Whimsicott,U Turn,machine,0,scarlet-violet
+Whimsicott,U-Turn,machine,0,scarlet-violet
 Whimsicott,Fling,machine,0,scarlet-violet
 Whimsicott,Worry Seed,egg,0,scarlet-violet
 Whimsicott,Seed Bomb,machine,0,scarlet-violet
@@ -41322,7 +41322,7 @@ Darumaka,Rock Tomb,machine,0,sword-shield
 Darumaka,Extrasensory,egg,0,sword-shield
 Darumaka,Hammer Arm,egg,0,sword-shield
 Darumaka,Gyro Ball,machine,0,sword-shield
-Darumaka,U Turn,machine,0,sword-shield
+Darumaka,U-Turn,machine,0,sword-shield
 Darumaka,Fling,machine,0,sword-shield
 Darumaka,Flare Blitz,level-up,40,sword-shield
 Darumaka,Flare Blitz,machine,0,sword-shield
@@ -41383,7 +41383,7 @@ Galarian Darumaka,Overheat,machine,0,sword-shield
 Galarian Darumaka,Rock Tomb,machine,0,sword-shield
 Galarian Darumaka,Hammer Arm,egg,0,sword-shield
 Galarian Darumaka,Gyro Ball,machine,0,sword-shield
-Galarian Darumaka,U Turn,machine,0,sword-shield
+Galarian Darumaka,U-Turn,machine,0,sword-shield
 Galarian Darumaka,Fling,machine,0,sword-shield
 Galarian Darumaka,Flare Blitz,machine,0,sword-shield
 Galarian Darumaka,Avalanche,level-up,12,sword-shield
@@ -41500,7 +41500,7 @@ Standard Mode",Hammer Arm,level-up,0,sword-shield
 "Darmanitan
 Standard Mode",Gyro Ball,machine,0,sword-shield
 "Darmanitan
-Standard Mode",U Turn,machine,0,sword-shield
+Standard Mode",U-Turn,machine,0,sword-shield
 "Darmanitan
 Standard Mode",Payback,machine,0,sword-shield
 "Darmanitan
@@ -41650,7 +41650,7 @@ Zen Mode",Hammer Arm,level-up,0,sword-shield
 "Darmanitan
 Zen Mode",Gyro Ball,machine,0,sword-shield
 "Darmanitan
-Zen Mode",U Turn,machine,0,sword-shield
+Zen Mode",U-Turn,machine,0,sword-shield
 "Darmanitan
 Zen Mode",Payback,machine,0,sword-shield
 "Darmanitan
@@ -41802,7 +41802,7 @@ Galarian Standard Mode",Bulk Up,machine,0,sword-shield
 "Darmanitan
 Galarian Standard Mode",Gyro Ball,machine,0,sword-shield
 "Darmanitan
-Galarian Standard Mode",U Turn,machine,0,sword-shield
+Galarian Standard Mode",U-Turn,machine,0,sword-shield
 "Darmanitan
 Galarian Standard Mode",Payback,machine,0,sword-shield
 "Darmanitan
@@ -41950,7 +41950,7 @@ Galarian Zen Mode",Bulk Up,machine,0,sword-shield
 "Darmanitan
 Galarian Zen Mode",Gyro Ball,machine,0,sword-shield
 "Darmanitan
-Galarian Zen Mode",U Turn,machine,0,sword-shield
+Galarian Zen Mode",U-Turn,machine,0,sword-shield
 "Darmanitan
 Galarian Zen Mode",Payback,machine,0,sword-shield
 "Darmanitan
@@ -42713,8 +42713,8 @@ Archen,Bounce,machine,0,sword-shield
 Archen,Rock Blast,machine,0,sword-shield
 Archen,Pluck,level-up,15,sword-shield
 Archen,Tailwind,level-up,36,sword-shield
-Archen,U Turn,level-up,21,sword-shield
-Archen,U Turn,machine,0,sword-shield
+Archen,U-Turn,level-up,21,sword-shield
+Archen,U-Turn,machine,0,sword-shield
 Archen,Assurance,machine,0,sword-shield
 Archen,Dragon Pulse,machine,0,sword-shield
 Archen,Earth Power,machine,0,sword-shield
@@ -42777,8 +42777,8 @@ Archeops,Bounce,machine,0,sword-shield
 Archeops,Rock Blast,machine,0,sword-shield
 Archeops,Pluck,level-up,15,sword-shield
 Archeops,Tailwind,level-up,36,sword-shield
-Archeops,U Turn,level-up,21,sword-shield
-Archeops,U Turn,machine,0,sword-shield
+Archeops,U-Turn,level-up,21,sword-shield
+Archeops,U-Turn,machine,0,sword-shield
 Archeops,Assurance,machine,0,sword-shield
 Archeops,Air Slash,machine,0,sword-shield
 Archeops,Dragon Pulse,machine,0,sword-shield
@@ -42952,7 +42952,7 @@ Zorua,Fake Tears,level-up,28,scarlet-violet
 Zorua,Fake Tears,machine,0,scarlet-violet
 Zorua,Extrasensory,egg,0,scarlet-violet
 Zorua,Calm Mind,machine,0,scarlet-violet
-Zorua,U Turn,machine,0,scarlet-violet
+Zorua,U-Turn,machine,0,scarlet-violet
 Zorua,Fling,machine,0,scarlet-violet
 Zorua,Copycat,egg,0,scarlet-violet
 Zorua,Sucker Punch,egg,0,scarlet-violet
@@ -43014,7 +43014,7 @@ Hisuian Zorua,Imprison,machine,0,scarlet-violet
 Hisuian Zorua,Fake Tears,machine,0,scarlet-violet
 Hisuian Zorua,Extrasensory,egg,0,scarlet-violet
 Hisuian Zorua,Calm Mind,machine,0,scarlet-violet
-Hisuian Zorua,U Turn,machine,0,scarlet-violet
+Hisuian Zorua,U-Turn,machine,0,scarlet-violet
 Hisuian Zorua,Fling,machine,0,scarlet-violet
 Hisuian Zorua,Dark Pulse,machine,0,scarlet-violet
 Hisuian Zorua,Giga Impact,machine,0,scarlet-violet
@@ -43084,8 +43084,8 @@ Zoroark,Fake Tears,level-up,28,scarlet-violet
 Zoroark,Fake Tears,machine,0,scarlet-violet
 Zoroark,Aerial Ace,machine,0,scarlet-violet
 Zoroark,Calm Mind,machine,0,scarlet-violet
-Zoroark,U Turn,level-up,1,scarlet-violet
-Zoroark,U Turn,machine,0,scarlet-violet
+Zoroark,U-Turn,level-up,1,scarlet-violet
+Zoroark,U-Turn,machine,0,scarlet-violet
 Zoroark,Fling,machine,0,scarlet-violet
 Zoroark,Dark Pulse,machine,0,scarlet-violet
 Zoroark,Night Slash,level-up,0,scarlet-violet
@@ -43158,8 +43158,8 @@ Hisuian Zoroark,Hyper Voice,machine,0,scarlet-violet
 Hisuian Zoroark,Fake Tears,machine,0,scarlet-violet
 Hisuian Zoroark,Aerial Ace,machine,0,scarlet-violet
 Hisuian Zoroark,Calm Mind,machine,0,scarlet-violet
-Hisuian Zoroark,U Turn,level-up,1,scarlet-violet
-Hisuian Zoroark,U Turn,machine,0,scarlet-violet
+Hisuian Zoroark,U-Turn,level-up,1,scarlet-violet
+Hisuian Zoroark,U-Turn,machine,0,scarlet-violet
 Hisuian Zoroark,Fling,machine,0,scarlet-violet
 Hisuian Zoroark,Dark Pulse,machine,0,scarlet-violet
 Hisuian Zoroark,Focus Blast,machine,0,scarlet-violet
@@ -43224,7 +43224,7 @@ Minccino,Fake Tears,machine,0,scarlet-violet
 Minccino,Tickle,level-up,36,scarlet-violet
 Minccino,Bullet Seed,machine,0,scarlet-violet
 Minccino,Calm Mind,machine,0,scarlet-violet
-Minccino,U Turn,machine,0,scarlet-violet
+Minccino,U-Turn,machine,0,scarlet-violet
 Minccino,Fling,machine,0,scarlet-violet
 Minccino,Last Resort,level-up,48,scarlet-violet
 Minccino,Aqua Tail,egg,0,scarlet-violet
@@ -43289,7 +43289,7 @@ Cinccino,Bullet Seed,machine,0,scarlet-violet
 Cinccino,Calm Mind,machine,0,scarlet-violet
 Cinccino,Rock Blast,egg,0,scarlet-violet
 Cinccino,Rock Blast,machine,0,scarlet-violet
-Cinccino,U Turn,machine,0,scarlet-violet
+Cinccino,U-Turn,machine,0,scarlet-violet
 Cinccino,Fling,machine,0,scarlet-violet
 Cinccino,Last Resort,egg,0,scarlet-violet
 Cinccino,Aqua Tail,egg,0,scarlet-violet
@@ -44079,7 +44079,7 @@ Emolga,Tickle,egg,0,sword-shield
 Emolga,Covet,egg,0,sword-shield
 Emolga,Shock Wave,egg,0,sword-shield
 Emolga,Roost,egg,0,sword-shield
-Emolga,U Turn,machine,0,sword-shield
+Emolga,U-Turn,machine,0,sword-shield
 Emolga,Fling,machine,0,sword-shield
 Emolga,Air Slash,machine,0,sword-shield
 Emolga,Energy Ball,machine,0,sword-shield
@@ -44822,7 +44822,7 @@ Eelektrik,Crunch,machine,0,scarlet-violet
 Eelektrik,Facade,machine,0,scarlet-violet
 Eelektrik,Charge,machine,0,scarlet-violet
 Eelektrik,Knock Off,machine,0,scarlet-violet
-Eelektrik,U Turn,machine,0,scarlet-violet
+Eelektrik,U-Turn,machine,0,scarlet-violet
 Eelektrik,Gastro Acid,level-up,64,scarlet-violet
 Eelektrik,Thunder Fang,machine,0,scarlet-violet
 Eelektrik,Flash Cannon,machine,0,scarlet-violet
@@ -44882,7 +44882,7 @@ Eelektross,Crush Claw,level-up,1,scarlet-violet
 Eelektross,Rock Tomb,machine,0,scarlet-violet
 Eelektross,Dragon Claw,machine,0,scarlet-violet
 Eelektross,Bulk Up,machine,0,scarlet-violet
-Eelektross,U Turn,machine,0,scarlet-violet
+Eelektross,U-Turn,machine,0,scarlet-violet
 Eelektross,Close Combat,machine,0,scarlet-violet
 Eelektross,Gastro Acid,level-up,1,scarlet-violet
 Eelektross,Dragon Pulse,machine,0,scarlet-violet
@@ -45701,8 +45701,8 @@ Accelgor,Rain Dance,machine,0,sword-shield
 Accelgor,Facade,machine,0,sword-shield
 Accelgor,Yawn,level-up,1,sword-shield
 Accelgor,Mud Shot,machine,0,sword-shield
-Accelgor,U Turn,level-up,36,sword-shield
-Accelgor,U Turn,machine,0,sword-shield
+Accelgor,U-Turn,level-up,36,sword-shield
+Accelgor,U-Turn,machine,0,sword-shield
 Accelgor,Power Swap,level-up,32,sword-shield
 Accelgor,Power Swap,machine,0,sword-shield
 Accelgor,Guard Swap,level-up,1,sword-shield
@@ -45882,8 +45882,8 @@ Mienfoo,Bounce,level-up,51,scarlet-violet
 Mienfoo,Calm Mind,level-up,55,scarlet-violet
 Mienfoo,Calm Mind,machine,0,scarlet-violet
 Mienfoo,Feint,egg,0,scarlet-violet
-Mienfoo,U Turn,level-up,30,scarlet-violet
-Mienfoo,U Turn,machine,0,scarlet-violet
+Mienfoo,U-Turn,level-up,30,scarlet-violet
+Mienfoo,U-Turn,machine,0,scarlet-violet
 Mienfoo,Close Combat,machine,0,scarlet-violet
 Mienfoo,Fling,machine,0,scarlet-violet
 Mienfoo,Force Palm,level-up,25,scarlet-violet
@@ -45942,8 +45942,8 @@ Mienshao,Bounce,level-up,53,scarlet-violet
 Mienshao,Calm Mind,level-up,59,scarlet-violet
 Mienshao,Calm Mind,machine,0,scarlet-violet
 Mienshao,Feint,egg,0,scarlet-violet
-Mienshao,U Turn,level-up,30,scarlet-violet
-Mienshao,U Turn,machine,0,scarlet-violet
+Mienshao,U-Turn,level-up,30,scarlet-violet
+Mienshao,U-Turn,machine,0,scarlet-violet
 Mienshao,Close Combat,machine,0,scarlet-violet
 Mienshao,Fling,machine,0,scarlet-violet
 Mienshao,Force Palm,level-up,25,scarlet-violet
@@ -46420,7 +46420,7 @@ Rufflet,Bulk Up,machine,0,scarlet-violet
 Rufflet,Roost,egg,0,scarlet-violet
 Rufflet,Tailwind,level-up,18,scarlet-violet
 Rufflet,Tailwind,machine,0,scarlet-violet
-Rufflet,U Turn,machine,0,scarlet-violet
+Rufflet,U-Turn,machine,0,scarlet-violet
 Rufflet,Close Combat,machine,0,scarlet-violet
 Rufflet,Air Slash,level-up,55,scarlet-violet
 Rufflet,Air Slash,machine,0,scarlet-violet
@@ -46473,7 +46473,7 @@ Braviary,Aerial Ace,machine,0,scarlet-violet
 Braviary,Bulk Up,machine,0,scarlet-violet
 Braviary,Tailwind,level-up,18,scarlet-violet
 Braviary,Tailwind,machine,0,scarlet-violet
-Braviary,U Turn,machine,0,scarlet-violet
+Braviary,U-Turn,machine,0,scarlet-violet
 Braviary,Close Combat,machine,0,scarlet-violet
 Braviary,Air Slash,level-up,57,scarlet-violet
 Braviary,Air Slash,machine,0,scarlet-violet
@@ -46537,7 +46537,7 @@ Hisuian Braviary,Bulk Up,machine,0,scarlet-violet
 Hisuian Braviary,Calm Mind,machine,0,scarlet-violet
 Hisuian Braviary,Tailwind,level-up,18,scarlet-violet
 Hisuian Braviary,Tailwind,machine,0,scarlet-violet
-Hisuian Braviary,U Turn,machine,0,scarlet-violet
+Hisuian Braviary,U-Turn,machine,0,scarlet-violet
 Hisuian Braviary,Close Combat,machine,0,scarlet-violet
 Hisuian Braviary,Air Slash,level-up,57,scarlet-violet
 Hisuian Braviary,Air Slash,machine,0,scarlet-violet
@@ -46601,7 +46601,7 @@ Vullaby,Roost,egg,0,scarlet-violet
 Vullaby,Pluck,level-up,12,scarlet-violet
 Vullaby,Tailwind,level-up,18,scarlet-violet
 Vullaby,Tailwind,machine,0,scarlet-violet
-Vullaby,U Turn,machine,0,scarlet-violet
+Vullaby,U-Turn,machine,0,scarlet-violet
 Vullaby,Dark Pulse,level-up,48,scarlet-violet
 Vullaby,Dark Pulse,machine,0,scarlet-violet
 Vullaby,Air Slash,level-up,42,scarlet-violet
@@ -46663,7 +46663,7 @@ Mandibuzz,Roost,egg,0,scarlet-violet
 Mandibuzz,Pluck,level-up,1,scarlet-violet
 Mandibuzz,Tailwind,level-up,18,scarlet-violet
 Mandibuzz,Tailwind,machine,0,scarlet-violet
-Mandibuzz,U Turn,machine,0,scarlet-violet
+Mandibuzz,U-Turn,machine,0,scarlet-violet
 Mandibuzz,Dark Pulse,level-up,48,scarlet-violet
 Mandibuzz,Dark Pulse,machine,0,scarlet-violet
 Mandibuzz,Air Slash,level-up,42,scarlet-violet
@@ -46955,7 +46955,7 @@ Hydreigon,Hyper Voice,machine,0,scarlet-violet
 Hydreigon,Rock Tomb,machine,0,scarlet-violet
 Hydreigon,Dragon Dance,machine,0,scarlet-violet
 Hydreigon,Tailwind,machine,0,scarlet-violet
-Hydreigon,U Turn,machine,0,scarlet-violet
+Hydreigon,U-Turn,machine,0,scarlet-violet
 Hydreigon,Assurance,level-up,16,scarlet-violet
 Hydreigon,Dark Pulse,machine,0,scarlet-violet
 Hydreigon,Dragon Pulse,level-up,40,scarlet-violet
@@ -47023,7 +47023,7 @@ Larvesta,Will O Wisp,machine,0,scarlet-violet
 Larvesta,Facade,machine,0,scarlet-violet
 Larvesta,Overheat,machine,0,scarlet-violet
 Larvesta,Calm Mind,machine,0,scarlet-violet
-Larvesta,U Turn,machine,0,scarlet-violet
+Larvesta,U-Turn,machine,0,scarlet-violet
 Larvesta,Flare Blitz,level-up,66,scarlet-violet
 Larvesta,Flare Blitz,machine,0,scarlet-violet
 Larvesta,Bug Buzz,level-up,42,scarlet-violet
@@ -47083,7 +47083,7 @@ Volcarona,Air Cutter,machine,0,scarlet-violet
 Volcarona,Overheat,machine,0,scarlet-violet
 Volcarona,Calm Mind,machine,0,scarlet-violet
 Volcarona,Tailwind,machine,0,scarlet-violet
-Volcarona,U Turn,machine,0,scarlet-violet
+Volcarona,U-Turn,machine,0,scarlet-violet
 Volcarona,Flare Blitz,level-up,1,scarlet-violet
 Volcarona,Flare Blitz,machine,0,scarlet-violet
 Volcarona,Poison Jab,machine,0,scarlet-violet
@@ -47393,7 +47393,7 @@ Incarnate Forme",Tailwind,level-up,30,scarlet-violet
 "Tornadus
 Incarnate Forme",Tailwind,machine,0,scarlet-violet
 "Tornadus
-Incarnate Forme",U Turn,machine,0,scarlet-violet
+Incarnate Forme",U-Turn,machine,0,scarlet-violet
 "Tornadus
 Incarnate Forme",Fling,machine,0,scarlet-violet
 "Tornadus
@@ -47523,7 +47523,7 @@ Therian Forme",Tailwind,level-up,30,scarlet-violet
 "Tornadus
 Therian Forme",Tailwind,machine,0,scarlet-violet
 "Tornadus
-Therian Forme",U Turn,machine,0,scarlet-violet
+Therian Forme",U-Turn,machine,0,scarlet-violet
 "Tornadus
 Therian Forme",Fling,machine,0,scarlet-violet
 "Tornadus
@@ -47649,7 +47649,7 @@ Incarnate Forme",Shock Wave,level-up,20,scarlet-violet
 "Thundurus
 Incarnate Forme",Hammer Arm,level-up,55,scarlet-violet
 "Thundurus
-Incarnate Forme",U Turn,machine,0,scarlet-violet
+Incarnate Forme",U-Turn,machine,0,scarlet-violet
 "Thundurus
 Incarnate Forme",Fling,machine,0,scarlet-violet
 "Thundurus
@@ -47791,7 +47791,7 @@ Therian Forme",Shock Wave,level-up,20,scarlet-violet
 "Thundurus
 Therian Forme",Hammer Arm,level-up,55,scarlet-violet
 "Thundurus
-Therian Forme",U Turn,machine,0,scarlet-violet
+Therian Forme",U-Turn,machine,0,scarlet-violet
 "Thundurus
 Therian Forme",Fling,machine,0,scarlet-violet
 "Thundurus
@@ -48090,7 +48090,7 @@ Incarnate Forme",Gravity,machine,0,scarlet-violet
 "Landorus
 Incarnate Forme",Hammer Arm,level-up,55,scarlet-violet
 "Landorus
-Incarnate Forme",U Turn,machine,0,scarlet-violet
+Incarnate Forme",U-Turn,machine,0,scarlet-violet
 "Landorus
 Incarnate Forme",Fling,machine,0,scarlet-violet
 "Landorus
@@ -48220,7 +48220,7 @@ Therian Forme",Gravity,machine,0,scarlet-violet
 "Landorus
 Therian Forme",Hammer Arm,level-up,55,scarlet-violet
 "Landorus
-Therian Forme",U Turn,machine,0,scarlet-violet
+Therian Forme",U-Turn,machine,0,scarlet-violet
 "Landorus
 Therian Forme",Fling,machine,0,scarlet-violet
 "Landorus
@@ -48814,9 +48814,9 @@ Aria Forme",Calm Mind,machine,0,scarlet-violet
 "Meloetta
 Aria Forme",Gravity,machine,0,scarlet-violet
 "Meloetta
-Aria Forme",U Turn,level-up,43,scarlet-violet
+Aria Forme",U-Turn,level-up,43,scarlet-violet
 "Meloetta
-Aria Forme",U Turn,machine,0,scarlet-violet
+Aria Forme",U-Turn,machine,0,scarlet-violet
 "Meloetta
 Aria Forme",Close Combat,level-up,78,scarlet-violet
 "Meloetta
@@ -48962,9 +48962,9 @@ Pirouette Forme",Calm Mind,machine,0,scarlet-violet
 "Meloetta
 Pirouette Forme",Gravity,machine,0,scarlet-violet
 "Meloetta
-Pirouette Forme",U Turn,level-up,43,scarlet-violet
+Pirouette Forme",U-Turn,level-up,43,scarlet-violet
 "Meloetta
-Pirouette Forme",U Turn,machine,0,scarlet-violet
+Pirouette Forme",U-Turn,machine,0,scarlet-violet
 "Meloetta
 Pirouette Forme",Close Combat,level-up,78,scarlet-violet
 "Meloetta
@@ -49052,7 +49052,7 @@ Genesect,Facade,machine,0,sword-shield
 Genesect,Blaze Kick,machine,0,sword-shield
 Genesect,Metal Sound,level-up,35,sword-shield
 Genesect,Iron Defense,machine,0,sword-shield
-Genesect,U Turn,machine,0,sword-shield
+Genesect,U-Turn,machine,0,sword-shield
 Genesect,Assurance,machine,0,sword-shield
 Genesect,Magnet Rise,level-up,49,sword-shield
 Genesect,Dark Pulse,machine,0,sword-shield
@@ -49575,7 +49575,7 @@ Froakie,Bounce,level-up,39,scarlet-violet
 Froakie,Mud Shot,machine,0,scarlet-violet
 Froakie,Water Pulse,level-up,14,scarlet-violet
 Froakie,Water Pulse,machine,0,scarlet-violet
-Froakie,U Turn,machine,0,scarlet-violet
+Froakie,U-Turn,machine,0,scarlet-violet
 Froakie,Fling,level-up,25,scarlet-violet
 Froakie,Fling,machine,0,scarlet-violet
 Froakie,Toxic Spikes,egg,0,scarlet-violet
@@ -49636,7 +49636,7 @@ Frogadier,Bounce,level-up,45,scarlet-violet
 Frogadier,Mud Shot,machine,0,scarlet-violet
 Frogadier,Water Pulse,level-up,14,scarlet-violet
 Frogadier,Water Pulse,machine,0,scarlet-violet
-Frogadier,U Turn,machine,0,scarlet-violet
+Frogadier,U-Turn,machine,0,scarlet-violet
 Frogadier,Fling,level-up,28,scarlet-violet
 Frogadier,Fling,machine,0,scarlet-violet
 Frogadier,Toxic Spikes,egg,0,scarlet-violet
@@ -49707,7 +49707,7 @@ Greninja,Aerial Ace,machine,0,scarlet-violet
 Greninja,Mud Shot,machine,0,scarlet-violet
 Greninja,Water Pulse,level-up,14,scarlet-violet
 Greninja,Water Pulse,machine,0,scarlet-violet
-Greninja,U Turn,machine,0,scarlet-violet
+Greninja,U-Turn,machine,0,scarlet-violet
 Greninja,Fling,machine,0,scarlet-violet
 Greninja,Toxic Spikes,egg,0,scarlet-violet
 Greninja,Toxic Spikes,machine,0,scarlet-violet
@@ -49779,7 +49779,7 @@ Ash-Greninja,Aerial Ace,machine,0,scarlet-violet
 Ash-Greninja,Mud Shot,machine,0,scarlet-violet
 Ash-Greninja,Water Pulse,level-up,14,scarlet-violet
 Ash-Greninja,Water Pulse,machine,0,scarlet-violet
-Ash-Greninja,U Turn,machine,0,scarlet-violet
+Ash-Greninja,U-Turn,machine,0,scarlet-violet
 Ash-Greninja,Fling,machine,0,scarlet-violet
 Ash-Greninja,Toxic Spikes,machine,0,scarlet-violet
 Ash-Greninja,Dark Pulse,machine,0,scarlet-violet
@@ -49835,7 +49835,7 @@ Bunnelby,Bounce,level-up,27,sword-shield
 Bunnelby,Bounce,machine,0,sword-shield
 Bunnelby,Mud Shot,level-up,12,sword-shield
 Bunnelby,Mud Shot,machine,0,sword-shield
-Bunnelby,U Turn,machine,0,sword-shield
+Bunnelby,U-Turn,machine,0,sword-shield
 Bunnelby,Payback,machine,0,sword-shield
 Bunnelby,Fling,machine,0,sword-shield
 Bunnelby,Iron Head,machine,0,sword-shield
@@ -49896,7 +49896,7 @@ Diggersby,Bounce,machine,0,sword-shield
 Diggersby,Mud Shot,level-up,12,sword-shield
 Diggersby,Mud Shot,machine,0,sword-shield
 Diggersby,Hammer Arm,level-up,58,sword-shield
-Diggersby,U Turn,machine,0,sword-shield
+Diggersby,U-Turn,machine,0,sword-shield
 Diggersby,Payback,machine,0,sword-shield
 Diggersby,Fling,machine,0,sword-shield
 Diggersby,Earth Power,machine,0,sword-shield
@@ -49949,7 +49949,7 @@ Fletchling,Aerial Ace,machine,0,scarlet-violet
 Fletchling,Roost,level-up,45,scarlet-violet
 Fletchling,Tailwind,level-up,35,scarlet-violet
 Fletchling,Tailwind,machine,0,scarlet-violet
-Fletchling,U Turn,machine,0,scarlet-violet
+Fletchling,U-Turn,machine,0,scarlet-violet
 Fletchling,Flare Blitz,machine,0,scarlet-violet
 Fletchling,Air Slash,machine,0,scarlet-violet
 Fletchling,Brave Bird,machine,0,scarlet-violet
@@ -50000,7 +50000,7 @@ Fletchinder,Roost,level-up,57,scarlet-violet
 Fletchinder,Feint,level-up,1,scarlet-violet
 Fletchinder,Tailwind,level-up,43,scarlet-violet
 Fletchinder,Tailwind,machine,0,scarlet-violet
-Fletchinder,U Turn,machine,0,scarlet-violet
+Fletchinder,U-Turn,machine,0,scarlet-violet
 Fletchinder,Flare Blitz,machine,0,scarlet-violet
 Fletchinder,Air Slash,machine,0,scarlet-violet
 Fletchinder,Brave Bird,machine,0,scarlet-violet
@@ -50053,7 +50053,7 @@ Talonflame,Roost,level-up,65,scarlet-violet
 Talonflame,Feint,level-up,1,scarlet-violet
 Talonflame,Tailwind,level-up,47,scarlet-violet
 Talonflame,Tailwind,machine,0,scarlet-violet
-Talonflame,U Turn,machine,0,scarlet-violet
+Talonflame,U-Turn,machine,0,scarlet-violet
 Talonflame,Flare Blitz,level-up,1,scarlet-violet
 Talonflame,Flare Blitz,machine,0,scarlet-violet
 Talonflame,Air Slash,machine,0,scarlet-violet
@@ -50116,7 +50116,7 @@ Vivillon,Weather Ball,machine,0,scarlet-violet
 Vivillon,Air Cutter,machine,0,scarlet-violet
 Vivillon,Iron Defense,machine,0,scarlet-violet
 Vivillon,Tailwind,machine,0,scarlet-violet
-Vivillon,U Turn,machine,0,scarlet-violet
+Vivillon,U-Turn,machine,0,scarlet-violet
 Vivillon,Air Slash,machine,0,scarlet-violet
 Vivillon,Bug Buzz,level-up,35,scarlet-violet
 Vivillon,Bug Buzz,machine,0,scarlet-violet
@@ -50716,7 +50716,7 @@ Furfrou,Endeavor,tutor,0,ultra-sun-ultra-moon
 Furfrou,Refresh,egg,0,ultra-sun-ultra-moon
 Furfrou,Hyper Voice,tutor,0,ultra-sun-ultra-moon
 Furfrou,Odor Sleuth,level-up,27,ultra-sun-ultra-moon
-Furfrou,U Turn,machine,0,ultra-sun-ultra-moon
+Furfrou,U-Turn,machine,0,ultra-sun-ultra-moon
 Furfrou,Last Resort,tutor,0,ultra-sun-ultra-moon
 Furfrou,Sucker Punch,level-up,42,ultra-sun-ultra-moon
 Furfrou,Dark Pulse,machine,0,ultra-sun-ultra-moon
@@ -51882,7 +51882,7 @@ Clauncher,Bounce,level-up,45,scarlet-violet
 Clauncher,Mud Shot,machine,0,scarlet-violet
 Clauncher,Water Pulse,level-up,30,scarlet-violet
 Clauncher,Water Pulse,machine,0,scarlet-violet
-Clauncher,U Turn,machine,0,scarlet-violet
+Clauncher,U-Turn,machine,0,scarlet-violet
 Clauncher,Aura Sphere,level-up,40,scarlet-violet
 Clauncher,Aura Sphere,machine,0,scarlet-violet
 Clauncher,Dark Pulse,machine,0,scarlet-violet
@@ -51937,7 +51937,7 @@ Clawitzer,Bounce,level-up,49,scarlet-violet
 Clawitzer,Mud Shot,machine,0,scarlet-violet
 Clawitzer,Water Pulse,level-up,30,scarlet-violet
 Clawitzer,Water Pulse,machine,0,scarlet-violet
-Clawitzer,U Turn,machine,0,scarlet-violet
+Clawitzer,U-Turn,machine,0,scarlet-violet
 Clawitzer,Aura Sphere,level-up,42,scarlet-violet
 Clawitzer,Aura Sphere,machine,0,scarlet-violet
 Clawitzer,Dark Pulse,level-up,1,scarlet-violet
@@ -51990,7 +51990,7 @@ Helioptile,Rain Dance,machine,0,sword-shield
 Helioptile,Facade,machine,0,sword-shield
 Helioptile,Charge,level-up,16,sword-shield
 Helioptile,Rock Tomb,machine,0,sword-shield
-Helioptile,U Turn,machine,0,sword-shield
+Helioptile,U-Turn,machine,0,sword-shield
 Helioptile,Dark Pulse,machine,0,sword-shield
 Helioptile,Dragon Rush,egg,0,sword-shield
 Helioptile,Grass Knot,machine,0,sword-shield
@@ -52050,7 +52050,7 @@ Heliolisk,Charge,level-up,1,sword-shield
 Heliolisk,Hyper Voice,machine,0,sword-shield
 Heliolisk,Weather Ball,machine,0,sword-shield
 Heliolisk,Rock Tomb,machine,0,sword-shield
-Heliolisk,U Turn,machine,0,sword-shield
+Heliolisk,U-Turn,machine,0,sword-shield
 Heliolisk,Dark Pulse,machine,0,sword-shield
 Heliolisk,Dragon Pulse,machine,0,sword-shield
 Heliolisk,Focus Blast,machine,0,sword-shield
@@ -52457,7 +52457,7 @@ Hawlucha,Bulk Up,machine,0,scarlet-violet
 Hawlucha,Bounce,level-up,28,scarlet-violet
 Hawlucha,Roost,level-up,36,scarlet-violet
 Hawlucha,Feint,egg,0,scarlet-violet
-Hawlucha,U Turn,machine,0,scarlet-violet
+Hawlucha,U-Turn,machine,0,scarlet-violet
 Hawlucha,Close Combat,machine,0,scarlet-violet
 Hawlucha,Fling,machine,0,scarlet-violet
 Hawlucha,Poison Jab,machine,0,scarlet-violet
@@ -52519,7 +52519,7 @@ Dedenne,Charge,machine,0,scarlet-violet
 Dedenne,Helping Hand,machine,0,scarlet-violet
 Dedenne,Endeavor,machine,0,scarlet-violet
 Dedenne,Covet,egg,0,scarlet-violet
-Dedenne,U Turn,machine,0,scarlet-violet
+Dedenne,U-Turn,machine,0,scarlet-violet
 Dedenne,Fling,machine,0,scarlet-violet
 Dedenne,Magnet Rise,egg,0,scarlet-violet
 Dedenne,Seed Bomb,machine,0,scarlet-violet
@@ -54238,7 +54238,7 @@ Noibat,Dragon Claw,machine,0,scarlet-violet
 Noibat,Roost,level-up,44,scarlet-violet
 Noibat,Tailwind,level-up,49,scarlet-violet
 Noibat,Tailwind,machine,0,scarlet-violet
-Noibat,U Turn,machine,0,scarlet-violet
+Noibat,U-Turn,machine,0,scarlet-violet
 Noibat,Dark Pulse,machine,0,scarlet-violet
 Noibat,Air Slash,level-up,36,scarlet-violet
 Noibat,Air Slash,machine,0,scarlet-violet
@@ -54302,7 +54302,7 @@ Noivern,Water Pulse,machine,0,scarlet-violet
 Noivern,Roost,level-up,44,scarlet-violet
 Noivern,Tailwind,level-up,51,scarlet-violet
 Noivern,Tailwind,machine,0,scarlet-violet
-Noivern,U Turn,machine,0,scarlet-violet
+Noivern,U-Turn,machine,0,scarlet-violet
 Noivern,Dark Pulse,machine,0,scarlet-violet
 Noivern,Air Slash,level-up,36,scarlet-violet
 Noivern,Air Slash,machine,0,scarlet-violet
@@ -54414,7 +54414,7 @@ Yveltal,Hyper Voice,machine,0,sword-shield
 Yveltal,Dragon Claw,machine,0,sword-shield
 Yveltal,Roost,level-up,30,sword-shield
 Yveltal,Tailwind,level-up,25,sword-shield
-Yveltal,U Turn,machine,0,sword-shield
+Yveltal,U-Turn,machine,0,sword-shield
 Yveltal,Payback,machine,0,sword-shield
 Yveltal,Sucker Punch,level-up,20,sword-shield
 Yveltal,Dark Pulse,level-up,40,sword-shield
@@ -55412,8 +55412,8 @@ Decidueye,Leaf Blade,level-up,44,scarlet-violet
 Decidueye,Roost,egg,0,scarlet-violet
 Decidueye,Pluck,level-up,25,scarlet-violet
 Decidueye,Tailwind,machine,0,scarlet-violet
-Decidueye,U Turn,level-up,1,scarlet-violet
-Decidueye,U Turn,machine,0,scarlet-violet
+Decidueye,U-Turn,level-up,1,scarlet-violet
+Decidueye,U-Turn,machine,0,scarlet-violet
 Decidueye,Close Combat,machine,0,scarlet-violet
 Decidueye,Sucker Punch,level-up,37,scarlet-violet
 Decidueye,Aura Sphere,machine,0,scarlet-violet
@@ -55502,8 +55502,8 @@ Hisuian Decidueye,Leaf Blade,level-up,44,scarlet-violet
 Hisuian Decidueye,Roost,egg,0,scarlet-violet
 Hisuian Decidueye,Pluck,level-up,25,scarlet-violet
 Hisuian Decidueye,Tailwind,machine,0,scarlet-violet
-Hisuian Decidueye,U Turn,level-up,1,scarlet-violet
-Hisuian Decidueye,U Turn,machine,0,scarlet-violet
+Hisuian Decidueye,U-Turn,level-up,1,scarlet-violet
+Hisuian Decidueye,U-Turn,machine,0,scarlet-violet
 Hisuian Decidueye,Close Combat,machine,0,scarlet-violet
 Hisuian Decidueye,Sucker Punch,level-up,37,scarlet-violet
 Hisuian Decidueye,Aura Sphere,machine,0,scarlet-violet
@@ -55572,7 +55572,7 @@ Litten,Helping Hand,machine,0,scarlet-violet
 Litten,Endeavor,machine,0,scarlet-violet
 Litten,Overheat,machine,0,scarlet-violet
 Litten,Bulk Up,machine,0,scarlet-violet
-Litten,U Turn,machine,0,scarlet-violet
+Litten,U-Turn,machine,0,scarlet-violet
 Litten,Flare Blitz,level-up,36,scarlet-violet
 Litten,Flare Blitz,machine,0,scarlet-violet
 Litten,Nasty Plot,machine,0,scarlet-violet
@@ -55626,7 +55626,7 @@ Torracat,Helping Hand,machine,0,scarlet-violet
 Torracat,Endeavor,machine,0,scarlet-violet
 Torracat,Overheat,machine,0,scarlet-violet
 Torracat,Bulk Up,machine,0,scarlet-violet
-Torracat,U Turn,machine,0,scarlet-violet
+Torracat,U-Turn,machine,0,scarlet-violet
 Torracat,Flare Blitz,level-up,50,scarlet-violet
 Torracat,Flare Blitz,machine,0,scarlet-violet
 Torracat,Nasty Plot,machine,0,scarlet-violet
@@ -55695,7 +55695,7 @@ Incineroar,Overheat,machine,0,scarlet-violet
 Incineroar,Aerial Ace,machine,0,scarlet-violet
 Incineroar,Bulk Up,level-up,1,scarlet-violet
 Incineroar,Bulk Up,machine,0,scarlet-violet
-Incineroar,U Turn,machine,0,scarlet-violet
+Incineroar,U-Turn,machine,0,scarlet-violet
 Incineroar,Close Combat,machine,0,scarlet-violet
 Incineroar,Fling,machine,0,scarlet-violet
 Incineroar,Flare Blitz,level-up,58,scarlet-violet
@@ -55936,7 +55936,7 @@ Pikipek,Aerial Ace,machine,0,scarlet-violet
 Pikipek,Roost,level-up,19,scarlet-violet
 Pikipek,Pluck,level-up,15,scarlet-violet
 Pikipek,Tailwind,machine,0,scarlet-violet
-Pikipek,U Turn,machine,0,scarlet-violet
+Pikipek,U-Turn,machine,0,scarlet-violet
 Pikipek,Air Slash,machine,0,scarlet-violet
 Pikipek,Brave Bird,machine,0,scarlet-violet
 Pikipek,Gunk Shot,egg,0,scarlet-violet
@@ -55987,7 +55987,7 @@ Trumbeak,Rock Blast,machine,0,scarlet-violet
 Trumbeak,Roost,level-up,21,scarlet-violet
 Trumbeak,Pluck,level-up,16,scarlet-violet
 Trumbeak,Tailwind,machine,0,scarlet-violet
-Trumbeak,U Turn,machine,0,scarlet-violet
+Trumbeak,U-Turn,machine,0,scarlet-violet
 Trumbeak,Air Slash,machine,0,scarlet-violet
 Trumbeak,Brave Bird,machine,0,scarlet-violet
 Trumbeak,Gunk Shot,egg,0,scarlet-violet
@@ -56043,7 +56043,7 @@ Toucannon,Rock Blast,machine,0,scarlet-violet
 Toucannon,Roost,level-up,21,scarlet-violet
 Toucannon,Pluck,level-up,16,scarlet-violet
 Toucannon,Tailwind,machine,0,scarlet-violet
-Toucannon,U Turn,machine,0,scarlet-violet
+Toucannon,U-Turn,machine,0,scarlet-violet
 Toucannon,Seed Bomb,machine,0,scarlet-violet
 Toucannon,Air Slash,machine,0,scarlet-violet
 Toucannon,Brave Bird,machine,0,scarlet-violet
@@ -56098,7 +56098,7 @@ Yungoos,Endeavor,egg,0,scarlet-violet
 Yungoos,Endeavor,machine,0,scarlet-violet
 Yungoos,Rock Tomb,machine,0,scarlet-violet
 Yungoos,Mud Shot,machine,0,scarlet-violet
-Yungoos,U Turn,machine,0,scarlet-violet
+Yungoos,U-Turn,machine,0,scarlet-violet
 Yungoos,Payback,level-up,7,scarlet-violet
 Yungoos,Last Resort,egg,0,scarlet-violet
 Yungoos,Seed Bomb,machine,0,scarlet-violet
@@ -56162,7 +56162,7 @@ Gumshoos,Knock Off,machine,0,scarlet-violet
 Gumshoos,Endeavor,machine,0,scarlet-violet
 Gumshoos,Rock Tomb,machine,0,scarlet-violet
 Gumshoos,Mud Shot,machine,0,scarlet-violet
-Gumshoos,U Turn,machine,0,scarlet-violet
+Gumshoos,U-Turn,machine,0,scarlet-violet
 Gumshoos,Payback,level-up,1,scarlet-violet
 Gumshoos,Fling,machine,0,scarlet-violet
 Gumshoos,Seed Bomb,machine,0,scarlet-violet
@@ -56547,7 +56547,7 @@ Baile Style",Pluck,egg,0,scarlet-violet
 "Oricorio
 Baile Style",Tailwind,machine,0,scarlet-violet
 "Oricorio
-Baile Style",U Turn,machine,0,scarlet-violet
+Baile Style",U-Turn,machine,0,scarlet-violet
 "Oricorio
 Baile Style",Air Slash,level-up,36,scarlet-violet
 "Oricorio
@@ -56655,7 +56655,7 @@ Pom-Pom Style",Pluck,egg,0,scarlet-violet
 "Oricorio
 Pom-Pom Style",Tailwind,machine,0,scarlet-violet
 "Oricorio
-Pom-Pom Style",U Turn,machine,0,scarlet-violet
+Pom-Pom Style",U-Turn,machine,0,scarlet-violet
 "Oricorio
 Pom-Pom Style",Air Slash,level-up,36,scarlet-violet
 "Oricorio
@@ -56763,7 +56763,7 @@ Pa'u Style",Pluck,egg,0,scarlet-violet
 "Oricorio
 Pa'u Style",Tailwind,machine,0,scarlet-violet
 "Oricorio
-Pa'u Style",U Turn,machine,0,scarlet-violet
+Pa'u Style",U-Turn,machine,0,scarlet-violet
 "Oricorio
 Pa'u Style",Air Slash,level-up,36,scarlet-violet
 "Oricorio
@@ -56871,7 +56871,7 @@ Sensu Style",Pluck,egg,0,scarlet-violet
 "Oricorio
 Sensu Style",Tailwind,machine,0,scarlet-violet
 "Oricorio
-Sensu Style",U Turn,machine,0,scarlet-violet
+Sensu Style",U-Turn,machine,0,scarlet-violet
 "Oricorio
 Sensu Style",Air Slash,level-up,36,scarlet-violet
 "Oricorio
@@ -56926,7 +56926,7 @@ Cutiefly,Covet,level-up,30,scarlet-violet
 Cutiefly,Magical Leaf,machine,0,scarlet-violet
 Cutiefly,Calm Mind,machine,0,scarlet-violet
 Cutiefly,Tailwind,machine,0,scarlet-violet
-Cutiefly,U Turn,machine,0,scarlet-violet
+Cutiefly,U-Turn,machine,0,scarlet-violet
 Cutiefly,Bug Buzz,level-up,48,scarlet-violet
 Cutiefly,Bug Buzz,machine,0,scarlet-violet
 Cutiefly,Energy Ball,machine,0,scarlet-violet
@@ -56983,7 +56983,7 @@ Ribombee,Covet,level-up,32,scarlet-violet
 Ribombee,Magical Leaf,machine,0,scarlet-violet
 Ribombee,Calm Mind,machine,0,scarlet-violet
 Ribombee,Tailwind,machine,0,scarlet-violet
-Ribombee,U Turn,machine,0,scarlet-violet
+Ribombee,U-Turn,machine,0,scarlet-violet
 Ribombee,Bug Buzz,level-up,56,scarlet-violet
 Ribombee,Bug Buzz,machine,0,scarlet-violet
 Ribombee,Energy Ball,machine,0,scarlet-violet
@@ -57667,7 +57667,7 @@ Solo Form",Brine,level-up,12,sword-shield
 "Wishiwashi
 Solo Form",Brine,machine,0,sword-shield
 "Wishiwashi
-Solo Form",U Turn,machine,0,sword-shield
+Solo Form",U-Turn,machine,0,sword-shield
 "Wishiwashi
 Solo Form",Aqua Ring,level-up,36,sword-shield
 "Wishiwashi
@@ -57763,7 +57763,7 @@ School Form",Brine,level-up,12,sword-shield
 "Wishiwashi
 School Form",Brine,machine,0,sword-shield
 "Wishiwashi
-School Form",U Turn,machine,0,sword-shield
+School Form",U-Turn,machine,0,sword-shield
 "Wishiwashi
 School Form",Aqua Ring,level-up,36,sword-shield
 "Wishiwashi
@@ -58644,7 +58644,7 @@ Tsareena,Teeter Dance,level-up,34,scarlet-violet
 Tsareena,Bullet Seed,machine,0,scarlet-violet
 Tsareena,Magical Leaf,level-up,22,scarlet-violet
 Tsareena,Magical Leaf,machine,0,scarlet-violet
-Tsareena,U Turn,machine,0,scarlet-violet
+Tsareena,U-Turn,machine,0,scarlet-violet
 Tsareena,Fling,machine,0,scarlet-violet
 Tsareena,Seed Bomb,machine,0,scarlet-violet
 Tsareena,Energy Ball,machine,0,scarlet-violet
@@ -58707,7 +58707,7 @@ Comfey,Magical Leaf,level-up,15,scarlet-violet
 Comfey,Magical Leaf,machine,0,scarlet-violet
 Comfey,Calm Mind,machine,0,scarlet-violet
 Comfey,Tailwind,machine,0,scarlet-violet
-Comfey,U Turn,machine,0,scarlet-violet
+Comfey,U-Turn,machine,0,scarlet-violet
 Comfey,Fling,machine,0,scarlet-violet
 Comfey,Worry Seed,egg,0,scarlet-violet
 Comfey,Seed Bomb,machine,0,scarlet-violet
@@ -58852,7 +58852,7 @@ Passimian,Bulk Up,level-up,35,scarlet-violet
 Passimian,Bulk Up,machine,0,scarlet-violet
 Passimian,Gyro Ball,machine,0,scarlet-violet
 Passimian,Feint,egg,0,scarlet-violet
-Passimian,U Turn,machine,0,scarlet-violet
+Passimian,U-Turn,machine,0,scarlet-violet
 Passimian,Close Combat,level-up,50,scarlet-violet
 Passimian,Close Combat,machine,0,scarlet-violet
 Passimian,Fling,level-up,30,scarlet-violet
@@ -59168,7 +59168,7 @@ Type: Null,Metal Sound,level-up,20,sword-shield
 Type: Null,Aerial Ace,level-up,5,sword-shield
 Type: Null,Iron Defense,machine,0,sword-shield
 Type: Null,Dragon Claw,machine,0,sword-shield
-Type: Null,U Turn,machine,0,sword-shield
+Type: Null,U-Turn,machine,0,sword-shield
 Type: Null,Payback,machine,0,sword-shield
 Type: Null,Air Slash,level-up,30,sword-shield
 Type: Null,Air Slash,machine,0,sword-shield
@@ -59229,7 +59229,7 @@ Silvally,Metal Sound,level-up,20,sword-shield
 Silvally,Aerial Ace,level-up,1,sword-shield
 Silvally,Iron Defense,machine,0,sword-shield
 Silvally,Dragon Claw,machine,0,sword-shield
-Silvally,U Turn,machine,0,sword-shield
+Silvally,U-Turn,machine,0,sword-shield
 Silvally,Payback,machine,0,sword-shield
 Silvally,Air Slash,level-up,30,sword-shield
 Silvally,Air Slash,machine,0,sword-shield
@@ -59331,7 +59331,7 @@ Meteor Form",Gravity,machine,0,scarlet-violet
 "Minior
 Meteor Form",Gyro Ball,machine,0,scarlet-violet
 "Minior
-Meteor Form",U Turn,machine,0,scarlet-violet
+Meteor Form",U-Turn,machine,0,scarlet-violet
 "Minior
 Meteor Form",Rock Polish,level-up,31,scarlet-violet
 "Minior
@@ -59439,7 +59439,7 @@ Core Form",Gravity,machine,0,scarlet-violet
 "Minior
 Core Form",Gyro Ball,machine,0,scarlet-violet
 "Minior
-Core Form",U Turn,machine,0,scarlet-violet
+Core Form",U-Turn,machine,0,scarlet-violet
 "Minior
 Core Form",Rock Polish,level-up,31,scarlet-violet
 "Minior
@@ -59519,7 +59519,7 @@ Komala,Endeavor,machine,0,scarlet-violet
 Komala,Rock Tomb,machine,0,scarlet-violet
 Komala,Bulk Up,machine,0,scarlet-violet
 Komala,Calm Mind,machine,0,scarlet-violet
-Komala,U Turn,machine,0,scarlet-violet
+Komala,U-Turn,machine,0,scarlet-violet
 Komala,Fling,machine,0,scarlet-violet
 Komala,Sucker Punch,level-up,31,scarlet-violet
 Komala,Seed Bomb,machine,0,scarlet-violet
@@ -59644,7 +59644,7 @@ Togedemaru,Wish,egg,0,sword-shield
 Togedemaru,Tickle,egg,0,sword-shield
 Togedemaru,Bounce,machine,0,sword-shield
 Togedemaru,Gyro Ball,machine,0,sword-shield
-Togedemaru,U Turn,machine,0,sword-shield
+Togedemaru,U-Turn,machine,0,sword-shield
 Togedemaru,Payback,machine,0,sword-shield
 Togedemaru,Assurance,machine,0,sword-shield
 Togedemaru,Fling,machine,0,sword-shield
@@ -60181,7 +60181,7 @@ Tapu Koko,Hyper Voice,machine,0,sword-shield
 Tapu Koko,Iron Defense,machine,0,sword-shield
 Tapu Koko,Calm Mind,machine,0,sword-shield
 Tapu Koko,Shock Wave,level-up,25,sword-shield
-Tapu Koko,U Turn,machine,0,sword-shield
+Tapu Koko,U-Turn,machine,0,sword-shield
 Tapu Koko,Assurance,machine,0,sword-shield
 Tapu Koko,Power Swap,level-up,70,sword-shield
 Tapu Koko,Power Swap,machine,0,sword-shield
@@ -60688,7 +60688,7 @@ Pheromosa,Brick Break,machine,0,sword-shield
 Pheromosa,Bounce,level-up,50,sword-shield
 Pheromosa,Bounce,machine,0,sword-shield
 Pheromosa,Feint,level-up,1,sword-shield
-Pheromosa,U Turn,machine,0,sword-shield
+Pheromosa,U-Turn,machine,0,sword-shield
 Pheromosa,Close Combat,machine,0,sword-shield
 Pheromosa,Assurance,machine,0,sword-shield
 Pheromosa,Fling,machine,0,sword-shield
@@ -61449,7 +61449,7 @@ Naganadel,Helping Hand,machine,0,sword-shield
 Naganadel,Air Cutter,level-up,0,sword-shield
 Naganadel,Dragon Claw,machine,0,sword-shield
 Naganadel,Dragon Dance,machine,0,sword-shield
-Naganadel,U Turn,machine,0,sword-shield
+Naganadel,U-Turn,machine,0,sword-shield
 Naganadel,Assurance,machine,0,sword-shield
 Naganadel,Gastro Acid,level-up,56,sword-shield
 Naganadel,Toxic Spikes,machine,0,sword-shield
@@ -61782,7 +61782,7 @@ Grookey,Endeavor,machine,0,scarlet-violet
 Grookey,Bullet Seed,machine,0,scarlet-violet
 Grookey,Magical Leaf,machine,0,scarlet-violet
 Grookey,Hammer Arm,egg,0,scarlet-violet
-Grookey,U Turn,machine,0,scarlet-violet
+Grookey,U-Turn,machine,0,scarlet-violet
 Grookey,Fling,machine,0,scarlet-violet
 Grookey,Worry Seed,egg,0,scarlet-violet
 Grookey,Seed Bomb,machine,0,scarlet-violet
@@ -61837,7 +61837,7 @@ Thwackey,Endeavor,machine,0,scarlet-violet
 Thwackey,Bullet Seed,machine,0,scarlet-violet
 Thwackey,Magical Leaf,machine,0,scarlet-violet
 Thwackey,Hammer Arm,egg,0,scarlet-violet
-Thwackey,U Turn,machine,0,scarlet-violet
+Thwackey,U-Turn,machine,0,scarlet-violet
 Thwackey,Fling,machine,0,scarlet-violet
 Thwackey,Worry Seed,egg,0,scarlet-violet
 Thwackey,Seed Bomb,machine,0,scarlet-violet
@@ -61901,7 +61901,7 @@ Rillaboom,Bulk Up,machine,0,scarlet-violet
 Rillaboom,Mud Shot,machine,0,scarlet-violet
 Rillaboom,Magical Leaf,machine,0,scarlet-violet
 Rillaboom,Hammer Arm,egg,0,scarlet-violet
-Rillaboom,U Turn,machine,0,scarlet-violet
+Rillaboom,U-Turn,machine,0,scarlet-violet
 Rillaboom,Fling,machine,0,scarlet-violet
 Rillaboom,Worry Seed,egg,0,scarlet-violet
 Rillaboom,Seed Bomb,machine,0,scarlet-violet
@@ -61967,7 +61967,7 @@ Scorbunny,Taunt,machine,0,scarlet-violet
 Scorbunny,Helping Hand,machine,0,scarlet-violet
 Scorbunny,Overheat,machine,0,scarlet-violet
 Scorbunny,Bounce,level-up,32,scarlet-violet
-Scorbunny,U Turn,machine,0,scarlet-violet
+Scorbunny,U-Turn,machine,0,scarlet-violet
 Scorbunny,Sucker Punch,egg,0,scarlet-violet
 Scorbunny,Flare Blitz,machine,0,scarlet-violet
 Scorbunny,Fire Fang,machine,0,scarlet-violet
@@ -62021,7 +62021,7 @@ Raboot,Overheat,machine,0,scarlet-violet
 Raboot,Bulk Up,machine,0,scarlet-violet
 Raboot,Bounce,level-up,42,scarlet-violet
 Raboot,Mud Shot,machine,0,scarlet-violet
-Raboot,U Turn,machine,0,scarlet-violet
+Raboot,U-Turn,machine,0,scarlet-violet
 Raboot,Sucker Punch,egg,0,scarlet-violet
 Raboot,Flare Blitz,machine,0,scarlet-violet
 Raboot,Fire Fang,machine,0,scarlet-violet
@@ -62082,7 +62082,7 @@ Cinderace,Bulk Up,machine,0,scarlet-violet
 Cinderace,Bounce,level-up,46,scarlet-violet
 Cinderace,Mud Shot,machine,0,scarlet-violet
 Cinderace,Feint,level-up,1,scarlet-violet
-Cinderace,U Turn,machine,0,scarlet-violet
+Cinderace,U-Turn,machine,0,scarlet-violet
 Cinderace,Fling,machine,0,scarlet-violet
 Cinderace,Sucker Punch,egg,0,scarlet-violet
 Cinderace,Flare Blitz,machine,0,scarlet-violet
@@ -62137,8 +62137,8 @@ Sobble,Muddy Water,machine,0,scarlet-violet
 Sobble,Mud Shot,machine,0,scarlet-violet
 Sobble,Water Pulse,level-up,12,scarlet-violet
 Sobble,Water Pulse,machine,0,scarlet-violet
-Sobble,U Turn,level-up,24,scarlet-violet
-Sobble,U Turn,machine,0,scarlet-violet
+Sobble,U-Turn,level-up,24,scarlet-violet
+Sobble,U-Turn,machine,0,scarlet-violet
 Sobble,Sucker Punch,level-up,20,scarlet-violet
 Sobble,Aqua Ring,egg,0,scarlet-violet
 Sobble,Ice Shard,egg,0,scarlet-violet
@@ -62181,8 +62181,8 @@ Drizzile,Muddy Water,machine,0,scarlet-violet
 Drizzile,Mud Shot,machine,0,scarlet-violet
 Drizzile,Water Pulse,level-up,12,scarlet-violet
 Drizzile,Water Pulse,machine,0,scarlet-violet
-Drizzile,U Turn,level-up,30,scarlet-violet
-Drizzile,U Turn,machine,0,scarlet-violet
+Drizzile,U-Turn,level-up,30,scarlet-violet
+Drizzile,U-Turn,machine,0,scarlet-violet
 Drizzile,Fling,machine,0,scarlet-violet
 Drizzile,Sucker Punch,level-up,24,scarlet-violet
 Drizzile,Aqua Ring,egg,0,scarlet-violet
@@ -62240,8 +62240,8 @@ Inteleon,Icicle Spear,machine,0,scarlet-violet
 Inteleon,Mud Shot,machine,0,scarlet-violet
 Inteleon,Water Pulse,level-up,12,scarlet-violet
 Inteleon,Water Pulse,machine,0,scarlet-violet
-Inteleon,U Turn,level-up,30,scarlet-violet
-Inteleon,U Turn,machine,0,scarlet-violet
+Inteleon,U-Turn,level-up,30,scarlet-violet
+Inteleon,U-Turn,machine,0,scarlet-violet
 Inteleon,Fling,machine,0,scarlet-violet
 Inteleon,Sucker Punch,level-up,24,scarlet-violet
 Inteleon,Aqua Ring,egg,0,scarlet-violet
@@ -62397,7 +62397,7 @@ Rookidee,Roost,egg,0,scarlet-violet
 Rookidee,Pluck,level-up,16,scarlet-violet
 Rookidee,Tailwind,egg,0,scarlet-violet
 Rookidee,Tailwind,machine,0,scarlet-violet
-Rookidee,U Turn,machine,0,scarlet-violet
+Rookidee,U-Turn,machine,0,scarlet-violet
 Rookidee,Air Slash,machine,0,scarlet-violet
 Rookidee,Brave Bird,level-up,36,scarlet-violet
 Rookidee,Brave Bird,machine,0,scarlet-violet
@@ -62435,7 +62435,7 @@ Corvisquire,Air Cutter,machine,0,scarlet-violet
 Corvisquire,Aerial Ace,machine,0,scarlet-violet
 Corvisquire,Pluck,level-up,16,scarlet-violet
 Corvisquire,Tailwind,machine,0,scarlet-violet
-Corvisquire,U Turn,machine,0,scarlet-violet
+Corvisquire,U-Turn,machine,0,scarlet-violet
 Corvisquire,Air Slash,machine,0,scarlet-violet
 Corvisquire,Brave Bird,level-up,46,scarlet-violet
 Corvisquire,Brave Bird,machine,0,scarlet-violet
@@ -62494,7 +62494,7 @@ Corviknight,Roost,egg,0,scarlet-violet
 Corviknight,Pluck,level-up,16,scarlet-violet
 Corviknight,Tailwind,machine,0,scarlet-violet
 Corviknight,Tailwind,egg,0,scarlet-violet
-Corviknight,U Turn,machine,0,scarlet-violet
+Corviknight,U-Turn,machine,0,scarlet-violet
 Corviknight,Air Slash,machine,0,scarlet-violet
 Corviknight,Brave Bird,level-up,50,scarlet-violet
 Corviknight,Brave Bird,machine,0,scarlet-violet
@@ -62595,7 +62595,7 @@ Orbeetle,Imprison,machine,0,sword-shield
 Orbeetle,Iron Defense,machine,0,sword-shield
 Orbeetle,Calm Mind,level-up,44,sword-shield
 Orbeetle,Calm Mind,machine,0,sword-shield
-Orbeetle,U Turn,machine,0,sword-shield
+Orbeetle,U-Turn,machine,0,sword-shield
 Orbeetle,Payback,machine,0,sword-shield
 Orbeetle,Power Swap,machine,0,sword-shield
 Orbeetle,Guard Swap,machine,0,sword-shield
@@ -62686,7 +62686,7 @@ Thievul,Facade,machine,0,sword-shield
 Thievul,Taunt,machine,0,sword-shield
 Thievul,Fake Tears,machine,0,sword-shield
 Thievul,Mud Shot,machine,0,sword-shield
-Thievul,U Turn,machine,0,sword-shield
+Thievul,U-Turn,machine,0,sword-shield
 Thievul,Assurance,level-up,16,sword-shield
 Thievul,Assurance,machine,0,sword-shield
 Thievul,Sucker Punch,level-up,28,sword-shield
@@ -63261,7 +63261,7 @@ Flapple,Iron Defense,machine,0,scarlet-violet
 Flapple,Magical Leaf,machine,0,scarlet-violet
 Flapple,Dragon Dance,level-up,24,scarlet-violet
 Flapple,Dragon Dance,machine,0,scarlet-violet
-Flapple,U Turn,machine,0,scarlet-violet
+Flapple,U-Turn,machine,0,scarlet-violet
 Flapple,Seed Bomb,machine,0,scarlet-violet
 Flapple,Air Slash,machine,0,scarlet-violet
 Flapple,Dragon Pulse,level-up,28,scarlet-violet
@@ -64665,7 +64665,7 @@ Perrserker,Iron Defense,level-up,1,scarlet-violet
 Perrserker,Iron Defense,machine,0,scarlet-violet
 Perrserker,Gyro Ball,machine,0,scarlet-violet
 Perrserker,Metal Burst,level-up,1,scarlet-violet
-Perrserker,U Turn,machine,0,scarlet-violet
+Perrserker,U-Turn,machine,0,scarlet-violet
 Perrserker,Close Combat,machine,0,scarlet-violet
 Perrserker,Fling,machine,0,scarlet-violet
 Perrserker,Dark Pulse,machine,0,scarlet-violet
@@ -65222,7 +65222,7 @@ Frosmoth,Icicle Spear,machine,0,scarlet-violet
 Frosmoth,Calm Mind,machine,0,scarlet-violet
 Frosmoth,Tailwind,level-up,44,scarlet-violet
 Frosmoth,Tailwind,machine,0,scarlet-violet
-Frosmoth,U Turn,machine,0,scarlet-violet
+Frosmoth,U-Turn,machine,0,scarlet-violet
 Frosmoth,Air Slash,machine,0,scarlet-violet
 Frosmoth,Bug Buzz,level-up,32,scarlet-violet
 Frosmoth,Bug Buzz,machine,0,scarlet-violet
@@ -66431,8 +66431,8 @@ Drakloak,Helping Hand,machine,0,scarlet-violet
 Drakloak,Astonish,level-up,1,scarlet-violet
 Drakloak,Dragon Dance,level-up,42,scarlet-violet
 Drakloak,Dragon Dance,machine,0,scarlet-violet
-Drakloak,U Turn,level-up,36,scarlet-violet
-Drakloak,U Turn,machine,0,scarlet-violet
+Drakloak,U-Turn,level-up,36,scarlet-violet
+Drakloak,U-Turn,machine,0,scarlet-violet
 Drakloak,Assurance,level-up,12,scarlet-violet
 Drakloak,Last Resort,level-up,72,scarlet-violet
 Drakloak,Dragon Pulse,level-up,0,scarlet-violet
@@ -66495,8 +66495,8 @@ Dragapult,Astonish,level-up,1,scarlet-violet
 Dragapult,Dragon Claw,machine,0,scarlet-violet
 Dragapult,Dragon Dance,level-up,42,scarlet-violet
 Dragapult,Dragon Dance,machine,0,scarlet-violet
-Dragapult,U Turn,level-up,36,scarlet-violet
-Dragapult,U Turn,machine,0,scarlet-violet
+Dragapult,U-Turn,level-up,36,scarlet-violet
+Dragapult,U-Turn,machine,0,scarlet-violet
 Dragapult,Assurance,level-up,12,scarlet-violet
 Dragapult,Last Resort,level-up,78,scarlet-violet
 Dragapult,Dragon Pulse,machine,0,scarlet-violet
@@ -67180,7 +67180,7 @@ Kubfu,Aerial Ace,level-up,12,scarlet-violet
 Kubfu,Aerial Ace,machine,0,scarlet-violet
 Kubfu,Bulk Up,level-up,32,scarlet-violet
 Kubfu,Bulk Up,machine,0,scarlet-violet
-Kubfu,U Turn,machine,0,scarlet-violet
+Kubfu,U-Turn,machine,0,scarlet-violet
 Kubfu,Close Combat,level-up,48,scarlet-violet
 Kubfu,Close Combat,machine,0,scarlet-violet
 Kubfu,Fling,machine,0,scarlet-violet
@@ -67279,7 +67279,7 @@ Single Strike Style",Bulk Up,level-up,32,scarlet-violet
 "Urshifu
 Single Strike Style",Bulk Up,machine,0,scarlet-violet
 "Urshifu
-Single Strike Style",U Turn,machine,0,scarlet-violet
+Single Strike Style",U-Turn,machine,0,scarlet-violet
 "Urshifu
 Single Strike Style",Close Combat,level-up,48,scarlet-violet
 "Urshifu
@@ -67419,7 +67419,7 @@ Rapid Strike Style",Bulk Up,level-up,32,scarlet-violet
 "Urshifu
 Rapid Strike Style",Bulk Up,machine,0,scarlet-violet
 "Urshifu
-Rapid Strike Style",U Turn,machine,0,scarlet-violet
+Rapid Strike Style",U-Turn,machine,0,scarlet-violet
 "Urshifu
 Rapid Strike Style",Close Combat,level-up,48,scarlet-violet
 "Urshifu
@@ -67513,8 +67513,8 @@ Zarude,Bulk Up,machine,0,scarlet-violet
 Zarude,Mud Shot,machine,0,scarlet-violet
 Zarude,Magical Leaf,machine,0,scarlet-violet
 Zarude,Hammer Arm,level-up,72,scarlet-violet
-Zarude,U Turn,level-up,48,scarlet-violet
-Zarude,U Turn,machine,0,scarlet-violet
+Zarude,U-Turn,level-up,48,scarlet-violet
+Zarude,U-Turn,machine,0,scarlet-violet
 Zarude,Close Combat,machine,0,scarlet-violet
 Zarude,Fling,machine,0,scarlet-violet
 Zarude,Dark Pulse,machine,0,scarlet-violet
@@ -68271,7 +68271,7 @@ Kleavor,Rock Tomb,machine,0,scarlet-violet
 Kleavor,Aerial Ace,machine,0,scarlet-violet
 Kleavor,Rock Blast,machine,0,scarlet-violet
 Kleavor,Tailwind,machine,0,scarlet-violet
-Kleavor,U Turn,machine,0,scarlet-violet
+Kleavor,U-Turn,machine,0,scarlet-violet
 Kleavor,Close Combat,machine,0,scarlet-violet
 Kleavor,Air Slash,machine,0,scarlet-violet
 Kleavor,X Scissor,level-up,40,scarlet-violet
@@ -68760,7 +68760,7 @@ Sneasler,Aerial Ace,machine,0,scarlet-violet
 Sneasler,Bulk Up,machine,0,scarlet-violet
 Sneasler,Poison Tail,machine,0,scarlet-violet
 Sneasler,Calm Mind,machine,0,scarlet-violet
-Sneasler,U Turn,machine,0,scarlet-violet
+Sneasler,U-Turn,machine,0,scarlet-violet
 Sneasler,Close Combat,level-up,60,scarlet-violet
 Sneasler,Close Combat,machine,0,scarlet-violet
 Sneasler,Fling,level-up,1,scarlet-violet
@@ -69106,8 +69106,8 @@ Sprigatito,Fake Tears,machine,0,scarlet-violet
 Sprigatito,Bullet Seed,machine,0,scarlet-violet
 Sprigatito,Magical Leaf,level-up,13,scarlet-violet
 Sprigatito,Magical Leaf,machine,0,scarlet-violet
-Sprigatito,U Turn,level-up,21,scarlet-violet
-Sprigatito,U Turn,machine,0,scarlet-violet
+Sprigatito,U-Turn,level-up,21,scarlet-violet
+Sprigatito,U-Turn,machine,0,scarlet-violet
 Sprigatito,Copycat,egg,0,scarlet-violet
 Sprigatito,Worry Seed,level-up,25,scarlet-violet
 Sprigatito,Sucker Punch,egg,0,scarlet-violet
@@ -69160,8 +69160,8 @@ Floragato,Bullet Seed,machine,0,scarlet-violet
 Floragato,Aerial Ace,machine,0,scarlet-violet
 Floragato,Magical Leaf,level-up,13,scarlet-violet
 Floragato,Magical Leaf,machine,0,scarlet-violet
-Floragato,U Turn,level-up,24,scarlet-violet
-Floragato,U Turn,machine,0,scarlet-violet
+Floragato,U-Turn,level-up,24,scarlet-violet
+Floragato,U-Turn,machine,0,scarlet-violet
 Floragato,Fling,machine,0,scarlet-violet
 Floragato,Worry Seed,level-up,28,scarlet-violet
 Floragato,Seed Bomb,level-up,20,scarlet-violet
@@ -69226,8 +69226,8 @@ Meowscarada,Aerial Ace,machine,0,scarlet-violet
 Meowscarada,Frenzy Plant,machine,0,scarlet-violet
 Meowscarada,Magical Leaf,level-up,13,scarlet-violet
 Meowscarada,Magical Leaf,machine,0,scarlet-violet
-Meowscarada,U Turn,level-up,24,scarlet-violet
-Meowscarada,U Turn,machine,0,scarlet-violet
+Meowscarada,U-Turn,level-up,24,scarlet-violet
+Meowscarada,U-Turn,machine,0,scarlet-violet
 Meowscarada,Fling,machine,0,scarlet-violet
 Meowscarada,Worry Seed,level-up,29,scarlet-violet
 Meowscarada,Toxic Spikes,machine,0,scarlet-violet
@@ -69568,7 +69568,7 @@ Quaquaval,Aerial Ace,machine,0,scarlet-violet
 Quaquaval,Bulk Up,machine,0,scarlet-violet
 Quaquaval,Water Pulse,level-up,17,scarlet-violet
 Quaquaval,Water Pulse,machine,0,scarlet-violet
-Quaquaval,U Turn,machine,0,scarlet-violet
+Quaquaval,U-Turn,machine,0,scarlet-violet
 Quaquaval,Close Combat,level-up,58,scarlet-violet
 Quaquaval,Close Combat,machine,0,scarlet-violet
 Quaquaval,Fling,machine,0,scarlet-violet
@@ -69890,7 +69890,7 @@ Spidops,Bullet Seed,machine,0,scarlet-violet
 Spidops,Aerial Ace,machine,0,scarlet-violet
 Spidops,Block,level-up,19,scarlet-violet
 Spidops,Feint,level-up,11,scarlet-violet
-Spidops,U Turn,machine,0,scarlet-violet
+Spidops,U-Turn,machine,0,scarlet-violet
 Spidops,Assurance,level-up,8,scarlet-violet
 Spidops,Fling,machine,0,scarlet-violet
 Spidops,Gastro Acid,level-up,37,scarlet-violet
@@ -69939,7 +69939,7 @@ Nymble,Sunny Day,machine,0,scarlet-violet
 Nymble,Facade,machine,0,scarlet-violet
 Nymble,Astonish,level-up,6,scarlet-violet
 Nymble,Feint,level-up,26,scarlet-violet
-Nymble,U Turn,machine,0,scarlet-violet
+Nymble,U-Turn,machine,0,scarlet-violet
 Nymble,Assurance,level-up,9,scarlet-violet
 Nymble,Sucker Punch,level-up,38,scarlet-violet
 Nymble,X Scissor,machine,0,scarlet-violet
@@ -69987,7 +69987,7 @@ Lokix,Astonish,level-up,6,scarlet-violet
 Lokix,Aerial Ace,machine,0,scarlet-violet
 Lokix,Bounce,level-up,48,scarlet-violet
 Lokix,Feint,level-up,28,scarlet-violet
-Lokix,U Turn,machine,0,scarlet-violet
+Lokix,U-Turn,machine,0,scarlet-violet
 Lokix,Assurance,level-up,9,scarlet-violet
 Lokix,Fling,machine,0,scarlet-violet
 Lokix,Sucker Punch,level-up,40,scarlet-violet
@@ -70242,7 +70242,7 @@ Tandemaus,Aerial Ace,machine,0,scarlet-violet
 Tandemaus,Mud Shot,machine,0,scarlet-violet
 Tandemaus,Water Pulse,machine,0,scarlet-violet
 Tandemaus,Feint,egg,0,scarlet-violet
-Tandemaus,U Turn,machine,0,scarlet-violet
+Tandemaus,U-Turn,machine,0,scarlet-violet
 Tandemaus,Copycat,level-up,41,scarlet-violet
 Tandemaus,Seed Bomb,machine,0,scarlet-violet
 Tandemaus,Switcheroo,egg,0,scarlet-violet
@@ -70336,7 +70336,7 @@ Family of Four",Mud Shot,machine,0,scarlet-violet
 "Maushold
 Family of Four",Water Pulse,machine,0,scarlet-violet
 "Maushold
-Family of Four",U Turn,machine,0,scarlet-violet
+Family of Four",U-Turn,machine,0,scarlet-violet
 "Maushold
 Family of Four",Copycat,level-up,46,scarlet-violet
 "Maushold
@@ -70448,7 +70448,7 @@ Family of Three",Mud Shot,machine,0,scarlet-violet
 "Maushold
 Family of Three",Water Pulse,machine,0,scarlet-violet
 "Maushold
-Family of Three",U Turn,machine,0,scarlet-violet
+Family of Three",U-Turn,machine,0,scarlet-violet
 "Maushold
 Family of Three",Copycat,level-up,46,scarlet-violet
 "Maushold
@@ -70804,7 +70804,7 @@ Green Plumage",Roost,level-up,47,scarlet-violet
 "Squawkabilly
 Green Plumage",Tailwind,machine,0,scarlet-violet
 "Squawkabilly
-Green Plumage",U Turn,machine,0,scarlet-violet
+Green Plumage",U-Turn,machine,0,scarlet-violet
 "Squawkabilly
 Green Plumage",Copycat,level-up,27,scarlet-violet
 "Squawkabilly
@@ -70914,7 +70914,7 @@ Blue Plumage",Roost,level-up,47,scarlet-violet
 "Squawkabilly
 Blue Plumage",Tailwind,machine,0,scarlet-violet
 "Squawkabilly
-Blue Plumage",U Turn,machine,0,scarlet-violet
+Blue Plumage",U-Turn,machine,0,scarlet-violet
 "Squawkabilly
 Blue Plumage",Copycat,level-up,27,scarlet-violet
 "Squawkabilly
@@ -71024,7 +71024,7 @@ Yellow Plumage",Roost,level-up,47,scarlet-violet
 "Squawkabilly
 Yellow Plumage",Tailwind,machine,0,scarlet-violet
 "Squawkabilly
-Yellow Plumage",U Turn,machine,0,scarlet-violet
+Yellow Plumage",U-Turn,machine,0,scarlet-violet
 "Squawkabilly
 Yellow Plumage",Copycat,level-up,27,scarlet-violet
 "Squawkabilly
@@ -71134,7 +71134,7 @@ White Plumage",Roost,level-up,47,scarlet-violet
 "Squawkabilly
 White Plumage",Tailwind,machine,0,scarlet-violet
 "Squawkabilly
-White Plumage",U Turn,machine,0,scarlet-violet
+White Plumage",U-Turn,machine,0,scarlet-violet
 "Squawkabilly
 White Plumage",Copycat,level-up,27,scarlet-violet
 "Squawkabilly
@@ -71620,7 +71620,7 @@ Wattrel,Aerial Ace,machine,0,scarlet-violet
 Wattrel,Roost,level-up,23,scarlet-violet
 Wattrel,Pluck,level-up,11,scarlet-violet
 Wattrel,Tailwind,machine,0,scarlet-violet
-Wattrel,U Turn,machine,0,scarlet-violet
+Wattrel,U-Turn,machine,0,scarlet-violet
 Wattrel,Air Slash,machine,0,scarlet-violet
 Wattrel,Brave Bird,machine,0,scarlet-violet
 Wattrel,Discharge,level-up,43,scarlet-violet
@@ -71669,7 +71669,7 @@ Kilowattrel,Aerial Ace,machine,0,scarlet-violet
 Kilowattrel,Roost,level-up,24,scarlet-violet
 Kilowattrel,Pluck,level-up,11,scarlet-violet
 Kilowattrel,Tailwind,machine,0,scarlet-violet
-Kilowattrel,U Turn,machine,0,scarlet-violet
+Kilowattrel,U-Turn,machine,0,scarlet-violet
 Kilowattrel,Air Slash,machine,0,scarlet-violet
 Kilowattrel,Brave Bird,machine,0,scarlet-violet
 Kilowattrel,Giga Impact,machine,0,scarlet-violet
@@ -71837,8 +71837,8 @@ Shroodle,Knock Off,machine,0,scarlet-violet
 Shroodle,Endeavor,machine,0,scarlet-violet
 Shroodle,Poison Fang,level-up,14,scarlet-violet
 Shroodle,Mud Shot,machine,0,scarlet-violet
-Shroodle,U Turn,level-up,25,scarlet-violet
-Shroodle,U Turn,machine,0,scarlet-violet
+Shroodle,U-Turn,level-up,25,scarlet-violet
+Shroodle,U-Turn,machine,0,scarlet-violet
 Shroodle,Fling,machine,0,scarlet-violet
 Shroodle,Copycat,egg,0,scarlet-violet
 Shroodle,Poison Jab,level-up,29,scarlet-violet
@@ -71898,8 +71898,8 @@ Grafaiai,Endeavor,machine,0,scarlet-violet
 Grafaiai,Poison Fang,level-up,14,scarlet-violet
 Grafaiai,Mud Shot,machine,0,scarlet-violet
 Grafaiai,Poison Tail,machine,0,scarlet-violet
-Grafaiai,U Turn,level-up,25,scarlet-violet
-Grafaiai,U Turn,machine,0,scarlet-violet
+Grafaiai,U-Turn,level-up,25,scarlet-violet
+Grafaiai,U-Turn,machine,0,scarlet-violet
 Grafaiai,Fling,machine,0,scarlet-violet
 Grafaiai,Poison Jab,level-up,33,scarlet-violet
 Grafaiai,Poison Jab,machine,0,scarlet-violet
@@ -72470,7 +72470,7 @@ Flittle,Skill Swap,machine,0,scarlet-violet
 Flittle,Calm Mind,machine,0,scarlet-violet
 Flittle,Roost,egg,0,scarlet-violet
 Flittle,Pluck,level-up,24,scarlet-violet
-Flittle,U Turn,machine,0,scarlet-violet
+Flittle,U-Turn,machine,0,scarlet-violet
 Flittle,Seed Bomb,machine,0,scarlet-violet
 Flittle,Zen Headbutt,machine,0,scarlet-violet
 Flittle,Trick Room,machine,0,scarlet-violet
@@ -72530,7 +72530,7 @@ Espathra,Hyper Voice,machine,0,scarlet-violet
 Espathra,Aerial Ace,machine,0,scarlet-violet
 Espathra,Calm Mind,machine,0,scarlet-violet
 Espathra,Pluck,level-up,24,scarlet-violet
-Espathra,U Turn,machine,0,scarlet-violet
+Espathra,U-Turn,machine,0,scarlet-violet
 Espathra,Last Resort,level-up,54,scarlet-violet
 Espathra,Seed Bomb,machine,0,scarlet-violet
 Espathra,Energy Ball,machine,0,scarlet-violet
@@ -72843,7 +72843,7 @@ Bombirdier,Rock Blast,machine,0,scarlet-violet
 Bombirdier,Roost,egg,0,scarlet-violet
 Bombirdier,Pluck,level-up,20,scarlet-violet
 Bombirdier,Tailwind,machine,0,scarlet-violet
-Bombirdier,U Turn,machine,0,scarlet-violet
+Bombirdier,U-Turn,machine,0,scarlet-violet
 Bombirdier,Payback,level-up,36,scarlet-violet
 Bombirdier,Sucker Punch,egg,0,scarlet-violet
 Bombirdier,Dark Pulse,machine,0,scarlet-violet
@@ -73203,8 +73203,8 @@ Cyclizar,Aerial Ace,machine,0,scarlet-violet
 Cyclizar,Dragon Claw,level-up,36,scarlet-violet
 Cyclizar,Dragon Claw,machine,0,scarlet-violet
 Cyclizar,Mud Shot,machine,0,scarlet-violet
-Cyclizar,U Turn,level-up,27,scarlet-violet
-Cyclizar,U Turn,machine,0,scarlet-violet
+Cyclizar,U-Turn,level-up,27,scarlet-violet
+Cyclizar,U-Turn,machine,0,scarlet-violet
 Cyclizar,Aqua Tail,egg,0,scarlet-violet
 Cyclizar,Dragon Pulse,level-up,45,scarlet-violet
 Cyclizar,Dragon Pulse,machine,0,scarlet-violet
@@ -73543,7 +73543,7 @@ Flamigo,Water Pulse,machine,0,scarlet-violet
 Flamigo,Roost,level-up,31,scarlet-violet
 Flamigo,Feint,level-up,21,scarlet-violet
 Flamigo,Tailwind,machine,0,scarlet-violet
-Flamigo,U Turn,machine,0,scarlet-violet
+Flamigo,U-Turn,machine,0,scarlet-violet
 Flamigo,Close Combat,machine,0,scarlet-violet
 Flamigo,Payback,level-up,27,scarlet-violet
 Flamigo,Fling,machine,0,scarlet-violet
@@ -74093,7 +74093,7 @@ Annihilape,Overheat,machine,0,scarlet-violet
 Annihilape,Rock Tomb,machine,0,scarlet-violet
 Annihilape,Shadow Punch,level-up,0,scarlet-violet
 Annihilape,Bulk Up,machine,0,scarlet-violet
-Annihilape,U Turn,machine,0,scarlet-violet
+Annihilape,U-Turn,machine,0,scarlet-violet
 Annihilape,Close Combat,level-up,39,scarlet-violet
 Annihilape,Assurance,level-up,26,scarlet-violet
 Annihilape,Fling,level-up,1,scarlet-violet
@@ -74999,7 +74999,7 @@ Slither Wing,Brick Break,machine,0,scarlet-violet
 Slither Wing,Aerial Ace,machine,0,scarlet-violet
 Slither Wing,Bulk Up,level-up,56,scarlet-violet
 Slither Wing,Bulk Up,machine,0,scarlet-violet
-Slither Wing,U Turn,machine,0,scarlet-violet
+Slither Wing,U-Turn,machine,0,scarlet-violet
 Slither Wing,Close Combat,machine,0,scarlet-violet
 Slither Wing,Flare Blitz,machine,0,scarlet-violet
 Slither Wing,Bug Buzz,machine,0,scarlet-violet
@@ -75186,7 +75186,7 @@ Iron Bundle,Helping Hand,level-up,35,scarlet-violet
 Iron Bundle,Helping Hand,machine,0,scarlet-violet
 Iron Bundle,Air Cutter,machine,0,scarlet-violet
 Iron Bundle,Water Pulse,machine,0,scarlet-violet
-Iron Bundle,U Turn,machine,0,scarlet-violet
+Iron Bundle,U-Turn,machine,0,scarlet-violet
 Iron Bundle,Fling,machine,0,scarlet-violet
 Iron Bundle,Giga Impact,machine,0,scarlet-violet
 Iron Bundle,Avalanche,machine,0,scarlet-violet
@@ -75304,7 +75304,7 @@ Iron Jugulis,Air Cutter,machine,0,scarlet-violet
 Iron Jugulis,Rock Tomb,machine,0,scarlet-violet
 Iron Jugulis,Metal Sound,machine,0,scarlet-violet
 Iron Jugulis,Tailwind,machine,0,scarlet-violet
-Iron Jugulis,U Turn,machine,0,scarlet-violet
+Iron Jugulis,U-Turn,machine,0,scarlet-violet
 Iron Jugulis,Assurance,level-up,14,scarlet-violet
 Iron Jugulis,Dark Pulse,level-up,70,scarlet-violet
 Iron Jugulis,Dark Pulse,machine,0,scarlet-violet
@@ -75366,7 +75366,7 @@ Iron Moth,Overheat,level-up,91,scarlet-violet
 Iron Moth,Overheat,machine,0,scarlet-violet
 Iron Moth,Metal Sound,level-up,63,scarlet-violet
 Iron Moth,Metal Sound,machine,0,scarlet-violet
-Iron Moth,U Turn,machine,0,scarlet-violet
+Iron Moth,U-Turn,machine,0,scarlet-violet
 Iron Moth,Toxic Spikes,machine,0,scarlet-violet
 Iron Moth,Flare Blitz,machine,0,scarlet-violet
 Iron Moth,Air Slash,machine,0,scarlet-violet
@@ -76023,7 +76023,7 @@ Roaring Moon,Dragon Dance,level-up,56,scarlet-violet
 Roaring Moon,Dragon Dance,machine,0,scarlet-violet
 Roaring Moon,Roost,level-up,84,scarlet-violet
 Roaring Moon,Tailwind,machine,0,scarlet-violet
-Roaring Moon,U Turn,machine,0,scarlet-violet
+Roaring Moon,U-Turn,machine,0,scarlet-violet
 Roaring Moon,Dark Pulse,machine,0,scarlet-violet
 Roaring Moon,Night Slash,level-up,49,scarlet-violet
 Roaring Moon,Air Slash,machine,0,scarlet-violet
@@ -76186,7 +76186,7 @@ Koraidon,Dragon Claw,level-up,42,scarlet-violet
 Koraidon,Dragon Claw,machine,0,scarlet-violet
 Koraidon,Bulk Up,machine,0,scarlet-violet
 Koraidon,Mud Shot,machine,0,scarlet-violet
-Koraidon,U Turn,machine,0,scarlet-violet
+Koraidon,U-Turn,machine,0,scarlet-violet
 Koraidon,Close Combat,level-up,84,scarlet-violet
 Koraidon,Close Combat,machine,0,scarlet-violet
 Koraidon,Flare Blitz,level-up,91,scarlet-violet
@@ -76263,7 +76263,7 @@ Miraidon,Metal Sound,machine,0,scarlet-violet
 Miraidon,Dragon Claw,machine,0,scarlet-violet
 Miraidon,Calm Mind,machine,0,scarlet-violet
 Miraidon,Shock Wave,level-up,7,scarlet-violet
-Miraidon,U Turn,machine,0,scarlet-violet
+Miraidon,U-Turn,machine,0,scarlet-violet
 Miraidon,Dragon Pulse,level-up,42,scarlet-violet
 Miraidon,Dragon Pulse,machine,0,scarlet-violet
 Miraidon,Power Gem,machine,0,scarlet-violet
@@ -76659,7 +76659,7 @@ Munkidori,Helping Hand,machine,0,scarlet-violet
 Munkidori,Trick,machine,0,scarlet-violet
 Munkidori,Imprison,machine,0,scarlet-violet
 Munkidori,Calm Mind,machine,0,scarlet-violet
-Munkidori,U Turn,machine,0,scarlet-violet
+Munkidori,U-Turn,machine,0,scarlet-violet
 Munkidori,Fling,machine,0,scarlet-violet
 Munkidori,Poison Jab,level-up,32,scarlet-violet
 Munkidori,Poison Jab,machine,0,scarlet-violet
@@ -76724,7 +76724,7 @@ Fezandipiti,Poison Tail,machine,0,scarlet-violet
 Fezandipiti,Calm Mind,machine,0,scarlet-violet
 Fezandipiti,Roost,level-up,64,scarlet-violet
 Fezandipiti,Tailwind,machine,0,scarlet-violet
-Fezandipiti,U Turn,machine,0,scarlet-violet
+Fezandipiti,U-Turn,machine,0,scarlet-violet
 Fezandipiti,Poison Jab,machine,0,scarlet-violet
 Fezandipiti,Dark Pulse,machine,0,scarlet-violet
 Fezandipiti,Air Slash,machine,0,scarlet-violet
@@ -76826,7 +76826,7 @@ Cornerstone Mask",Bullet Seed,machine,0,scarlet-violet
 "Ogerpon
 Cornerstone Mask",Magical Leaf,machine,0,scarlet-violet
 "Ogerpon
-Cornerstone Mask",U Turn,machine,0,scarlet-violet
+Cornerstone Mask",U-Turn,machine,0,scarlet-violet
 "Ogerpon
 Cornerstone Mask",Fling,machine,0,scarlet-violet
 "Ogerpon
@@ -76954,7 +76954,7 @@ Hearthflame Mask",Bullet Seed,machine,0,scarlet-violet
 "Ogerpon
 Hearthflame Mask",Magical Leaf,machine,0,scarlet-violet
 "Ogerpon
-Hearthflame Mask",U Turn,machine,0,scarlet-violet
+Hearthflame Mask",U-Turn,machine,0,scarlet-violet
 "Ogerpon
 Hearthflame Mask",Fling,machine,0,scarlet-violet
 "Ogerpon
@@ -77082,7 +77082,7 @@ Teal Mask",Bullet Seed,machine,0,scarlet-violet
 "Ogerpon
 Teal Mask",Magical Leaf,machine,0,scarlet-violet
 "Ogerpon
-Teal Mask",U Turn,machine,0,scarlet-violet
+Teal Mask",U-Turn,machine,0,scarlet-violet
 "Ogerpon
 Teal Mask",Fling,machine,0,scarlet-violet
 "Ogerpon
@@ -77210,7 +77210,7 @@ Wellspring Mask",Bullet Seed,machine,0,scarlet-violet
 "Ogerpon
 Wellspring Mask",Magical Leaf,machine,0,scarlet-violet
 "Ogerpon
-Wellspring Mask",U Turn,machine,0,scarlet-violet
+Wellspring Mask",U-Turn,machine,0,scarlet-violet
 "Ogerpon
 Wellspring Mask",Fling,machine,0,scarlet-violet
 "Ogerpon

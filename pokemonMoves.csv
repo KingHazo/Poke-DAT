@@ -367,7 +367,7 @@ Pluck,365,100,20,60,0,Flying,Generation IV,"If target has a berry, inflicts doub
 Tailwind,366,,15,,0,Flying,Generation IV,"For three turns, friendly Pokemon have doubled Speed.",Status
 Acupressure,367,,30,,0,Normal,Generation IV,Raises one of a friendly Pokemon's stats at random by two stages.,Status
 Metal Burst,368,100,10,,0,Steel,Generation IV,Strikes back at the last Pokemon to hit the user this turn with 1.5× the damage.,Physical
-U Turn,369,100,20,70,0,Bug,Generation IV,User must switch out after attacking.,Physical
+U-Turn,369,100,20,70,0,Bug,Generation IV,User must switch out after attacking.,Physical
 Close Combat,370,100,5,120,0,Fighting,Generation IV,Lowers the user's Defense and Special Defense by one stage after inflicting damage.,Physical
 Payback,371,100,10,50,0,Dark,Generation IV,Power is doubled if the target has already moved this turn.,Physical
 Assurance,372,100,10,60,0,Dark,Generation IV,Power is doubled if the target has already received damage this turn.,Physical

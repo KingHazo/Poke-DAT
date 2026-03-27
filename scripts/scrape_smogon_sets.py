@@ -3,19 +3,19 @@ import requests
 import json
 
 OUTPUT_FILE = 'pokemon_smogon_sets.json'
-BASE_URL    = 'https://data.pkmn.cc/sets/'
-HEADERS     = {'User-Agent': 'SmogonSetsScraper/1.0 (educational project)'}
+BASE_URL = 'https://data.pkmn.cc/sets/'
+HEADERS = {'User-Agent': 'SmogonSetsScraper/1.0 (educational project)'}
 
 #Tiers in priority order — if a Pokémon appears in multiple tiers, the highest-priority tier's sets are kept (but all sets are merged).
 GEN9_TIERS = [
-    ('gen9ubers.json',      'Ubers'),
-    ('gen9ou.json',         'OU'),
-    ('gen9uu.json',         'UU'),
-    ('gen9ru.json',         'RU'),
-    ('gen9nu.json',         'NU'),
-    ('gen9pu.json',         'PU'),
-    ('gen9lc.json',         'LC'),
-    ('gen9doublesou.json',  'Doubles OU'),
+    ('gen9ubers.json', 'Ubers'),
+    ('gen9ou.json', 'OU'),
+    ('gen9uu.json', 'UU'),
+    ('gen9ru.json', 'RU'),
+    ('gen9nu.json', 'NU'),
+    ('gen9pu.json', 'PU'),
+    ('gen9lc.json', 'LC'),
+    ('gen9doublesou.json', 'Doubles OU'),
     ('gen9nationaldex.json','National Dex'),
     ('gen9anythinggoes.json','AG'),
 ]
