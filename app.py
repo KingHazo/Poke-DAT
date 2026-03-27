@@ -891,7 +891,7 @@ main_tabs = st.tabs([
 
 #MAIN TAB 1: RANKINGS
 with main_tabs[0]:
-    mode = st.segmented_control ("View Rankings By:", ["Type", "Specific Stat", "Height", "Weight", "Legendary", "Mythical"], default="Type", key="mode" )
+    mode = st.segmented_control ("View Rankings By:", ["Type", "Specific Stat", "Height", "Weight", "Legendary", "Mythical", "Moves"], default="Type", key="mode" )
     
     if mode == "Type":
         #SUB-SECTION: Top 10 by Type 
@@ -1120,7 +1120,6 @@ with main_tabs[0]:
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
 
     elif mode == "Mythical":
-
         #SUB-SECTION: Top 10 Mythical
         st.header("Top 10 Mythical Pokémon by Total Stats")
         myth_df  = get_top_mythical(df)
@@ -1152,7 +1151,55 @@ with main_tabs[0]:
                 else:
                     st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
+    else:
+        st.header("Top 10 Moves by Specific Metrics")
 
+        # 1. UI Selection Row
+        m_col1, m_col2 = st.columns(2)
+        with m_col1:
+            metric_label = st.selectbox("Select Metric:", ["Power", "PP", "Priority"])
+            move_metric = metric_label.lower()
+            
+        with m_col2:
+            unique_move_types = sorted(moves_meta_df['type'].unique().tolist())
+            move_type_filter = st.selectbox("Filter by Move Type:", ["All Types"] + unique_move_types)
+        
+        # 2. Filtering Logic
+        m_filtered = moves_meta_df.copy()
+        if move_type_filter != "All Types":
+            m_filtered = m_filtered[m_filtered['type'] == move_type_filter]
+            
+        # 3. Data Processing
+        # Drop NaNs for the metric and get top 10
+        top_moves = m_filtered.dropna(subset=[move_metric]).nlargest(10, move_metric)
+        # Sort ascending for horizontal bar chart (highest at the top)
+        top_moves = top_moves.sort_values(by=move_metric, ascending=True)
+        
+        if not top_moves.empty:
+            m_col_pad_1, m_col_chart, m_col_pad_2 = st.columns([2, 6, 2])
+            
+            colors = get_pokedex_colors(len(top_moves))
+            
+            with m_col_chart:
+                #Create horizontal bar chart
+                plt.barh(top_moves['name'], top_moves[move_metric], color=colors)
+
+                #Styling to match your Pokedex theme
+                plt.title(f"Top 10 {move_type_filter} Moves by {metric_label}", fontsize=12, fontweight='bold', pad=15)
+                plt.xlabel(metric_label, fontsize=10)
+                plt.ylabel("Move Name", fontsize=10)
+
+                #Add gridlines for readability (matching your Plotly grid style)
+                plt.grid(axis='x', linestyle='--', alpha=0.7)
+
+                #Adjust layout to prevent label clipping
+                plt.tight_layout()
+
+                #Display in Streamlit
+                st.pyplot(plt)
+            
+        else:
+            st.info(f"No moves found for the {move_type_filter} type with a valid {metric_label} value.")
 
 #MAIN TAB 2: TRENDS
 with main_tabs[1]:
