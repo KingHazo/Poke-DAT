@@ -29,6 +29,8 @@ plt.rcParams.update({
     "savefig.facecolor": "lightblue"  #Ensures it stays grey if saved
 })
 
+patterns = ['///', '...', 'xxx', '---', '+++', 'OOO', '\\\\\\', '***']
+
 #Data Loading
 @st.cache_data
 def load_learnsets():
@@ -941,10 +943,9 @@ with main_tabs[0]:
                 sprite_path = get_sprite_path(row['Name'], df)
                 st.caption(f"**#{rank}**")
                 if sprite_path:
-                    st.image(sprite_path, caption='Name', use_container_width=True)
+                    st.image(sprite_path, caption=(f"{row['Name'].replace(chr(10), ' ')}"), use_container_width=True)
                 else:
                     st.markdown("<div style='text-align:center; font-size:24px;'>🎮</div>", unsafe_allow_html=True)
-                st.caption(f"{row['Name'].replace(chr(10), ' ')}")
             
             
     elif mode == "Specific Stat":
@@ -992,10 +993,9 @@ with main_tabs[0]:
                 sprite_path = get_sprite_path(row['Name'], df)
                 st.caption(f"**#{rank}**")
                 if sprite_path:
-                    st.image(sprite_path, caption='Name', use_container_width=True)
+                    st.image(sprite_path, caption=(f"{row['Name'].replace(chr(10), ' ')}"), use_container_width=True)
                 else:
                     st.markdown("<div style='text-align:center; font-size:24px;'>🎮</div>", unsafe_allow_html=True)
-                st.caption(f"{row['Name'].replace(chr(10), ' ')}")
 
 
     elif mode == "Height":
@@ -1038,10 +1038,9 @@ with main_tabs[0]:
                 sprite_path = get_sprite_path(row['Name'], df)
                 st.caption(f"**#{rank}**")
                 if sprite_path:
-                    st.image(sprite_path, caption='Name', use_container_width=True)
+                    st.image(sprite_path, caption=(f"{row['Name'].replace(chr(10), ' ')}"), use_container_width=True)
                 else:
                     st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
-                st.caption(f"{row['Name'].replace(chr(10), ' ')}")
 
     elif mode == "Weight":
         #SUB-SECTION: Top 10 by Weight
@@ -1080,10 +1079,9 @@ with main_tabs[0]:
                 sprite_path = get_sprite_path(row['Name'], df)
                 st.caption(f"**#{rank}**")
                 if sprite_path:
-                    st.image(sprite_path, caption='Name', use_container_width=True)
+                    st.image(sprite_path, caption=(f"{row['Name'].replace(chr(10), ' ')}"), use_container_width=True)
                 else:
-                    st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
-                st.caption(f"{row['Name'].replace(chr(10), ' ')}")       
+                    st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)  
 
     elif mode == "Legendary":
         #SUB-SECTION: Top 10 Legendary
@@ -1114,10 +1112,9 @@ with main_tabs[0]:
                 sprite_path = get_sprite_path(row['Name'], df)
                 st.caption(f"**#{rank}**")
                 if sprite_path:
-                    st.image(sprite_path, caption='Name', use_container_width=True)
+                    st.image(sprite_path, (f"{row['Name'].replace(chr(10), ' ')}"), use_container_width=True)
                 else:
                     st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
-                st.caption(f"{row['Name'].replace(chr(10), ' ')}")
 
     elif mode == "Mythical":
         #SUB-SECTION: Top 10 Mythical
@@ -1147,10 +1144,9 @@ with main_tabs[0]:
                 sprite_path = get_sprite_path(row['Name'], df)
                 st.caption(f"**#{rank}**")
                 if sprite_path:
-                    st.image(sprite_path, caption='Name', use_container_width=True)
+                    st.image(sprite_path, caption=(f"{row['Name'].replace(chr(10), ' ')}"), use_container_width=True)
                 else:
                     st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
-                st.caption(f"{row['Name'].replace(chr(10), ' ')}")
     else:
         st.header("Top 10 Moves by Specific Metrics")
 
@@ -1184,7 +1180,7 @@ with main_tabs[0]:
                 plt.clf()
                 #Create horizontal bar chart
                 plt.barh(top_moves['name'], top_moves[move_metric], color=colors)
-
+                
                 #Styling to match your Pokedex theme
                 plt.title(f"Top 10 {move_type_filter} Moves by {metric_label}", fontsize=12, fontweight='bold', pad=15)
                 plt.xlabel(metric_label, fontsize=10)
@@ -2108,7 +2104,7 @@ with main_tabs[2]:
             _, img_area, _ = st.columns([1, 1, 1])
             with img_area:
                 if sprite_path:
-                    st.image(sprite_path, caption='Name', use_container_width=True)
+                    st.image(sprite_path, use_container_width=True)
                 else:
                     st.caption("Sprite not available")
 
@@ -2580,7 +2576,7 @@ with main_tabs[4]:
         _, lk_img, _ = st.columns([1, 2, 1])
         with lk_img:
             if lk_sprite:
-                st.image(lk_sprite, caption='Name', use_container_width=True)
+                st.image(lk_sprite, use_container_width=True)
             else:
                 st.caption("Sprite not available")
  
