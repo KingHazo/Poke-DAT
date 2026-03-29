@@ -941,7 +941,7 @@ with main_tabs[0]:
                 sprite_path = get_sprite_path(row['Name'], df)
                 st.caption(f"**#{rank}**")
                 if sprite_path:
-                    st.image(sprite_path, use_container_width=True)
+                    st.image(sprite_path, caption='Name', use_container_width=True)
                 else:
                     st.markdown("<div style='text-align:center; font-size:24px;'>🎮</div>", unsafe_allow_html=True)
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
@@ -992,7 +992,7 @@ with main_tabs[0]:
                 sprite_path = get_sprite_path(row['Name'], df)
                 st.caption(f"**#{rank}**")
                 if sprite_path:
-                    st.image(sprite_path, use_container_width=True)
+                    st.image(sprite_path, caption='Name', use_container_width=True)
                 else:
                     st.markdown("<div style='text-align:center; font-size:24px;'>🎮</div>", unsafe_allow_html=True)
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
@@ -1038,7 +1038,7 @@ with main_tabs[0]:
                 sprite_path = get_sprite_path(row['Name'], df)
                 st.caption(f"**#{rank}**")
                 if sprite_path:
-                    st.image(sprite_path, use_container_width=True)
+                    st.image(sprite_path, caption='Name', use_container_width=True)
                 else:
                     st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
@@ -1080,7 +1080,7 @@ with main_tabs[0]:
                 sprite_path = get_sprite_path(row['Name'], df)
                 st.caption(f"**#{rank}**")
                 if sprite_path:
-                    st.image(sprite_path, use_container_width=True)
+                    st.image(sprite_path, caption='Name', use_container_width=True)
                 else:
                     st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")       
@@ -1114,7 +1114,7 @@ with main_tabs[0]:
                 sprite_path = get_sprite_path(row['Name'], df)
                 st.caption(f"**#{rank}**")
                 if sprite_path:
-                    st.image(sprite_path, use_container_width=True)
+                    st.image(sprite_path, caption='Name', use_container_width=True)
                 else:
                     st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
@@ -1147,7 +1147,7 @@ with main_tabs[0]:
                 sprite_path = get_sprite_path(row['Name'], df)
                 st.caption(f"**#{rank}**")
                 if sprite_path:
-                    st.image(sprite_path, use_container_width=True)
+                    st.image(sprite_path, caption='Name', use_container_width=True)
                 else:
                     st.markdown("<div style='text-align:center;font-size:24px;'>Unavailable</div>", unsafe_allow_html=True)
                 st.caption(f"{row['Name'].replace(chr(10), ' ')}")
@@ -2108,7 +2108,7 @@ with main_tabs[2]:
             _, img_area, _ = st.columns([1, 1, 1])
             with img_area:
                 if sprite_path:
-                    st.image(sprite_path, use_container_width=True)
+                    st.image(sprite_path, caption='Name', use_container_width=True)
                 else:
                     st.caption("Sprite not available")
 
@@ -2580,7 +2580,7 @@ with main_tabs[4]:
         _, lk_img, _ = st.columns([1, 2, 1])
         with lk_img:
             if lk_sprite:
-                st.image(lk_sprite, use_container_width=True)
+                st.image(lk_sprite, caption='Name', use_container_width=True)
             else:
                 st.caption("Sprite not available")
  
