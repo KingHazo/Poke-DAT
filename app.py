@@ -1181,6 +1181,7 @@ with main_tabs[0]:
             colors = get_pokedex_colors(len(top_moves))
             
             with m_col_chart:
+                plt.clf()
                 #Create horizontal bar chart
                 plt.barh(top_moves['name'], top_moves[move_metric], color=colors)
 
@@ -1197,6 +1198,47 @@ with main_tabs[0]:
 
                 #Display in Streamlit
                 st.pyplot(plt)
+
+                #Data Table
+                table_html = (
+                    f"<div style='background-color:#242424; border:8px solid #d0d0d0; border-radius:6px; "
+                    f"box-shadow:0 0 0 2px #c1c1c1, inset 0 2px 6px rgba(0,0,0,0.35); "
+                    f"padding:14px 18px; font-family:monospace; margin-top:10px;'>"
+                    f"<p style='color:#aaaaaa; font-size:0.7rem; margin:0 0 10px 0; letter-spacing:2px;'>▶ DETAILED RANKING</p>"
+                )
+
+                #Add each row to that same string
+                #We use iloc[::-1] if top_moves was sorted ascending for the chart
+                for _, row in top_moves.iloc[::-1].iterrows():
+                    mv_name = row['name']
+                    val = int(row[move_metric]) if move_metric == 'pp' else row[move_metric]
+
+                    mv_lookup_comp = build_moves_lookup(moves_meta_df)
+                    info = mv_lookup_comp.get(mv_name, {})
+                    mtype = info.get('type', '--')
+                    dclass = info.get('damage_class', '--')
+                    effect = info.get('effect', '').replace("'", "&apos;")
+
+                    tooltip_content = (
+                        f"<b>{mv_name}</b><br>{mtype} &middot; {dclass}<br>"
+                        f"Power: {row.get('power','--')} &nbsp; Accuracy: {row.get('accuracy','--')}<br>"
+                        f"<i>{effect}</i>"
+                    )  
+
+                    table_html += (
+                        f"<div class='move-tip' style='display:block; border-bottom:1px solid #333; padding:5px 0;'>"
+                        f"  <div style='display:flex; justify-content:space-between; align-items:center; cursor:help;'>"
+                        f"    <span style='color:#e0e0e0; font-size:0.85rem;'>{mv_name}</span>"
+                        f"    <span style='color:#EF5350; font-weight:bold; font-size:0.9rem;'>{val}</span>"
+                        f"  </div>"
+                        f"  <span class='tip-box'>{tooltip_content}</span>"
+                        f"</div>"
+                    )
+
+                #Close the container div and send it to Streamlit all at once
+                table_html += "</div>"
+
+                st.markdown(table_html, unsafe_allow_html=True)
 
 #MAIN TAB 2: TRENDS
 with main_tabs[1]:
