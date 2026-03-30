@@ -1780,35 +1780,38 @@ with main_tabs[1]:
                     top_n = st.slider("Show top N Pokémon", 10, 100, 30, 5,
                                       key="usage_top_n")
  
-                filtered = tier_filtered[
-                    tier_filtered['usage_pct'] >= min_usage].head(top_n)
-                n = len(filtered)
+                u_col3, u_col4, u_col5 = st.columns([2, 6, 2])
 
-                #Row height scales with count; min 0.45 per bar so labels never overlap
-                row_h   = max(0.45, 10 / max(n, 1))
-                fig_u, ax_u = plt.subplots(figsize=(10, n * row_h))
-                colors_u = get_pokedex_colors(n)
-                ax_u.barh(range(n), filtered['usage_pct'], color=colors_u)
-    
-                _u_max = filtered['usage_pct'].max()
-                for i, (_, row) in enumerate(filtered.iterrows()):
-                    ax_u.text(row['usage_pct'] + _u_max * 0.01, i,
-                              f"{row['usage_pct']:.1f}%",
-                              va='center', fontsize=9, fontweight='bold')
-    
-                ax_u.set_yticks(range(n))
-                ax_u.set_yticklabels(filtered['pokemon'], fontsize=10)
-                ax_u.invert_yaxis()
-                ax_u.set_xlabel("Usage %", fontweight='bold', fontsize=11)
-                ax_u.set_xlim(0, _u_max * 1.20)
-                ax_u.xaxis.set_major_formatter(
-                    plt.FuncFormatter(lambda x, _: f"{x:.0f}%"))
-                ax_u.grid(axis='x', alpha=0.3, linestyle='--')
-                ax_u.set_title(
-                    f"Gen 9 Usage - Top {n} Pokémon (\u2265{min_usage}% usage)",
-                    fontsize=11, fontweight='bold')
-                plt.tight_layout()
-                st.pyplot(fig_u, use_container_width=True)
+                with u_col4:
+                
+                    filtered = tier_filtered[tier_filtered['usage_pct'] >= min_usage].head(top_n)
+                    n = len(filtered)
+
+                    #Row height scales with count; min 0.45 per bar so labels never overlap
+                    row_h   = max(0.45, 10 / max(n, 1))
+                    fig_u, ax_u = plt.subplots(figsize=(10, n * row_h))
+                    colors_u = get_pokedex_colors(n)
+                    ax_u.barh(range(n), filtered['usage_pct'], color=colors_u)
+
+                    _u_max = filtered['usage_pct'].max()
+                    for i, (_, row) in enumerate(filtered.iterrows()):
+                        ax_u.text(row['usage_pct'] + _u_max * 0.01, i,
+                                  f"{row['usage_pct']:.1f}%",
+                                  va='center', fontsize=9, fontweight='bold')
+
+                    ax_u.set_yticks(range(n))
+                    ax_u.set_yticklabels(filtered['pokemon'], fontsize=10)
+                    ax_u.invert_yaxis()
+                    ax_u.set_xlabel("Usage %", fontweight='bold', fontsize=11)
+                    ax_u.set_xlim(0, _u_max * 1.20)
+                    ax_u.xaxis.set_major_formatter(
+                        plt.FuncFormatter(lambda x, _: f"{x:.0f}%"))
+                    ax_u.grid(axis='x', alpha=0.3, linestyle='--')
+                    ax_u.set_title(
+                        f"Gen 9 Usage - Top {n} Pokémon (\u2265{min_usage}% usage)",
+                        fontsize=11, fontweight='bold')
+                    plt.tight_layout()
+                    st.pyplot(fig_u, use_container_width=True)
  
     elif trend_mode == "Competitive Cores":
         st.header("Competitive Cores - Commonly Used Together")
