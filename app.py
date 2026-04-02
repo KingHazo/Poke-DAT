@@ -911,29 +911,59 @@ with main_tabs[0]:
         
         #Chart at full width
         num_items = len(filtered_df)
-        fig_height = num_items * 0.4
-        
-        left_pad, chart_area, right_pad = st.columns([1, 8, 1])
-        with chart_area:
-            fig, ax = plt.subplots(figsize=(8, fig_height))
-            colors = get_pokedex_colors(num_items)
+
+        if not filtered_df.empty:
+            #Ensure the data is sorted so the highest stats are at the top of the chart
+            leg_plot_df = filtered_df.sort_values(by='Total', ascending=False)
+
+            #Handle Colour Conversion
+            #Plotly needs strings (hex or rgba) rather than matplotlib tuples
+            raw_colors = get_pokedex_colors(num_items)
+            plotly_colors = [f'rgba({int(r*255)}, {int(g*255)}, {int(b*255)}, {a})' for r,g,b,a in raw_colors]
+
+            #Create the Plotly Chart
+            fig_leg = px.bar(
+                filtered_df,
+                x='Total',
+                y='Name',
+                orientation='h',
+                title=f"Top 10 {selected_type} Pokémon by Total Stats",
+                labels={'Total': 'Total Stats', 'Name': 'Pokémon'},
+                text='Total',
+                template="plotly_dark",
+                color='Name',
+                color_discrete_sequence=plotly_colors,
+                #Add extra info to the hover tooltip
+                hover_data={
+                    'Name': True,
+                    'Total': True,
+                    'Type_2': True,
+                    'HP': True,
+                    'Attack': True,
+                    'Defense': True,
+                    'Sp. Atk': True,
+                    'Sp. Def': True,
+                    'Speed': True
+                }
+            )
+
+            fig_leg.update_traces(
+                textposition='outside', 
+                textfont_size=20,
+                cliponaxis=False
+            )
             
-            y_positions = range(num_items)
-            ax.barh(y_positions, filtered_df['Total'], color=colors)
-            
-            for i, v in enumerate(filtered_df['Total']):
-                ax.text(v + 0.5, i, f'{int(v)}', va='center', 
-                       fontweight='bold', fontsize=8)
-            
-            ax.set_yticks(y_positions)
-            ax.set_yticklabels([f"#{i+1}" for i in range(num_items)], 
-                              fontsize=11, fontweight='bold')
-            ax.invert_yaxis()
-            ax.set_xlabel('Total Stats', fontweight='bold', fontsize=11)
-            ax.grid(axis='x', alpha=0.3, linestyle='--')
-            
-            plt.tight_layout()
-            st.pyplot(fig)
+            fig_leg.update_layout(
+                showlegend=False,
+                height=500, 
+                xaxis=dict(gridcolor='#444', zeroline=True),
+                yaxis=dict(gridcolor='#444', title=None),
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+            )
+
+            #Display
+            st.plotly_chart(fig_leg, use_container_width=True)
         
         #Sprites in a horizontal strip below the chart - one column per Pokémon
         st.markdown("### Pokémon")
@@ -959,31 +989,61 @@ with main_tabs[0]:
 
         top_stat_df = get_top_pokemon_by_stat(df, stat_choice, 10)
         
-        #Chart at full width
         num_items = len(top_stat_df)
-        fig_height = num_items * 0.4
 
-        left_pad, chart_area, right_pad = st.columns([1, 8, 1])
-        with chart_area:
-            fig2, ax2 = plt.subplots(figsize=(8, fig_height))
-            colors2 = get_pokedex_colors(num_items)
+        if not top_stat_df.empty:
+            #Ensure the data is sorted so the highest stats are at the top of the chart
+            leg_plot_df = top_stat_df.sort_values(by=stat_choice, ascending=False)
+
+            #Handle Colour Conversion
+            #Plotly needs strings (hex or rgba) rather than matplotlib tuples
+            raw_colors = get_pokedex_colors(num_items)
+            plotly_colors = [f'rgba({int(r*255)}, {int(g*255)}, {int(b*255)}, {a})' for r,g,b,a in raw_colors]
+
+            #Create the Plotly Chart
+            fig_leg = px.bar(
+                top_stat_df,
+                x=stat_choice,
+                y='Name',
+                orientation='h',
+                title=f"Top 10 Pokémon by {stat_choice}",
+                labels={stat_choice: f'{stat_choice} Stat', 'Name': 'Pokémon'},
+                text=stat_choice,
+                template="plotly_dark",
+                color='Name',
+                color_discrete_sequence=plotly_colors,
+                #Add extra info to the hover tooltip
+                hover_data={
+                    'Name': True,
+                    stat_choice: True,
+                    'Type_1': True,
+                    'Type_2': True,
+                    'HP': True,
+                    'Attack': True,
+                    'Defense': True,
+                    'Sp. Atk': True,
+                    'Sp. Def': True,
+                    'Speed': True
+                }
+            )
+
+            fig_leg.update_traces(
+                textposition='outside', 
+                textfont_size=20,
+                cliponaxis=False
+            )
             
-            y_positions = range(num_items)
-            ax2.barh(y_positions, top_stat_df[stat_choice], color=colors2)
-            
-            for i, v in enumerate(top_stat_df[stat_choice]):
-                ax2.text(v + 0.5, i, f'{int(v)}', va='center', 
-                        fontweight='bold', fontsize=8)
-            
-            ax2.set_yticks(y_positions)
-            ax2.set_yticklabels([f"#{i+1}" for i in range(num_items)], 
-                               fontsize=11, fontweight='bold')
-            ax2.invert_yaxis()
-            ax2.set_xlabel(f'{stat_choice} Stats', fontweight='bold', fontsize=11)
-            ax2.grid(axis='x', alpha=0.3, linestyle='--')
-            
-            plt.tight_layout()
-            st.pyplot(fig2)
+            fig_leg.update_layout(
+                showlegend=False,
+                height=500, 
+                xaxis=dict(gridcolor='#444', zeroline=True),
+                yaxis=dict(gridcolor='#444', title=None),
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+            )
+
+            #Display
+            st.plotly_chart(fig_leg, use_container_width=True)
 
         #Sprites in a horizontal strip below the chart - one column per Pokémon
         st.markdown("### Pokémon")
@@ -1011,25 +1071,69 @@ with main_tabs[0]:
         h_df = get_top_by_physical(df, 'Height_m', ascending=(height_dir == "Shortest"))
         h_num = len(h_df)
 
-        left_pad, chart_area, right_pad = st.columns([1, 8, 1])
-        with chart_area:
-            fig_h, ax_h = plt.subplots(figsize=(8, h_num * 0.4))
-            colors_h = get_pokedex_colors(h_num)
-            ax_h.barh(range(h_num), h_df['Height_m'], color=colors_h)
-            _h_max = h_df['Height_m'].max()
-            _h_pad = _h_max * 0.30
-            ax_h.set_xlim(0, _h_max + _h_pad)
-            ax_h.xaxis.set_major_locator(plt.MaxNLocator(nbins=6, steps=[1,2,5,10]))
-            ax_h.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x:g}'))
-            for i, v in enumerate(h_df['Height_m']):
-                ax_h.text(v + _h_max * 0.02, i, f'{v:g} m', va='center', fontweight='bold', fontsize=8)
-            ax_h.set_yticks(range(h_num))
-            ax_h.set_yticklabels([f"#{i+1}" for i in range(h_num)], fontsize=11, fontweight='bold')
-            ax_h.invert_yaxis()
-            ax_h.set_xlabel('Height (m)', fontweight='bold', fontsize=11)
-            ax_h.grid(axis='x', alpha=0.3, linestyle='--')
-            plt.tight_layout()
-            st.pyplot(fig_h)
+        if not h_df.empty:
+            #Force the Y-axis order
+            name_order_h = h_df['Name'].tolist()
+
+            raw_colors_h = get_pokedex_colors(h_num)
+            plotly_colors_h = [f'rgba({int(r*255)}, {int(g*255)}, {int(b*255)}, {a})' for r, g, b, a in raw_colors_h]
+
+            fig_h = px.bar(
+                h_df,
+                x='Height_m',
+                y='Name',
+                orientation='h',
+                labels={'Height_m': 'Height (m)', 'Name': 'Pokémon'},
+                text='Height_m',
+                template="plotly_dark",
+                color='Name',
+                color_discrete_sequence=plotly_colors_h,
+                hover_data={
+                    'Name': True,
+                    'Height_m': True,
+                    'Type_1': True,
+                    'Type_2': True,
+                    'HP': True,
+                    'Attack': True,
+                    'Defense': True,
+                    'Sp. Atk': True,
+                    'Sp. Def': True,
+                    'Speed': True
+                }
+            )
+
+            fig_h.update_traces(
+                texttemplate='%{x:.1~f} m', 
+                textposition='outside', 
+                textfont_size=20,
+                cliponaxis=False
+            )
+            
+            fig_h.update_layout(
+                showlegend=False,
+                height=500, 
+                xaxis=dict(
+                    gridcolor='#444', 
+                    zeroline=True,
+                    #Padding for text labels
+                    range=[0, h_df['Height_m'].max() * 1.25] 
+                ),
+                yaxis=dict(
+                    type='category',
+                    categoryorder='array',
+                    categoryarray=name_order_h,
+                    autorange="reversed", 
+                    gridcolor='#444', 
+                    title=None
+                ),
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+            )
+
+            #Display with Padding
+            left_pad, chart_area, right_pad = st.columns([1, 8, 1])
+            with chart_area:
+                st.plotly_chart(fig_h, use_container_width=True)
 
         st.markdown("### Pokémon")
         sprite_cols_h = st.columns(h_num)
@@ -1047,30 +1151,74 @@ with main_tabs[0]:
         st.header("Top 10 Pokémon by Weight")
         weight_dir = st.segmented_control ("Weight ranking:", ["Heaviest", "Lightest"], default="Heaviest", key="weight_dir" )
         st.divider()
-         #Weight chart
+        #Weight chart
         st.subheader(f"{'Top 10 Heaviest' if weight_dir == 'Heaviest' else 'Top 10 Lightest'} Pokémon")
         w_df = get_top_by_physical(df, 'Weight_kg', ascending=(weight_dir == "Lightest"))
         w_num = len(w_df)
 
-        left_pad2, chart_area2, right_pad2 = st.columns([1, 8, 1])
-        with chart_area2:
-            fig_w, ax_w = plt.subplots(figsize=(8, w_num * 0.4))
-            colors_w = get_pokedex_colors(w_num)
-            ax_w.barh(range(w_num), w_df['Weight_kg'], color=colors_w)
-            _w_max = w_df['Weight_kg'].max()
-            _w_pad = _w_max * 0.30
-            ax_w.set_xlim(0, _w_max + _w_pad)
-            ax_w.xaxis.set_major_locator(plt.MaxNLocator(nbins=6, steps=[1,2,5,10]))
-            ax_w.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x:g}'))
-            for i, v in enumerate(w_df['Weight_kg']):
-                ax_w.text(v + _w_max * 0.02, i, f'{v:g} kg', va='center', fontweight='bold', fontsize=8)
-            ax_w.set_yticks(range(w_num))
-            ax_w.set_yticklabels([f"#{i+1}" for i in range(w_num)], fontsize=11, fontweight='bold')
-            ax_w.invert_yaxis()
-            ax_w.set_xlabel('Weight (kg)', fontweight='bold', fontsize=11)
-            ax_w.grid(axis='x', alpha=0.3, linestyle='--')
-            plt.tight_layout()
-            st.pyplot(fig_w)
+        if not w_df.empty:
+            name_order = w_df['Name'].tolist()
+
+            raw_colors = get_pokedex_colors(w_num)
+            plotly_colors = [f'rgba({int(r*255)}, {int(g*255)}, {int(b*255)}, {a})' for r,g,b,a in raw_colors]
+
+            fig_w = px.bar(
+                w_df,
+                x='Weight_kg',
+                y='Name',
+                orientation='h',
+                labels={'Weight_kg': 'Weight (kg)', 'Name': 'Pokémon'},
+                text='Weight_kg',
+                template="plotly_dark",
+                color='Name',
+                color_discrete_sequence=plotly_colors,
+                hover_data={
+                    'Name': True,
+                    'Weight_kg': True,
+                    'Type_1': True,
+                    'Type_2': True,
+                    'HP': True,
+                    'Attack': True,
+                    'Defense': True,
+                    'Sp. Atk': True,
+                    'Sp. Def': True,
+                    'Speed': True
+                }
+            )
+
+            fig_w.update_traces(
+                texttemplate='%{x:.1~f} kg',
+                textposition='outside', 
+                textfont_size=20,
+                cliponaxis=False
+            )
+            
+            fig_w.update_layout(
+                showlegend=False,
+                height=500,
+                xaxis=dict(
+                    gridcolor='#444', 
+                    zeroline=True,
+                    #Adding a bit of padding to the right for the text labels
+                    range=[0, w_df['Weight_kg'].max() * 1.15] 
+                ),
+                yaxis=dict(
+                    type='category',
+                    #Forces Plotly to use the order of the names provided in the list
+                    categoryorder='array',
+                    categoryarray=name_order,
+                    #Reversed makes the first item in name_order appear at the top
+                    autorange="reversed", 
+                    gridcolor='#444', 
+                    title=None
+                ),
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+            )
+
+            left_pad2, chart_area2, right_pad2 = st.columns([1, 8, 1])
+            with chart_area2:
+                st.plotly_chart(fig_w, use_container_width=True)
 
         st.markdown("### Pokémon")
         sprite_cols_w = st.columns(w_num)
@@ -1089,21 +1237,59 @@ with main_tabs[0]:
 
         leg_df  = get_top_legendary(df)
         leg_num = len(leg_df)
+        if not leg_df.empty:
+            #Ensure the data is sorted so the highest stats are at the top of the chart
+            leg_plot_df = leg_df.sort_values(by='Total', ascending=False)
 
-        left_pad, chart_area, right_pad = st.columns([1, 8, 1])
-        with chart_area:
-            fig_l, ax_l = plt.subplots(figsize=(8, leg_num * 0.4))
-            colors_l = get_pokedex_colors(leg_num)
-            ax_l.barh(range(leg_num), leg_df['Total'], color=colors_l)
-            for i, v in enumerate(leg_df['Total']):
-                ax_l.text(v + 0.5, i, f'{int(v)}', va='center', fontweight='bold', fontsize=8)
-            ax_l.set_yticks(range(leg_num))
-            ax_l.set_yticklabels([f"#{i+1}" for i in range(leg_num)], fontsize=11, fontweight='bold')
-            ax_l.invert_yaxis()
-            ax_l.set_xlabel('Total Stats', fontweight='bold', fontsize=11)
-            ax_l.grid(axis='x', alpha=0.3, linestyle='--')
-            plt.tight_layout()
-            st.pyplot(fig_l)
+            #Handle Colour Conversion
+            #Plotly needs strings (hex or rgba) rather than matplotlib tuples
+            raw_colors = get_pokedex_colors(leg_num)
+            plotly_colors = [f'rgba({int(r*255)}, {int(g*255)}, {int(b*255)}, {a})' for r,g,b,a in raw_colors]
+
+            #Create the Plotly Chart
+            fig_leg = px.bar(
+                leg_plot_df,
+                x='Total',
+                y='Name',
+                orientation='h',
+                title="Top Legendary Pokémon by Base Stat Total",
+                labels={'Total': 'Total Stats', 'Name': 'Pokémon'},
+                text='Total',
+                template="plotly_dark",
+                color='Name',
+                color_discrete_sequence=plotly_colors,
+                #Add extra info to the hover tooltip
+                hover_data={
+                    'Name': True,
+                    'Total': True,
+                    'Type_1': True,
+                    'Type_2': True,
+                    'HP': True,
+                    'Attack': True,
+                    'Defense': True,
+                    'Sp. Atk': True,
+                    'Sp. Def': True,
+                    'Speed': True
+                }
+            )
+
+            fig_leg.update_traces(
+                textposition='outside', 
+                textfont_size=20,
+                cliponaxis=False
+            )
+            
+            fig_leg.update_layout(
+                showlegend=False,
+                height=500, 
+                xaxis=dict(gridcolor='#444', zeroline=True),
+                yaxis=dict(gridcolor='#444', title=None),
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+            )
+
+            #Display
+            st.plotly_chart(fig_leg, use_container_width=True)
 
         st.markdown("### Pokémon")
         sprite_cols_l = st.columns(leg_num)
@@ -1122,20 +1308,58 @@ with main_tabs[0]:
         myth_df  = get_top_mythical(df)
         myth_num = len(myth_df)
 
-        left_pad2, chart_area2, right_pad2 = st.columns([1, 8, 1])
-        with chart_area2:
-            fig_m, ax_m = plt.subplots(figsize=(8, myth_num * 0.4))
-            colors_m = get_pokedex_colors(myth_num)
-            ax_m.barh(range(myth_num), myth_df['Total'], color=colors_m)
-            for i, v in enumerate(myth_df['Total']):
-                ax_m.text(v + 0.5, i, f'{int(v)}', va='center', fontweight='bold', fontsize=8)
-            ax_m.set_yticks(range(myth_num))
-            ax_m.set_yticklabels([f"#{i+1}" for i in range(myth_num)], fontsize=11, fontweight='bold')
-            ax_m.invert_yaxis()
-            ax_m.set_xlabel('Total Stats', fontweight='bold', fontsize=11)
-            ax_m.grid(axis='x', alpha=0.3, linestyle='--')
-            plt.tight_layout()
-            st.pyplot(fig_m)
+        if not myth_df.empty:
+            #Ensure the data is sorted so the highest stats are at the top of the chart
+            myth_plot_df = myth_df.sort_values(by='Total', ascending=False)
+
+            #Handle Colour Conversion
+            #Plotly needs strings (hex or rgba) rather than matplotlib tuples
+            raw_colors = get_pokedex_colors(myth_num)
+            plotly_colors = [f'rgba({int(r*255)}, {int(g*255)}, {int(b*255)}, {a})' for r,g,b,a in raw_colors]
+
+            #Create the Plotly Chart
+            fig_myth = px.bar(
+                myth_plot_df,
+                x='Total',
+                y='Name',
+                orientation='h',
+                title="Top Mythical Pokémon by Base Stat Total",
+                labels={'Total': 'Total Stats', 'Name': 'Pokémon'},
+                text='Total',
+                template="plotly_dark",
+                color='Name',
+                color_discrete_sequence=plotly_colors,
+                #Add extra info to the hover tooltip
+                hover_data={
+                    'Name': True,
+                    'Total': True,
+                    'Type_1': True,
+                    'Type_2': True,
+                    'HP': True,
+                    'Attack': True,
+                    'Defense': True,
+                    'Sp. Atk': True,
+                    'Sp. Def': True,
+                    'Speed': True
+                }
+            )
+
+            fig_myth.update_traces(
+                textposition='outside', 
+                textfont_size=20,
+            )
+            
+            fig_myth.update_layout(
+                showlegend=False,
+                height=500, 
+                xaxis=dict(gridcolor='#444', zeroline=True),
+                yaxis=dict(gridcolor='#444', title=None),
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+            )
+
+            #Display
+            st.plotly_chart(fig_myth, use_container_width=True)
 
         st.markdown("### Pokémon")
         sprite_cols_m = st.columns(myth_num)
@@ -1150,91 +1374,64 @@ with main_tabs[0]:
     else:
         st.header("Top 10 Moves by Specific Metrics")
 
-        #UI Selection Row
         m_col1, m_col2 = st.columns(2)
         with m_col1:
+            #Use the actual column names from the CSV for the logic
             metric_label = st.selectbox("Select Metric:", ["Power", "PP", "Priority"])
-            move_metric = metric_label.lower()
+            move_metric = metric_label.lower() # Converts to 'power', 'pp', or 'priority'
             
         with m_col2:
+            #Get unique types from the moves dataset
             unique_move_types = sorted(moves_meta_df['type'].unique().tolist())
             move_type_filter = st.selectbox("Filter by Move Type:", ["All Types"] + unique_move_types)
         
         #Filtering Logic
         m_filtered = moves_meta_df.copy()
+        
+        #Handle "All Types" vs specific type
         if move_type_filter != "All Types":
             m_filtered = m_filtered[m_filtered['type'] == move_type_filter]
             
-        #Data Processing
-        #Drop NaNs for the metric and get top 10
-        top_moves = m_filtered.dropna(subset=[move_metric]).nlargest(10, move_metric)
-        #Sort ascending for horizontal bar chart (highest at the top)
-        top_moves = top_moves.sort_values(by=move_metric, ascending=True)
+        #Use nlargest to handle ties and get the top 10
+        #Then sort ascending for a better horizontal bar chart display (highest at the top)
+        top_moves = m_filtered.dropna(subset=[move_metric]).nlargest(10, move_metric).sort_values(by=move_metric, ascending=False)
         
         if not top_moves.empty:
-            m_col_pad_1, m_col_chart, m_col_pad_2 = st.columns([2, 6, 2])
+            #Generate the Chart
+            raw_colors = get_pokedex_colors(len(top_moves))
+            plotly_colors = [f'rgba({int(r*255)}, {int(g*255)}, {int(b*255)}, {a})' for r,g,b,a in raw_colors]
             
-            colors = get_pokedex_colors(len(top_moves))
+            fig_moves = px.bar(
+                top_moves,
+                x=move_metric,
+                y='name',
+                orientation='h',
+                title=f"Top 10 {move_type_filter} Moves by {metric_label}",
+                labels={move_metric: metric_label, 'name': 'Move Name'},
+                template="plotly_dark",
+                text='type',
+                color='name',
+                color_discrete_sequence=plotly_colors,
+                hover_data=['type', 'short_descripton']
+            )
+
+            fig_moves.update_traces(
+                textposition='outside', 
+                textfont_size=15,
+                cliponaxis=False
+            )            
             
-            with m_col_chart:
-                plt.clf()
-                #Create horizontal bar chart
-                plt.barh(top_moves['name'], top_moves[move_metric], color=colors)
-                
-                #Styling to match your Pokedex theme
-                plt.title(f"Top 10 {move_type_filter} Moves by {metric_label}", fontsize=12, fontweight='bold', pad=15)
-                plt.xlabel(metric_label, fontsize=10)
-                plt.ylabel("Move Name", fontsize=10)
+            fig_moves.update_layout(
+                showlegend=False, 
+                height=500,
+                xaxis=dict(gridcolor='#444'),
+                yaxis=dict(gridcolor='#444', title=None),
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)'
+            )
+            
+            st.plotly_chart(fig_moves, use_container_width=True)
 
-                #Add gridlines for readability (matching your Plotly grid style)
-                plt.grid(axis='x', linestyle='--', alpha=0.7)
-
-                #Adjust layout to prevent label clipping
-                plt.tight_layout()
-
-                #Display in Streamlit
-                st.pyplot(plt)
-
-                #Data Table
-                table_html = (
-                    f"<div style='background-color:#242424; border:8px solid #d0d0d0; border-radius:6px; "
-                    f"box-shadow:0 0 0 2px #c1c1c1, inset 0 2px 6px rgba(0,0,0,0.35); "
-                    f"padding:14px 18px; font-family:monospace; margin-top:10px;'>"
-                    f"<p style='color:#aaaaaa; font-size:0.7rem; margin:0 0 10px 0; letter-spacing:2px;'>▶ DETAILED RANKING</p>"
-                )
-
-                #Add each row to that same string
-                #We use iloc[::-1] if top_moves was sorted ascending for the chart
-                for _, row in top_moves.iloc[::-1].iterrows():
-                    mv_name = row['name']
-                    val = int(row[move_metric]) if move_metric == 'pp' else row[move_metric]
-
-                    mv_lookup_comp = build_moves_lookup(moves_meta_df)
-                    info = mv_lookup_comp.get(mv_name, {})
-                    mtype = info.get('type', '--')
-                    dclass = info.get('damage_class', '--')
-                    effect = info.get('effect', '').replace("'", "&apos;")
-
-                    tooltip_content = (
-                        f"<b>{mv_name}</b><br>{mtype} &middot; {dclass}<br>"
-                        f"Power: {row.get('power','--')} &nbsp; Accuracy: {row.get('accuracy','--')}<br>"
-                        f"<i>{effect}</i>"
-                    )  
-
-                    table_html += (
-                        f"<div class='move-tip' style='display:block; border-bottom:1px solid #333; padding:5px 0;'>"
-                        f"  <div style='display:flex; justify-content:space-between; align-items:center; cursor:help;'>"
-                        f"    <span style='color:#e0e0e0; font-size:0.85rem;'>{mv_name}</span>"
-                        f"    <span style='color:#EF5350; font-weight:bold; font-size:0.9rem;'>{val}</span>"
-                        f"  </div>"
-                        f"  <span class='tip-box'>{tooltip_content}</span>"
-                        f"</div>"
-                    )
-
-                #Close the container div and send it to Streamlit all at once
-                table_html += "</div>"
-
-                st.markdown(table_html, unsafe_allow_html=True)
 
 #MAIN TAB 2: TRENDS
 with main_tabs[1]:
