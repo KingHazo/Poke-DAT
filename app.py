@@ -928,11 +928,11 @@ with main_tabs[0]:
                 y='Name',
                 orientation='h',
                 title=f"Top 10 {selected_type} Pokémon by Total Stats",
-                labels={'Total': 'Total Stats', 'Name': 'Pokémon'},
+                labels={'Total': 'Total Stats', 'Name': 'Pokémon', 'Type_2': 'Secondary Type'},
                 text='Total',
                 template="plotly_dark",
                 color='Name',
-                color_discrete_sequence=plotly_colors,
+                color_discrete_sequence=plotly_colors,            
                 #Add extra info to the hover tooltip
                 hover_data={
                     'Name': True,
@@ -1007,7 +1007,7 @@ with main_tabs[0]:
                 y='Name',
                 orientation='h',
                 title=f"Top 10 Pokémon by {stat_choice}",
-                labels={stat_choice: f'{stat_choice} Stat', 'Name': 'Pokémon'},
+                labels={stat_choice: f'{stat_choice} Stat', 'Name': 'Pokémon', 'Type_1': 'Primary Type', 'Type_2': 'Secondary Type'},
                 text=stat_choice,
                 template="plotly_dark",
                 color='Name',
@@ -1083,7 +1083,7 @@ with main_tabs[0]:
                 x='Height_m',
                 y='Name',
                 orientation='h',
-                labels={'Height_m': 'Height (m)', 'Name': 'Pokémon'},
+                labels={'Height_m': 'Height (m)', 'Name': 'Pokémon', 'Type_1': 'Primary Type', 'Type_2': 'Secondary Type'},
                 text='Height_m',
                 template="plotly_dark",
                 color='Name',
@@ -1167,7 +1167,7 @@ with main_tabs[0]:
                 x='Weight_kg',
                 y='Name',
                 orientation='h',
-                labels={'Weight_kg': 'Weight (kg)', 'Name': 'Pokémon'},
+                labels={'Weight_kg': 'Weight (kg)', 'Name': 'Pokémon', 'Type_1': 'Primary Type', 'Type_2': 'Secondary Type'},
                 text='Weight_kg',
                 template="plotly_dark",
                 color='Name',
@@ -1253,7 +1253,7 @@ with main_tabs[0]:
                 y='Name',
                 orientation='h',
                 title="Top Legendary Pokémon by Base Stat Total",
-                labels={'Total': 'Total Stats', 'Name': 'Pokémon'},
+                labels={'Total': 'Total Stats', 'Name': 'Pokémon', 'Type_1': 'Primary Type', 'Type_2': 'Secondary Type'},
                 text='Total',
                 template="plotly_dark",
                 color='Name',
@@ -1324,7 +1324,7 @@ with main_tabs[0]:
                 y='Name',
                 orientation='h',
                 title="Top Mythical Pokémon by Base Stat Total",
-                labels={'Total': 'Total Stats', 'Name': 'Pokémon'},
+                labels={'Total': 'Total Stats', 'Name': 'Pokémon', 'Type_1': 'Primary Type', 'Type_2': 'Secondary Type'},
                 text='Total',
                 template="plotly_dark",
                 color='Name',
@@ -1407,7 +1407,7 @@ with main_tabs[0]:
                 y='name',
                 orientation='h',
                 title=f"Top 10 {move_type_filter} Moves by {metric_label}",
-                labels={move_metric: metric_label, 'name': 'Move Name'},
+                labels={move_metric: metric_label, 'name': 'Move Name', 'type': 'Type', 'short_descripton': 'Short Desc'},
                 template="plotly_dark",
                 text='type',
                 color='name',
@@ -1945,22 +1945,21 @@ with main_tabs[1]:
         else:
             available_tiers = sorted(usage_df_global['tier'].unique().tolist())                 if 'tier' in usage_df_global.columns else ['Ubers']
  
-            st.markdown("**Include tiers:**")
-            tier_cols = st.columns(min(len(available_tiers), 6))
-            selected_tiers = []
-            default_on = {'Ubers'}
-            for i, tier in enumerate(available_tiers):
-                with tier_cols[i % len(tier_cols)]:
-                    if st.checkbox(tier, value=(tier in default_on),
-                                   key=f"tier_cb_{tier}"):
-                        selected_tiers.append(tier)
+            st.markdown("**Select tiers:**")
+            selected_tier = st.segmented_control(
+                "Tiers",
+                options=available_tiers,
+                default='Ubers',
+                key="selected_tier_single",
+                label_visibility="collapsed"
+            )
  
-            if not selected_tiers:
-                st.info("Select at least one tier to display data.")
+            if not selected_tier:
+                st.info("Select at least a tier to display data.")
             else:
                 if 'tier' in usage_df_global.columns:
-                    tier_filtered = usage_df_global[
-                        usage_df_global['tier'].isin(selected_tiers)]
+                    tier_filtered = usage_df_global[usage_df_global['tier'] == selected_tier]
+                    
                     tier_filtered = (tier_filtered
                         .sort_values('usage_pct', ascending=False)
                         .drop_duplicates('pokemon')
@@ -1976,39 +1975,95 @@ with main_tabs[1]:
                 with u_col2:
                     top_n = st.slider("Show top N Pokémon", 10, 100, 30, 5,
                                       key="usage_top_n")
- 
-                u_col3, u_col4, u_col5 = st.columns([2, 6, 2])
+                    
+                filtered_usage = tier_filtered[tier_filtered['usage_pct'] >= min_usage].head(top_n)
+                filtered_usage = filtered_usage.merge(
+                    df[['Name', 'Type_1', 'Type_2', 'HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed', 'Total']],
+                    left_on='pokemon', # The column name in your usage CSV
+                    right_on='Name',   # The column name in your pokedex CSV
+                    how='left'                    
+                )
+                n = len(filtered_usage)
+                hover_config = {
+                    'pokemon': False,    #Hide the raw 'pokemon' column since we use 'Name'
+                    'Name': True,       #Show 'Name' from the main df
+                    'usage_pct': ':.2f%',#Format usage with 2 decimals and % sign
+                    'Type_1': True,
+                    'Type_2': True,
+                    'Total': True,
+                    'HP': True,
+                    'Attack': True,
+                    'Defense': True,
+                    'Sp. Atk': True,
+                    'Sp. Def': True,
+                    'Speed': True
+                }
 
-                with u_col4:
-                
-                    filtered = tier_filtered[tier_filtered['usage_pct'] >= min_usage].head(top_n)
-                    n = len(filtered)
+                if not filtered_usage.empty:
+                    #Force the Y-axis order
+                    pokemon_order = filtered_usage['pokemon'].tolist()
 
-                    #Row height scales with count; min 0.45 per bar so labels never overlap
-                    row_h   = max(0.45, 10 / max(n, 1))
-                    fig_u, ax_u = plt.subplots(figsize=(10, n * row_h))
-                    colors_u = get_pokedex_colors(n)
-                    ax_u.barh(range(n), filtered['usage_pct'], color=colors_u)
+                    raw_colors = get_pokedex_colors(n)
+                    plotly_colors = [f'rgba({int(r*255)}, {int(g*255)}, {int(b*255)}, {a})' for r,g,b,a in raw_colors]
 
-                    _u_max = filtered['usage_pct'].max()
-                    for i, (_, row) in enumerate(filtered.iterrows()):
-                        ax_u.text(row['usage_pct'] + _u_max * 0.01, i,
-                                  f"{row['usage_pct']:.1f}%",
-                                  va='center', fontsize=9, fontweight='bold')
+                    fig_u = px.bar(
+                        filtered_usage,
+                        x='usage_pct',
+                        y='pokemon',
+                        orientation='h',
+                        title=f"Gen 9 Usage - Top {n} Pokémon (≥{min_usage}% usage)",
+                        #Labels renames the keys in the hover box automatically
+                        labels={
+                            'pokemon': 'Pokémon',
+                            'usage_pct': 'Usage Rate',
+                            'Type_1': 'Primary Type',
+                            'Type_2': 'Secondary Type'
+                        },
+                        text='usage_pct',
+                        template="plotly_dark",
+                        color='pokemon',
+                        color_discrete_sequence=plotly_colors,
+                        hover_data=hover_config #Apply our detailed config
+                    )
 
-                    ax_u.set_yticks(range(n))
-                    ax_u.set_yticklabels(filtered['pokemon'], fontsize=10)
-                    ax_u.invert_yaxis()
-                    ax_u.set_xlabel("Usage %", fontweight='bold', fontsize=11)
-                    ax_u.set_xlim(0, _u_max * 1.20)
-                    ax_u.xaxis.set_major_formatter(
-                        plt.FuncFormatter(lambda x, _: f"{x:.0f}%"))
-                    ax_u.grid(axis='x', alpha=0.3, linestyle='--')
-                    ax_u.set_title(
-                        f"Gen 9 Usage - Top {n} Pokémon (\u2265{min_usage}% usage)",
-                        fontsize=11, fontweight='bold')
-                    plt.tight_layout()
-                    st.pyplot(fig_u, use_container_width=True)
+                    #Styling labels (1 decimal place + %)
+                    fig_u.update_traces(
+                        texttemplate='%{x:.1f}%', 
+                        textposition='outside', 
+                        textfont_size=12,
+                        cliponaxis=False
+                    )
+                    
+                    #We scale height by 'n' so 100 pokemon doesn't look like a mess
+                    chart_height = max(500, n * 25) 
+
+                    fig_u.update_layout(
+                        showlegend=False,
+                        height=chart_height,
+                        xaxis=dict(
+                            gridcolor='#444', 
+                            zeroline=True,
+                            ticksuffix='%',
+                            range=[0, filtered_usage['usage_pct'].max() * 1.25] #Space for labels
+                        ),
+                        yaxis=dict(
+                            type='category',
+                            categoryorder='array',
+                            categoryarray=pokemon_order,
+                            autorange="reversed", 
+                            gridcolor='#444', 
+                            title=None,
+                            tickfont=dict(size=12) #Slightly larger font for names
+                        ),
+                        paper_bgcolor='rgba(0,0,0,0)',
+                        plot_bgcolor='rgba(0,0,0,0)',
+                        margin=dict(l=20, r=50, t=50, b=20)
+                    )
+
+                    # 6. Display
+                    u_col3, u_col4, u_col5 = st.columns([1, 10, 1])
+                    with u_col4:
+                        st.plotly_chart(fig_u, use_container_width=True)
  
     elif trend_mode == "Competitive Cores":
         st.header("Competitive Cores - Commonly Used Together")
@@ -2045,19 +2100,36 @@ with main_tabs[1]:
                                         index=core_default, key="core_mon",
                                         label_visibility="collapsed")
                 top_n_cores = st.slider("Top N teammates", 5, 20, 10, key="core_top_n")
- 
-            with c_col2:
                 mon_mates = (
                     tm_for_tier[tm_for_tier['pokemon'] == core_mon]
                     .sort_values('score', ascending=False)
                     .head(top_n_cores)
                 )
                 n_mates = len(mon_mates)
+
+                if n_mates > 0:
+                    st.markdown(f"**Top {n_mates} Partners**")
+                    cols_per_row = 5 # 10 is very squished in a 1/4 column, 5 is safer
+
+                    for i in range(0, n_mates, cols_per_row):
+                        row_data = mon_mates.iloc[i : i + cols_per_row]
+                        grid_cols = st.columns(cols_per_row)
+
+                        for index, (col, (_, row)) in enumerate(zip(grid_cols, row_data.iterrows())):
+                            with col:
+                                #Use 'teammate' column and the main 'df' for lookup
+                                t_name = row['teammate'] 
+                                sprite_path = get_sprite_path(t_name, df) 
+
+                                if sprite_path:
+                                    st.image(sprite_path, use_container_width=True)
+                                st.caption(f"#{i + index + 1}")
  
+            with c_col2:
                 if n_mates == 0:
                     st.info(f"No teammate data found for {core_mon}.")
                 else:
-                    # Normalise scores to % of max for cleaner display
+                    #Normalise scores to % of max for cleaner display
                     score_max = mon_mates['score'].max()
                     fig_c, ax_c = plt.subplots(figsize=(8, n_mates * 0.45))
                     colors_c = get_pokedex_colors(n_mates)
@@ -2083,12 +2155,12 @@ with main_tabs[1]:
                     plt.tight_layout()
                     st.pyplot(fig_c)
  
-                    # Usage context for the selected Pokemon
+                    #Usage context for the selected Pokemon
                     mon_usage = usage_df_global[usage_df_global['pokemon'] == core_mon]
                     if not mon_usage.empty:
                         u_row = mon_usage.iloc[0]
                         st.caption(
-                            f"{core_mon}: rank #{int(u_row['rank'])} in Gen 9 OU "
+                            f"{core_mon}: rank #{int(u_row['rank'])} in Gen 9"
                             f"- {u_row['usage_pct']:.1f}% usage"
                         )
 
