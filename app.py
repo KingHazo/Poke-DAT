@@ -2106,24 +2106,6 @@ with main_tabs[1]:
                     .head(top_n_cores)
                 )
                 n_mates = len(mon_mates)
-
-                if n_mates > 0:
-                    st.markdown(f"**Top {n_mates} Partners**")
-                    cols_per_row = 5 # 10 is very squished in a 1/4 column, 5 is safer
-
-                    for i in range(0, n_mates, cols_per_row):
-                        row_data = mon_mates.iloc[i : i + cols_per_row]
-                        grid_cols = st.columns(cols_per_row)
-
-                        for index, (col, (_, row)) in enumerate(zip(grid_cols, row_data.iterrows())):
-                            with col:
-                                #Use 'teammate' column and the main 'df' for lookup
-                                t_name = row['teammate'] 
-                                sprite_path = get_sprite_path(t_name, df) 
-
-                                if sprite_path:
-                                    st.image(sprite_path, use_container_width=True)
-                                st.caption(f"#{i + index + 1}")
  
             with c_col2:
                 if n_mates == 0:
