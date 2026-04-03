@@ -2306,26 +2306,43 @@ with main_tabs[2]:
             _p2_default = _filtered2.index(_p2_current) if _p2_current in _filtered2 else 0
             p2 = st.selectbox("Select Pokémon 2", _filtered2, index=_p2_default, key="radar_p2", label_visibility="collapsed")
 
-        #Create the radar chart function
         def create_radar(name1, name2):
             categories = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
+            radar_labels = categories + [categories[0]]
+
             fig = go.Figure()
 
             for name, color in [(name1, '#EF5350'), (name2, '#42A5F5')]:
-                stats = get_pokemon_stats(df, name, categories)
-                stats.append(stats[0])  #Close the loop
+                #Get the 6 base stats
+                base_stats = get_pokemon_stats(df, name, categories)
+                display_stats = base_stats + [base_stats[0]]
+
                 fig.add_trace(go.Scatterpolar(
-                    r=stats, 
-                    theta=categories + [categories[0]],
+                    r=display_stats, 
+                    theta=radar_labels,
                     fill='toself', 
                     name=name, 
-                    line_color=color
+                    line_color=color,
+                    hovertemplate=(
+                        "<b>Stat:</b> %{theta}<br>" +
+                        "<b>Value:</b> %{r}" +
+                        "<extra></extra>"
+                    )
                 ))
 
             fig.update_layout(
                 polar=dict(
                     bgcolor="lightblue",
-                    radialaxis=dict(visible=True, range=[0, 255]),
+                    radialaxis=dict(
+                        visible=True, 
+                        range=[0, 255],
+                        gridcolor="#444",
+                        tickfont=dict(color="black")
+                    ),
+                    angularaxis=dict(
+                        gridcolor="#444",
+                        tickfont=dict(size=12, color="black")
+                    )
                 ),
                 showlegend=True,
                 height=500,
