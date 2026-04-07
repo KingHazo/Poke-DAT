@@ -3162,14 +3162,14 @@ with main_tabs[4]:
                     f"You are a Pokemon encyclopaedia. In 3 to 4 concise sentences, "
                     f"describe the real-world design inspiration and origin of {_name_clean}. "
                     f"Cover the animals, mythology, objects, or cultural references its design "
-                    f"draws from. Be factual and specific. Do not use bullet points."
+                    f"draws from. Be factual and specific. Do not use bullet points. Use https://bulbapedia.bulbagarden.net/wiki/Main_Page as your main source."
                 )
                 _faq_prompt = (
                     f"You are a Pokemon encyclopaedia. Write exactly 4 frequently asked "
                     f"questions and answers about {_name_clean}. "
                     f"Format each strictly as: Q: question then A: answer on the next line. "
                     f"Focus on lore, competitive use, evolution, or notable trivia. "
-                    f"Keep answers to 1 to 2 sentences each."
+                    f"Keep answers to 1 to 2 sentences each. Use https://bulbapedia.bulbagarden.net/wiki/Main_Page as your main source."
                 )
  
                 try:
