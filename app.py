@@ -1711,7 +1711,7 @@ with main_tabs[1]:
             st.write(
                 "Each box spans the **middle 50%** of values for that type "
                 "(the interquartile range). The **white line** is the median. "
-                "Whiskers extend to 1.5× the IQR, and dots beyond that are outliers."
+                "Whiskers (Denoting standard deviation) extend to 1.5x the IQR, and dots beyond that are outliers."
             )
             st.markdown("A **tall box** means high variance - that type contains "
                         "both weak and strong Pokemon. A **short box** means "
