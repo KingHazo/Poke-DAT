@@ -1606,7 +1606,6 @@ with main_tabs[1]:
         st.plotly_chart(fig_mv, use_container_width=True)
  
         # Summary stat cards
-        n_moves     = len(mv_df)
         top_move    = mv_df.iloc[0]
         signature   = (mv_df['Count'] == 1).sum()
  
@@ -1634,12 +1633,10 @@ with main_tabs[1]:
 </div>
 """, unsafe_allow_html=True)
  
-        c1, c2, c3 = st.columns(3)
+        c1, c2 = st.columns(2)
         with c1:
-            _mv_stat_card("Unique Moves", n_moves, " ")
-        with c2:
             _mv_stat_card("Most Widespread", top_move['Move'], f"{top_move['Count']} Pokémon")
-        with c3:
+        with c2:
             _mv_stat_card("Signature Moves", signature, "learned by exactly 1 Pokémon")
 
 
