@@ -816,6 +816,10 @@ div[data-testid="stRadio"] [data-testid="stWidgetLabel"] p {
     opacity: 0.8; /* Makes the header slightly distinct */
 }
             
+button[data-baseweb="tab"] p {
+    font-weight: bold !important;
+}            
+            
 .move-tip {
     position: relative;
     cursor: default;
@@ -2334,17 +2338,28 @@ with main_tabs[2]:
                         visible=True, 
                         range=[0, 255],
                         gridcolor="#444",
-                        tickfont=dict(color="black")
+                        tickfont=dict(
+                            size=14, 
+                            color="black", 
+                        )
                     ),
                     angularaxis=dict(
                         gridcolor="#444",
-                        tickfont=dict(size=12, color="black")
+                        tickfont=dict(
+                            size=15, 
+                            color="black", 
+                            family="Arial Black, sans-serif"
+                        )
                     )
                 ),
                 showlegend=True,
                 height=500,
                 margin=dict(l=80, r=80, t=20, b=20),
-                font=dict(color='black'),
+                font=dict(
+                    family="Arial Black, sans-serif", 
+                    size=14, 
+                    color='black'
+                ),
             )
 
             return fig
@@ -2818,15 +2833,39 @@ with main_tabs[4]:
     except Exception:
         _api_key = ""
  
-    #Pokemon selector with live search filter
-    _lookup_names = list(df['Name'].unique())
+    #Pokemon selector with live search filter + type filter
+
+    #define types to filter by
+    _all_types = sorted(df['Type_1'].unique().tolist())
+
+    #Type Selectbox
     lk_col1, _ = st.columns([1, 3])
     with lk_col1:
+        lk_type = st.selectbox("Filter by Type", ["All Types"] + _all_types, key="lk_type_filter")
+
+        #Determine the names to search based on the type filter
+        if lk_type == "All Types":
+            _lookup_names = list(df['Name'].unique())
+        else:
+            #Filter the dataframe for the selected type (checks both Type 1 and Type 2)
+            _type_mask = (df['Type_1'] == lk_type) | (df['Type_2'] == lk_type)
+            _lookup_names = list(df[_type_mask]['Name'].unique())      
+       
         _lk_search   = st.text_input("Search Pokemon", placeholder="Type to filter...", key="lk_search")
         _lk_filtered = [n for n in _lookup_names if _lk_search.lower() in n.lower()] if _lk_search else _lookup_names
         _lk_current  = st.session_state.get("lk_pokemon")
         _lk_default  = _lk_filtered.index(_lk_current) if _lk_current in _lk_filtered else 0
-        lk_pokemon   = st.selectbox("Select Pokemon", _lk_filtered, index=_lk_default, key="lk_pokemon", label_visibility="collapsed")
+        if not _lk_filtered:
+            st.warning("No Pokémon found matching both filters.")
+            lk_pokemon = None
+        else:
+            lk_pokemon = st.selectbox(
+                "Select Pokemon", 
+                _lk_filtered, 
+                index=_lk_default, 
+                key="lk_pokemon", 
+                label_visibility="collapsed"
+            )
  
     st.divider()
  
@@ -2929,7 +2968,24 @@ with main_tabs[4]:
             fig_lk.update_layout(
                 polar=dict(
                     bgcolor='lightblue',
-                    radialaxis=dict(visible=True, range=[0, 255]),
+                    radialaxis=dict(
+                        visible=True, 
+                        range=[0, 255],
+                        gridcolor="#444",
+                        tickfont=dict(
+                            size=12, 
+                            color="black", 
+                            family="Arial Black, sans-serif"
+                        )
+                    ),
+                    angularaxis=dict(
+                        gridcolor="#444",
+                        tickfont=dict(
+                            size=15, 
+                            color="black", 
+                            family="Arial Black, sans-serif"
+                        )
+                    )
                 ),
                 showlegend=False,
                 height=420,
