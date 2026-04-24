@@ -2873,126 +2873,128 @@ with main_tabs[4]:
     lk_left, lk_right = st.columns([1, 2])
  
     with lk_left:
-        _name_display = lk_pokemon.replace(chr(10), ' ')
-        st.markdown(
-            f"<h2 style='text-align:center;'>{_name_display}</h2>",
-            unsafe_allow_html=True
-        )
- 
-        lk_sprite = get_sprite_path(lk_pokemon, df)
-        _, lk_img, _ = st.columns([1, 2, 1])
-        with lk_img:
-            if lk_sprite:
-                st.image(lk_sprite, use_container_width=True)
-            else:
-                st.caption("Sprite not available")
- 
-        lk_types = get_type_sprite_paths(lk_pokemon, df)
-        if lk_types:
-            if len(lk_types) == 1:
-                _, tb, _ = st.columns([1.5, 1, 1.5])
-                with tb: st.image(lk_types[0][1])
-            else:
-                _, tb1, tb2, _ = st.columns([0.75, 0.75, 0.75, 0.75])
-                with tb1: st.image(lk_types[0][1])
-                with tb2: st.image(lk_types[1][1])
- 
-        lk_normal_abs, lk_hidden_ab = get_pokemon_abilities(df, lk_pokemon)
-        lk_all_abs = lk_normal_abs + ([f"{lk_hidden_ab} (Hidden)"] if lk_hidden_ab else [])
-
-        def _make_ability_tip(ability_name, display_name=None):
-            if not ability_name or pd.isna(ability_name):
-                return "N/A"
+        if lk_pokemon != None:
+            _name_display = lk_pokemon.replace(chr(10), ' ')
+            st.markdown(
+                f"<h2 style='text-align:center;'>{_name_display}</h2>",
+                unsafe_allow_html=True
+            )
+    
+            lk_sprite = get_sprite_path(lk_pokemon, df)
+            _, lk_img, _ = st.columns([1, 2, 1])
+            with lk_img:
+                if lk_sprite:
+                    st.image(lk_sprite, use_container_width=True)
+                else:
+                    st.caption("Sprite not available")
+    
+            lk_types = get_type_sprite_paths(lk_pokemon, df)
+            if lk_types:
+                if len(lk_types) == 1:
+                    _, tb, _ = st.columns([1.5, 1, 1.5])
+                    with tb: st.image(lk_types[0][1])
+                else:
+                    _, tb1, tb2, _ = st.columns([0.75, 0.75, 0.75, 0.75])
+                    with tb1: st.image(lk_types[0][1])
+                    with tb2: st.image(lk_types[1][1])
+    
+            lk_normal_abs, lk_hidden_ab = get_pokemon_abilities(df, lk_pokemon)
+            lk_all_abs = lk_normal_abs + ([f"{lk_hidden_ab} (Hidden)"] if lk_hidden_ab else [])
+    
+            def _make_ability_tip(ability_name, display_name=None):
+                if not ability_name or pd.isna(ability_name):
+                    return "N/A"
+                
+                label = display_name if display_name else ability_name
+    
+                desc = abilities_df.get(ability_name, "No description available.")
+                desc = desc.replace('"', '&quot;')
+    
+                return (
+                    f"<span class='move-tip' style='display:block;'>"
+                    f"<div style='padding:1px 0;font-size:0.95rem;font-weight:600;word-break:break-word;'>{label}</div>"
+                    f"<span class='tip-box'><b>{ability_name}</b><br><i>{desc}</i></span>"
+                    f"</span>"
+                )
             
-            label = display_name if display_name else ability_name
-
-            desc = abilities_df.get(ability_name, "No description available.")
-            desc = desc.replace('"', '&quot;')
-
-            return (
-                f"<span class='move-tip' style='display:block;'>"
-                f"<div style='padding:1px 0;font-size:0.95rem;font-weight:600;word-break:break-word;'>{label}</div>"
-                f"<span class='tip-box'><b>{ability_name}</b><br><i>{desc}</i></span>"
-                f"</span>"
-            )
-        
-        if lk_all_abs:
-            st.markdown(
-                "<p style='text-align:center; font-size:0.75rem; color:#aaaaaa;"
-                " margin:10px 0 4px 0; letter-spacing:1px;'>ABILITIES</p>",
-                unsafe_allow_html=True
-            )
-            abilities_html = ""
-            for ab in lk_all_abs:
-                #Clean the name for lookup (removes " (Hidden)")
-                clean_name = ab.replace(" (Hidden)", "").strip()
-                abilities_html += _make_ability_tip(clean_name, display_name=ab)
-
-            #Display the final block
-            st.markdown(
-                f"<div style='text-align:center;'>{abilities_html}</div>",
-                unsafe_allow_html=True
-            )
- 
-        _stat_cols = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed', 'Total']
-        lk_row = df[df['Name'] == lk_pokemon]
-        if not lk_row.empty:
-            st.markdown(
-                "<p style='text-align:center; font-size:0.75rem; color:#aaaaaa;"
-                " margin:14px 0 4px 0; letter-spacing:1px;'>BASE STATS</p>",
-                unsafe_allow_html=True
-            )
-            _sr = lk_row.iloc[0]
-            for sc in _stat_cols:
-                val = _sr.get(sc, 'N/A')
+            if lk_all_abs:
                 st.markdown(
-                    f"<p style='text-align:center; margin:1px 0;"
-                    f" font-size:0.88rem;'><b>{sc}</b>: {val}</p>",
+                    "<p style='text-align:center; font-size:0.75rem; color:#aaaaaa;"
+                    " margin:10px 0 4px 0; letter-spacing:1px;'>ABILITIES</p>",
                     unsafe_allow_html=True
                 )
+                abilities_html = ""
+                for ab in lk_all_abs:
+                    #Clean the name for lookup (removes " (Hidden)")
+                    clean_name = ab.replace(" (Hidden)", "").strip()
+                    abilities_html += _make_ability_tip(clean_name, display_name=ab)
+    
+                #Display the final block
+                st.markdown(
+                    f"<div style='text-align:center;'>{abilities_html}</div>",
+                    unsafe_allow_html=True
+                )
+    
+            _stat_cols = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed', 'Total']
+            lk_row = df[df['Name'] == lk_pokemon]
+            if not lk_row.empty:
+                st.markdown(
+                    "<p style='text-align:center; font-size:0.75rem; color:#aaaaaa;"
+                    " margin:14px 0 4px 0; letter-spacing:1px;'>BASE STATS</p>",
+                    unsafe_allow_html=True
+                )
+                _sr = lk_row.iloc[0]
+                for sc in _stat_cols:
+                    val = _sr.get(sc, 'N/A')
+                    st.markdown(
+                        f"<p style='text-align:center; margin:1px 0;"
+                        f" font-size:0.88rem;'><b>{sc}</b>: {val}</p>",
+                        unsafe_allow_html=True
+                    )
  
     with lk_right:
-        lk_categories = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
-        lk_stats = get_pokemon_stats(df, lk_pokemon, lk_categories)
-        if lk_stats:
-            lk_stats_closed = lk_stats + [lk_stats[0]]
-            fig_lk = go.Figure()
-            fig_lk.add_trace(go.Scatterpolar(
-                r=lk_stats_closed,
-                theta=lk_categories + [lk_categories[0]],
-                fill='toself',
-                fillcolor='rgba(239,83,80,0.3)',
-                line=dict(color='#EF5350', width=2),
-                hovertemplate='%{theta}: %{r}<extra></extra>',
-            ))
-            fig_lk.update_layout(
-                polar=dict(
-                    bgcolor='lightblue',
-                    radialaxis=dict(
-                        visible=True, 
-                        range=[0, 255],
-                        gridcolor="#444",
-                        tickfont=dict(
-                            size=12, 
-                            color="black", 
-                            family="Arial Black, sans-serif"
+        if lk_pokemon != None:
+            lk_categories = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed']
+            lk_stats = get_pokemon_stats(df, lk_pokemon, lk_categories)
+            if lk_stats:
+                lk_stats_closed = lk_stats + [lk_stats[0]]
+                fig_lk = go.Figure()
+                fig_lk.add_trace(go.Scatterpolar(
+                    r=lk_stats_closed,
+                    theta=lk_categories + [lk_categories[0]],
+                    fill='toself',
+                    fillcolor='rgba(239,83,80,0.3)',
+                    line=dict(color='#EF5350', width=2),
+                    hovertemplate='%{theta}: %{r}<extra></extra>',
+                ))
+                fig_lk.update_layout(
+                    polar=dict(
+                        bgcolor='lightblue',
+                        radialaxis=dict(
+                            visible=True, 
+                            range=[0, 255],
+                            gridcolor="#444",
+                            tickfont=dict(
+                                size=12, 
+                                color="black", 
+                                family="Arial Black, sans-serif"
+                            )
+                        ),
+                        angularaxis=dict(
+                            gridcolor="#444",
+                            tickfont=dict(
+                                size=15, 
+                                color="black", 
+                                family="Arial Black, sans-serif"
+                            )
                         )
                     ),
-                    angularaxis=dict(
-                        gridcolor="#444",
-                        tickfont=dict(
-                            size=15, 
-                            color="black", 
-                            family="Arial Black, sans-serif"
-                        )
-                    )
-                ),
-                showlegend=False,
-                height=420,
-                margin=dict(l=60, r=60, t=30, b=30),
-                font=dict(color='black'),
-            )
-            st.plotly_chart(fig_lk, use_container_width=True)
+                    showlegend=False,
+                    height=420,
+                    margin=dict(l=60, r=60, t=30, b=30),
+                    font=dict(color='black'),
+                )
+                st.plotly_chart(fig_lk, use_container_width=True)
  
     st.divider()
  
