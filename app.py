@@ -2997,266 +2997,266 @@ with main_tabs[4]:
                 st.plotly_chart(fig_lk, use_container_width=True)
  
     st.divider()
- 
-    #Moves section
-    def _make_move_tip(mv, pokemon_name, mv_lookup, ls_rows):
-        info  = mv_lookup.get(mv, {})
-        mtype = info.get('type', '--')
-        dclass= info.get('damage_class', '--')
-        pp    = info.get('pp', '--')
-        pwr   = info.get('power', '--')
-        acc   = info.get('accuracy', '--')
-        effect= info.get('effect', '')
-        # Level learned (only meaningful for level-up moves)
-        level_str = ''
-        if mv in ls_rows.index:
-            row = ls_rows.loc[mv]
-            # loc returns a Series for a single match, DataFrame for multiple
-            if isinstance(row, pd.Series):
-                lvl = row['level']
-            else:
-                # Multiple rows - pick the level-up entry if present, else first
-                lu = row[row['learn_method'] == 'level-up']
-                lvl = lu.iloc[0]['level'] if not lu.empty else row.iloc[0]['level']
-            if pd.notna(lvl) and int(lvl) > 0:
-                level_str = f'<br>Learned at: Lv. {int(lvl)}'
-        tip_content = (
-            f'<b>{mv}</b><br>'
-            f'{mtype} &middot; {dclass}<br>'
-            f'PP: {pp} &nbsp; PWR: {pwr} &nbsp; ACC: {acc}'
-            + level_str +
-            (f'<br><i>{effect}</i>' if effect else '')
-        )
-        return (
-            f"<span class='move-tip' style='display:block;'>"
-            f"<div style='padding:1px 0;font-size:0.75rem;color:#e0e0e0;word-break:break-word;'>{mv}</div>"
-            f"<span class='tip-box'>{tip_content}</span>"
-            f"</span>"
-        )
-
-    lk_move_data = get_pokemon_moves(learnsets_df, lk_pokemon)
-    LK_METHOD_LABELS = {
-        'level-up':    'LEVEL UP',
-        'machine':     'TM',
-        'egg':         'EGG',
-        'tutor':       'TUTOR',
-        'form-change': 'FORM CHANGE',
-    }
-    LK_METHOD_ORDER = ['level-up', 'machine', 'egg', 'tutor', 'form-change']
-    lk_active_methods = [m for m in LK_METHOD_ORDER if lk_move_data.get(m)]
- 
-    if lk_active_methods:
-        st.markdown(
-            f"<h3 style='text-align:left;'>MOVES</h2>",
-            unsafe_allow_html=True
-        )
-        chunk_size = 15
-        col_widths = [
-            max(1, len(lk_move_data[m]) // chunk_size + (1 if len(lk_move_data[m]) % chunk_size else 0))
-            for m in lk_active_methods
-        ]
-        lk_method_cols = st.columns(col_widths)
-        for col, method in zip(lk_method_cols, lk_active_methods):
-            with col:
-                label = LK_METHOD_LABELS.get(method, method.upper())
-                st.markdown(
-                    f"<p style='font-size:0.7rem; color:#aaaaaa; margin:0 0 6px 0; "
-                    f"letter-spacing:2px; text-transform:uppercase;'>▶ {label}</p>",
-                    unsafe_allow_html=True
-                )
-                moves_list = lk_move_data[method]
-                chunks = [moves_list[i:i+chunk_size] for i in range(0, len(moves_list), chunk_size)]
-                chunks_html = ""
-                for chunk in chunks:
-                    mv_lookup = build_moves_lookup(moves_meta_df)
-                    ls_rows   = learnsets_df[
-                        (learnsets_df['pokemon_name'] == lk_pokemon) &
-                        (learnsets_df['move_name'].isin(chunk))
-                    ].set_index('move_name')
-                    chunk_items = ''.join(
-                        _make_move_tip(mv, lk_pokemon, mv_lookup, ls_rows)
-                        for mv in chunk
-                    )
-                    border = "border-right:1px solid #444; padding-right:16px;"
-                    chunks_html += (
-                        f"<div style='flex:1; min-width:0;"
-                        f"overflow-wrap:break-word; {border}'>"
-                        + chunk_items
-                        + "</div>"
-                    )
-                st.markdown(
-                    "<div style='display:flex; flex-direction:row; gap:16px; "
-                    "font-family:monospace;'>"
-                    + chunks_html +
-                    "</div>",
-                    unsafe_allow_html=True
-                )
-
-    smogon_key   = _smogon_name(lk_pokemon)
-    pokemon_sets = smogon_sets.get(smogon_key, {}) if smogon_key else {}
- 
-    if pokemon_sets:
-        st.divider()
-        tier = pokemon_sets.get('tier', '')
-        sets = pokemon_sets.get('sets', {})
-        st.markdown(
-            f"<h3 style='margin-bottom:4px;'>Competitive Sets</h3>"
-            f"<p style='font-size:0.8rem;color:#aaaaaa;margin-top:0;'>"
-            f"Source: Smogon &nbsp;&middot;&nbsp; Tier: <b>{tier}</b></p>",
-            unsafe_allow_html=True
-        )
-        EV_MAP = {'hp':'HP','atk':'Atk','def':'Def','spa':'SpA','spd':'SpD','spe':'Spe'}
- 
-        def _flat(val):
-            if val is None: return '--'
-            if isinstance(val, list): return ' / '.join(str(v) for v in val)
-            return str(val)
- 
-        for set_name, s in sets.items():
-            moves_flat = [
-                ' / '.join(m) if isinstance(m, list) else m
-                for m in s.get('moves', [])
-            ]
-            item    = _flat(s.get('item'))
-            ability = _flat(s.get('ability'))
-            nature  = _flat(s.get('nature'))
-            tera    = _flat(s.get('teratypes'))
-            evs_raw = s.get('evs', {})
-            if isinstance(evs_raw, list):
-                evs_raw = evs_raw[0]
-            ev_str = ' / '.join(
-                f"{v} {EV_MAP.get(k,k)}" for k,v in evs_raw.items() if v
-            ) if evs_raw else '--'
- 
-            mv_lookup_comp = build_moves_lookup(moves_meta_df)
-            def _ability_tip_comp(ability_entry):
-                if not ability_entry or ability_entry == '--':
-                    return '--'
-                parts = [p.strip() for p in ability_entry.split(' / ')]
-                tipped_parts = []
-
-                for p in parts:
-                    desc = abilities_df.get(p, "No description available.")
-                    desc = desc.replace('"', '&quot;')
-                    html = (
-                        f"<span class='move-tip'>"
-                        f"{p}"
-                        f"<span class='tip-box'><b>{p}</b><br><i>{desc}</i></span>"
-                        f"</span>"
-                    )
-                    tipped_parts.append(html)
-            
-                return ' / '.join(tipped_parts)
-            def _tip_or_plain(move_entry):
-                #move_entry may be 'Move A / Move B' (slash options)
-                #wrap each option individually then rejoin
-                parts = [p.strip() for p in move_entry.split(' / ')]
-                tipped = ' / '.join(
-                    _move_tip_html(p, mv_lookup_comp) if p in mv_lookup_comp else p
-                    for p in parts
-                )
-                return f"<div style='padding:1px 0;'>&#9658; {tipped}</div>"
-            moves_html = ''.join(_tip_or_plain(m) for m in moves_flat)
-            raw_ability = _flat(s.get('ability'))
-            ability_html = _ability_tip_comp(raw_ability)            
-            card = (
-                "<div style='background-color:#242424;border:8px solid #d0d0d0;"
-                "border-radius:6px;box-shadow:0 0 0 2px #c1c1c1,"
-                "inset 0 2px 6px rgba(0,0,0,0.35);padding:14px 18px 16px 18px;"
-                "font-family:monospace;margin-bottom:12px;'>"
-                f"<p style='font-size:0.8rem;color:#aaaaaa;margin:0 0 10px 0;"
-                f"letter-spacing:2px;text-transform:uppercase;'>&#9658; {set_name}</p>"
-                "<div style='display:flex;gap:32px;'>"
-                "<div style='flex:1;'>"
-                "<p style='font-size:0.65rem;color:#777;margin:0 0 4px 0;"
-                "letter-spacing:1px;'>MOVES</p>"
-                f"<div style='font-size:0.82rem;color:#e0e0e0;'>{moves_html}</div>"
-                "</div>"
-                "<div style='flex:1;font-size:0.82rem;color:#e0e0e0;'>"
-                "<p style='font-size:0.65rem;color:#777;margin:0 0 4px 0;"
-                "letter-spacing:1px;'>DETAILS</p>"
-                f"<div><span style='color:#aaa;'>Item: </span>{item}</div>"
-                f"<div><span style='color:#aaa;'>Ability: </span>{ability_html}</div>"
-                f"<div><span style='color:#aaa;'>Nature: </span>{nature}</div>"
-                f"<div><span style='color:#aaa;'>Tera: </span>{tera}</div>"
-                f"<div><span style='color:#aaa;'>EVs: </span>{ev_str}</div>"
-                "</div></div></div>"
+    if lk_pokemon != None:
+        #Moves section
+        def _make_move_tip(mv, pokemon_name, mv_lookup, ls_rows):
+            info  = mv_lookup.get(mv, {})
+            mtype = info.get('type', '--')
+            dclass= info.get('damage_class', '--')
+            pp    = info.get('pp', '--')
+            pwr   = info.get('power', '--')
+            acc   = info.get('accuracy', '--')
+            effect= info.get('effect', '')
+            # Level learned (only meaningful for level-up moves)
+            level_str = ''
+            if mv in ls_rows.index:
+                row = ls_rows.loc[mv]
+                # loc returns a Series for a single match, DataFrame for multiple
+                if isinstance(row, pd.Series):
+                    lvl = row['level']
+                else:
+                    # Multiple rows - pick the level-up entry if present, else first
+                    lu = row[row['learn_method'] == 'level-up']
+                    lvl = lu.iloc[0]['level'] if not lu.empty else row.iloc[0]['level']
+                if pd.notna(lvl) and int(lvl) > 0:
+                    level_str = f'<br>Learned at: Lv. {int(lvl)}'
+            tip_content = (
+                f'<b>{mv}</b><br>'
+                f'{mtype} &middot; {dclass}<br>'
+                f'PP: {pp} &nbsp; PWR: {pwr} &nbsp; ACC: {acc}'
+                + level_str +
+                (f'<br><i>{effect}</i>' if effect else '')
             )
-            st.markdown(card, unsafe_allow_html=True)
-    elif smogon_key:
-        st.divider()
-        st.markdown(
-            f"<p style='color:#888;font-size:0.9rem;'>No competitive sets found for "
-            f"{lk_pokemon.replace(chr(10),' ')} - this Pokémon may not have a dedicated "
-            f"Smogon tier set.</p>",
-            unsafe_allow_html=True
-        )
-    st.divider()
-    #AI-generated Design Origin and FAQ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    if not _api_key:
-        st.warning( "No Anthropic API key found.")
-    else:
-        _origin_key = f"_lk_origin_{lk_pokemon}"
-        _faq_key    = f"_lk_faq_{lk_pokemon}"
- 
-        if _origin_key not in st.session_state or _faq_key not in st.session_state:
-            _name_clean = lk_pokemon.replace(chr(10), ' ')
-            with st.spinner(f"Looking up {_name_clean}..."):
- 
-                def _call_claude(prompt):
-                    client = _anthropic.Anthropic(api_key=_api_key)
-                    message = client.messages.create(
-                        model="claude-haiku-4-5-20251001",
-                        max_tokens=600,
-                        temperature=0,
-                        messages=[{"role": "user", "content": prompt}],
+            return (
+                f"<span class='move-tip' style='display:block;'>"
+                f"<div style='padding:1px 0;font-size:0.75rem;color:#e0e0e0;word-break:break-word;'>{mv}</div>"
+                f"<span class='tip-box'>{tip_content}</span>"
+                f"</span>"
+            )
+
+        lk_move_data = get_pokemon_moves(learnsets_df, lk_pokemon)
+        LK_METHOD_LABELS = {
+            'level-up':    'LEVEL UP',
+            'machine':     'TM',
+            'egg':         'EGG',
+            'tutor':       'TUTOR',
+            'form-change': 'FORM CHANGE',
+        }
+        LK_METHOD_ORDER = ['level-up', 'machine', 'egg', 'tutor', 'form-change']
+        lk_active_methods = [m for m in LK_METHOD_ORDER if lk_move_data.get(m)]
+    
+        if lk_active_methods:
+            st.markdown(
+                f"<h3 style='text-align:left;'>MOVES</h2>",
+                unsafe_allow_html=True
+            )
+            chunk_size = 15
+            col_widths = [
+                max(1, len(lk_move_data[m]) // chunk_size + (1 if len(lk_move_data[m]) % chunk_size else 0))
+                for m in lk_active_methods
+            ]
+            lk_method_cols = st.columns(col_widths)
+            for col, method in zip(lk_method_cols, lk_active_methods):
+                with col:
+                    label = LK_METHOD_LABELS.get(method, method.upper())
+                    st.markdown(
+                        f"<p style='font-size:0.7rem; color:#aaaaaa; margin:0 0 6px 0; "
+                        f"letter-spacing:2px; text-transform:uppercase;'>▶ {label}</p>",
+                        unsafe_allow_html=True
                     )
-                    return message.content[0].text.strip()
- 
-                _origin_prompt = (
-                    f"You are a Pokemon encyclopaedia. In 3 to 4 concise sentences, "
-                    f"describe the real-world design inspiration and origin of {_name_clean}. "
-                    f"Cover the animals, mythology, objects, or cultural references its design "
-                    f"draws from. Be factual and specific. Do not use bullet points. Use https://bulbapedia.bulbagarden.net/wiki/Main_Page as your main source."
+                    moves_list = lk_move_data[method]
+                    chunks = [moves_list[i:i+chunk_size] for i in range(0, len(moves_list), chunk_size)]
+                    chunks_html = ""
+                    for chunk in chunks:
+                        mv_lookup = build_moves_lookup(moves_meta_df)
+                        ls_rows   = learnsets_df[
+                            (learnsets_df['pokemon_name'] == lk_pokemon) &
+                            (learnsets_df['move_name'].isin(chunk))
+                        ].set_index('move_name')
+                        chunk_items = ''.join(
+                            _make_move_tip(mv, lk_pokemon, mv_lookup, ls_rows)
+                            for mv in chunk
+                        )
+                        border = "border-right:1px solid #444; padding-right:16px;"
+                        chunks_html += (
+                            f"<div style='flex:1; min-width:0;"
+                            f"overflow-wrap:break-word; {border}'>"
+                            + chunk_items
+                            + "</div>"
+                        )
+                    st.markdown(
+                        "<div style='display:flex; flex-direction:row; gap:16px; "
+                        "font-family:monospace;'>"
+                        + chunks_html +
+                        "</div>",
+                        unsafe_allow_html=True
+                    )
+
+        smogon_key   = _smogon_name(lk_pokemon)
+        pokemon_sets = smogon_sets.get(smogon_key, {}) if smogon_key else {}
+    
+        if pokemon_sets:
+            st.divider()
+            tier = pokemon_sets.get('tier', '')
+            sets = pokemon_sets.get('sets', {})
+            st.markdown(
+                f"<h3 style='margin-bottom:4px;'>Competitive Sets</h3>"
+                f"<p style='font-size:0.8rem;color:#aaaaaa;margin-top:0;'>"
+                f"Source: Smogon &nbsp;&middot;&nbsp; Tier: <b>{tier}</b></p>",
+                unsafe_allow_html=True
+            )
+            EV_MAP = {'hp':'HP','atk':'Atk','def':'Def','spa':'SpA','spd':'SpD','spe':'Spe'}
+    
+            def _flat(val):
+                if val is None: return '--'
+                if isinstance(val, list): return ' / '.join(str(v) for v in val)
+                return str(val)
+    
+            for set_name, s in sets.items():
+                moves_flat = [
+                    ' / '.join(m) if isinstance(m, list) else m
+                    for m in s.get('moves', [])
+                ]
+                item    = _flat(s.get('item'))
+                ability = _flat(s.get('ability'))
+                nature  = _flat(s.get('nature'))
+                tera    = _flat(s.get('teratypes'))
+                evs_raw = s.get('evs', {})
+                if isinstance(evs_raw, list):
+                    evs_raw = evs_raw[0]
+                ev_str = ' / '.join(
+                    f"{v} {EV_MAP.get(k,k)}" for k,v in evs_raw.items() if v
+                ) if evs_raw else '--'
+    
+                mv_lookup_comp = build_moves_lookup(moves_meta_df)
+                def _ability_tip_comp(ability_entry):
+                    if not ability_entry or ability_entry == '--':
+                        return '--'
+                    parts = [p.strip() for p in ability_entry.split(' / ')]
+                    tipped_parts = []
+
+                    for p in parts:
+                        desc = abilities_df.get(p, "No description available.")
+                        desc = desc.replace('"', '&quot;')
+                        html = (
+                            f"<span class='move-tip'>"
+                            f"{p}"
+                            f"<span class='tip-box'><b>{p}</b><br><i>{desc}</i></span>"
+                            f"</span>"
+                        )
+                        tipped_parts.append(html)
+
+                    return ' / '.join(tipped_parts)
+                def _tip_or_plain(move_entry):
+                    #move_entry may be 'Move A / Move B' (slash options)
+                    #wrap each option individually then rejoin
+                    parts = [p.strip() for p in move_entry.split(' / ')]
+                    tipped = ' / '.join(
+                        _move_tip_html(p, mv_lookup_comp) if p in mv_lookup_comp else p
+                        for p in parts
+                    )
+                    return f"<div style='padding:1px 0;'>&#9658; {tipped}</div>"
+                moves_html = ''.join(_tip_or_plain(m) for m in moves_flat)
+                raw_ability = _flat(s.get('ability'))
+                ability_html = _ability_tip_comp(raw_ability)            
+                card = (
+                    "<div style='background-color:#242424;border:8px solid #d0d0d0;"
+                    "border-radius:6px;box-shadow:0 0 0 2px #c1c1c1,"
+                    "inset 0 2px 6px rgba(0,0,0,0.35);padding:14px 18px 16px 18px;"
+                    "font-family:monospace;margin-bottom:12px;'>"
+                    f"<p style='font-size:0.8rem;color:#aaaaaa;margin:0 0 10px 0;"
+                    f"letter-spacing:2px;text-transform:uppercase;'>&#9658; {set_name}</p>"
+                    "<div style='display:flex;gap:32px;'>"
+                    "<div style='flex:1;'>"
+                    "<p style='font-size:0.65rem;color:#777;margin:0 0 4px 0;"
+                    "letter-spacing:1px;'>MOVES</p>"
+                    f"<div style='font-size:0.82rem;color:#e0e0e0;'>{moves_html}</div>"
+                    "</div>"
+                    "<div style='flex:1;font-size:0.82rem;color:#e0e0e0;'>"
+                    "<p style='font-size:0.65rem;color:#777;margin:0 0 4px 0;"
+                    "letter-spacing:1px;'>DETAILS</p>"
+                    f"<div><span style='color:#aaa;'>Item: </span>{item}</div>"
+                    f"<div><span style='color:#aaa;'>Ability: </span>{ability_html}</div>"
+                    f"<div><span style='color:#aaa;'>Nature: </span>{nature}</div>"
+                    f"<div><span style='color:#aaa;'>Tera: </span>{tera}</div>"
+                    f"<div><span style='color:#aaa;'>EVs: </span>{ev_str}</div>"
+                    "</div></div></div>"
                 )
-                _faq_prompt = (
-                    f"You are a Pokemon encyclopaedia. Write exactly 4 frequently asked "
-                    f"questions and answers about {_name_clean}. "
-                    f"Format each strictly as: Q: question then A: answer on the next line. "
-                    f"Focus on lore, competitive use, evolution, or notable trivia. "
-                    f"Keep answers to 1 to 2 sentences each. Use https://bulbapedia.bulbagarden.net/wiki/Main_Page as your main source."
-                )
- 
-                try:
-                    st.session_state[_origin_key] = _call_claude(_origin_prompt)
-                    st.session_state[_faq_key]    = _call_claude(_faq_prompt)
-                except Exception as e:
-                    st.error(f"API error: {e}")
-                    st.session_state[_origin_key] = None
-                    st.session_state[_faq_key]    = None
- 
-        _origin_text = st.session_state.get(_origin_key)
-        _faq_text    = st.session_state.get(_faq_key)
- 
-        ai_left, ai_right = st.columns(2)
- 
-        with ai_left:
-            st.subheader("Design Origin")
-            if _origin_text:
-                st.write(_origin_text)
-            else:
-                st.caption("Could not retrieve design origin.")
- 
-        with ai_right:
-            st.subheader("FAQ")
-            if _faq_text:
-                for line in _faq_text.splitlines():
-                    line = line.strip()
-                    if not line:
-                        st.markdown("")
-                    elif line.startswith("Q:"):
-                        st.markdown(f"**{line}**")
-                    elif line.startswith("A:"):
-                        st.markdown(line[2:].strip())
-            else:
-                st.caption("Could not retrieve FAQ.")
+                st.markdown(card, unsafe_allow_html=True)
+        elif smogon_key:
+            st.divider()
+            st.markdown(
+                f"<p style='color:#888;font-size:0.9rem;'>No competitive sets found for "
+                f"{lk_pokemon.replace(chr(10),' ')} - this Pokémon may not have a dedicated "
+                f"Smogon tier set.</p>",
+                unsafe_allow_html=True
+            )
+        st.divider()
+        #AI-generated Design Origin and FAQ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        if not _api_key:
+            st.warning( "No Anthropic API key found.")
+        else:
+            _origin_key = f"_lk_origin_{lk_pokemon}"
+            _faq_key    = f"_lk_faq_{lk_pokemon}"
+    
+            if _origin_key not in st.session_state or _faq_key not in st.session_state:
+                _name_clean = lk_pokemon.replace(chr(10), ' ')
+                with st.spinner(f"Looking up {_name_clean}..."):
+                
+                    def _call_claude(prompt):
+                        client = _anthropic.Anthropic(api_key=_api_key)
+                        message = client.messages.create(
+                            model="claude-haiku-4-5-20251001",
+                            max_tokens=600,
+                            temperature=0,
+                            messages=[{"role": "user", "content": prompt}],
+                        )
+                        return message.content[0].text.strip()
+    
+                    _origin_prompt = (
+                        f"You are a Pokemon encyclopaedia. In 3 to 4 concise sentences, "
+                        f"describe the real-world design inspiration and origin of {_name_clean}. "
+                        f"Cover the animals, mythology, objects, or cultural references its design "
+                        f"draws from. Be factual and specific. Do not use bullet points. Use https://bulbapedia.bulbagarden.net/wiki/Main_Page as your main source."
+                    )
+                    _faq_prompt = (
+                        f"You are a Pokemon encyclopaedia. Write exactly 4 frequently asked "
+                        f"questions and answers about {_name_clean}. "
+                        f"Format each strictly as: Q: question then A: answer on the next line. "
+                        f"Focus on lore, competitive use, evolution, or notable trivia. "
+                        f"Keep answers to 1 to 2 sentences each. Use https://bulbapedia.bulbagarden.net/wiki/Main_Page as your main source."
+                    )
+    
+                    try:
+                        st.session_state[_origin_key] = _call_claude(_origin_prompt)
+                        st.session_state[_faq_key]    = _call_claude(_faq_prompt)
+                    except Exception as e:
+                        st.error(f"API error: {e}")
+                        st.session_state[_origin_key] = None
+                        st.session_state[_faq_key]    = None
+    
+            _origin_text = st.session_state.get(_origin_key)
+            _faq_text    = st.session_state.get(_faq_key)
+    
+            ai_left, ai_right = st.columns(2)
+    
+            with ai_left:
+                st.subheader("Design Origin")
+                if _origin_text:
+                    st.write(_origin_text)
+                else:
+                    st.caption("Could not retrieve design origin.")
+    
+            with ai_right:
+                st.subheader("FAQ")
+                if _faq_text:
+                    for line in _faq_text.splitlines():
+                        line = line.strip()
+                        if not line:
+                            st.markdown("")
+                        elif line.startswith("Q:"):
+                            st.markdown(f"**{line}**")
+                        elif line.startswith("A:"):
+                            st.markdown(line[2:].strip())
+                else:
+                    st.caption("Could not retrieve FAQ.")
