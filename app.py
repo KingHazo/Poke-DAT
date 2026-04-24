@@ -1980,8 +1980,8 @@ with main_tabs[1]:
                 filtered_usage = tier_filtered[tier_filtered['usage_pct'] >= min_usage].head(top_n)
                 filtered_usage = filtered_usage.merge(
                     df[['Name', 'Type_1', 'Type_2', 'HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed', 'Total']],
-                    left_on='pokemon', # The column name in your usage CSV
-                    right_on='Name',   # The column name in your pokedex CSV
+                    left_on='pokemon', #The column name in usage CSV
+                    right_on='Name',   #The column name in pokedex CSV
                     how='left'                    
                 )
                 n = len(filtered_usage)

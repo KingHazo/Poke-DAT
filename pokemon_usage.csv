@@ -1,32 +1,32 @@
 pokemon,tier,usage_pct,raw_count,rank
 Koraidon,Ubers,49.9397,93432,1
-Zacian-Crowned,Ubers,36.9179,73165,2
+Zacian Crowned Sword,Ubers,36.9179,73165,2
 Kyogre,Ubers,24.9506,49937,3
 Arceus,Ubers,20.3333,37495,4
-Ho-Oh,Ubers,19.394,35992,5
+Ho-oh,Ubers,19.394,35992,5
 Eternatus,Ubers,19.1364,35531,6
-Necrozma-Dusk-Mane,Ubers,14.3807,26512,7
+Dusk Mane Necrozma,Ubers,14.3807,26512,7
 Flutter Mane,Ubers,13.5391,32284,8
 Lunala,Ubers,12.0542,20849,9
 Kingambit,Ubers,12.0245,25460,10
-Calyrex-Ice,Ubers,10.175,20007,11
+Calyrex Ice Rider,Ubers,10.175,20007,11
 Ribombee,Ubers,10.1084,19107,12
-Arceus-Fairy,Ubers,9.2145,16978,13
-Giratina-Origin,Ubers,8.6502,16999,14
-Deoxys-Speed,Ubers,7.6697,13706,15
-Terapagos,Ubers,7.2652,15632,16
-Arceus-Ground,Ubers,6.807,12095,17
+Arceus,Ubers,9.2145,16978,13
+Giratina Origin Forme,Ubers,8.6502,16999,14
+Deoxys Speed Forme,Ubers,7.6697,13706,15
+Terapagos Stellar Form,Ubers,7.2652,15632,16
+Arceus,Ubers,6.807,12095,17
 Glimmora,Ubers,6.7925,17543,18
 Chien-Pao,Ubers,6.6449,15388,19
 Ting-Lu,Ubers,6.5547,13117,20
-Deoxys-Attack,Ubers,6.5092,13199,21
+Deoxys Attack Forme,Ubers,6.5092,13199,21
 Groudon,Ubers,6.4201,15501,22
 Regieleki,Ubers,6.2278,16241,23
 Landorus-Therian,Ubers,6.1984,12425,24
 Hatterene,Ubers,5.8177,11960,25
 Annihilape,Ubers,5.7119,19031,26
 Gliscor,Ubers,5.2405,16934,27
-Kyurem-Black,Ubers,5.229,10638,28
+Black Kyurem,Ubers,5.229,10638,28
 Grimmsnarl,Ubers,4.8792,11564,29
 Skeledirge,Ubers,4.6825,11380,30
 Ditto,Ubers,4.5324,9408,31
@@ -34,14 +34,14 @@ Rayquaza,Ubers,4.4088,11755,32
 Great Tusk,Ubers,4.3057,11319,33
 Dondozo,Ubers,4.1422,8701,34
 Sneasler,Ubers,4.1341,11987,35
-Arceus-Water,Ubers,3.8124,6987,36
+Arceus,Ubers,3.8124,6987,36
 Corviknight,Ubers,3.8005,11381,37
 Archaludon,Ubers,3.7124,12569,38
 Volcarona,Ubers,3.7085,13265,39
 Chi-Yu,Ubers,3.7043,8684,40
 Giratina,Ubers,3.5826,7464,41
 Mewtwo,Ubers,3.5006,9088,42
-Urshifu-Rapid-Strike,Ubers,3.3544,10602,43
+Urshifu Rapid Strike Style,Ubers,3.3544,10602,43
 Baxcalibur,Ubers,3.2599,9271,44
 Lugia,Ubers,3.2288,8712,45
 Clodsire,Ubers,3.1708,8269,46
@@ -55,15 +55,15 @@ Blissey,Ubers,2.8534,6925,53
 Espathra,Ubers,2.7267,8585,54
 Iron Bundle,Ubers,2.6605,6958,55
 Palafin,Ubers,2.6337,8247,56
-Zamazenta-Crowned,Ubers,2.6118,7603,57
-Shaymin-Sky,Ubers,2.6067,6792,58
+Zamazenta Crowned Shield,Ubers,2.6118,7603,57
+Shaymin Sky Forme,Ubers,2.6067,6792,58
 Ogerpon-Hearthflame,Ubers,2.5835,7090,59
 Ceruledge,Ubers,2.4547,10115,60
 Urshifu,Ubers,2.3577,5516,61
 Alomomola,Ubers,2.2774,5430,62
 Toxapex,Ubers,2.2702,8569,63
-Kyurem-White,Ubers,2.2019,5271,64
-Arceus-Ghost,Ubers,2.1676,4309,65
+White Kyurem,Ubers,2.2019,5271,64
+Arceus,Ubers,2.1676,4309,65
 Garchomp,Ubers,2.1588,10510,66
 Incineroar,Ubers,2.1179,7080,67
 Walking Wake,Ubers,2.0127,5472,68
@@ -78,17 +78,18 @@ Ursaluna,Ubers,1.6111,5089,76
 Pecharunt,Ubers,1.6064,3965,77
 Raging Bolt,Ubers,1.6013,4410,78
 Galvantula,Ubers,1.5676,4843,79
-Landorus,Ubers,1.5481,4029,80
+"Landorus
+Therian Forme",Ubers,1.5481,4029,80
 Mimikyu,Ubers,1.5471,5343,81
 Scizor,Ubers,1.5463,6791,82
-Necrozma-Dawn-Wings,Ubers,1.4145,3880,83
+Dawn Wings Necrozma,Ubers,1.4145,3880,83
 Cyclizar,Ubers,1.4091,4854,84
 Blaziken,Ubers,1.3082,6202,85
-Palkia-Origin,Ubers,1.2729,3253,86
+Palkia Origin Forme,Ubers,1.2729,3253,86
 Palkia,Ubers,1.2579,2691,87
 Meowscarada,Ubers,1.2433,6266,88
-Dialga-Origin,Ubers,1.2234,3419,89
-Ogerpon-Wellspring,Ubers,1.2186,3581,90
+Dialga,Ubers,1.2234,3419,89
+Origin Forme,Ubers,1.2186,3581,90
 Excadrill,Ubers,1.2119,4624,91
 Iron Valiant,Ubers,1.181,4848,92
 Ninetales-Alola,Ubers,1.1695,3841,93
@@ -109,7 +110,7 @@ Forretress,Ubers,0.9619,3189,107
 Polteageist,Ubers,0.9371,2524,108
 Azumarill,Ubers,0.9003,3778,109
 Talonflame,Ubers,0.9002,2602,110
-Arceus-Electric,Ubers,0.9002,1798,111
+Arceus,Ubers,0.9002,1798,111
 Slowking-Galar,Ubers,0.879,2626,112
 Maushold,Ubers,0.8775,4102,113
 Gengar,Ubers,0.8769,4828,114
@@ -117,7 +118,7 @@ Rotom-Wash,Ubers,0.876,3614,115
 Skarmory,Ubers,0.8563,2699,116
 Zapdos,Ubers,0.8337,2943,117
 Espeon,Ubers,0.8196,2734,118
-Arceus-Fire,Ubers,0.7646,1687,119
+Arceus,Ubers,0.7646,1687,119
 Spectrier,Ubers,0.7496,2254,120
 Primarina,Ubers,0.7476,2977,121
 Weezing-Galar,Ubers,0.7331,2552,122
@@ -128,8 +129,8 @@ Salamence,Ubers,0.6646,2791,126
 Araquanid,Ubers,0.6587,2599,127
 Cloyster,Ubers,0.6563,2960,128
 Cresselia,Ubers,0.6358,1619,129
-Arceus-Flying,Ubers,0.6328,1519,130
-Arceus-Dark,Ubers,0.6242,1295,131
+Arceus,Ubers,0.6328,1519,130
+Arceus,Ubers,0.6242,1295,131
 Metagross,Ubers,0.6209,3740,132
 Venusaur,Ubers,0.6126,3182,133
 Whimsicott,Ubers,0.5827,2272,134
@@ -143,7 +144,7 @@ Staraptor,Ubers,0.4963,1564,141
 Solgaleo,Ubers,0.496,1703,142
 Sinistcha,Ubers,0.492,1184,143
 Armarouge,Ubers,0.4844,2236,144
-Arceus-Steel,Ubers,0.4784,1212,145
+Arceus,Ubers,0.4784,1212,145
 Dachsbun,Ubers,0.4765,1557,146
 Porygon2,Ubers,0.4693,1748,147
 Quagsire,Ubers,0.4524,1557,148
@@ -157,14 +158,14 @@ Breloom,Ubers,0.4073,2061,155
 Mew,Ubers,0.4059,2003,156
 Donphan,Ubers,0.4053,1705,157
 Swampert,Ubers,0.4044,2706,158
-Deoxys-Defense,Ubers,0.3965,1816,159
+Deoxys Defense Forme,Ubers,0.3965,1816,159
 Hydrapple,Ubers,0.3927,1757,160
 Lurantis,Ubers,0.3921,1006,161
 Blastoise,Ubers,0.3858,1875,162
 Golem-Alola,Ubers,0.3854,873,163
 Slowbro-Galar,Ubers,0.3792,1820,164
 Lucario,Ubers,0.3676,3377,165
-Arceus-Poison,Ubers,0.365,987,166
+Arceus,Ubers,0.365,987,166
 Hoopa-Unbound,Ubers,0.3567,1401,167
 Pawmot,Ubers,0.3526,1639,168
 Zamazenta,Ubers,0.352,1037,169
@@ -178,7 +179,7 @@ Weavile,Ubers,0.3173,1671,176
 Slowking,Ubers,0.3156,1007,177
 Scream Tail,Ubers,0.313,935,178
 Kilowattrel,Ubers,0.3126,1460,179
-Arceus-Grass,Ubers,0.3051,768,180
+Arceus,Ubers,0.3051,768,180
 Snorlax,Ubers,0.298,2221,181
 Iron Hands,Ubers,0.2932,1455,182
 Grafaiai,Ubers,0.2915,1001,183
@@ -211,13 +212,13 @@ Sceptile,Ubers,0.2297,1842,209
 Kommo-o,Ubers,0.2253,1559,210
 Muk-Alola,Ubers,0.225,1048,211
 Zacian,Ubers,0.2224,638,212
-Arceus-Psychic,Ubers,0.2223,511,213
+Arceus,Ubers,0.2223,511,213
 Wo-Chien,Ubers,0.2214,729,214
 Kleavor,Ubers,0.2206,1197,215
 Arcanine-Hisui,Ubers,0.215,1579,216
 Kyurem,Ubers,0.214,709,217
 Diancie,Ubers,0.2119,791,218
-Arceus-Rock,Ubers,0.2112,387,219
+Arceus,Ubers,0.2112,387,219
 Lycanroc-Dusk,Ubers,0.2112,959,220
 Thundurus,Ubers,0.208,576,221
 Hawlucha,Ubers,0.208,1317,222
@@ -278,7 +279,7 @@ Rabsca,Ubers,0.1196,482,276
 Entei,Ubers,0.1194,424,277
 Jolteon,Ubers,0.1154,815,278
 Feraligatr,Ubers,0.115,662,279
-Arceus-Fighting,Ubers,0.1134,392,280
+Arceus,Ubers,0.1134,392,280
 Bisharp,Ubers,0.1131,666,281
 Inteleon,Ubers,0.1124,978,282
 Bastiodon,Ubers,0.1103,415,283
@@ -311,7 +312,7 @@ Gothorita,Ubers,0.0917,241,309
 Scovillain,Ubers,0.091,484,310
 Appletun,Ubers,0.0896,322,311
 Pincurchin,Ubers,0.0889,600,312
-Arceus-Dragon,Ubers,0.0885,431,313
+Arceus,Ubers,0.0885,431,313
 Rotom-Heat,Ubers,0.0862,642,314
 Toxicroak,Ubers,0.086,497,315
 Mienshao,Ubers,0.084,654,316
@@ -513,7 +514,7 @@ Darkrai,OU,9.3978,161041,21
 Pecharunt,OU,9.3016,140083,22
 Gliscor,OU,9.2017,227829,23
 Iron Moth,OU,9.027,151267,24
-Deoxys-Speed,OU,8.9583,100507,25
+Deoxys Speed Forme,OU,8.9583,100507,25
 Alomomola,OU,8.3956,177221,26
 Rillaboom,OU,7.4294,151681,27
 Enamorus,OU,7.304,98687,28
@@ -618,7 +619,7 @@ Tentacruel,OU,0.2505,9885,126
 Salamence,OU,0.2472,18245,127
 Gengar,OU,0.2415,32626,128
 Golduck,OU,0.2369,2221,129
-Deoxys-Defense,OU,0.2321,8789,130
+Deoxys Defense Forme,OU,0.2321,8789,130
 Conkeldurr,OU,0.2303,17631,131
 Charizard,OU,0.2287,18606,132
 Haxorus,OU,0.2273,18132,133
@@ -960,7 +961,7 @@ Terrakion,UU,0.4184,456,151
 Drifblim,UU,0.4147,505,152
 Amoonguss,UU,0.4059,717,153
 Torterra,UU,0.4054,701,154
-Deoxys-Defense,UU,0.3986,973,155
+Deoxys Defense Forme,UU,0.3986,973,155
 Overqwil,UU,0.3848,591,156
 Brambleghast,UU,0.3802,597,157
 Whimsicott,UU,0.3797,874,158
@@ -1252,7 +1253,7 @@ Heracross,RU,2.22,1199,68
 Espeon,RU,2.1939,1734,69
 Amoonguss,RU,2.1798,1223,70
 Sandslash-Alola,RU,2.0869,937,71
-Deoxys-Defense,RU,1.9495,1208,72
+Deoxys Defense Forme,RU,1.9495,1208,72
 Salazzle,RU,1.9391,1435,73
 Swampert,RU,1.9131,1223,74
 Tornadus,RU,1.9053,933,75
@@ -2461,7 +2462,7 @@ Slither Wing,Doubles OU,0.3885,2112,145
 Gardevoir,Doubles OU,0.3879,6811,146
 Weezing,Doubles OU,0.3872,5556,147
 Cetitan,Doubles OU,0.3756,3059,148
-Deoxys-Speed,Doubles OU,0.3749,1982,149
+Deoxys Speed Forme,Doubles OU,0.3749,1982,149
 Iron Boulder,Doubles OU,0.3643,3086,150
 Lurantis,Doubles OU,0.3537,4137,151
 Talonflame,Doubles OU,0.3535,12536,152
@@ -2469,7 +2470,7 @@ Oranguru,Doubles OU,0.3525,11991,153
 Muk-Alola,Doubles OU,0.3523,6444,154
 Krookodile,Doubles OU,0.3499,6947,155
 Primeape,Doubles OU,0.3479,2949,156
-Shaymin-Sky,Doubles OU,0.3417,2236,157
+Shaymin Sky Forme,Doubles OU,0.3417,2236,157
 Clodsire,Doubles OU,0.3329,6613,158
 Necrozma,Doubles OU,0.3307,1184,159
 Mandibuzz,Doubles OU,0.3233,1145,160
@@ -2546,7 +2547,7 @@ Alcremie,Doubles OU,0.1046,6998,230
 Rampardos,Doubles OU,0.1011,2737,231
 Goodra,Doubles OU,0.1009,2700,232
 Toxtricity,Doubles OU,0.0993,4435,233
-Deoxys-Defense,Doubles OU,0.0988,4009,234
+Deoxys Defense Forme,Doubles OU,0.0988,4009,234
 Regirock,Doubles OU,0.0985,1392,235
 Camerupt,Doubles OU,0.0983,984,236
 Illumise,Doubles OU,0.097,1842,237
@@ -2698,8 +2699,8 @@ Gliscor,National Dex,9.6359,93292,11
 Zamazenta,National Dex,9.5791,63416,12
 Zapdos,National Dex,9.5498,74122,13
 Corviknight,National Dex,9.3797,83375,14
-Urshifu-Rapid-Strike,National Dex,9.1995,75925,15
-Terapagos,National Dex,9.1674,64639,16
+Urshifu Rapid Strike Style,National Dex,9.1995,75925,15
+Terapagos Stellar Form,National Dex,9.1674,64639,16
 Charizard-Mega-Y,National Dex,8.803,80446,17
 Slowking-Galar,National Dex,8.7926,68620,18
 Heatran,National Dex,8.7492,74166,19
@@ -2952,7 +2953,7 @@ Inteleon,National Dex,0.1995,4623,265
 Hitmonlee,National Dex,0.1948,4144,266
 Cofagrigus,National Dex,0.1943,3942,267
 Floatzel,National Dex,0.1912,2776,268
-Deoxys-Defense,National Dex,0.1875,2930,269
+Deoxys Defense Forme,National Dex,0.1875,2930,269
 Vaporeon,National Dex,0.1875,5668,270
 Golurk,National Dex,0.1871,4409,271
 Spiritomb,National Dex,0.1867,5249,272
@@ -3299,17 +3300,17 @@ Furret,National Dex,0.01,496,612
 Calyrex-Shadow,AG,34.5675,85417,1
 Miraidon,AG,32.5502,87727,2
 Koraidon,AG,23.6427,55230,3
-Zacian-Crowned,AG,18.2413,47901,4
+Zacian Crowned Sword,AG,18.2413,47901,4
 Arceus,AG,18.1108,40687,5
 Smeargle,AG,11.7335,41658,6
-Ho-Oh,AG,10.1422,22917,7
+Ho-oh,AG,10.1422,22917,7
 Kyogre,AG,9.327,24589,8
 Ditto,AG,8.704,25656,9
 Ting-Lu,AG,8.2759,20823,10
 Glimmora,AG,8.2697,25480,11
 Kingambit,AG,6.6858,22535,12
 Gliscor,AG,6.5968,24352,13
-Arceus-Ground,AG,6.4437,13699,14
+Arceus,AG,6.4437,13699,14
 Ribombee,AG,6.0671,15596,15
 Flutter Mane,AG,5.5925,17817,16
 Chien-Pao,AG,5.2746,14961,17
@@ -3323,12 +3324,12 @@ Blaziken,AG,4.4854,18130,24
 Corviknight,AG,4.358,14700,25
 Skeledirge,AG,4.2747,12970,26
 Grimmsnarl,AG,4.2611,13816,27
-Necrozma-Dusk-Mane,AG,4.0914,14836,28
-Urshifu-Rapid-Strike,AG,4.0658,14462,29
+Dusk Mane Necrozma,AG,4.0914,14836,28
+Urshifu Rapid Strike Style,AG,4.0658,14462,29
 Annihilape,AG,3.9686,18613,30
 Espathra,AG,3.8749,12397,31
 Dragapult,AG,3.8427,17008,32
-Arceus-Fairy,AG,3.838,8934,33
+Arceus,AG,3.838,8934,33
 Alomomola,AG,3.7921,9456,34
 Incineroar,AG,3.7829,14163,35
 Garchomp,AG,3.75,18084,36
@@ -3337,18 +3338,18 @@ Eternatus,AG,3.633,11701,38
 Espeon,AG,3.5576,13628,39
 Great Tusk,AG,3.503,11375,40
 Iron Treads,AG,3.4957,8216,41
-Deoxys-Speed,AG,3.4274,8971,42
+Deoxys Speed Forme,AG,3.4274,8971,42
 Regieleki,AG,3.3525,12180,43
 Maushold,AG,3.3443,15789,44
-Deoxys-Attack,AG,3.2965,9963,45
+Deoxys Attack Forme,AG,3.2965,9963,45
 Gholdengo,AG,3.2957,12742,46
 Clefable,AG,3.2447,11957,47
 Dondozo,AG,3.2209,10035,48
-Calyrex-Ice,AG,3.0408,12297,49
-Kyurem-Black,AG,2.9042,8191,50
+Calyrex Ice Rider,AG,3.0408,12297,49
+Black Kyurem,AG,2.9042,8191,50
 Iron Valiant,AG,2.8451,12027,51
 Volcarona,AG,2.8346,10939,52
-Terapagos,AG,2.8341,10109,53
+Terapagos Stellar Form,AG,2.8341,10109,53
 Basculegion,AG,2.7964,7761,54
 Mimikyu,AG,2.7216,11140,55
 Archaludon,AG,2.6819,10340,56
@@ -3366,15 +3367,15 @@ Forretress,AG,2.3375,7778,67
 Zoroark-Hisui,AG,2.2384,10170,68
 Blissey,AG,2.2012,6986,69
 Serperior,AG,2.1997,9171,70
-Shaymin-Sky,AG,2.1974,7413,71
+Shaymin Sky Forme,AG,2.1974,7413,71
 Meowscarada,AG,2.1694,11195,72
 Landorus-Therian,AG,2.1635,6574,73
 Malamar,AG,2.1477,7576,74
 Galvantula,AG,2.1266,7656,75
-Zamazenta-Crowned,AG,2.1254,8383,76
+Zamazenta Crowned Shield,AG,2.1254,8383,76
 Iron Bundle,AG,2.0746,6950,77
 Gengar,AG,2.0408,10899,78
-Giratina-Origin,AG,2.0255,6496,79
+Giratina Origin Forme,AG,2.0255,6496,79
 Tyranitar,AG,2.0246,9166,80
 Lugia,AG,1.9852,6004,81
 Bellossom,AG,1.9571,5915,82
@@ -3386,7 +3387,7 @@ Quaquaval,AG,1.755,6508,87
 Umbreon,AG,1.7202,7550,88
 Palafin,AG,1.6884,7005,89
 Rillaboom,AG,1.6504,7648,90
-Arceus-Water,AG,1.6502,4047,91
+Arceus,AG,1.6502,4047,91
 Excadrill,AG,1.6188,6059,92
 Ursaluna,AG,1.5926,6141,93
 Mewtwo,AG,1.5545,7142,94
@@ -3406,7 +3407,7 @@ Goodra-Hisui,AG,1.1938,4201,107
 Samurott-Hisui,AG,1.1869,4940,108
 Hitmonlee,AG,1.1773,4293,109
 Sableye,AG,1.1721,4682,110
-Kyurem-White,AG,1.162,3290,111
+White Kyurem,AG,1.162,3290,111
 Salamence,AG,1.1395,4833,112
 Vivillon,AG,1.1334,4431,113
 Polteageist,AG,1.1178,4457,114
@@ -3450,7 +3451,7 @@ Lapras,AG,0.768,3379,151
 Torkoal,AG,0.7663,4052,152
 Kommo-o,AG,0.7623,3979,153
 Tinkaton,AG,0.7578,4586,154
-Arceus-Dark,AG,0.7473,1868,155
+Arceus,AG,0.7473,1868,155
 Salazzle,AG,0.746,3764,156
 Zoroark,AG,0.732,4103,157
 Manaphy,AG,0.7262,3744,158
@@ -3478,8 +3479,8 @@ Gastrodon,AG,0.5981,2903,179
 Bellibolt,AG,0.5869,1741,180
 Dudunsparce,AG,0.586,2815,181
 Tentacruel,AG,0.5772,2496,182
-Arceus-Poison,AG,0.5676,1421,183
-Arceus-Psychic,AG,0.5635,1416,184
+Arceus,AG,0.5676,1421,183
+Arceus,AG,0.5635,1416,184
 Gouging Fire,AG,0.5635,2079,185
 Masquerain,AG,0.5539,1750,186
 Dialga,AG,0.5523,3621,187
@@ -3489,7 +3490,7 @@ Porygon2,AG,0.5278,2829,190
 Vikavolt,AG,0.5214,2675,191
 Hoopa-Unbound,AG,0.5189,2249,192
 Volbeat,AG,0.5167,1709,193
-Deoxys-Defense,AG,0.5095,2444,194
+Deoxys Defense Forme,AG,0.5095,2444,194
 Moltres-Galar,AG,0.5066,1843,195
 Reshiram,AG,0.5059,2974,196
 Diancie,AG,0.5053,2551,197
@@ -3502,7 +3503,7 @@ Zapdos-Galar,AG,0.4882,1733,203
 Landorus,AG,0.4881,1702,204
 Jolteon,AG,0.4867,3676,205
 Crawdaunt,AG,0.4843,1609,206
-Arceus-Ghost,AG,0.4831,1585,207
+Arceus,AG,0.4831,1585,207
 Indeedee,AG,0.4807,1728,208
 Kilowattrel,AG,0.4747,1987,209
 Minior,AG,0.4703,2110,210
@@ -3514,17 +3515,17 @@ Keldeo,AG,0.4489,1572,215
 Slither Wing,AG,0.4481,1931,216
 Porygon-Z,AG,0.4458,2560,217
 Noivern,AG,0.4457,2993,218
-Arceus-Electric,AG,0.4429,1333,219
+Arceus,AG,0.4429,1333,219
 Hydrapple,AG,0.4398,2746,220
 Dugtrio,AG,0.4386,1932,221
 Electivire,AG,0.4383,2658,222
 Slowking-Galar,AG,0.4375,2421,223
-Arceus-Flying,AG,0.4334,2076,224
+Arceus,AG,0.4334,2076,224
 Toxtricity,AG,0.4321,3262,225
 Hydreigon,AG,0.4285,2461,226
 Trevenant,AG,0.4235,2033,227
 Arboliva,AG,0.4177,2212,228
-Arceus-Fire,AG,0.4134,1349,229
+Arceus,AG,0.4134,1349,229
 Bisharp,AG,0.412,2099,230
 Sceptile,AG,0.4091,2801,231
 Feraligatr,AG,0.4074,2339,232
@@ -3532,7 +3533,7 @@ Thundurus-Therian,AG,0.403,1689,233
 Comfey,AG,0.4016,1269,234
 Cottonee,AG,0.3946,1628,235
 Arcanine,AG,0.3865,2219,236
-Arceus-Steel,AG,0.3807,1479,237
+Arceus,AG,0.3807,1479,237
 Empoleon,AG,0.3752,2870,238
 Regidrago,AG,0.3659,1796,239
 Mienshao,AG,0.3654,1726,240
@@ -3569,7 +3570,7 @@ Decidueye,AG,0.2994,3114,270
 Delphox,AG,0.2985,2363,271
 Magnezone,AG,0.2984,2488,272
 Sinistcha,AG,0.2962,1693,273
-Arceus-Grass,AG,0.2942,859,274
+Arceus,AG,0.2942,859,274
 Inteleon,AG,0.2939,1992,275
 Toedscruel,AG,0.2933,968,276
 Cresselia,AG,0.2913,1189,277
@@ -3587,7 +3588,7 @@ Goodra,AG,0.2682,2121,288
 Uxie,AG,0.2645,880,289
 Ariados,AG,0.2598,1757,290
 Leafeon,AG,0.2576,1927,291
-Arceus-Dragon,AG,0.2573,1243,292
+Arceus,AG,0.2573,1243,292
 Leavanny,AG,0.2563,1139,293
 Conkeldurr,AG,0.2539,1624,294
 Palkia,AG,0.253,1255,295
@@ -3706,7 +3707,7 @@ Electrode,AG,0.1037,1012,407
 Coalossal,AG,0.1037,635,408
 Skuntank,AG,0.1035,572,409
 Drednaw,AG,0.1035,583,410
-Arceus-Fighting,AG,0.1034,540,411
+Arceus,AG,0.1034,540,411
 Klawf,AG,0.1031,503,412
 Brambleghast,AG,0.1014,602,413
 Raikou,AG,0.1003,683,414
@@ -3714,7 +3715,7 @@ Cacturne,AG,0.0986,791,415
 Veluza,AG,0.0978,665,416
 Spectrier,AG,0.0969,1063,417
 Flareon,AG,0.0958,989,418
-Arceus-Rock,AG,0.0957,298,419
+Arceus,AG,0.0957,298,419
 Pineco,AG,0.0937,617,420
 Seviper,AG,0.0923,768,421
 Zacian,AG,0.0912,487,422
@@ -3889,7 +3890,7 @@ Scizor,Monotype,9.3875,20925,7
 Sneasler,Monotype,9.128,20616,8
 Greninja,Monotype,8.5623,16469,9
 Iron Valiant,Monotype,8.3394,17753,10
-Urshifu-Rapid-Strike,Monotype,8.1547,16515,11
+Urshifu Rapid Strike Style,Monotype,8.1547,16515,11
 Meowscarada,Monotype,7.7499,16849,12
 Heatran,Monotype,7.5708,15586,13
 Kleavor,Monotype,7.4376,15138,14
@@ -3948,7 +3949,7 @@ Azumarill,Monotype,3.2299,7065,66
 Darkrai,Monotype,3.2067,6924,67
 Rotom-Wash,Monotype,3.1995,7536,68
 Enamorus,Monotype,3.0836,6474,69
-Terapagos,Monotype,3.0793,6925,70
+Terapagos Stellar Form,Monotype,3.0793,6925,70
 Weavile,Monotype,2.9974,8381,71
 Walking Wake,Monotype,2.9646,6305,72
 Volcanion,Monotype,2.923,6666,73
@@ -4027,7 +4028,7 @@ Salazzle,Monotype,0.962,3655,145
 Zapdos-Galar,Monotype,0.944,2510,146
 Hydrapple,Monotype,0.8891,3887,147
 Armarouge,Monotype,0.884,2300,148
-Deoxys-Speed,Monotype,0.8641,1739,149
+Deoxys Speed Forme,Monotype,0.8641,1739,149
 Infernape,Monotype,0.8196,3332,150
 Jirachi,Monotype,0.8142,2388,151
 Espeon,Monotype,0.8085,1430,152
@@ -4167,7 +4168,7 @@ Entei,Monotype,0.1258,421,285
 Dedenne,Monotype,0.1257,405,286
 Hitmonlee,Monotype,0.1253,615,287
 Qwilfish-Hisui,Monotype,0.1251,373,288
-Deoxys-Defense,Monotype,0.123,395,289
+Deoxys Defense Forme,Monotype,0.123,395,289
 Electivire,Monotype,0.119,574,290
 Lycanroc,Monotype,0.1189,367,291
 Skuntank,Monotype,0.1179,467,292
